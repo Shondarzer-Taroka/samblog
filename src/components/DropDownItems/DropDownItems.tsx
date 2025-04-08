@@ -11,7 +11,7 @@ const categories = [
 const DropDownItems = () => {
   return (
     <div className="bg-teal-600 max-h-screen min-w-[90vw] flex items-center justify-center">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 p-6 text-white text-lg font-normal">
+      <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 p-6 justify-between text-white text-lg font-normal">
         {categories.map((column, colIndex) => (
           <div key={colIndex} className="space-y-2">
             {column.map((item, index) => (
