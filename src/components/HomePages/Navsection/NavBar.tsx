@@ -17,25 +17,38 @@ const NavBar: React.FC = () => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const dropdownRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
+
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            // console.log('values',Object.values(dropdownRefs.current));
-
+            // Get window dimensions
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+    
+            // Get the clicked position
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+    
+            // If the click is on the vertical or horizontal scrollbar
+            const isScrollbarClick =
+                clickX >= document.documentElement.clientWidth ||
+                clickY >= document.documentElement.clientHeight;
+    
+            if (isScrollbarClick) return; // Don't close the dropdown if scrollbar is clicked
+    
             const clickedInsideAny = Object.values(dropdownRefs.current).some(ref =>
-
                 ref?.contains(event.target as Node)
             );
-            // console.log(clickedInsideAny);
-
+    
             if (!clickedInsideAny) {
                 setOpenDropdown(null);
             }
         };
-
+    
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
-
+    
     return (
         <section className='bg-black  flex items-center'>
             <div className='flex gap-6 p-4'>
@@ -50,7 +63,7 @@ const NavBar: React.FC = () => {
                     >
                         <p>{label}</p>
                         {dropdown && openDropdown === key && (
-                            <div className='bg-gray-200 w-max p-3 absolute top-10 -left-9 text-black shadow rounded z-10'>
+                            <div className=' md:w-max p-0 absolute top-10 -left-22 md:-left-9 text-black shadow rounded z-10'>
                                 {dropdown}
                             </div>
                         )}
