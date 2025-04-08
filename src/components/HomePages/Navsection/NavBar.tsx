@@ -9,8 +9,8 @@ import React, { useEffect, useRef, useState } from 'react';
 const menuItems = [
     { key: 'মূলপাতা', label: 'মূলপাতা' },
     { key: 'বিষয়শ্রেণি', label: 'বিষয়শ্রেণি', dropdown: <><DropDownItems /></> },
-    { key: 'জানুন ', label: 'জানুন ', dropdown: <><p>জানুন </p><p>জানুন </p></> },
-    { key: 'নোটিশ', label: 'নোটিশ', dropdown: <><p>নোটিশ</p><p>নোটিশ</p></> }
+    { key: 'জানুন ', label: 'জানুন ', },
+    { key: 'নোটিশ', label: 'নোটিশ',  }
 ];
 
 const NavBar: React.FC = () => {
@@ -22,8 +22,8 @@ const NavBar: React.FC = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             // Get window dimensions
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
+            // const windowWidth = window.innerWidth;
+            // const windowHeight = window.innerHeight;
     
             // Get the clicked position
             const clickX = event.clientX;
@@ -63,7 +63,7 @@ const NavBar: React.FC = () => {
                     >
                         <p>{label}</p>
                         {dropdown && openDropdown === key && (
-                            <div className=' md:w-max p-0 absolute top-10 -left-22 md:-left-9 text-black shadow rounded z-10'>
+                            <div className=' md:w-max p-0 absolute top-10 -left-22 md:-left-7 text-black shadow rounded z-10'>
                                 {dropdown}
                             </div>
                         )}
