@@ -24,9 +24,10 @@
 import React from 'react';
 import NewsTabs from './NewsTabs';
 
+
 const SpecialNews = () => {
     return (
-        <section className='flex gap-4'>
+        <section className='flex flex-col md:flex-row gap-4'>
             <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow max-w-screen-xl mx-auto">
                 {/* Left Content */}
                 <div className="flex-1">
@@ -53,11 +54,15 @@ const SpecialNews = () => {
 
                     </div>
                 </div>
+
+               
+
             </div>
 
             <div>
-                <NewsTabs/>
+                <NewsTabs />
             </div>
+          
         </section>
     );
 };

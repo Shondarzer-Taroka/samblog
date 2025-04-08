@@ -5,23 +5,23 @@ import React, { useState } from 'react';
 
 const newsData = [
   {
-    img: 'https://via.placeholder.com/80x60?text=Img1',
+    img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/08/small/Untitled-1-67f524a14f810.jpg',
     title: 'ঘুষের টাকা ফেরত দিতে বাধ্য হলেন শিক্ষা কর্মকর্তা',
   },
   {
-    img: 'https://via.placeholder.com/80x60?text=Img2',
+    img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/08/small/Untitled-1-67f524a14f810.jpg',
     title: 'যেভাবে রাজউকের ১০ কর্মকর্তার প্লট ভাগিয়ে নেন পুতুল',
   },
   {
-    img: 'https://via.placeholder.com/80x60?text=Img3',
+    img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/08/small/Untitled-1-67f524a14f810.jpg',
     title: 'বঙ্গোপসাগরে সুস্পষ্ট লঘুচাপ, আবহাওয়া অফিসের সতর্কবার্তা',
   },
   {
-    img: 'https://via.placeholder.com/80x60?text=Img1',
+    img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/08/small/Untitled-1-67f524a14f810.jpg',
     title: 'ঘুষের টাকা ফেরত দিতে বাধ্য হলেন শিক্ষা কর্মকর্তা',
   },
   {
-    img: 'https://via.placeholder.com/80x60?text=Img2',
+    img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/08/small/Untitled-1-67f524a14f810.jpg',
     title: 'যেভাবে রাজউকের ১০ কর্মকর্তার প্লট ভাগিয়ে নেন পুতুল',
   },
   {
@@ -34,7 +34,7 @@ const NewsTabs = () => {
   const [activeTab, setActiveTab] = useState('latest');
 
   return (
-    <div className="w-80 bg-white border border-gray-200 rounded shadow overflow-hidden flex flex-col">
+    <div className= "w-full md:w-80 bg-white border border-gray-200 rounded shadow overflow-hidden flex flex-col">
       {/* Tabs */}
       <div className="flex border-b text-sm font-semibold">
         <button
