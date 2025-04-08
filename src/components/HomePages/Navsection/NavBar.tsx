@@ -70,7 +70,7 @@ const NavBar: React.FC = () => {
                     </li>
                 ))}
             </div>
-            <div className='flex w-[77%] justify-end'>
+            <div className='flex w-[77%] justify-end mr-5 md:mr-0'>
                 <button className='text-white'>লগ ইন</button>
             </div>
         </section>
