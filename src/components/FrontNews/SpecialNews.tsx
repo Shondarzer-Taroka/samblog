@@ -28,7 +28,7 @@ import NewsTabs from './NewsTabs';
 const SpecialNews = () => {
     return (
         <section className='flex flex-col md:flex-row gap-4'>
-            <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow max-w-screen-xl mx-auto">
+            <div className="flex flex-col-reverse md:flex-row gap-6 bg-white p-6 rounded-lg shadow max-w-screen-xl mx-auto">
                 {/* Left Content */}
                 <div className="flex-1">
                     <h2 className="text-3xl md:text-4xl font-extrabold leading-snug text-gray-800">
