@@ -1,5 +1,6 @@
 import React from 'react';
 import FirstSectionRandom from './FirstSectionRandom';
+import SecondRandom from './SecondRandom';
 
 const RandomNews = () => {
     return (
@@ -9,8 +10,10 @@ const RandomNews = () => {
                 <FirstSectionRandom />
             </aside>
 
-            
 
+          <aside>
+            <SecondRandom/>
+          </aside>
         </section>
     );
 };
