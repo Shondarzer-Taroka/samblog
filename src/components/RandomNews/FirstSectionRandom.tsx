@@ -1,4 +1,4 @@
-'use client';
+
 import Image from 'next/image';
 import React from 'react';
 
@@ -28,9 +28,9 @@ const FirstSectionRandom = () => {
 
     ]
   return (
-    <section className="p-3 grid grid-cols-2">
+    <section className="p-3 grid grid-cols-1 md:grid-cols-2">
       {/* First Aside - Image with text wrapping */}
-      <aside className="mb-6 w-[600px] h-[460px]">
+      <aside className="mb-6 w-full lg:w-[600px] h-[460px]">
         <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">
           {/* Title & Date */}
           <h2 className="text-2xl font-bold mb-1">বাংলাদেশ ৪৭তম</h2>

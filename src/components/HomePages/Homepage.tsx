@@ -3,6 +3,7 @@ import Navsection from './Navsection/Navsection';
 import SpecialNews from '../FrontNews/SpecialNews';
 import BottomNewsCard from '../FrontNews/BottomNewsCard';
 import RandomNews from '../RandomNews/RandomNews';
+import PoliticsSection from './PoliticsSection/PoliticsSection';
 
 const Homepage = () => {
     return (
@@ -11,6 +12,7 @@ const Homepage = () => {
             <SpecialNews />
             <BottomNewsCard />
             <RandomNews />
+            <PoliticsSection/>
         </div>
     );
 };

@@ -41,14 +41,16 @@ const SecondRandom = () => {
     ];
 
     return (
-        <section className='max-w-7xl mx-auto grid grid-cols-[2fr_3fr_2fr] gap-4'>
+        <section className='p-3 max-w-7xl mx-auto grid  grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] gap-4 items-center'>
 
             <aside>
                 <div className="">
                     {newsList.map((news, index) => (
+                      <div key={index}>
+                        <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
                         <div
-                            key={index}
-                            className="flex gap-4 border-b pb-4 items-start"
+                           
+                            className="flex gap-4 items-start"
                         >
                             {/* Image */}
                             <img
@@ -61,7 +63,10 @@ const SecondRandom = () => {
                             <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
                                 {news.title}
                             </h3>
+
+                            
                         </div>
+                      </div>
                     ))}
                 </div>
             </aside>
@@ -69,7 +74,8 @@ const SecondRandom = () => {
             <aside>
                 <div className="">
                     {/* First news (featured style) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b pb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                        
                         <img
                             src={newsData[0].img}
                             alt="featured"
@@ -85,6 +91,7 @@ const SecondRandom = () => {
                     </div>
 
                     {/* Two smaller news cards */}
+                    <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {newsData.slice(1).map((news, idx) => (
                             <div key={idx} className="flex gap-3">
@@ -109,9 +116,11 @@ const SecondRandom = () => {
             <aside>
                 <div className="">
                     {newsList.map((news, index) => (
+                        <div key={index}>
+                        <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
                         <div
-                            key={index}
-                            className="flex gap-4 border-b pb-4 items-start"
+                           
+                            className="flex gap-4 items-start"
                         >
                             {/* Image */}
                             <img
@@ -124,7 +133,10 @@ const SecondRandom = () => {
                             <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
                                 {news.title}
                             </h3>
+
+                            
                         </div>
+                      </div>
                     ))}
                 </div>
             </aside>
