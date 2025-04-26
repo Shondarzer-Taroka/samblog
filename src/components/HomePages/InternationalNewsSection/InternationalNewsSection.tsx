@@ -1,42 +1,56 @@
 
 import React from 'react';
+import { FaDownload } from 'react-icons/fa';
 
 const InternationalNewsSection = () => {
     const newsItems = [
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 6,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'গাজায় যুদ্ধবিরতি নিয়ে যুক্তরাষ্ট্র-সৌদির শীর্ষ দুই কূটনীতিকের বৈঠক',
+            category: 'international'
         },
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 5,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'মার্কিন সরকারের সঙ্গে বাণিজ্য আলোচনা হয়নি: সুইস অর্থমন্ত্রী',
+            category: 'international'
         },
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 4,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'পারমাণবিক প্রযুক্তির নতুন সাফল্য উদযাপন ইরানের',
+            category: 'national'
         },
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 3,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'ইরানের সঙ্গে সম্পর্ক নিয়ে নিজ দলের মধ্যেই বিক্ষোভ!',
+            category: 'country-news'
         },
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 2,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'নেতানিয়াহুর বিমানে আকাশসীما ব্যবহারের অনুমতি নিয়ে আলোচনার মুখে ফ্রান্স',
+            category: 'international'
         },
         {
-            img: 'https://via.placeholder.com/300x180',
+            id: 1,
+            img: 'https://cdn.jugantor.com/assets/news_photos/2025/04/10/medium/US-Saudi-67f78bd36ffd7.jpg',
             title: 'বেলুচিস্তান সংকটে নেতৃত্ব দিতে নওয়াজ শরীফকে আহ্বান',
+            category: 'international'
         },
+
     ];
 
     return (
-        <section className="w-[1190px] mx-auto grid grid-cols-[850px_320px] gap-8 py-6">
+        <section className="w-[1190px] mx-auto grid grid-cols-1 lg:grid-cols-[850px_320px] gap-8 py-6">
             {/* International News */}
             <div>
                 <h2 className="text-xl font-semibold border-b pb-2 mb-4">
                     <span className="text-red-600 mr-2">■</span>আন্তর্জাতিক
                 </h2>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {newsItems.map((item, i) => (
                         <div key={i} className="space-y-2">
                             <img src={item.img} alt="news" className="w-full h-40 object-cover rounded" />
@@ -54,7 +68,7 @@ const InternationalNewsSection = () => {
                     <span>
                         <span className="text-red-600 mr-2">■</span>অনলাইন ভোট
                     </span>
-                    <span className="text-xl cursor-pointer">⬇️</span>
+                    <span className="text-xl cursor-pointer"><FaDownload /></span>
                 </h2>
                 <div className="border p-4 rounded space-y-3 text-sm">
                     <p className="text-gray-500">১০ এপ্রিল ২০২৫</p>

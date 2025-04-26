@@ -4,6 +4,7 @@ import SpecialNews from '../FrontNews/SpecialNews';
 import BottomNewsCard from '../FrontNews/BottomNewsCard';
 import RandomNews from '../RandomNews/RandomNews';
 import PoliticsSection from './PoliticsSection/PoliticsSection';
+import InternationalNewsSection from './InternationalNewsSection/InternationalNewsSection';
 
 const Homepage = () => {
     return (
@@ -13,6 +14,7 @@ const Homepage = () => {
             <BottomNewsCard />
             <RandomNews />
             <PoliticsSection/>
+            <InternationalNewsSection/>
         </div>
     );
 };
