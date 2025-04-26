@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 import React from 'react';
 import { FaDownload } from 'react-icons/fa';
 
@@ -52,12 +53,14 @@ const InternationalNewsSection = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {newsItems.map((item, i) => (
-                        <div key={i} className="space-y-2">
+                     <Link href={`/news/${item.category}/${item.id}`} key={i}>
+                        <div  className="space-y-2">
                             <img src={item.img} alt="news" className="w-full h-40 object-cover rounded" />
                             <h3 className="text-sm font-semibold leading-snug hover:text-red-600 cursor-pointer">
                                 {item.title}
                             </h3>
                         </div>
+                     </Link>
                     ))}
                 </div>
             </div>
