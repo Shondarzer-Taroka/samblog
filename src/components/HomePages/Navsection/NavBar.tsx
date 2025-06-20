@@ -50,7 +50,8 @@ const NavBar: React.FC = () => {
     }, []);
     
     return (
-        <section className='bg-black  flex items-center'>
+        <section> 
+        <div className='bg-black  flex items-center'>
             <div className='flex gap-6 p-4'>
                 {menuItems.map(({ key, label, dropdown }) => (
                     <li
@@ -73,6 +74,9 @@ const NavBar: React.FC = () => {
             <div className='flex w-[77%] justify-end mr-5 md:mr-0'>
                 <button className='text-white'>লগ ইন</button>
             </div>
+        </div>
+
+        
         </section>
     );
 };
