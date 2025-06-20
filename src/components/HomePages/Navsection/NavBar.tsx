@@ -95,8 +95,24 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const menuItems = [
     { key: 'মূলপাতা', label: 'মূলপাতা' },
-    { key: 'বিষয়শ্রেণি', label: 'বিষয়শ্রেণি', dropdown: <><DropDownItems /></> },
-    { key: 'জানুন ', label: 'জানুন ', },
+    {
+        key: 'বিষয়শ্রেণি', label: 'বিষয়শ্রেণি', dropdown:
+            [
+                ['চরমান ইস্যু', 'রাজনীতি', 'অর্থনীতি', 'ধর্ম', 'ইসলাম', 'ইতিহাস', 'সংস্কৃতি', 'সাহিত্য'],
+                ['বিজ্ঞান', 'গল্প', 'কবিতা', 'উপন্যাস', 'বুক রিভিউ', 'ছবিরূপ', 'বাংলাদেশ', 'আন্তর্জাতিক'],
+                ['শিক্ষা', 'সমসাময়িক', 'তর্কযুদ্ধ', 'মুক্তচিন্তা', 'খেলাধুলা', 'মুক্তিযুদ্ধ', 'অপরাধ', 'শিশুত্ব'],
+                ['প্রম', 'রান্নাবান্না', 'তথ্যপ্রযুক্তি', 'ব্যবস্থা', 'স্বাস্থ্যকথা', 'বিবিধ'],
+            ]
+    },
+    {
+        key: 'জানুন ', label: 'জানুন ', dropdown:
+            [
+                ['রাজনীতি', 'চরমান ইস্যু', 'বিবিধ', 'ধর্ম', 'ইসলাম', 'ইতিহাস', 'সংস্কৃতি', 'সাহিত্য'],
+                ['বিজ্ঞান', 'গল্প', 'কবিতা', 'উপন্যাস', 'বুক রিভিউ', 'ছবিরূপ', 'বাংলাদেশ', 'আন্তর্জাতিক'],
+                ['শিক্ষা', 'সমসাময়িক', 'তর্কযুদ্ধ', 'মুক্তচিন্তা', 'খেলাধুলা', 'মুক্তিযুদ্ধ', 'অপরাধ', 'শিশুত্ব'],
+                ['প্রম', 'রান্নাবান্না', 'তথ্যপ্রযুক্তি', 'ব্যবস্থা', 'স্বাস্থ্যকথা', ' অর্থনীতি'],
+            ]
+    },
     { key: 'নোটিশ', label: 'নোটিশ', }
 ];
 
@@ -105,11 +121,16 @@ const NavBar: React.FC = () => {
     const dropdownRefs = useRef<Record<string, HTMLLIElement | null>>({});
     const [showMenuNav, setMenuNav] = useState<boolean>(false)
 
-    function handleChangeShowMenuNavState() {
-        // console.log(dropdowns);
 
+    const [containerMenues, setContainerMenues] = useState<string[][] | undefined>()
+    function handleChangeShowMenuNavState(menuItems: string[][] | undefined) {
+        // console.log(dropdowns);
+        setContainerMenues(menuItems)
         setMenuNav(!showMenuNav)
     }
+
+
+
 
 
     useEffect(() => {
@@ -154,16 +175,12 @@ const NavBar: React.FC = () => {
                                 dropdownRefs.current[key] = el;
                             }}
                             onMouseEnter={() => setOpenDropdown(key)}
-                            onClick={handleChangeShowMenuNavState
+                            onClick={() => handleChangeShowMenuNavState(dropdown)
 
                             }
                         >
                             <p>{label}</p>
-                            {/* {dropdown && openDropdown === key && (
-                                <div className=' md:w-max p-0 absolute top-10 -left-22 md:-left-7 text-black shadow rounded z-10'>
-                                    {dropdown}
-                                </div>
-                            )} */}
+
                         </li>
                     ))}
                 </div>
@@ -172,10 +189,10 @@ const NavBar: React.FC = () => {
                 </div>
             </div>
 
-            {showMenuNav && <div className=''>
+            {showMenuNav && <div className='relative'>
 
-                <div className=' '>
-                    <DropDownItems />
+                <div className='absolute top-0 left-0 w-full z-40'>
+                    <DropDownItems categories={containerMenues} />
                 </div>
 
             </div>}
