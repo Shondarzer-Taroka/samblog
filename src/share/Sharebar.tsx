@@ -17,7 +17,7 @@ const icons = [
   { title: 'Copy', component: FaCopy },
 ];
 
-const IconButton = ({ Icon, title }) => (
+const IconButton = ({ Icon, title }:{Icon:,title:string}) => (
   <div
     className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
     title={title}
