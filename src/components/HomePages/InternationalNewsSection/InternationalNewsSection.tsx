@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import React from 'react';
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload, FaFacebookF, FaTwitter, FaLink, FaEnvelope } from 'react-icons/fa';
 
 const InternationalNewsSection = () => {
     const newsItems = [
@@ -66,57 +66,65 @@ const InternationalNewsSection = () => {
             </div>
 
             {/* Online Vote */}
-            <div>
-                <h2 className="text-xl font-semibold border-b pb-2 mb-4 flex items-center justify-between">
-                    <span>
-                        <span className="text-red-600 mr-2">■</span>অনলাইন ভোট
-                    </span>
-                    <span className="text-xl cursor-pointer"><FaDownload /></span>
-                </h2>
-                <div className="border p-4 rounded space-y-3 text-sm">
-                    <p className="text-gray-500">১০ এপ্রিল ২০২৫</p>
-                    <p>
-                        অর্থনীতিবিদ হোসেন সোহেল বলেন, মার্কিন প্রেসিডেন্ট ডোনাল্ড ট্রাম্প হেয়ারে বাণিজ্য
-                        ঘাটতি কমাতে চাচ্ছেন, সেভাবে ঘাটতি কমানো সম্ভব নয়। আপনি কি তাই মনে করেন?
-                    </p>
+                <div>
+      <h2 className="text-xl font-semibold border-b pb-2 mb-4 flex items-center justify-between">
+        <span>
+          <span className="text-red-600 mr-2">■</span>অনলাইন ভোট
+        </span>
+        <span className="text-xl cursor-pointer text-gray-600 hover:text-red-600">
+          <FaDownload />
+        </span>
+      </h2>
 
-                    <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                            <label className="flex items-center gap-2">
-                                <input type="radio" name="vote" className="accent-red-600" />
-                                হ্যাঁ ভোট
-                            </label>
-                            <span>৯১%</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <label className="flex items-center gap-2">
-                                <input type="radio" name="vote" className="accent-red-600" />
-                                না ভোট
-                            </label>
-                            <span>৮%</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <label className="flex items-center gap-2">
-                                <input type="radio" name="vote" className="accent-red-600" />
-                                মন্তব্য নেই
-                            </label>
-                            <span>১%</span>
-                        </div>
-                    </div>
+      <div className="border p-4 rounded space-y-3 text-sm bg-white">
+        <p className="text-gray-500">১০ এপ্রিল ২০২৫</p>
 
-                    <p className="text-gray-500 mt-2">মোট ভোটদাতা: ১৪৮৪ জন</p>
+        <p>
+          অর্থনীতিবিদ হোসেন সোহেল বলেন, মার্কিন প্রেসিডেন্ট ডোনাল্ড ট্রাম্প হেয়ারে বাণিজ্য
+          ঘাটতি কমাতে চাচ্ছেন, সেভাবে ঘাটতি কমানো সম্ভব নয়। আপনি কি তাই মনে করেন?
+        </p>
 
-                    <div className="flex items-center gap-4 pt-2 border-t pt-3 text-lg">
-                        <span className="text-sm">3 Shares</span>
-                        <span className="cursor-pointer">🔗</span>
-                        <span className="cursor-pointer">📘</span>
-                        <span className="cursor-pointer">🐦</span>
-                        <span className="cursor-pointer">📨</span>
-                    </div>
-                </div>
-            </div>
+        {/* Voting Options */}
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <label className="flex items-center gap-2">
+              <input type="radio" name="vote" className="accent-red-600" />
+              হ্যাঁ ভোট
+            </label>
+            <span className="font-semibold">৯১%</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <label className="flex items-center gap-2">
+              <input type="radio" name="vote" className="accent-red-600" />
+              না ভোট
+            </label>
+            <span className="font-semibold">৮%</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <label className="flex items-center gap-2">
+              <input type="radio" name="vote" className="accent-red-600" />
+              মন্তব্য নেই
+            </label>
+            <span className="font-semibold">১%</span>
+          </div>
+        </div>
+
+        <p className="text-gray-500 mt-2">মোট ভোটদাতা: ১৪৮৪ জন</p>
+
+        {/* Share Icons */}
+        <div className="flex items-center gap-4 pt-3 border-t text-lg text-gray-600">
+          <span className="text-sm">3 Shares</span>
+          <FaLink className="cursor-pointer hover:text-red-600" title="Copy link" />
+          <FaFacebookF className="cursor-pointer hover:text-blue-600" title="Share on Facebook" />
+          <FaTwitter className="cursor-pointer hover:text-sky-500" title="Share on Twitter" />
+          <FaEnvelope className="cursor-pointer hover:text-green-600" title="Share by Email" />
+        </div>
+      </div>
+    </div>
+
         </section>
     );
 };
 
 export default InternationalNewsSection;
+
