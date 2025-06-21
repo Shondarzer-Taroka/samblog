@@ -1,3 +1,5 @@
+import DetailsPageNewsSection from '@/share/DetailsPageNewsSection';
+import ShareBar from '@/share/Sharebar';
 import Image from 'next/image';
 import React from 'react';
 
@@ -37,16 +39,44 @@ export default function NewsDetailsPage({ params }: NewsDetailsPageProps) {
             <p className="border-b-2 border-black inline-block pb-1 font-bold text-2xl">রাজনীতি</p>
 
             <h1 className='text-[45px] font-bold'>অবশেষে মুক্তি পেলেন ফিলিস্তিনি শিক্ষার্থী মাহমুদ খলিল</h1>
-            {/* <img src={news.img} alt="news" className="w-full h-80 object-cover rounded mb-6" /> */}
-          <Image
-          width={1000}
-          height={400}
-           src={'https://cdn.jugantor.com/assets/news_photos/2025/06/21/mahmud-khalil-685639f4acd24.jpg'}/>
+
+
+            <div>
+                <div className='grid grid-cols-2'>
+                    <div className='flex gap-2.5 items-center'>
+                        <Image
+                            src={'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
+                            alt='logo'
+                            width={50}
+                            height={50}
+                            className='rounded-full'
+                        />
+
+                        <div className='text-xl'>
+                            <p>আন্তর্জাতিক ডেস্ক</p>
+                            <p className='text-[#00000067]'>প্রকাশ: ২১ জুন ২০২৫, ১০:৪৯ এএম</p>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <ShareBar />
+                    </div>
+                </div>
+            </div>
+
+
+            <Image
+                width={1000}
+                height={400}
+                alt='details'
+                src={'https://cdn.jugantor.com/assets/news_photos/2025/06/21/mahmud-khalil-685639f4acd24.jpg'} />
             <h1 className="text-2xl font-bold mb-4">{news.title}</h1>
-            <p className="text-gray-700">
-                {/* Example description */}
-                This is a detailed news page for the &quot;{news.title}&quot; under the &quot;{news.category}&quot; category.
-            </p>
+
+
+            <div>
+                <DetailsPageNewsSection />
+            </div>
         </section>
     );
 }
