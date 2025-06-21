@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const newsItems = [
@@ -23,7 +24,7 @@ type NewsDetailsPageProps = {
     }
 }
 
-export default function NewsDetailsPage({ params }:NewsDetailsPageProps) {
+export default function NewsDetailsPage({ params }: NewsDetailsPageProps) {
     const { category, id } = params;
     const news = newsItems.find(item => item.category === category && item.id === parseInt(id));
 
@@ -32,8 +33,15 @@ export default function NewsDetailsPage({ params }:NewsDetailsPageProps) {
     }
 
     return (
-        <section className="w-[1190px] mx-auto py-6">
-            <img src={news.img} alt="news" className="w-full h-80 object-cover rounded mb-6" />
+        <section className="w-[1190px] mx-auto py-6 font-noto">
+            <p className="border-b-2 border-black inline-block pb-1 font-bold text-2xl">রাজনীতি</p>
+
+            <h1 className='text-[45px] font-bold'>অবশেষে মুক্তি পেলেন ফিলিস্তিনি শিক্ষার্থী মাহমুদ খলিল</h1>
+            {/* <img src={news.img} alt="news" className="w-full h-80 object-cover rounded mb-6" /> */}
+          <Image
+          width={1000}
+          height={400}
+           src={'https://cdn.jugantor.com/assets/news_photos/2025/06/21/mahmud-khalil-685639f4acd24.jpg'}/>
             <h1 className="text-2xl font-bold mb-4">{news.title}</h1>
             <p className="text-gray-700">
                 {/* Example description */}

@@ -170,7 +170,7 @@ const NavBar: React.FC = () => {
 
 
 
-  
+
   return (
     <section>
       <nav className='bg-black flex items-center justify-between p-4'>

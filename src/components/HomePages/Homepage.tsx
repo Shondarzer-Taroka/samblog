@@ -1,5 +1,4 @@
 import React from 'react';
-import Navsection from './Navsection/Navsection';
 import SpecialNews from '../FrontNews/SpecialNews';
 import BottomNewsCard from '../FrontNews/BottomNewsCard';
 import RandomNews from '../RandomNews/RandomNews';
@@ -8,8 +7,8 @@ import InternationalNewsSection from './InternationalNewsSection/InternationalNe
 
 const Homepage = () => {
     return (
-        <div className='max-w-7xl mx-auto'>
-            <Navsection />
+        <div className='max-w-7xl mx-auto font-noto'>
+       
             <SpecialNews />
             <BottomNewsCard />
             <RandomNews />

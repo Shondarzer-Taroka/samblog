@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 
 const Navsection = () => {
     return (
-        <div>
+        <div className='font-noto'>
             <NavBar/>
         </div>
     );
