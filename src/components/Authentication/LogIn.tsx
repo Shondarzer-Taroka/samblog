@@ -43,15 +43,19 @@ const Login = () => {
       });
 
       const data = await res.json();
-      console.log(data);
-      router.push('/news/dashboard');
+
 
       if (res.ok) {
-        // localStorage.setItem('token', data.token);
         showToast('success', 'সফলভাবে লগইন হয়েছে');
+
+        // Wait a short moment to ensure cookie is saved
+        setTimeout(() => {
+          router.push('/news/dashboard');
+        }, 300); // slight delay to let cookie settle
       } else {
         showToast('error', data?.message || 'লগইন ব্যর্থ হয়েছে');
       }
+
     } catch (err) {
       console.error(err);
       showToast('error', 'সার্ভার এরর');
@@ -101,7 +105,7 @@ const Login = () => {
 
         <div className='flex justify-between'>
           <button>forgotten password?</button>
-          <button className='underline text-blue-400 cursor-pointer' onClick={()=>router.push('/register')}>Register</button>
+          <button className='underline text-blue-400 cursor-pointer' onClick={() => router.push('/register')}>Register</button>
         </div>
 
       </form>
