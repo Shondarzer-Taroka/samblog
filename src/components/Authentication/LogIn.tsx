@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/share/Toast';
+// import axios from 'axios';
+import { useRouter } from 'next/navigation'; // for redirect
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +14,9 @@ const Login = () => {
   });
 
   const { toast, showToast, hideToast } = useToast();
+  const router = useRouter();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -23,19 +24,41 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Simulate login validation
-    if (formData.email === '' || formData.password === '') {
-      showToast('error', 'সব ফিল্ড পূরণ করুন');
-      return;
+  if (formData.email === '' || formData.password === '') {
+    showToast('error', 'সব ফিল্ড পূরণ করুন');
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:7700/api/users/login',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+      credentials:'include'
+    });
+
+    const data = await res.json();
+console.log(data);
+
+    if (res.ok) {
+      // localStorage.setItem('token', data.token);
+      showToast('success', 'সফলভাবে লগইন হয়েছে');
+      router.push('/news/dashboard');
+    } else {
+      showToast('error', data?.message || 'লগইন ব্যর্থ হয়েছে');
     }
+  } catch (err) {
+    console.error(err);
+    showToast('error', 'সার্ভার এরর');
+  }
+};
 
-    // You can replace this with real authentication logic
-    console.log('Logging in with:', formData);
-    showToast('success', 'সফলভাবে লগইন হয়েছে');
-  };
+
 
   return (
     <section className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-center">

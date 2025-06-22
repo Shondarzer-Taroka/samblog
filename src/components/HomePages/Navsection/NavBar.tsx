@@ -125,6 +125,8 @@
 
 'use client'
 import DropDownItems from '@/components/DropDownItems/DropDownItems';
+import { useAuthProvider } from '@/Providers/AuthProvider';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
 
 const menuItems = [
@@ -151,6 +153,9 @@ const menuItems = [
 const NavBar: React.FC = () => {
   const [dropdownContent, setDropdownContent] = useState<string[][] | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { user, loading , logout} = useAuthProvider()
+  const router= useRouter()
+  const pathname=usePathname()
 
   const toggleDropdown = (dropdown?: string[][]) => {
     setDropdownContent(prev => (prev === dropdown ? null : dropdown || null));
@@ -169,7 +174,13 @@ const NavBar: React.FC = () => {
   }, []);
 
 
+  function handleNavigateLogInPage() {
+    router.push('/login')
+  }
 
+  if (pathname.startsWith('/news/dashboard')) {
+    return 
+  }
 
   return (
     <section>
@@ -185,7 +196,8 @@ const NavBar: React.FC = () => {
             </li>
           ))}
         </ul>
-        <button className='text-white'>লগ ইন</button>
+       
+        { loading ? <h1 className='text-white'>loading</h1> :  user?.email ? <button onClick={logout} className='text-white cursor-pointer'>Log out</button> : <button onClick={handleNavigateLogInPage} className='text-white cursor-pointer'>লগ ইন</button>}
       </nav>
 
       {dropdownContent && (

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import Navsection from "@/components/HomePages/Navsection/Navsection";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,12 +29,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerifBengali.variable} antialiased font-noto`}
       >
         <Navsection/>
+
+      {/* <AuthProvider>{children}</AuthProvider> */}
+
+
         {children}
       </body>
     </html>

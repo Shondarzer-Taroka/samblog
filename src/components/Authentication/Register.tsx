@@ -349,33 +349,3 @@ export default Register;
 
 
 
-
-
-
-// import React from 'react';
-// import { allDivision ,allDistict,allUpazila,divisionalDataOf, DivisonName} from '@bangladeshi/bangladesh-address';
-// import BdAddress, { bdUnions, bdUnionByUpazilla, bdPostCodes } from "bd-address";
-
-// const Register = () => {
-//     const division=allDivision()
-//     const thana=allUpazila()
-//     const district=allDistict()
-// //     console.log(division,thana);
-// //  console.log(divisionalDataOf(DivisonName.Dhaka));
- 
-    
-//     // console.log(bdPostCodes());
-//     const allUnions = bdUnions();
-// console.log('All Unions:', allUnions);
-
-// const allDivisions = BdAddress;
-// console.log('All Divisions:', allDivisions);
-    
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default Register;
