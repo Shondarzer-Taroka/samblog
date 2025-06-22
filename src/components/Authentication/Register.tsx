@@ -107,41 +107,66 @@ const Register = () => {
 
 
 
-const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (e.target.files && e.target.files[0]) {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'my-uploads'); // replace
-    formData.append('cloud_name', 'dw72swggv'); // replace
-    setUploading(true);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'my-uploads'); // replace
+      formData.append('cloud_name', 'dw72swggv'); // replace
+      setUploading(true);
 
-    fetch('https://api.cloudinary.com/v1_1/dw72swggv/image/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.secure_url) {
-          setProfileImage(data.secure_url);
-          showToast('success', '✅ প্রোফাইল ছবি আপলোড হয়েছে');
-        } else {
-          showToast('error', '❌ ছবি আপলোড ব্যর্থ হয়েছে');
-        }
+      fetch('https://api.cloudinary.com/v1_1/dw72swggv/image/upload', {
+        method: 'POST',
+        body: formData,
       })
-      .catch(() => {
-        showToast('error', '❌ ছবি আপলোডে সমস্যা হয়েছে');
-      })
-      .finally(() => setUploading(false))
-  }
-};
-
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ formData, profileImage });
-    showToast('success', 'ফর্ম সফলভাবে সাবমিট হয়েছে');
+        .then(res => res.json())
+        .then(data => {
+          if (data.secure_url) {
+            setProfileImage(data.secure_url);
+            showToast('success', '✅ প্রোফাইল ছবি আপলোড হয়েছে');
+          } else {
+            showToast('error', '❌ ছবি আপলোড ব্যর্থ হয়েছে');
+          }
+        })
+        .catch(() => {
+          showToast('error', '❌ ছবি আপলোডে সমস্যা হয়েছে');
+        })
+        .finally(() => setUploading(false))
+    }
   };
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        ...formData,
+        image: profileImage,
+      };
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        showToast('success', 'নিবন্ধন সফল হয়েছে');
+      } else {
+        showToast('error', data?.message || 'নিবন্ধন ব্যর্থ হয়েছে');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('error', 'সার্ভার সমস্যার কারণে নিবন্ধন ব্যর্থ হয়েছে');
+    }
+  };
+
 
   return (
     <section className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center">
@@ -183,70 +208,70 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-                   <div className="relative">
-          <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            name="name"
-            placeholder="পূর্ণ নাম"
-            className="w-full border p-2 pl-10 rounded"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="relative">
+            <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="name"
+              placeholder="পূর্ণ নাম"
+              className="w-full border p-2 pl-10 rounded"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="relative">
-          <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="email"
-            name="email"
-            placeholder="ইমেইল"
-            className="w-full border p-2 pl-10 rounded"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="relative">
+            <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              placeholder="ইমেইল"
+              className="w-full border p-2 pl-10 rounded"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="relative">
-          <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            name="phone"
-            placeholder="ফোন নম্বর"
-            className="w-full border p-2 pl-10 rounded"
-            onChange={handleChange}
-            required
-          />
-        </div> 
+          <div className="relative">
+            <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="phone"
+              placeholder="ফোন নম্বর"
+              className="w-full border p-2 pl-10 rounded"
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
 
 
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                  <div className="relative">
-          <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="password"
-            name="password"
-            placeholder="পাসওয়ার্ড"
-            className="w-full border p-2 pl-10 rounded"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="password"
+              name="password"
+              placeholder="পাসওয়ার্ড"
+              className="w-full border p-2 pl-10 rounded"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="relative">
-          <FaHome className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            name="address"
-            placeholder="বর্তমান ঠিকানা"
-            className="w-full border p-2 pl-10 rounded"
-            onChange={handleChange}
-            required
-          />
-        </div>  
+          <div className="relative">
+            <FaHome className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="address"
+              placeholder="বর্তমান ঠিকানা"
+              className="w-full border p-2 pl-10 rounded"
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
         {/* Dropdowns */}
@@ -317,14 +342,14 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             ))}
           </select>
 
-<input
-  type="text"
-  name="postCode"
-  value={formData.postCode}
-  placeholder="পোস্ট কোড"
-  className="border p-2 rounded"
-  onChange={handleChange}
-/>
+          <input
+            type="text"
+            name="postCode"
+            value={formData.postCode}
+            placeholder="পোস্ট কোড"
+            className="border p-2 rounded"
+            onChange={handleChange}
+          />
         </div>
 
         {/* Submit */}
@@ -336,8 +361,8 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         </button>
       </form>
       {toast && (
-  <Toast type={toast.type} message={toast.message} onClose={hideToast} />
-)}
+        <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+      )}
     </section>
   );
 };

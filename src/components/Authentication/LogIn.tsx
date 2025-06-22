@@ -24,39 +24,39 @@ const Login = () => {
     }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (formData.email === '' || formData.password === '') {
-    showToast('error', 'সব ফিল্ড পূরণ করুন');
-    return;
-  }
-
-  try {
-    const res = await fetch('http://localhost:7700/api/users/login',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-      credentials:'include'
-    });
-
-    const data = await res.json();
-console.log(data);
-
-    if (res.ok) {
-      // localStorage.setItem('token', data.token);
-      showToast('success', 'সফলভাবে লগইন হয়েছে');
-      router.push('/news/dashboard');
-    } else {
-      showToast('error', data?.message || 'লগইন ব্যর্থ হয়েছে');
+    if (formData.email === '' || formData.password === '') {
+      showToast('error', 'সব ফিল্ড পূরণ করুন');
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    showToast('error', 'সার্ভার এরর');
-  }
-};
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include'
+      });
+
+      const data = await res.json();
+      console.log(data);
+      router.push('/news/dashboard');
+
+      if (res.ok) {
+        // localStorage.setItem('token', data.token);
+        showToast('success', 'সফলভাবে লগইন হয়েছে');
+      } else {
+        showToast('error', data?.message || 'লগইন ব্যর্থ হয়েছে');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('error', 'সার্ভার এরর');
+    }
+  };
 
 
 
@@ -98,6 +98,12 @@ console.log(data);
         >
           লগইন করুন
         </button>
+
+        <div className='flex justify-between'>
+          <button>forgotten password?</button>
+          <button className='underline text-blue-400 cursor-pointer' onClick={()=>router.push('/register')}>Register</button>
+        </div>
+
       </form>
 
       {toast && (
