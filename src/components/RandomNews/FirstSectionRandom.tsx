@@ -28,7 +28,7 @@ const FirstSectionRandom = () => {
 
     ]
   return (
-    <section className="p-3 grid grid-cols-1 md:grid-cols-2">
+    <section className=" grid grid-cols-1 xl:grid-cols-2">
       {/* First Aside - Image with text wrapping */}
       <aside className="mb-6 w-full lg:w-[600px] h-[460px]">
         <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">

@@ -41,7 +41,7 @@ const SecondRandom = () => {
     ];
 
     return (
-        <section className='p-3 max-w-7xl mx-auto grid  grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] gap-4 items-center'>
+        <section className=' grid grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] gap-4 items-center'>
 
             <aside>
                 <div className="">

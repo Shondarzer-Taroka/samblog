@@ -30,10 +30,10 @@ const Register = () => {
   const { toast, showToast, hideToast } = useToast();
 
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [districts, setDistricts] = useState<any[]>([]);
-  const [thanas, setThanas] = useState<any[]>([]);
-  const [unions, setUnions] = useState<any[]>([]);
-  const [divisions, setDivisions] = useState<any[]>([]);
+  const [districts, setDistricts] = useState([]);
+  const [thanas, setThanas] = useState([]);
+  const [unions, setUnions] = useState([]);
+  const [divisions, setDivisions] = useState([]);
   const [uploading, setUploading] = useState(false);
 
 

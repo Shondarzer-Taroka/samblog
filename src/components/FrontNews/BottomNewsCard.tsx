@@ -28,7 +28,7 @@ const newsCards = [
 
 const BottomNewsCard = () => {
   return (
-    <div className=" py-4 px-2">
+    <div className=" py-4 px-2 mt-24">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {newsCards.map((card, index) => (
           <div

@@ -96,7 +96,7 @@ import React from 'react';
 
 const PoliticsSection = () => {
     return (
-        <section className='max-w-screen-xl mx-auto py-8 px-4 '>
+        <section className='mt-24 py-6 px-2 '>
             <h2 className="text-xl font-semibold text-red-600 mb-4">রাজনীতি</h2>
 
             <aside className=" grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">

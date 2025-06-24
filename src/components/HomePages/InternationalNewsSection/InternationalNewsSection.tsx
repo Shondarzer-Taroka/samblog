@@ -45,7 +45,7 @@ const InternationalNewsSection = () => {
     ];
 
     return (
-        <section className="w-[1190px] mx-auto grid grid-cols-1 lg:grid-cols-[850px_320px] gap-8 py-6">
+        <section className=" grid grid-cols-1 lg:grid-cols-[70%_30%] gap-4 xl:gap-8 py-6 px-2 mt-24">
             {/* International News */}
             <div>
                 <h2 className="text-xl font-semibold border-b pb-2 mb-4">
@@ -55,7 +55,7 @@ const InternationalNewsSection = () => {
                     {newsItems.map((item, i) => (
                      <Link href={`/news/${item.category}/${item.id}`} key={i}>
                         <div  className="space-y-2">
-                            <img src={item.img} alt="news" className="w-full h-40 object-cover rounded" />
+                            <img src={item.img} alt="news" className="rounded" />
                             <h3 className="text-sm font-semibold leading-snug hover:text-red-600 cursor-pointer">
                                 {item.title}
                             </h3>
@@ -66,7 +66,7 @@ const InternationalNewsSection = () => {
             </div>
 
             {/* Online Vote */}
-                <div>
+                <div className='w-full'>
       <h2 className="text-xl font-semibold border-b pb-2 mb-4 flex items-center justify-between">
         <span>
           <span className="text-red-600 mr-2">■</span>অনলাইন ভোট
@@ -76,7 +76,7 @@ const InternationalNewsSection = () => {
         </span>
       </h2>
 
-      <div className="border p-4 rounded space-y-3 text-sm bg-white">
+      <div className="border w-full p-4 rounded space-y-3 text-sm bg-white">
         <p className="text-gray-500">১০ এপ্রিল ২০২৫</p>
 
         <p>
