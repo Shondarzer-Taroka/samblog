@@ -35,7 +35,7 @@ const Homepage = async () => {
 
             <SpecialNews data={news.specialNews} />
             <BottomNewsCard />
-            <RandomNews />
+            <RandomNews data={news}/>
             <PoliticsSection />
             <InternationalNewsSection />
             <Entertainment />
