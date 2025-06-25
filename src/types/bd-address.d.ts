@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'bd-address' {
     const BdAddress: any;
     export const bdUnions: any;

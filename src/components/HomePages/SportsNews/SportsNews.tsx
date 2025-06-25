@@ -94,7 +94,7 @@ const SportsNews: React.FC = () => {
         <div className="space-y-4 w-full">
           {leftColumn.map((item) => (
             <div key={item.id} className="space-y-2">
-              <img src={item.image} alt={item.title} className="w-full  rounded" />
+              <Image width={250} height={200} src={item.image} alt={item.title} className="w-full  rounded" />
               <p className="text-sm font-medium leading-snug">{item.title}</p>
             </div>
           ))}
@@ -102,7 +102,7 @@ const SportsNews: React.FC = () => {
 
         {/* Center Column */}
         <div className='w-full'>
-          <img src={centerMain.image} alt={centerMain.title} className="w-full  rounded" />
+          <Image src={centerMain.image} alt={centerMain.title} width={350} height={200} className="w-full  rounded" />
           <h2 className="text-lg font-semibold mt-2">{centerMain.title}</h2>
           <p className="text-sm text-gray-700">{centerMain.description}</p>
         </div>
@@ -111,7 +111,7 @@ const SportsNews: React.FC = () => {
         <div className="space-y-4 w-full">
           {rightColumn.map((item) => (
             <div key={item.id} className="space-y-2">
-              <img src={item.image} alt={item.title} className="w-full  rounded" />
+              <Image width={250} height={200} src={item.image} alt={item.title} className="w-full  rounded" />
               {item.title && <p className="text-sm font-medium leading-snug">{item.title}</p>}
             </div>
           ))}

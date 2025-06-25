@@ -1,4 +1,4 @@
-import { getUserFromCookie } from '@/hooks/auth';
+
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import Image from 'next/image';
 import { FiMenu, FiX, FiUser } from 'react-icons/fi';

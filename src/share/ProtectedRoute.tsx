@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // components/ProtectedRoute.tsx
 'use client';
 
@@ -11,7 +12,7 @@ const ProtectedRoute = ({ user, children }: { user: any; children: React.ReactNo
     if (!user) {
       router.push('/login');
     }
-  }, [user]);
+  }, [router, user]);
 
   if (!user) return null;
 

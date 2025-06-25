@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface NewsCardProps {
@@ -10,9 +11,11 @@ const NewsCard: React.FC<NewsCardProps> = ({ image, title, time }) => {
   return (
     <div className="flex mb-4">
       {image && (
-        <img
+        <Image
           src={image}
           alt="news"
+          width={112}
+          height={80}
           className="w-28 h-20 object-cover mr-4 rounded"
         />
       )}

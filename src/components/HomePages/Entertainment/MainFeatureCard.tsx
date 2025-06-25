@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface MainFeatureCardProps {
@@ -15,7 +16,9 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
 }) => {
   return (
     <div className="w-full">
-      <img
+      <Image
+      width={100}
+      height={100}
         src={image}
         alt="feature"
         className="w-full rounded"

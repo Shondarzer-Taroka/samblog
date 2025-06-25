@@ -58,7 +58,7 @@ const InternationalNewsSection = ({ data }: { data: NewsItem[] }) => {
           {newsItems.map((item, i) => (
             <Link href={`/news/${item.category}/${item.id}`} key={i}>
               <div className="space-y-2">
-                <Image src={item.imageUrl || ''} width={150} height={200} alt={item.title} className="rounded w-full" />
+                <Image src={item.imageUrl || ''} width={150} height={200} alt={item.title} className="rounded md:h-[160px] w-full" />
                 <h3 className="text-sm font-semibold leading-snug hover:text-red-600 cursor-pointer">
                   {item.title}
                 </h3>

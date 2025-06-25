@@ -112,6 +112,14 @@ import Image from 'next/image';
 import React from 'react';
 
 
+// interface NewsPageProps {
+//     params: {
+//         id: string;
+//         category: string;
+//     };
+// }
+
+
 async function getSingleNews(id: string): Promise<NewsItem> {
     const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getSingleNews/${id}`)
     return result.data.news
@@ -120,13 +128,17 @@ async function getSingleNews(id: string): Promise<NewsItem> {
 
 
 
-export default async function NewsDetailsPage({ params }: { params: { id: string; category: string } }) {
-    console.log(params.category,'kd');
 
-    const news = await getSingleNews(params.id)
-    console.log(news, 'news');
+export default async function NewsDetailsPage({ params }:{params:Promise<{id:string;category:string}>} ) {
+ 
+    const {category,id}= await params
 
+    const news = await getSingleNews(id)
 
+   
+
+    console.log(category);
+    
     if (!news) {
         return <div className="text-center py-10">News not found!</div>;
     }
@@ -189,7 +201,8 @@ export default async function NewsDetailsPage({ params }: { params: { id: string
 
 
             <div>
-                <DetailsPageNewsSection category={params.category} data={news} />
+                <DetailsPageNewsSection data={news} />
+                {/* <DetailsPageNewsSection category={category} data={news} /> */}
             </div>
         </section>
     );

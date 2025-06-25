@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronsLeft, ChevronsRight, Pause, Play } from "lucide-react";
+import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 
 interface Slide {
@@ -81,7 +82,9 @@ const PhotoSlider: React.FC = () => {
 
 
       <div className="relative">
-        <img
+        <Image
+          width={1000}
+          height={500}
           src={slides[current].image}
           alt="slide"
           className="w-full h-[420px] object-cover"
@@ -103,15 +106,15 @@ const PhotoSlider: React.FC = () => {
             onClick={togglePause}
             className="bg-white text-black p-1 rounded-full shadow"
           >
-            {isPaused ?<Play />: <Pause />}
+            {isPaused ? <Play /> : <Pause />}
           </button>
           <button
             onClick={prevSlide}
             className="bg-white text-black p-1 rounded-full shadow"
           >
-            
+
             <ChevronsLeft />
-          
+
           </button>
           <button
             onClick={nextSlide}

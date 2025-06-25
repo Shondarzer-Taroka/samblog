@@ -1,6 +1,7 @@
 
 
 
+import Image from 'next/image';
 import React from 'react';
 
 const newsCards = [
@@ -36,7 +37,9 @@ const BottomNewsCard = () => {
             className="relative h-40 rounded overflow-hidden cursor-pointer group"
           >
             {/* Background Image */}
-            <img
+            <Image
+              width={240}
+              height={300}
               src={card.image}
               alt={card.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-300"

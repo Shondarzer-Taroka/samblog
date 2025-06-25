@@ -1,6 +1,7 @@
 
 
 'use client';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 const newsData = [
@@ -59,7 +60,7 @@ const NewsTabs = () => {
       <div className="divide-y overflow-y-auto h-[300px]">
         {newsData.map((item, idx) => (
           <div key={idx} className="flex gap-3 p-3 hover:bg-gray-100 cursor-pointer">
-            <img src={item.img} alt="news" className="w-20 h-16 object-cover rounded" />
+            <Image src={item.img} alt="news" width={80} height={64} className="w-20 h-16 object-cover rounded" />
             <p className="text-[17px] font-medium text-gray-800 leading-snug">
               {item.title}
             </p>
