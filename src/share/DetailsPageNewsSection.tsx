@@ -1,25 +1,35 @@
+
+
+
+
+
+
+
 // DetailsPageNewsSection
 
 import { NewsItem } from '@/types/news.types';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import axios from 'axios';
+import Link from 'next/link';
 import React from 'react';
 
 
+const getTitleForDescription = async (category: string): Promise<NewsItem[]> => {
+    const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getTitleForDescription/${category}`)
+    return result.data.categorizedNews
+}
 
-const newsList = [
-    'ইসরাইলে কেন এতো ভারতীয়, কী করেন তারা',
-    'গাজায় ইসরাইলি হামলায় আরও ৮৬ ফিলিস্তিনি নিহত',
-    'ইসরাইল আক্রমণ বন্ধ না করা পর্যন্ত আলোচনায় যাবে না ইরান',
-    'ইরানে ধরা পড়ল মোসাদের ৫৪ গুপ্তচর',
-    'ইসরাইলের চ্যানেল ১৪ কার্যালয়ে হামলা চালাল ইরান',
-];
+export default async function DetailsPageNewsSection({ data, category }: { data: NewsItem, category: string }) {
+    console.log(category, 'cat');
 
-const bottomHighlights = [
-    'গাজায় ইসরাইলি হামলায় আরও ৮৬ ফিলিস্তিনি নিহত',
-    'ইসরাইলে কেন এতো ভারতীয়, কী করেন তারা',
-];
+    const newsList = await getTitleForDescription('আন্তর্জাতিক') || []
 
-export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
+    const bottomHighlights = newsList.slice(5, 7) || []
+
+    console.log(newsList);
+
+
+
     return (
         <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Sidebar */}
@@ -27,8 +37,9 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
                 <h2 className="text-lg font-bold mb-4">আরও পড়ুন</h2>
                 <ul className="space-y-3">
                     {newsList.map((item, idx) => (
+
                         <li key={idx} className="text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
-                            ➤ {item}
+                            <Link href={`/news/${item.category}/${item.id}`}> ➤ {item.title}</Link>
                         </li>
                     ))}
                 </ul>
@@ -41,26 +52,7 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
                     {data.title}
                 </h1>
                 <p className="text-gray-700">
-
                     {stripHtmlAndLimit(data.content, 1000).short}
-
-                    {/* অভিবাসন হেফাজত থেকে কলম্বিয়া বিশ্ববিদ্যালয়ের গ্র্যাজুয়েট ও ফিলিস্তিনপন্থি অধিকারকর্মী মাহমুদ খলিলকে মুক্তির নির্দেশ দিয়েছেন মার্কিন ফেডারেল আদালত। স্থানীয় সময় শুক্রবার (২০ জুন) নিউ জার্সির একটি ফেডারেল আদালতের বিচারক খলিলকে মুক্তির আদেশ দেন।
-
-                    সংবাদমাধ্যম আল-জাজিরার প্রতিবেদনে এ তথ্য জানানো হয়।
-
-                    প্রতিবেদনে বলা হয়েছে, গাজায় ইসরাইলের বর্বরতার প্রতিবাদে গত বছর কলম্বিয়া বিশ্ববিদ্যালয়ে ফিলিস্তিনপন্থি বিক্ষোভে গুরুত্বপূর্ণ ভূমিকা রাখেন খলিল।
-
-                    গত মার্চে বিশ্ববিদ্যালয়ের বাসভবন থেকে তাকে গ্রেফতার করেন যুক্তরাষ্ট্রের ইমিগ্রেশন অ্যান্ড কাস্টমস এনফোর্সমেন্টের (আইসিই) কর্মকর্তারা। পরে তাকে লুইজিয়ানার একটি কারাগারে আটক রাখা হয়।
-
-
-                    বৈধভাবে আমেরিকায় স্থায়ী বসবাস করা খলিল অভিযোগ করেন, সংবিধানের প্রথম সংশোধনী লঙ্ঘন করে রাজনৈতিক বক্তব্যের জন্য তাকে সাজা দেয়া হচ্ছে।
-
-                    শুক্রবার (২০ জুন) নিউ জার্সির একটি ফেডারেল আদালতের বিচারক খলিলকে মুক্তির আদেশ দেন।  বিচারকের আদেশের পর শুক্রবারই লুইজিয়ানার কারাগার থেকে  মুক্তি পান মাহমুদ খলিল।
-
-                    এর আগে নিউ জার্সির নিউয়ার্কের ডিস্ট্রিক্ট জাজ মাইকেল ফারবিয়ারজ গত ১১ জুন এক আদেশে বলেন, আটক রেখে খলিলের মতপ্রকাশের স্বাধীনতা লঙ্ঘন করেছে সরকার। তবে গত ১৩ জুন লুইজিয়ানার জেনার একটি আটক কেন্দ্র থেকে খলিলকে মুক্তি দিতে অসম্মতি জানান বিচারক।
-
-                    এর আগে ট্রাম্প প্রশাসন জানায়, বৈধভাবে বসবাসের আবেদনের বিষয়ে তথ্য দিতে অস্বীকৃতি জানিয়েছেন খলিল। আলাদা সে অভিযোগে তাকে ইমিগ্রেশন অ্যান্ড কাস্টমস এনফোর্সমেন্ট-আইসের আটক কেন্দ্রে বন্দি রাখা হয়েছে। */}
-
                 </p>
 
                 {/* Highlighted Footer */}
@@ -69,7 +61,7 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {bottomHighlights.map((item, idx) => (
                             <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
-                                ★ {item}
+                                ★ {item.title}
                             </li>
                         ))}
                     </ul>

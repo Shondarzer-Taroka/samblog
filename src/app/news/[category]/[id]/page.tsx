@@ -120,7 +120,8 @@ async function getSingleNews(id: string): Promise<NewsItem> {
 
 
 
-export default async function NewsDetailsPage({ params }: { params: { id: string } }) {
+export default async function NewsDetailsPage({ params }: { params: { id: string; category: string } }) {
+    console.log(params.category,'kd');
 
     const news = await getSingleNews(params.id)
     console.log(news, 'news');
@@ -177,18 +178,18 @@ export default async function NewsDetailsPage({ params }: { params: { id: string
                     src={news.imageUrl || ''} />
 
                 <p className="mt-2 text-center text-base font-medium text-gray-700 w-full">
-                    {news.imageTitle && news.imageTitle}
+                    <i>  {news.imageTitle && news.imageTitle}</i>
                 </p>
 
-                <p className="mt-2 text-center text-base font-medium text-gray-700 w-full">
-                    ছবি : সংগ্রহীত
+                <p className="mt-1 text-center text-base font-medium text-gray-700 w-full">
+                    {news.imageSource && ` ছবি : ${news.imageSource}`}
                 </p>
             </div>
 
 
 
             <div>
-                <DetailsPageNewsSection data={news} />
+                <DetailsPageNewsSection category={params.category} data={news} />
             </div>
         </section>
     );
