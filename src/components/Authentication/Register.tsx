@@ -35,6 +35,7 @@ const Register = () => {
   const [unions, setUnions] = useState([]);
   const [divisions, setDivisions] = useState([]);
   const [uploading, setUploading] = useState(false);
+  console.log(uploading);
 
 
   useEffect(() => {

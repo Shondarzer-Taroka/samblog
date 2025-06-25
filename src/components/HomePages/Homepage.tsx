@@ -7,6 +7,7 @@ import InternationalNewsSection from './InternationalNewsSection/InternationalNe
 import Entertainment from './Entertainment/Entertainment';
 import PhotoSlider from '@/swiper/PhotoSlider';
 import axios from 'axios';
+import SportsNews from './SportsNews/SportsNews';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
@@ -37,8 +38,9 @@ const Homepage = async () => {
             <BottomNewsCard />
             <RandomNews data={news}/>
             <PoliticsSection />
-            <InternationalNewsSection />
+            <InternationalNewsSection data={news.internationalNews}/>
             <Entertainment />
+            <SportsNews/>
             <PhotoSlider />
         </div>
     );

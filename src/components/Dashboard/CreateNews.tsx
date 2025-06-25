@@ -435,6 +435,7 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/share/Toast';
 import TinyMCEWrapper from '@/components/TinyMCEWrapper';
+import Image from 'next/image';
 
 const CATEGORIES = [
     'চরমান ইস্যু',
@@ -474,7 +475,7 @@ const CreateNews = () => {
     const [imageTitle, setImageTitle] = useState('');
     const [imageSource, setImageSource] = useState('');
     const [isUploading, setIsUploading] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -614,7 +615,10 @@ const CreateNews = () => {
             });
 
             const result = await res.json();
-
+             console.log(result);
+             console.log(image);
+             
+             
             if (res.ok) {
                 showToast('success', 'সংবাদ আপলোড হয়েছে');
                 // Reset form
@@ -652,7 +656,7 @@ const CreateNews = () => {
                 <div className="mb-4">
                     <p><strong>লেখক:</strong> {user.name}</p>
                     <p><strong>ইমেইল:</strong> {user.email}</p>
-                    {user.image && <img src={user.image} alt="User" className="w-12 h-12 rounded-full mt-2" />}
+                    {user.image && <Image src={user.image} width={48} height={48} alt="User" className="w-12 h-12 rounded-full mt-2" />}
                 </div>
             )}
 
@@ -694,9 +698,12 @@ const CreateNews = () => {
 
                             {imagePreview ? (
                                 <div className="flex flex-col items-center">
-                                    <img
+                                    <Image
+
                                         src={imagePreview}
                                         alt="Preview"
+                                        width={256}
+                                        height={300}
                                         className="max-h-60 rounded object-cover mb-2"
                                     />
                                     <p className="text-sm text-gray-600 mb-2">ছবি সিলেক্টেড</p>
