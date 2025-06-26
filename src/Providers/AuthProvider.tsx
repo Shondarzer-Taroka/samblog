@@ -10,7 +10,7 @@ export const useAuthProvider = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch('http://localhost:7700/api/users/logInUser', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/logInUser`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -34,7 +34,7 @@ export const useAuthProvider = () => {
 
   const logout = async () => {
     try {
-      const res = await fetch('http://localhost:7700/api/users/logout', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/logout`, {
         method: 'POST',
         credentials: 'include',
       });

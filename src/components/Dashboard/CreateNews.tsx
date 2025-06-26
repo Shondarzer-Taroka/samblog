@@ -608,7 +608,7 @@ const CreateNews = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:7700/api/news/create`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newsData),

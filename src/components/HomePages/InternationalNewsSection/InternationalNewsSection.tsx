@@ -48,7 +48,7 @@ const InternationalNewsSection = ({ data }: { data: NewsItem[] }) => {
 
   const newsItems = data
   return (
-    <section className=" grid grid-cols-1 lg:grid-cols-[70%_30%] gap-4 xl:gap-8 py-6 px-2 mt-24">
+    <section className=" grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-4 xl:gap-8 py-6 px-2 mt-24">
       {/* International News */}
       <div>
         <h2 className="text-xl font-semibold border-b pb-2 mb-4">

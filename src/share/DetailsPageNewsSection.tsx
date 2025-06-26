@@ -1,9 +1,10 @@
 // // DetailsPageNewsSection
+// // without advervitisement
 
 
 
 // import { NewsItem } from '@/types/news.types';
-// import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+
 // import axios from 'axios';
 // import Link from 'next/link';
 // import React from 'react';
@@ -18,7 +19,7 @@
 
 //     const newsList = await getTitleForDescription(category) || []
 
-//     const bottomHighlights = newsList.slice(newsList.length-2, newsList.length + 1) || []
+//     const bottomHighlights = newsList.slice(newsList.length - 2, newsList.length + 1) || []
 
 
 
@@ -38,14 +39,21 @@
 //             </aside>
 
 //             {/* Main Article */}
+//             {/* Main Article */}
 //             <main className="md:col-span-3 space-y-4">
 //                 <h1 className="text-2xl font-semibold text-gray-900">
-//                     {/* যুক্তরাষ্ট্রে কোর্টের আদেশে মুক্ত মাহমুদ খালিল */}
 //                     {data.title}
 //                 </h1>
-//                 <p className="text-gray-700">
-//                     {stripHtmlAndLimit(data.content, 1000).short}
-//                 </p>
+
+//                 {/* First 700 characters */}
+//                 <div
+//                     className="blog-content"
+//                     dangerouslySetInnerHTML={{
+//                         __html: data.content.length > 700
+//                             ? `${data.content.substring(0, 700)}...`
+//                             : data.content
+//                     }}
+//                 />
 
 //                 {/* Highlighted Footer */}
 //                 <div className="bg-red-50 p-4 rounded-lg mt-6">
@@ -53,12 +61,21 @@
 //                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
 //                         {bottomHighlights.map((item, idx) => (
 //                             <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
-
-//                                  <Link href={`/news/${item.category}/${item.id}`}>  ★ {item.title}</Link>
+//                                 <Link href={`/news/${item.category}/${item.id}`}>★ {item.title}</Link>
 //                             </li>
 //                         ))}
 //                     </ul>
 //                 </div>
+
+//                 {/* Remaining content after 700 characters */}
+//                 {data.content.length > 700 && (
+//                     <div
+//                         className="blog-content mt-6"
+//                         dangerouslySetInnerHTML={{
+//                             __html: data.content.substring(700)
+//                         }}
+//                     />
+//                 )}
 //             </main>
 //         </div>
 //     );
@@ -75,29 +92,73 @@
 
 
 
-// DetailsPageNewsSection
+
+
+
+
+
+
+
+
+// DetailsPageNewsSection.tsx
+// // with demo advertisement 
 
 import { NewsItem } from '@/types/news.types';
+import axios from 'axios';
+import Link from 'next/link';
 import React from 'react';
 
+const getTitleForDescription = async (category: string): Promise<NewsItem[]> => {
+    const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getTitleForDescription/${category}`)
+    return result.data.categorizedNews
+}
 
+// Advertisement component
+const Advertisement = ({ position }: { position: string }) => {
+    return (
+        <div className="my-6 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
+            <p className="text-xs text-gray-500 mb-2">Advertisement</p>
+            <div className="h-48 md:h-64 w-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-500">Ad Space {position}</span>
+            </div>
+        </div>
+    );
+};
 
+// Function to split content into parts with ad positions
+const splitContentWithAds = (content: string) => {
+    const contentLength = content.length;
+    if (contentLength <= 700) return [{ content, showAd: false }];
 
+    const parts = [];
+    const firstBreak = 700;
+    const secondBreak = firstBreak + Math.floor((contentLength - firstBreak) / 2);
 
-const newsList = [
-    'ইসরাইলে কেন এতো ভারতীয়, কী করেন তারা',
-    'গাজায় ইসরাইলি হামলায় আরও ৮৬ ফিলিস্তিনি নিহত',
-    'ইসরাইল আক্রমণ বন্ধ না করা পর্যন্ত আলোচনায় যাবে না ইরান',
-    'ইরানে ধরা পড়ল মোসাদের ৫৪ গুপ্তচর',
-    'ইসরাইলের চ্যানেল ১৪ কার্যালয়ে হামলা চালাল ইরান',
-];
+    parts.push({
+        content: content.substring(0, firstBreak),
+        showAd: true,
+        adPosition: "After first section"
+    });
 
-const bottomHighlights = [
-    'গাজায় ইসরাইলি হামলায় আরও ৮৬ ফিলিস্তিনি নিহত',
-    'ইসরাইলে কেন এতো ভারতীয়, কী করেন তারা',
-];
+    parts.push({
+        content: content.substring(firstBreak, secondBreak),
+        showAd: true,
+        adPosition: "Middle of content"
+    });
 
-export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
+    parts.push({
+        content: content.substring(secondBreak),
+        showAd: false
+    });
+
+    return parts;
+};
+
+export default async function DetailsPageNewsSection({ data, category }: { data: NewsItem, category: string }) {
+    const newsList = await getTitleForDescription(category) || [];
+    const bottomHighlights = newsList.slice(newsList.length - 2, newsList.length + 1) || [];
+    const contentParts = splitContentWithAds(data.content);
+
     return (
         <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Sidebar */}
@@ -106,44 +167,35 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
                 <ul className="space-y-3">
                     {newsList.map((item, idx) => (
                         <li key={idx} className="text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
-                            ➤ {item}
+                            <Link href={`/news/${item.category}/${item.id}`}> ➤ {item.title}</Link>
                         </li>
                     ))}
                 </ul>
+
+                {/* Sidebar Advertisement */}
+                <div className="mt-8">
+                    <Advertisement position="Sidebar" />
+                </div>
             </aside>
 
             {/* Main Article */}
             <main className="md:col-span-3 space-y-4">
                 <h1 className="text-2xl font-semibold text-gray-900">
-                    {/* যুক্তরাষ্ট্রে কোর্টের আদেশে মুক্ত মাহমুদ খালিল */}
                     {data.title}
                 </h1>
-                <p className="text-gray-700">
 
-                    {/* {stripHtmlAndLimit(data.content, 1000).short} */}
-                    <div
-                        className="blog-content"
-                        dangerouslySetInnerHTML={{ __html: data.content }}
-                    />
-
-                    {/* অভিবাসন হেফাজত থেকে কলম্বিয়া বিশ্ববিদ্যালয়ের গ্র্যাজুয়েট ও ফিলিস্তিনপন্থি অধিকারকর্মী মাহমুদ খলিলকে মুক্তির নির্দেশ দিয়েছেন মার্কিন ফেডারেল আদালত। স্থানীয় সময় শুক্রবার (২০ জুন) নিউ জার্সির একটি ফেডারেল আদালতের বিচারক খলিলকে মুক্তির আদেশ দেন।
-
-                    সংবাদমাধ্যম আল-জাজিরার প্রতিবেদনে এ তথ্য জানানো হয়।
-
-                    প্রতিবেদনে বলা হয়েছে, গাজায় ইসরাইলের বর্বরতার প্রতিবাদে গত বছর কলম্বিয়া বিশ্ববিদ্যালয়ে ফিলিস্তিনপন্থি বিক্ষোভে গুরুত্বপূর্ণ ভূমিকা রাখেন খলিল।
-
-                    গত মার্চে বিশ্ববিদ্যালয়ের বাসভবন থেকে তাকে গ্রেফতার করেন যুক্তরাষ্ট্রের ইমিগ্রেশন অ্যান্ড কাস্টমস এনফোর্সমেন্টের (আইসিই) কর্মকর্তারা। পরে তাকে লুইজিয়ানার একটি কারাগারে আটক রাখা হয়।
-
-
-                    বৈধভাবে আমেরিকায় স্থায়ী বসবাস করা খলিল অভিযোগ করেন, সংবিধানের প্রথম সংশোধনী লঙ্ঘন করে রাজনৈতিক বক্তব্যের জন্য তাকে সাজা দেয়া হচ্ছে।
-
-                    শুক্রবার (২০ জুন) নিউ জার্সির একটি ফেডারেল আদালতের বিচারক খলিলকে মুক্তির আদেশ দেন।  বিচারকের আদেশের পর শুক্রবারই লুইজিয়ানার কারাগার থেকে  মুক্তি পান মাহমুদ খলিল।
-
-                    এর আগে নিউ জার্সির নিউয়ার্কের ডিস্ট্রিক্ট জাজ মাইকেল ফারবিয়ারজ গত ১১ জুন এক আদেশে বলেন, আটক রেখে খলিলের মতপ্রকাশের স্বাধীনতা লঙ্ঘন করেছে সরকার। তবে গত ১৩ জুন লুইজিয়ানার জেনার একটি আটক কেন্দ্র থেকে খলিলকে মুক্তি দিতে অসম্মতি জানান বিচারক।
-
-                    এর আগে ট্রাম্প প্রশাসন জানায়, বৈধভাবে বসবাসের আবেদনের বিষয়ে তথ্য দিতে অস্বীকৃতি জানিয়েছেন খলিল। আলাদা সে অভিযোগে তাকে ইমিগ্রেশন অ্যান্ড কাস্টমস এনফোর্সমেন্ট-আইসের আটক কেন্দ্রে বন্দি রাখা হয়েছে। */}
-
-                </p>
+                {/* Content with strategically placed ads */}
+                {contentParts.map((part, index) => (
+                    <React.Fragment key={index}>
+                        <div
+                            className="blog-content"
+                            dangerouslySetInnerHTML={{ __html: part.content }}
+                        />
+                        {part.showAd && (
+                            <Advertisement position={part.adPosition || `Position ${index + 1}`} />
+                        )}
+                    </React.Fragment>
+                ))}
 
                 {/* Highlighted Footer */}
                 <div className="bg-red-50 p-4 rounded-lg mt-6">
@@ -151,7 +203,7 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {bottomHighlights.map((item, idx) => (
                             <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
-                                ★ {item}
+                                <Link href={`/news/${item.category}/${item.id}`}>★ {item.title}</Link>
                             </li>
                         ))}
                     </ul>
@@ -171,3 +223,172 @@ export default function DetailsPageNewsSection({ data }: { data: NewsItem }) {
 
 
 
+
+
+
+
+
+
+// // DetailsPageNewsSection.tsx
+
+// import { NewsItem } from '@/types/news.types';
+// import axios from 'axios';
+// import Link from 'next/link';
+// import React from 'react';
+// import Image from 'next/image';
+
+// const getTitleForDescription = async (category: string): Promise<NewsItem[]> => {
+//     const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getTitleForDescription/${category}`)
+//     return result.data.categorizedNews
+// }
+
+// // Advertisement component with actual Google ads
+// const Advertisement = ({ position }: { position: string }) => {
+//     // Define different ad images based on position
+//     const ads = {
+//         "Sidebar": {
+//             url: "https://tpc.googlesyndication.com/simgad/16313860394474783449",
+//             width: 120,
+//             height: 240,
+//             alt: "Google Ad - Sidebar"
+//         },
+//         "After first section": {
+//             url: "https://tpc.googlesyndication.com/simgad/16619085746182280828",
+//             width: 728,
+//             height: 90,
+//             alt: "Google Ad - Content Top"
+//         },
+//         "Middle of content": {
+//             url: "https://tpc.googlesyndication.com/simgad/16619085746182280828",
+//             width: 728,
+//             height: 90,
+//             alt: "Google Ad - Content Middle"
+//         },
+//         "default": {
+//             url: "https://tpc.googlesyndication.com/simgad/16619085746182280828",
+//             width: 300,
+//             height: 250,
+//             alt: "Google Ad"
+//         }
+//     };
+
+//     const adConfig = ads[position as keyof typeof ads] || ads.default;
+
+//     return (
+//         <div className={`my-6 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center 
+//             ${position === 'Sidebar' ? 'w-full' : 'w-full max-w-4xl mx-auto'}`}>
+//             <p className="text-xs text-gray-500 mb-2">Advertisement</p>
+//             <div className="relative w-full"
+
+//                 // style={{
+//                 //     height: `${adConfig.height}px`,
+//                 //     maxWidth: `${adConfig.width}px`,
+//                 //     margin: '0 auto'
+//                 // }}
+
+//             >
+//                 <a href="https://www.google.com/adsense/" target="_blank" rel="noopener noreferrer">
+//                     <img
+//                         src={adConfig.url}
+//                         alt={adConfig.alt}
+//                         layout="fill"
+//                         objectFit="contain"
+//                         className="rounded w-full"
+//                     />
+//                 </a>
+//             </div>
+//             {/* Google AdSense script would normally go here */}
+//         </div>
+//     );
+// };
+
+// // Function to split content into parts with ad positions
+// const splitContentWithAds = (content: string) => {
+//     const contentLength = content.length;
+//     if (contentLength <= 700) return [{ content, showAd: false }];
+
+//     const parts = [];
+//     const firstBreak = 700;
+//     const secondBreak = firstBreak + Math.floor((contentLength - firstBreak) / 2);
+
+//     parts.push({
+//         content: content.substring(0, firstBreak),
+//         showAd: true,
+//         adPosition: "After first section"
+//     });
+
+//     parts.push({
+//         content: content.substring(firstBreak, secondBreak),
+//         showAd: true,
+//         adPosition: "Middle of content"
+//     });
+
+//     parts.push({
+//         content: content.substring(secondBreak),
+//         showAd: false
+//     });
+
+//     return parts;
+// };
+
+// export default async function DetailsPageNewsSection({ data, category }: { data: NewsItem, category: string }) {
+//     const newsList = await getTitleForDescription(category) || [];
+//     const bottomHighlights = newsList.slice(newsList.length - 2, newsList.length + 1) || [];
+//     const contentParts = splitContentWithAds(data.content);
+
+//     return (
+//         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+//             {/* Sidebar */}
+//             <aside className="md:col-span-1">
+//                 <h2 className="text-lg font-bold mb-4">আরও পড়ুন</h2>
+//                 <ul className="space-y-3">
+//                     {newsList.map((item, idx) => (
+//                         <li key={idx} className="text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
+//                             <Link href={`/news/${item.category}/${item.id}`}> ➤ {item.title}</Link>
+//                         </li>
+//                     ))}
+//                 </ul>
+
+//                 {/* Sidebar Advertisement */}
+//                 <div className="mt-8">
+//                     <Advertisement position="Sidebar" />
+//                 </div>
+//             </aside>
+
+//             {/* Main Article */}
+//             <main className="md:col-span-3 space-y-4">
+//                 <h1 className="text-2xl font-semibold text-gray-900">
+//                     {data.title}
+//                 </h1>
+
+//                 {/* Content with strategically placed ads */}
+//                 {contentParts.map((part, index) => (
+//                     <React.Fragment key={index}>
+//                         <div
+//                             className="blog-content"
+//                             dangerouslySetInnerHTML={{ __html: part.content }}
+//                         />
+//                         {part.showAd && (
+//                             <Advertisement position={part.adPosition || `Position ${index + 1}`} />
+//                         )}
+//                     </React.Fragment>
+//                 ))}
+
+//                 {/* Bottom Advertisement */}
+//                 <Advertisement position="default" />
+
+//                 {/* Highlighted Footer */}
+//                 <div className="bg-red-50 p-4 rounded-lg mt-6">
+//                     <h3 className="text-md font-semibold mb-3 text-red-700">আরও শিরোনাম</h3>
+//                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+//                         {bottomHighlights.map((item, idx) => (
+//                             <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
+//                                 <Link href={`/news/${item.category}/${item.id}`}>★ {item.title}</Link>
+//                             </li>
+//                         ))}
+//                     </ul>
+//                 </div>
+//             </main>
+//         </div>
+//     );
+// }
