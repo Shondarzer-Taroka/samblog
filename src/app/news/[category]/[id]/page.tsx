@@ -40,7 +40,6 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
             <p className="border-b-2 border-black inline-block pb-1 font-bold text-2xl mt-4">{news.category}</p>
 
             <h1 className='text-[45px] font-bold mt-4'>{news.title}</h1>
-            {/* <h1 className='text-[45px] font-bold'>অবশেষে মুক্তি পেলেন ফিলিস্তিনি শিক্ষার্থী মাহমুদ খলিল</h1> */}
 
 
             <div>
@@ -70,9 +69,6 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
             </div>
 
 
-
-            {/* src={'https://cdn.jugantor.com/assets/news_photos/2025/06/21/mahmud-khalil-685639f4acd24.jpg'} /> */}
-            {/* <h1 className="text-2xl font-bold mt-10">{news.title}</h1> */}
             <div className="w-full">
                 <Image
                     className='w-full'
