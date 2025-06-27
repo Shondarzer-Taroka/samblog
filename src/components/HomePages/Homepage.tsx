@@ -11,16 +11,39 @@ import SportsNews from './SportsNews/SportsNews';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
+// const getHomePageNews = async () => {
+//     try {
+//         const gettingNews = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`)
+//         return gettingNews.data
+//     } catch (error) {
+//         console.log(error);
+
+//     }
+// }
+
+
+
+
 const getHomePageNews = async () => {
-    try {
-        const gettingNews = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`)
-        return gettingNews.data
-    } catch (error) {
-        console.log(error);
-
-    }
-}
-
+  try {
+    const gettingNews = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`,
+      {
+        headers: {
+          'Cache-Control': 'no-store',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+        params: {
+          timestamp: new Date().getTime(), // force unique URL to bust CDN cache
+        },
+      }
+    );
+    return gettingNews.data;
+  } catch (error) {
+    console.error('Error fetching home page news:', error);
+  }
+};
 
 
 

@@ -33,11 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        id="__next"
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerifBengali.variable} antialiased font-noto`}
       >
-        <Navsection/>
+        <Navsection />
 
-      {/* <AuthProvider>{children}</AuthProvider> */}
+        {/* <AuthProvider>{children}</AuthProvider> */}
 
 
         {children}

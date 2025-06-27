@@ -56,7 +56,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
 
                         <div className='text-xl'>
                             <p>আন্তর্জাতিক ডেস্ক</p>
-                            <p className='text-[#00000067]'>{formatBengaliDate(news.createdAt)}</p>
+                            <p className='text-[#00000067]'> প্রকাশ: {formatBengaliDate(news.createdAt)}</p>
                             {/* <p className='text-[#00000067]'>প্রকাশ: ২১ জুন ২০২৫, ১০:৪৯ এএম</p> */}
                         </div>
                     </div>

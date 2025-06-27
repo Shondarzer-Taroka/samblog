@@ -1,3 +1,4 @@
+'use client'
 import CreateNews from '@/components/Dashboard/CreateNews';
 import React from 'react';
 

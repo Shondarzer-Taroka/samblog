@@ -47,11 +47,9 @@
 
 
 
+'use client';
 
-
-
-'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FaFacebookF,
   FaFacebookMessenger,
@@ -70,10 +68,15 @@ type ShareIcon = {
   color?: string;
 };
 
-const ShareBar = ({ url = window.location.href, title = document.title }: { url?: string; title?: string }) => {
-  // Set default values if not provided
-  const currentUrl = url || window.location.href;
-  const currentTitle = title || document.title;
+const ShareBar = ({ url, title }: { url?: string; title?: string }) => {
+  const [currentUrl, setCurrentUrl] = useState('');
+  const [currentTitle, setCurrentTitle] = useState('');
+
+  useEffect(() => {
+    // Client-side only code
+    setCurrentUrl(url || window.location.href);
+    setCurrentTitle(title || document.title);
+  }, [url, title]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(currentUrl);
@@ -102,9 +105,8 @@ const ShareBar = ({ url = window.location.href, title = document.title }: { url?
       component: FaFacebookMessenger,
       action: (url) => {
         const shareUrl = `fb-messenger://share/?link=${encodeURIComponent(url)}`;
-        // Fallback for desktop browsers
         if (!navigator.userAgent.match(/iPhone|iPad|iPod|Android/i)) {
-          window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=YOUR_APP_ID&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank', 'noopener,noreferrer');
+          window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank', 'noopener,noreferrer');
         } else {
           window.open(shareUrl, '_blank', 'noopener,noreferrer');
         }
@@ -149,14 +151,19 @@ const ShareBar = ({ url = window.location.href, title = document.title }: { url?
       title={icon.title}
       onClick={(e) => {
         e.preventDefault();
-        icon.action(currentUrl, currentTitle);
+        if (currentUrl && currentTitle) {
+          icon.action(currentUrl, currentTitle);
+        }
       }}
       style={{ color: icon.color }}
       aria-label={`Share via ${icon.title}`}
+      disabled={!currentUrl}
     >
       <icon.component className="text-xl" />
     </button>
   );
+
+  if (!currentUrl) return null;
 
   return (
     <div className="flex flex-wrap gap-3">
