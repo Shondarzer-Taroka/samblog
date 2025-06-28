@@ -4,6 +4,7 @@ import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 
 import Navsection from "@/components/HomePages/Navsection/Navsection";
+// import { AuthProvider } from "@/context/AuthContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -40,8 +41,9 @@ export default function RootLayout({
 
         {/* <AuthProvider>{children}</AuthProvider> */}
 
-
-        {children}
+        {/* <AuthProvider> */}
+          {children}
+        {/* </AuthProvider> */}
       </body>
     </html>
   );
