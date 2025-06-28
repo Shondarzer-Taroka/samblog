@@ -206,11 +206,15 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                     />
 
                                     {/* Text */}
-                                    <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
-                                        {news.title}
-                                    </h3>
+
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
+                                            {news.title}
+                                        </h3>
+                                        <p className="text-[12.6px] text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p>
 
 
+                                    </div>
                                 </div>
                             </Link>
                         </div>
@@ -293,7 +297,9 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                             {news?.title}
                                         </h3>
 
-                                        <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p></div>
+                                        <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p>
+
+                                    </div>
                                 </div>
                             </Link>
                         </div>
