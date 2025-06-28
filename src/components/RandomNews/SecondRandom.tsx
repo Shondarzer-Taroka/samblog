@@ -162,7 +162,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
     const newsList2 = Array.isArray(data) ? data.slice(6, 9) : [];
 
     return (
-        <section className="bg-gray-50 py-10 px-4 md:px-6">
+        <section className="">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-6">
                     {/* Left Column */}

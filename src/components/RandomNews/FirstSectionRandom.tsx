@@ -5,30 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
-  // const randomNews=[
-  //     {
-  //         title:'বাংলাদেশ ৪৭তম',
-  //         date: '৮ এপ্রিল ২০২৫, ০৬:৪৯ পিএম',
-  //         image:'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-09%2F4tewt7yk%2Firan-us.webp?rect=57%2C0%2C864%2C576&w=622&auto=format%2Ccompress&fmt=avif'
-  //     },
-  //     {
-  //         title:'বাংলাদেশ ৪৭তম',
-  //         date: '৮ এপ্রিল ২০২৫, ০৬:৪৯ পিএম',
-  //         image:'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-09%2F4tewt7yk%2Firan-us.webp?rect=57%2C0%2C864%2C576&w=622&auto=format%2Ccompress&fmt=avif'
-  //     },
-  //     {
-  //         title:'বাংলাদেশ ৪৭তম',
-  //         date: '৮ এপ্রিল ২০২৫, ০৬:৪৯ পিএম',
-  //         image:'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-09%2F4tewt7yk%2Firan-us.webp?rect=57%2C0%2C864%2C576&w=622&auto=format%2Ccompress&fmt=avif'
-  //     },
-  //     {
-  //         title:'বাংলাদেশ ৪৭তম',
-  //         date: '৮ এপ্রিল ২০২৫, ০৬:৪৯ পিএম',
-  //         image:'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-09%2F4tewt7yk%2Firan-us.webp?rect=57%2C0%2C864%2C576&w=622&auto=format%2Ccompress&fmt=avif'
-  //     },
-
-
-  // ]
+ 
 
   const randomNews = data
   return (
