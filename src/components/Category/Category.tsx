@@ -4,8 +4,66 @@
 import Image from 'next/image';
 import Advertisement from '@/share/Advertisement';
 import TopStoriesPage from '@/share/TopStories';
+import { NewsItem } from '@/types/news.types';
+import { useEffect, useState } from 'react';
 
-const Category = () => {
+const Category = ({ category }: { category: string }) => {
+    const [news, setNews] = useState<NewsItem[]>([])
+    const [loading, setLoading] = useState(true)
+    const [hasMore, setHasMore] = useState(true)
+    const [page, setPage] = useState(1)
+    
+
+    const fetchNews = async (pageNum: number) => {
+    try {
+      setLoading(true)
+      const skip = (pageNum - 1) * 15
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getCategorizedNews/${category}?skip=${skip}&take=15`)
+      const data = await res.json()
+      
+      if (data.success) {
+        setNews(prev => [...prev, ...data.data])
+        setHasMore(data.hasMore)
+      }
+    } catch (error) {
+      console.error('Error fetching news:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    setNews([])
+    setPage(1)
+    fetchNews(1)
+  }, [])
+
+  const loadMore = () => {
+    if (hasMore && !loading) {
+      const nextPage = page + 1
+      setPage(nextPage)
+      fetchNews(nextPage)
+    }
+  }
+
+//   // Format date to Bengali
+//   const formatDate = (dateString: string) => {
+//     const date = new Date(dateString)
+//     const options: Intl.DateTimeFormatOptions = { 
+//       year: 'numeric', 
+//       month: 'long', 
+//       day: 'numeric',
+//       hour: 'numeric',
+//       minute: 'numeric'
+//     }
+//     return new Intl.DateTimeFormat('bn-BD', options).format(date)
+//   }
+
+  console.log(news);
+
+//   console.log(formatDate('2025-06-24T04:35:29.887Z'));
+  
+  
     return (
         <section className="px-2 py-6 max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold text-red-600 mb-6">রাজনীতি</h2>
@@ -145,14 +203,27 @@ const Category = () => {
                         </article>
                     ))}
                 </div>
-                <div className="flex justify-center mt-8">
+                {/* <div className="flex justify-center mt-8">
                     <button
                         className="px-6 py-2 text-sm font-semibold text-white bg-red-600 rounded-full shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all"
                     >
                         আরও
                     </button>
-                </div>
-                
+                </div> */}
+
+
+
+
+                    <div className="mt-8 text-center">
+              <button
+                onClick={loadMore}
+                disabled={loading}
+                className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
+              >
+                {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
+              </button>
+            </div>
+
             </div>
         </section>
     );
