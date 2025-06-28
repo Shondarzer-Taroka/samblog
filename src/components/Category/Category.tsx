@@ -73,7 +73,7 @@ const Category = () => {
           </div>
 
           {/* Bottom row – 3 cards */}
-          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[1, 2, 3].map((item) => (
               <div key={item} className="bg-white shadow-md">
                 {/* Swap in real thumbnails ↓ */}
