@@ -8,13 +8,14 @@ import { NewsItem } from '@/types/news.types';
 import { useEffect, useState } from 'react';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import { useRouter } from 'next/navigation';
 
 const Category = ({ category }: { category: string }) => {
     const [news, setNews] = useState<NewsItem[]>([])
     const [loading, setLoading] = useState(true)
     const [hasMore, setHasMore] = useState(true)
     const [page, setPage] = useState(1)
-
+    const router=useRouter()
 
     const fetchNews = async (pageNum: number) => {
         try {
@@ -38,6 +39,7 @@ const Category = ({ category }: { category: string }) => {
         setNews([])
         setPage(1)
         fetchNews(1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const loadMore = () => {
@@ -48,19 +50,7 @@ const Category = ({ category }: { category: string }) => {
         }
     }
 
-    //   // Format date to Bengali
-    //   const formatDate = (dateString: string) => {
-    //     const date = new Date(dateString)
-    //     const options: Intl.DateTimeFormatOptions = { 
-    //       year: 'numeric', 
-    //       month: 'long', 
-    //       day: 'numeric',
-    //       hour: 'numeric',
-    //       minute: 'numeric'
-    //     }
-    //     return new Intl.DateTimeFormat('bn-BD', options).format(date)
-    //   }
-
+   
     console.log(news);
 
     //   console.log(formatDate('2025-06-24T04:35:29.887Z'));
@@ -68,14 +58,26 @@ const Category = ({ category }: { category: string }) => {
 
     return (
         <section className="px-2 py-6 max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold text-red-600 mb-6">রাজনীতি</h2>
+            <h2 className="text-2xl font-bold text-red-600 mb-6">{decodeURIComponent(category)}</h2>
 
             {/* --- Main layout: content + right‑side ad --- */}
-            <div className="lg:flex lg:gap-6">
+           { loading ? <><div className="mt-8 text-center">
+                     <button
+                      
+                   
+                        className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
+                    >
+                        {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
+                    </button>
+                </div> </> : <div className="lg:flex lg:gap-6">
                 {/* ---------- NEWS GRID ---------- */}
-                <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 " >
+
+                    
                     {/* Left Large Card */}
-                    <div className="lg:col-span-2 relative">
+                    <div   
+                    onClick={()=> router.push(`/news/${news[0].category}/${news[0].id}`)}
+                    className="lg:col-span-2 relative">
                         <div className='w-full h-full bg-[#00000072] absolute top-0'></div>
                         <div className="h-full bg-white shadow-md">
                             <Image
@@ -98,8 +100,8 @@ const Category = ({ category }: { category: string }) => {
 
                     {/* Top‑right two small cards */}
                     <div className="flex flex-col gap-6">
-                        {news.slice(3, 5).map(({ title, imageUrl, createdAt }, i) => (
-                            <div key={i} className="bg-white shadow-md">
+                        {news.slice(3, 5).map(({ title, imageUrl, createdAt,category,id }, i) => (
+                            <div key={i} className="bg-white shadow-md cursor-pointer" onClick={()=> router.push(`/news/${category}/${id}`)}>
                                 <Image
                                     src={imageUrl && imageUrl || "https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg"}
                                     alt={title}
@@ -118,9 +120,9 @@ const Category = ({ category }: { category: string }) => {
                     </div>
 
                     {/* Bottom row – 3 cards */}
-                    <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {news.slice(4, 7).map(({ id, imageUrl, title }, i) => (
-                            <div key={id} className="bg-white shadow-md">
+                    <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 cursor-pointer">
+                        {news.slice(4, 7).map(({ id, imageUrl, title ,category}, i) => (
+                            <div key={id} className="bg-white shadow-md" onClick={()=> router.push(`/news/${category}/${id}`)}>
                                 {/* Swap in real thumbnails ↓ */}
                                 <Image
                                     src={imageUrl && imageUrl || `https://picsum.photos/id/${i + 10}/400/200`}
@@ -158,7 +160,7 @@ const Category = ({ category }: { category: string }) => {
 
                     <TopStoriesPage />
                 </aside>
-            </div>
+            </div>}
 
             {/* Optional: banner ad below the section */}
             <div className="mt-10">
@@ -176,14 +178,14 @@ const Category = ({ category }: { category: string }) => {
 
             <div>
 
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">আন্তর্জাতিক সংবাদ</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">আরও দেখুন  <span className='underline'>{decodeURIComponent(category)}</span> সংবাদ</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {news.length > 0 && news.slice(5, news.length + 1).map((news) => (
                         <article
-                            key={news.id}
-                            className="bg-white shadow-sm rounded-md overflow-hidden hover:shadow-md transition-shadow duration-200 border border-gray-100"
+                            key={news.id+Math.random()}
+                            className="bg-white cursor-pointer shadow-sm rounded-md overflow-hidden hover:shadow-md transition-shadow duration-200 border border-gray-100"
                         >
-                            <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="flex flex-col sm:flex-row gap-4" onClick={()=> router.push(`/news/${news.category}/${news.id}`)}>
                                 {/* Content */}
                                 <div className="p-4 flex-1">
                                     <h3 className="text-md sm:text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
@@ -241,47 +243,3 @@ export default Category;
 
 
 
-const newsItems = [
-    {
-        id: 1,
-        title: 'দক্ষিণ আফ্রিকায় ২ বাংলাদেশি অপহরণ, একজনকে হত্যা',
-        summary: '২ জুন ইস্টার্ন কেপ প্রদেশের এলিয়ট শহরে রামান্দি প্রবাসীদের অপহরণ করা হয়...',
-        time: '৩০ জুন ২০২৫, ১২:৫৫ অপরাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-    {
-        id: 2,
-        title: 'দক্ষিণ আফ্রিকায় ভারী বন্যায় ৪৯ জনের মৃত্যু',
-        summary: 'দক্ষিণ আফ্রিকার পূর্বাঞ্চলে ব্যাপক বৃষ্টির ফলে বন্যা ও ভূমিধসে বহু মানুষ মারা গেছেন...',
-        time: '২৯ জুন ২০২৫, ০৮:৪০ পূর্বাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-    {
-        id: 3,
-        title: 'বিস্ময় বাজছে নতুন রাজাধানী গড়ছে মিশর, যা থাকবে শহরজুড়ে',
-        summary: 'রাজধানী কায়রোর বাইরে নির্মাণাধীন “নিউ কায়রো” নামক মিশরের নতুন প্রশাসনিক নগরীর ছবি দেখলে চমকে যাবেন...',
-        time: '৩০ জুন ২০২৫, ১০:২৫ পূর্বাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-    {
-        id: 4,
-        title: 'দক্ষিণ আফ্রিকায় বিমান বিধ্বস্ত, নিহত ৩',
-        summary: 'দক্ষিণ আফ্রিকার কেপটাউন-ভিত্তিক একটি ছোট বিমান বিধ্বস্ত হয়ে তিনজন যাত্রী প্রাণ হারিয়েছেন...',
-        time: '২৯ জুন ২০২৫, ০৮:২০ পূর্বাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-    {
-        id: 5,
-        title: 'তানজানিয়ায় ভয়াবহ সড়ক দুর্ঘটনায় ২৮ জন নিহত',
-        summary: 'পূর্ব আফ্রিকার দেশ তানজানিয়ায় যাত্রীবাহী বাস ও ট্রাকের সংঘর্ষে বহু প্রাণহানি ঘটেছে...',
-        time: '২৯ জুন ২০২৫, ১০:৩৫ পূর্বাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-    {
-        id: 6,
-        title: 'তানজানিয়ায় ভয়াবহ সড়ক দুর্ঘটনায় ২৮ জন নিহত',
-        summary: 'পূর্ব আফ্রিকার দেশ তানজানিয়ায় যাত্রীবাহী বাস ও ট্রাকের সংঘর্ষে বহু প্রাণহানি ঘটেছে...',
-        time: '২৯ জুন ২০২৫, ১০:৩৫ পূর্বাহ্ন',
-        image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-06-27%2F906oyzbl%2FSYLHETDH077820250627SYLHET-JAMAT-1.JPG.JPG?rect=265%2C0%2C3444%2C2296&w=622&auto=format%2Ccompress&fmt=avif',
-    },
-];
