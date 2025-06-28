@@ -49,7 +49,7 @@
 //                       <div key={index}>
 //                         <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
 //                         <div
-                           
+
 //                             className="flex gap-4 items-start"
 //                         >
 //                             {/* Image */}
@@ -64,7 +64,7 @@
 //                                 {news.title}
 //                             </h3>
 
-                            
+
 //                         </div>
 //                       </div>
 //                     ))}
@@ -75,7 +75,7 @@
 //                 <div className="">
 //                     {/* First news (featured style) */}
 //                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-                        
+
 //                         <img
 //                             src={newsData[0].img}
 //                             alt="featured"
@@ -119,7 +119,7 @@
 //                         <div key={index}>
 //                         <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
 //                         <div
-                           
+
 //                             className="flex gap-4 items-start"
 //                         >
 //                             {/* Image */}
@@ -134,7 +134,7 @@
 //                                 {news.title}
 //                             </h3>
 
-                            
+
 //                         </div>
 //                       </div>
 //                     ))}
@@ -172,15 +172,16 @@ import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimitForArray } from '@/utils/stripAndLimitHtml';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-const SecondRandom = ({data}:{data:NewsItem[]}) => {
+const SecondRandom = ({ data }: { data: NewsItem[] }) => {
 
-    
-const newsData = Array.isArray(data) ? data.slice(0, 3) : [];
 
-const newsList1= Array.isArray(data) ? data.slice(3, 6) : [];
-const newsList2= Array.isArray(data) ? data.slice(6, 9) : [];
+    const newsData = Array.isArray(data) ? data.slice(0, 3) : [];
+
+    const newsList1 = Array.isArray(data) ? data.slice(3, 6) : [];
+    const newsList2 = Array.isArray(data) ? data.slice(6, 9) : [];
 
     return (
         <section className=' grid grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] gap-4 items-center'>
@@ -188,29 +189,31 @@ const newsList2= Array.isArray(data) ? data.slice(6, 9) : [];
             <aside>
                 <div className="">
                     {newsList1.map((news, index) => (
-                      <div key={index}>
-                        <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
-                        <div
-                           
-                            className="flex gap-4 items-start"
-                        >
-                            {/* Image */}
-                            <Image
-                                src={news?.imageUrl || ''}
-                                alt={news.title}
-                                width={200}
-                                height={100}
-                                className=" h-24 object-cover rounded-md shrink-0"
-                            />
+                        <div key={index} >
+                            <Link href={`/news/${news.category}/${news.id}`}>
+                                <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
+                                <div
 
-                            {/* Text */}
-                            <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
-                                {news.title}
-                            </h3>
+                                    className="flex gap-4 items-start"
+                                >
+                                    {/* Image */}
+                                    <Image
+                                        src={news?.imageUrl || ''}
+                                        alt={news.title}
+                                        width={200}
+                                        height={100}
+                                        className=" h-24 object-cover rounded-md shrink-0"
+                                    />
 
-                            
+                                    {/* Text */}
+                                    <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
+                                        {news.title}
+                                    </h3>
+
+
+                                </div>
+                            </Link>
                         </div>
-                      </div>
                     ))}
                 </div>
             </aside>
@@ -218,44 +221,47 @@ const newsList2= Array.isArray(data) ? data.slice(6, 9) : [];
             <aside>
                 <div className="">
                     {/* First news (featured style) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-                        
-                        <Image
-                            src={newsData[0]?.imageUrl || ''}
-                            width={200}
-                            height={100}
-                            alt="featured"
-                            className="w-full h-auto object-cover rounded"
-                        />
-                        <div>
-                            <h2 className="text-xl font-bold text-gray-800 leading-snug hover:text-red-600 cursor-pointer">
-                                {newsData[0]?.title}
-                            </h2>
-                            {stripHtmlAndLimitForArray(newsData[0].content, 10).short}
-                            <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate( newsData[0].createdAt)}</p>
-                        </div>
-                    </div>
+                    <Link href={`/news/${newsData[0].category}/${newsData[0].id}`}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
 
+                            <Image
+                                src={newsData[0]?.imageUrl || ''}
+                                width={200}
+                                height={100}
+                                alt="featured"
+                                className="w-full h-auto object-cover rounded"
+                            />
+                            <div>
+                                <h2 className="text-xl font-bold text-gray-800 leading-snug hover:text-red-600 cursor-pointer">
+                                    {newsData[0]?.title}
+                                </h2>
+                                {stripHtmlAndLimitForArray(newsData[0].content, 10).short}
+                                <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(newsData[0].createdAt)}</p>
+                            </div>
+                        </div>
+                    </Link>
                     {/* Two smaller news cards */}
                     <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {newsData?.slice(1).map((news, idx) => (
-                            <div key={idx} className="flex gap-3">
-                                <Image
-                                    src={news?.imageUrl || ''}
-                                    alt={news?.title}
-                                    width={200}
-                                    height={100}
-                                    className="w-24 h-24 object-cover rounded"
-                                />
-                                <div>
-                                    <h3 className="text-md font-bold text-gray-800 hover:text-red-600 cursor-pointer">
-                                        {news?.title}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p>
-                                    
+                            <Link key={idx} href={`/news/${news.category}/${news.id}`}>
+                                <div className="flex gap-3">
+                                    <Image
+                                        src={news?.imageUrl || ''}
+                                        alt={news?.title}
+                                        width={200}
+                                        height={100}
+                                        className="w-24 h-24 object-cover rounded"
+                                    />
+                                    <div>
+                                        <h3 className="text-md font-bold text-gray-800 hover:text-red-600 cursor-pointer">
+                                            {news?.title}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p>
+
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -266,28 +272,31 @@ const newsList2= Array.isArray(data) ? data.slice(6, 9) : [];
                 <div className="">
                     {newsList2.map((news, index) => (
                         <div key={index}>
-                        <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
-                        <div
-                           
-                            className="flex gap-4 items-start"
-                        >
-                            {/* Image */}
-                            <Image
-                                src={news?.imageUrl || ''}
-                                    alt={news?.title}
-                                    width={200}
-                                    height={100}
-                                    className=" h-24 object-cover rounded"
-                            />
+                            <Link href={`/news/${news.category}/${news.id}`}>
+                                <div className='h-[1px] bg-[#00000018] w-full my-4'></div>
+                                <div
 
-                            {/* Text */}
-                            <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
-                                {news?.title}
-                            </h3>
+                                    className="flex gap-4 items-start"
+                                >
+                                    {/* Image */}
+                                    <Image
+                                        src={news?.imageUrl || ''}
+                                        alt={news?.title}
+                                        width={200}
+                                        height={100}
+                                        className=" h-24 object-cover rounded"
+                                    />
 
-                            
+                                    {/* Text */}
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
+                                            {news?.title}
+                                        </h3>
+
+                                        <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(news.createdAt)}</p></div>
+                                </div>
+                            </Link>
                         </div>
-                      </div>
                     ))}
                 </div>
             </aside>
