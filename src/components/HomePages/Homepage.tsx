@@ -49,24 +49,24 @@ const getHomePageNews = async () => {
 
 const Homepage = async () => {
 
-    const news = await getHomePageNews()
-    console.log(news);
+  const news = await getHomePageNews()
+  console.log(news);
 
-    return (
-        <div className='max-w-7xl mx-auto font-noto'>
+  return (
+    <div className='max-w-7xl mx-auto font-noto'>
 
-            {/* <AuthServer/> */}
+      {/* <AuthServer/> */}
 
-            <SpecialNews data={news.specialNews} />
-            <BottomNewsCard />
-            <RandomNews data={news}/>
-            <PoliticsSection />
-            <InternationalNewsSection data={news.internationalNews}/>
-            <Entertainment />
-            <SportsNews/>
-            <PhotoSlider />
-        </div>
-    );
+      <SpecialNews data={news.specialNews} />
+      <BottomNewsCard />
+      <RandomNews data={news} />
+      <PoliticsSection data={news.politicalNews} />
+      <InternationalNewsSection data={news.internationalNews} />
+      <Entertainment />
+      <SportsNews />
+      <PhotoSlider />
+    </div>
+  );
 };
 
 export default Homepage;
