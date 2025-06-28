@@ -1,3 +1,4 @@
+import Category from '@/components/Category/Category';
 import React from 'react';
 
 const page = async ({ params }: { params: Promise<{ category: string }> }) => {
@@ -7,7 +8,7 @@ const page = async ({ params }: { params: Promise<{ category: string }> }) => {
 
     return (
         <div>
-
+            <Category />
         </div>
     );
 };
