@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         id="__next"
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifBengali.variable} antialiased font-noto`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifBengali.variable}  antialiased font-noto`}
       >
         <Navsection />
 

@@ -8,6 +8,7 @@ import Entertainment from './Entertainment/Entertainment';
 import PhotoSlider from '@/swiper/PhotoSlider';
 import axios from 'axios';
 import SportsNews from './SportsNews/SportsNews';
+import IslamAndLifeSection from './IslamAndLifeSection/IslamAndLifeSection';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
@@ -63,8 +64,9 @@ const Homepage = async () => {
       <PoliticsSection data={news.politicalNews} />
       <InternationalNewsSection data={news.internationalNews} />
       <Entertainment />
-      <SportsNews />
+      <SportsNews data={news.sports}/>
       <PhotoSlider />
+      <IslamAndLifeSection/>
     </div>
   );
 };
