@@ -88,6 +88,7 @@
 'use client';
 
 import { NewsItem } from '@/types/news.types';
+import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -122,7 +123,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                 {politicalNews[0].title}
                             </h3>
 
-                            
+                                 <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(politicalNews[0].createdAt)}</p>
                         </div>
 
 
@@ -134,7 +135,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
 
                 {/* ---------- List of Other News ---------- */}
                 <div className="flex flex-col gap-6">
-                    {politicalNews.slice(1).map(({ title, imageUrl, category, id }, i) => (
+                    {politicalNews.slice(1).map(({ title, imageUrl, category, createdAt,id }, i) => (
                         <Link
                             href={`/news/${category}/${id}`}
                             key={i}
@@ -148,9 +149,13 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                     className="object-cover "
                                 />
                             </div>
-                            <h4 className="text-sm sm:text-base font-medium leading-snug text-gray-800 group-hover:text-red-600 transition-colors">
+                             <div>
+                            <h3 className=" font-semibold mt-4 group-hover:text-red-600 transition-colors leading-snug">
                                 {title}
-                            </h4>
+                            </h3>
+
+                                 <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(createdAt)}</p>
+                        </div>
                         </Link>
                     ))}
                 </div>
