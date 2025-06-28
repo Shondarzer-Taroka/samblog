@@ -6,64 +6,66 @@ import Advertisement from '@/share/Advertisement';
 import TopStoriesPage from '@/share/TopStories';
 import { NewsItem } from '@/types/news.types';
 import { useEffect, useState } from 'react';
+import { formatBengaliDate } from '@/utils/formatBengaliDate';
+import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 
 const Category = ({ category }: { category: string }) => {
     const [news, setNews] = useState<NewsItem[]>([])
     const [loading, setLoading] = useState(true)
     const [hasMore, setHasMore] = useState(true)
     const [page, setPage] = useState(1)
-    
+
 
     const fetchNews = async (pageNum: number) => {
-    try {
-      setLoading(true)
-      const skip = (pageNum - 1) * 15
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getCategorizedNews/${category}?skip=${skip}&take=15`)
-      const data = await res.json()
-      
-      if (data.success) {
-        setNews(prev => [...prev, ...data.data])
-        setHasMore(data.hasMore)
-      }
-    } catch (error) {
-      console.error('Error fetching news:', error)
-    } finally {
-      setLoading(false)
+        try {
+            setLoading(true)
+            const skip = (pageNum - 1) * 15
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getCategorizedNews/${category}?skip=${skip}&take=15`)
+            const data = await res.json()
+
+            if (data.success) {
+                setNews(prev => [...prev, ...data.data])
+                setHasMore(data.hasMore)
+            }
+        } catch (error) {
+            console.error('Error fetching news:', error)
+        } finally {
+            setLoading(false)
+        }
     }
-  }
 
-  useEffect(() => {
-    setNews([])
-    setPage(1)
-    fetchNews(1)
-  }, [])
+    useEffect(() => {
+        setNews([])
+        setPage(1)
+        fetchNews(1)
+    }, [])
 
-  const loadMore = () => {
-    if (hasMore && !loading) {
-      const nextPage = page + 1
-      setPage(nextPage)
-      fetchNews(nextPage)
+    const loadMore = () => {
+        if (hasMore && !loading) {
+            const nextPage = page + 1
+            setPage(nextPage)
+            fetchNews(nextPage)
+        }
     }
-  }
 
-//   // Format date to Bengali
-//   const formatDate = (dateString: string) => {
-//     const date = new Date(dateString)
-//     const options: Intl.DateTimeFormatOptions = { 
-//       year: 'numeric', 
-//       month: 'long', 
-//       day: 'numeric',
-//       hour: 'numeric',
-//       minute: 'numeric'
-//     }
-//     return new Intl.DateTimeFormat('bn-BD', options).format(date)
-//   }
+    //   // Format date to Bengali
+    //   const formatDate = (dateString: string) => {
+    //     const date = new Date(dateString)
+    //     const options: Intl.DateTimeFormatOptions = { 
+    //       year: 'numeric', 
+    //       month: 'long', 
+    //       day: 'numeric',
+    //       hour: 'numeric',
+    //       minute: 'numeric'
+    //     }
+    //     return new Intl.DateTimeFormat('bn-BD', options).format(date)
+    //   }
 
-  console.log(news);
+    console.log(news);
 
-//   console.log(formatDate('2025-06-24T04:35:29.887Z'));
-  
-  
+    //   console.log(formatDate('2025-06-24T04:35:29.887Z'));
+
+
     return (
         <section className="px-2 py-6 max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold text-red-600 mb-6">রাজনীতি</h2>
@@ -77,7 +79,7 @@ const Category = ({ category }: { category: string }) => {
                         <div className='w-full h-full bg-[#00000072] absolute top-0'></div>
                         <div className="h-full bg-white shadow-md">
                             <Image
-                                src="https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg"
+                                src={news[0]?.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg'}
                                 alt="Main news"
                                 width={800}
                                 height={450}
@@ -85,21 +87,21 @@ const Category = ({ category }: { category: string }) => {
                             />
                             <div className="p-4 absolute bottom-0 text-white">
                                 <h3 className="text-lg font-semibold leading-snug hover:text-red-600 cursor-pointer ">
-                                    ইসলামী আন্দোলনের মহাসমাবেশ: লোহাপট্টনীতে যোগ দিলেন নেতা-কর্মীরা
+                                    {/* ইসলামী আন্দোলনের মহাসমাবেশ: লোহাপট্টনীতে যোগ দিলেন নেতা-কর্মীরা */}
+                                    {news[0]?.title}
                                 </h3>
-                                <p className="text-sm text-white mt-2">২ ঘণ্টা আগে</p>
+                                {/* <p className="text-sm text-white mt-2">২ ঘণ্টা আগে</p> */}
+                                <p className="text-sm text-white mt-2">{formatBengaliDate(news[0]?.createdAt)}</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Top‑right two small cards */}
                     <div className="flex flex-col gap-6">
-                        {['দৈনন্দিনতা নয় আন্দোলন গুরুত্বের উন্নয়নে ভূমিকা, ফেসবুকে জানালেন আফরিন',
-                            'রাজপথের লড়াইয়ে ঝাঁপিয়ে পড়ুন, ছাত্রদলকে বিএনপি'
-                        ].map((title, i) => (
+                        {news.slice(3, 5).map(({ title, imageUrl, createdAt }, i) => (
                             <div key={i} className="bg-white shadow-md">
                                 <Image
-                                    src="https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg"
+                                    src={imageUrl && imageUrl || "https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg"}
                                     alt={title}
                                     width={400}
                                     height={220}
@@ -109,7 +111,7 @@ const Category = ({ category }: { category: string }) => {
                                     <h3 className="text-base font-medium hover:text-red-600 cursor-pointer">
                                         {title}
                                     </h3>
-                                    <p className="text-sm text-gray-500 mt-1">২ ঘণ্টা আগে</p>
+                                    <p className="text-sm text-gray-500 mt-1">{formatBengaliDate(createdAt)}</p>
                                 </div>
                             </div>
                         ))}
@@ -117,24 +119,26 @@ const Category = ({ category }: { category: string }) => {
 
                     {/* Bottom row – 3 cards */}
                     <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[1, 2, 3].map((item) => (
-                            <div key={item} className="bg-white shadow-md">
+                        {news.slice(4, 7).map(({ id, imageUrl, title }, i) => (
+                            <div key={id} className="bg-white shadow-md">
                                 {/* Swap in real thumbnails ↓ */}
                                 <Image
-                                    src={`https://picsum.photos/id/${item + 10}/400/200`}
-                                    alt="News"
+                                    src={imageUrl && imageUrl || `https://picsum.photos/id/${i + 10}/400/200`}
+                                    alt={title || 'news'}
                                     width={400}
                                     height={200}
                                     className="w-full h-[160px] object-cover"
                                 />
                                 <div className="p-3">
-                                    <h3 className="text-base font-medium hover:text-red-600 cursor-pointer">
+                                    {/* <h3 className="text-base font-medium hover:text-red-600 cursor-pointer">
                                         {item === 1
                                             ? 'অবৈধ সরকারের ক্ষমতায় টিকে থাকার সুযোগ নেই'
                                             : item === 2
                                                 ? 'প্রধান নির্বাচন কমিশনারকে অব্যাহতি দিতে চায় বিএনপি'
                                                 : 'ঢাকা-চট্টগ্রাম কর্মসূচি সফল করার আহ্বান'}
-                                    </h3>
+                                    </h3> */}
+                                    <h3 className="text-base font-medium hover:text-red-600 cursor-pointer">
+                                        {title}</h3>
                                     <p className="text-sm text-gray-500 mt-1">২ ঘণ্টা আগে</p>
                                 </div>
                             </div>
@@ -174,7 +178,7 @@ const Category = ({ category }: { category: string }) => {
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">আন্তর্জাতিক সংবাদ</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {newsItems.map((news) => (
+                    {news.length > 0 && news.slice(5, news.length + 1).map((news) => (
                         <article
                             key={news.id}
                             className="bg-white shadow-sm rounded-md overflow-hidden hover:shadow-md transition-shadow duration-200 border border-gray-100"
@@ -185,15 +189,16 @@ const Category = ({ category }: { category: string }) => {
                                     <h3 className="text-md sm:text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
                                         {news.title}
                                     </h3>
-                                    <p className="text-sm text-gray-600 mt-2 line-clamp-2">{news.summary}</p>
-                                    <p className="text-xs text-gray-400 mt-2">{news.time}</p>
+                                    <p className="text-sm text-gray-600 mt-2 line-clamp-2">{stripHtmlAndLimit(news.content, 30).short}</p>
+                                    {/* <p className="text-sm text-gray-600 mt-2 line-clamp-2">{news.summary}</p> */}
+                                    <p className="text-xs text-gray-400 mt-2">{formatBengaliDate(news.createdAt)}</p>
                                 </div>
 
                                 {/* Image */}
                                 <div className="min-w-[120px] sm:min-w-[160px] h-[100px] sm:h-auto relative">
                                     <Image
-                                        src={news.image}
-                                        alt={news.title}
+                                        src={news.imageUrl || ''}
+                                        alt={news?.title}
                                         width={160}
                                         height={120}
                                         className="w-full h-full object-cover rounded-r-md"
@@ -214,15 +219,15 @@ const Category = ({ category }: { category: string }) => {
 
 
 
-                    <div className="mt-8 text-center">
-              <button
-                onClick={loadMore}
-                disabled={loading}
-                className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
-              >
-                {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
-              </button>
-            </div>
+                <div className="mt-8 text-center">
+                    {hasMore && <button
+                        onClick={loadMore}
+                        disabled={loading}
+                        className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
+                    >
+                        {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
+                    </button>}
+                </div>
 
             </div>
         </section>
