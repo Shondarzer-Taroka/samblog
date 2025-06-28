@@ -41,7 +41,7 @@
 //                 </Link>
 //                 {/* Right Side (Mini News Items) */}
 //                 <div className="flex flex-col gap-6">
-               
+
 //                     {politicalNews.slice(1,politicalNews.length+1).map(({ title, imageUrl ,category,id}, i) => (
 //                         <div className="flex gap-4 items-start" key={i}>
 //                             <Link href={`/news/${category}/${id}`}> 
@@ -113,14 +113,18 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                 src={politicalNews[0]?.imageUrl || ''}
                                 alt={politicalNews[0].title}
                                 fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                className="object-cover"
                                 priority
                             />
                         </div>
+                        <div>
+                            <h3 className="text-xl sm:text-2xl font-semibold mt-4 group-hover:text-red-600 transition-colors leading-snug">
+                                {politicalNews[0].title}
+                            </h3>
 
-                        <h3 className="text-xl sm:text-2xl font-semibold mt-4 group-hover:text-red-600 transition-colors leading-snug">
-                            {politicalNews[0].title}
-                        </h3>
+                            
+                        </div>
+
 
                         <p className="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-3">
                             {stripHtmlAndLimit(politicalNews[0].content, 25).short}
@@ -141,7 +145,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                     src={imageUrl || ''}
                                     alt={title}
                                     fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    className="object-cover "
                                 />
                             </div>
                             <h4 className="text-sm sm:text-base font-medium leading-snug text-gray-800 group-hover:text-red-600 transition-colors">
