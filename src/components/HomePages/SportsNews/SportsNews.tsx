@@ -149,8 +149,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const rightColumn = data?.slice(6, 8) || [];
 
   return (
-    <section className="mt-16 bg-gray-50 py-8 px-4 md:px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gray-50 py-6 md:px-4 px-2">
+      <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8 border-b-2 border-red-600 pb-2">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">

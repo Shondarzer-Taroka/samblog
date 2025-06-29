@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import React from "react";
 
 const leftArticles = [
@@ -28,6 +29,19 @@ const leftArticles = [
     thumb: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     category: "জীবনধারা",
   },
+  {
+    title: "কেন্টা খুঁজতে গিয়ে ডাইনোসর",
+    time: "৪ ঘণ্টা আগে",
+    thumb: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4",
+    category: "প্রত্নতত্ত্ব",
+  },
+  {
+    title: "হাইপেগ্গুর আয়ন যখন বোলতের ছিপির সমান",
+    time: "৮ ঘণ্টা আগে",
+    thumb: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4",
+    category: "বিজ্ঞান",
+  },
+
 ];
 
 const rightArticles = [
@@ -61,15 +75,16 @@ const rightArticles = [
 
 export default function MixedLayout() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-2 md:px-4  py-6">
       {/* Left Section */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gray-800">
+          {/* <h2 className="text-2xl font-bold text-gray-800">
             <span className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-1 rounded-lg inline-block">
               একটু থামুন
             </span>
-          </h2>
+          </h2> */}
+          <TitleNewsOverSection headline="       একটু থামুন" />
           <button className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center">
             সব দেখুন
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,7 +156,7 @@ export default function MixedLayout() {
 
       {/* Right Section */}
       <div className="space-y-6">
-        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 shadow-sm">
+        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl md:px-4 px-2 py-6 shadow-sm">
           <div className="text-center mb-6">
             <h2 className="text-3xl font-extrabold text-blue-800 mb-2">
               <span className="bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
@@ -208,7 +223,7 @@ export default function MixedLayout() {
             ))}
           </div>
 
-          <button className="w-full mt-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-lg font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+          <button className="w-full mt-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
             আরও পড়ুন
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

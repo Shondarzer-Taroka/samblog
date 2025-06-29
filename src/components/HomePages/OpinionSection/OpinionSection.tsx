@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import React from "react";
 
 export default function OpinionSection() {
@@ -27,13 +28,17 @@ export default function OpinionSection() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 max-w-7xl mx-auto font-noto">
-      <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center relative pb-4">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto">
+      {/* <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center relative pb-4">
         <span className="relative z-10 px-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white py-2 rounded-lg shadow-lg">
           মতামত বিভাগ
         </span>
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 w-24 bg-yellow-400 rounded-full"></span>
-      </h2>
+      </h2> */}
+
+      <div className="mb-8">
+        <TitleNewsOverSection headline="মতামত বিভাগ"/>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Highlighted Opinion Card */}

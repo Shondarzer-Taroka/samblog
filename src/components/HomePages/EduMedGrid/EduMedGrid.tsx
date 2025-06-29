@@ -51,7 +51,7 @@ const categories = [
 
 const EduMedGrid = () => {
   return (
-    <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8 font-noto">
+    <div className="bg-gray-50 py-6 md:px-4 px-2 font-noto">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
