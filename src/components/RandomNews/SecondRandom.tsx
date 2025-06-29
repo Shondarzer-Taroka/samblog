@@ -163,7 +163,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
 
     return (
         <section className="">
-            <div className="max-w-7xl mx-auto">
+            <div className="">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-6">
                     {/* Left Column */}
                     <div className="space-y-4">
@@ -174,7 +174,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                 className="block group"
                             >
                                 <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-                                    <div className="flex gap-4 p-4">
+                                    <div className="flex gap-4 p-2">
                                         <div className="relative w-24 h-24 flex-shrink-0">
                                             <Image
                                                 src={news?.imageUrl || '/default-news.jpg'}
@@ -207,7 +207,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                 className="block group"
                             >
                                 <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                                    <div className="relative h-60 w-full">
+                                    <div className="relative h-60 w-full overflow-hidden">
                                         <Image
                                             src={newsData[0]?.imageUrl || '/default-news.jpg'}
                                             alt={newsData[0].title}
@@ -251,7 +251,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                     className="block group"
                                 >
                                     <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full">
-                                        <div className="flex gap-3 p-3">
+                                        <div className="flex gap-3 p-2">
                                             <div className="relative w-20 h-20 flex-shrink-0">
                                                 <Image
                                                     src={news?.imageUrl || '/default-news.jpg'}
@@ -285,7 +285,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                 className="block group"
                             >
                                 <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-                                    <div className="flex gap-4 p-4">
+                                    <div className="flex gap-4 p-2">
                                         <div className="relative w-24 h-24 flex-shrink-0">
                                             <Image
                                                 src={news?.imageUrl || '/default-news.jpg'}

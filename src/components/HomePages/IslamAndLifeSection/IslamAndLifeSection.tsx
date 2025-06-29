@@ -93,7 +93,7 @@ import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
 const IslamAndLifeSection = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 font-noto max-w-7xl mx-auto">
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-2 font-noto max-w-7xl mx-auto">
       <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">

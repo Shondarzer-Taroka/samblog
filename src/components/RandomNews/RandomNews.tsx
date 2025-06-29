@@ -20,7 +20,7 @@ const RandomNews = ({data}:{data:{nationalNews:NewsItem[],wholeCountry:NewsItem[
       </aside>
 
 
-      <aside className=' bg-gray-50 py-10 px-4 md:px-6 '>
+      <aside className=' bg-gray-50 py-6 px-2'>
         {/* <h2 className="text-xl font-semibold text-red-600">সারাদেশ</h2> */}
         <div className='mb-8'>
            <TitleNewsOverSection headline='সারাদেশ'/>

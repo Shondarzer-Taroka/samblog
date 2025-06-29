@@ -101,7 +101,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
     if (!politicalNews.length) return null;
 
     return (
-        <section className="px-2 ">
+        <section className="px-2 bg-gradient-to-b from-gray-50 to-gray-100 py-12">
 
             <div className='mb-8'>
                 <TitleNewsOverSection headline='       রাজনীতি' />
@@ -110,8 +110,8 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
             <aside className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
                 {/* ---------- Featured News ---------- */}
                 <Link href={`/news/${politicalNews[0].category}/${politicalNews[0].id}`} className="group">
-                    <div className="w-full">
-                        <div className="relative w-full h-[460px] rounded-lg overflow-hidden">
+                    <div className="w-full bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden p-2">
+                        <div className="relative w-full h-[460px] rounded-lg overflow-hidden ">
                             <Image
                                 src={politicalNews[0]?.imageUrl || ''}
                                 alt={politicalNews[0].title}
@@ -141,7 +141,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                         <Link
                             href={`/news/${category}/${id}`}
                             key={i}
-                            className="flex gap-4 items-start group"
+                            className="flex gap-4 items-start group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden p-2"
                         >
                             <div className="relative w-28 h-20 flex-shrink-0 overflow-hidden rounded-md">
                                 <Image
