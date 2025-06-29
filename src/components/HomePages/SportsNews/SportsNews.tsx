@@ -203,7 +203,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
 
           {/* Center Column - Featured Story */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-            <div className="relative h-96 w-full">
+            <div className="relative h-96 w-full overflow-hidden">
               <Image
                 src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                 alt={centerMain.title}
@@ -220,7 +220,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                 {centerMain.title}
               </h2>
               <p className="text-gray-600 mb-4">
-                {stripHtmlAndLimit(centerMain.content, 40).short}
+                {stripHtmlAndLimit(centerMain.content, 25).short}
               </p>
               <div className="flex items-center justify-between">
                 <span className="flex items-center text-sm text-gray-500">
@@ -240,7 +240,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                 key={item.id} 
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <div className="relative h-48 w-full">
+                <div className="relative h-48 w-full ">
                   <Image
                     src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                     alt={item.title}
@@ -280,7 +280,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
               className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
             >
               <div className="flex">
-                <div className="relative w-1/3 min-h-[120px]">
+                <div className="relative w-1/3 min-h-[120px] overflow-hidden">
                   <Image
                     src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                     alt={item.title}

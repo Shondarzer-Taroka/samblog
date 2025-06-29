@@ -94,7 +94,7 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
     const { short, isTruncated } = stripHtmlAndLimit(data.content, 40);
   
     return (
-        <section className="relative bg-gray-50 py-8 px-4 md:px-6 lg:px-8">
+        <section className="relative bg-gray-50 pt-4 pb-6 px-2 md:px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Main News Card with Gradient Overlay */}
                 <div className="relative rounded-xl overflow-hidden shadow-lg mb-8 group">
