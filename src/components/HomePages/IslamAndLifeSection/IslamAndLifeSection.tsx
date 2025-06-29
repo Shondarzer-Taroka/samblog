@@ -97,10 +97,7 @@ const IslamAndLifeSection = () => {
       <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
-         {/*  <h2 className="text-2xl md:text-3xl font-bold text-red-600 relative pl-4">
-            <span className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-red-600 rounded-full"></span>
-            ইসলাম ও জীবন
-          </h2> */}
+
           <TitleNewsOverSection headline='   ইসলাম ও জীবন'/>
           <button className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
             সব দেখুন →
