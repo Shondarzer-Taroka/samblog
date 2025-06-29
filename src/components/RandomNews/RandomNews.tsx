@@ -10,7 +10,7 @@ const RandomNews = ({data}:{data:{nationalNews:NewsItem[],wholeCountry:NewsItem[
   return (
     <section className=''>
 
-      <aside className='bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 font-noto '>
+      <aside className='bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto '>
         {/* <h2 className="text-xl font-semibold text-red-600 mb-4">জাতীয়</h2> */}
         <div className='mb-8'>
                   <TitleNewsOverSection headline='জাতীয়'/>
@@ -20,7 +20,7 @@ const RandomNews = ({data}:{data:{nationalNews:NewsItem[],wholeCountry:NewsItem[
       </aside>
 
 
-      <aside className=' bg-gray-50 py-6 px-2'>
+      <aside className=' bg-gray-50 py-6 px-2 md:px-4 '>
         {/* <h2 className="text-xl font-semibold text-red-600">সারাদেশ</h2> */}
         <div className='mb-8'>
            <TitleNewsOverSection headline='সারাদেশ'/>

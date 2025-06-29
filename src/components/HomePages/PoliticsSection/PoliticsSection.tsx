@@ -101,7 +101,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
     if (!politicalNews.length) return null;
 
     return (
-        <section className="px-2 bg-gradient-to-b from-gray-50 to-gray-100 py-12">
+        <section className="px-2 md:px-4 bg-gradient-to-b from-gray-50 to-gray-100 py-6">
 
             <div className='mb-8'>
                 <TitleNewsOverSection headline='       রাজনীতি' />
