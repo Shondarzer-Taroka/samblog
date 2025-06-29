@@ -2,6 +2,7 @@
 import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
@@ -12,6 +13,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
     <section className=" grid grid-cols-1 xl:grid-cols-2">
       {/* First Aside - Image with text wrapping */}
       <aside className="mb-6 w-full lg:w-[600px] h-[460px]">
+        <Link href={`/news/${data[0].category}/${data[0].id}`}> 
         <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">
           {/* Title & Date */}
           <h2 className="text-2xl font-bold mb-1"> {data[0].title}</h2>
@@ -32,6 +34,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
 
           </p>
         </div>
+        </Link>
         <div className="clear-both"></div>
       </aside>
 
@@ -39,6 +42,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
       <aside className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {randomNews.map((item, index) => (
           <div key={index + 987} className='h-[218px]'>
+               <Link href={`/news/${item.category}/${item.id}`}>
             <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">
               {/* Title & Date */}
               <div className='leading-5 mb-1.5'>
@@ -61,6 +65,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
 
               </p>
             </div>
+            </Link>
             <div className="clear-both"></div>
           </div>
         ))}
@@ -70,3 +75,12 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
 };
 
 export default FirstSectionRandom;
+
+
+
+
+
+
+
+
+

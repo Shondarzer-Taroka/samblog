@@ -87,6 +87,7 @@
 
 'use client';
 
+import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
@@ -100,16 +101,17 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
     if (!politicalNews.length) return null;
 
     return (
-        <section className="mt-24 py-6 px-2 max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold text-red-600 mb-6 border-b border-red-200 pb-2">
-                রাজনীতি
-            </h2>
+        <section className="px-2 ">
+
+            <div className='mb-8'>
+                <TitleNewsOverSection headline='       রাজনীতি' />
+            </div>
 
             <aside className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
                 {/* ---------- Featured News ---------- */}
                 <Link href={`/news/${politicalNews[0].category}/${politicalNews[0].id}`} className="group">
                     <div className="w-full">
-                        <div className="relative w-full h-[260px] rounded-lg overflow-hidden">
+                        <div className="relative w-full h-[460px] rounded-lg overflow-hidden">
                             <Image
                                 src={politicalNews[0]?.imageUrl || ''}
                                 alt={politicalNews[0].title}
@@ -123,19 +125,19 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                 {politicalNews[0].title}
                             </h3>
 
-                                 <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(politicalNews[0].createdAt)}</p>
+                            <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(politicalNews[0].createdAt)}</p>
                         </div>
 
 
                         <p className="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-3">
-                            {stripHtmlAndLimit(politicalNews[0].content, 25).short}
+                            {stripHtmlAndLimit(politicalNews[0].content, 55).short}
                         </p>
                     </div>
                 </Link>
 
                 {/* ---------- List of Other News ---------- */}
                 <div className="flex flex-col gap-6">
-                    {politicalNews.slice(1).map(({ title, imageUrl, category, createdAt,id }, i) => (
+                    {politicalNews.slice(1).map(({ title, imageUrl, category, createdAt, id }, i) => (
                         <Link
                             href={`/news/${category}/${id}`}
                             key={i}
@@ -149,13 +151,13 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                                     className="object-cover "
                                 />
                             </div>
-                             <div>
-                            <h3 className=" font-semibold mt-4 group-hover:text-red-600 transition-colors leading-snug">
-                                {title}
-                            </h3>
+                            <div>
+                                <h3 className=" font-semibold mt-4 group-hover:text-red-600 transition-colors leading-snug">
+                                    {title}
+                                </h3>
 
-                                 <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(createdAt)}</p>
-                        </div>
+                                <p className="text-sm text-gray-500 mt-1"> {formatBengaliDate(createdAt)}</p>
+                            </div>
                         </Link>
                     ))}
                 </div>

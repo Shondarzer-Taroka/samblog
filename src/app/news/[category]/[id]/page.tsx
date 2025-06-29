@@ -42,7 +42,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
             <h1 className='text-[45px] font-bold mt-4'>{news.title}</h1>
 
 
-            <div>
+            <div className=' mb-4'>
                 <div className='grid lg:grid-cols-2'>
                     <div className='flex gap-2.5 items-center'>
                         <Image
@@ -51,7 +51,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                             alt={news.title}
                             width={50}
                             height={50}
-                            className='rounded-full'
+                            className='rounded-full w-[60px] h-[60px] '
                         />
 
                         <div className='text-xl'>

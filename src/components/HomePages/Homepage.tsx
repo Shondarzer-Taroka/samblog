@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SpecialNews from '../FrontNews/SpecialNews';
 import BottomNewsCard from '../FrontNews/BottomNewsCard';
@@ -9,6 +10,9 @@ import PhotoSlider from '@/swiper/PhotoSlider';
 import axios from 'axios';
 import SportsNews from './SportsNews/SportsNews';
 import IslamAndLifeSection from './IslamAndLifeSection/IslamAndLifeSection';
+import EduMedGrid from './EduMedGrid/EduMedGrid';
+import OpinionSection from './OpinionSection/OpinionSection';
+import MixedLayout from './MixedLayout/MixedLayout';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
@@ -67,6 +71,9 @@ const Homepage = async () => {
       <SportsNews data={news.sports}/>
       <PhotoSlider />
       <IslamAndLifeSection/>
+      <EduMedGrid/>
+      <OpinionSection/>
+      <MixedLayout/>
     </div>
   );
 };

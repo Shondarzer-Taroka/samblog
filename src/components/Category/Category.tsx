@@ -51,7 +51,10 @@ const Category = ({ category }: { category: string }) => {
     }
 
    
-    console.log(news);
+    if (news.length==0) {
+        return <div className='flex justify-center items-center h-screen'><h1 >No news available</h1> </div> 
+    }
+    // console.log(news);
 
     //   console.log(formatDate('2025-06-24T04:35:29.887Z'));
 

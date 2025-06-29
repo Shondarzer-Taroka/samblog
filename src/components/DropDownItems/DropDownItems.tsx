@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 import React from 'react';
 
 // type Cate = {
@@ -15,7 +16,7 @@ const DropDownItems = ({ categories }: { categories: string[][] | undefined }) =
           {categories?.map((column, colIndex) => (
             <div key={colIndex} className="space-y-2">
               {column.map((item, index) => (
-                <p key={index}>{item}</p>
+                <p key={index}> <Link href={`/news/${item}`}> {item}</Link> </p>
               ))}
             </div>
           ))}

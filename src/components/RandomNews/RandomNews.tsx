@@ -10,8 +10,12 @@ const RandomNews = ({data}:{data:{nationalNews:NewsItem[],wholeCountry:NewsItem[
   return (
     <section className=''>
 
-      <aside>
-        <h2 className="text-xl font-semibold text-red-600 mb-4">জাতীয়</h2>
+      <aside className='bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 font-noto '>
+        {/* <h2 className="text-xl font-semibold text-red-600 mb-4">জাতীয়</h2> */}
+        <div className='mb-8'>
+                  <TitleNewsOverSection headline='জাতীয়'/>
+        </div>
+
         <FirstSectionRandom data={data.nationalNews}/>
       </aside>
 
