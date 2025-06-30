@@ -19,7 +19,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
 }) => {
   return (
     <div className="w-full group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
-      {/* Image Container with Hover Effect */}
+
       <div className="relative h-48 md:h-52 w-full overflow-hidden">
         <Image
           src={image}
@@ -29,14 +29,14 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
-        {/* Category Badge */}
+      
         {category && (
           <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
             {category}
           </span>
         )}
         
-        {/* Action Buttons */}
+      
         <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button className="p-2 bg-white/90 rounded-full shadow-sm hover:bg-white transition-colors">
             <FiBookmark className="text-gray-700" />
@@ -47,7 +47,6 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
         </div>
       </div>
 
-      {/* Content Container */}
       <div className="p-4 md:p-5">
         <h2 className="text-lg md:text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors line-clamp-2 mb-2">
           {title}
