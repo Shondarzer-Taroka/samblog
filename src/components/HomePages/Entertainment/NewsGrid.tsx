@@ -2,6 +2,8 @@ import React from "react";
 import NewsCard from "./NewsCard";
 import MainFeatureCard from "./MainFeatureCard";
 import { NewsItem } from "@/types/news.types";
+import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
+import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
 
 const NewsGrid = ({ data }: { data: NewsItem[] }) => {
   return (
@@ -28,7 +30,7 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
 
       <div className="col-span-1">
         {
-          data.slice(0,3).map((news, i) => <NewsCard image={news.imageUrl} time={news.createdAt} title={news.title} key={i} />)
+          data.slice(0,3).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
         }
       </div>
 
@@ -41,7 +43,12 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
           time="৩৬ মিনিট আগে"
         /> */}
 
-   
+         <MainFeatureCard
+          image={ data[3].imageUrl || "https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2Fwbd5nux5%2Fresize.jpg?rect=134%2C0%2C666%2C444&w=420&auto=format%2Ccompress&fmt=avif"}
+          title={ data[3].title}
+          description= {stripHtmlAndLimit( data[3].content,26).short}
+          time={getBengaliTimeAgo( data[3].createdAt)}
+        />
       </div>
 
 
