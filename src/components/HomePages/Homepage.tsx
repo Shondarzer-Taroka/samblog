@@ -7,7 +7,7 @@ import PoliticsSection from './PoliticsSection/PoliticsSection';
 import InternationalNewsSection from './InternationalNewsSection/InternationalNewsSection';
 import Entertainment from './Entertainment/Entertainment';
 import PhotoSlider from '@/swiper/PhotoSlider';
-import axios from 'axios';
+
 import SportsNews from './SportsNews/SportsNews';
 import IslamAndLifeSection from './IslamAndLifeSection/IslamAndLifeSection';
 import EduMedGrid from './EduMedGrid/EduMedGrid';
@@ -29,26 +29,29 @@ import MixedLayout from './MixedLayout/MixedLayout';
 
 
 
+
 const getHomePageNews = async () => {
   try {
-    const gettingNews = await axios.get(
+    const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`,
       {
+        cache: 'no-store',
         headers: {
-          'Cache-Control': 'no-store',
+          'Cache-Control': 'no-cache',
           'Pragma': 'no-cache',
-          'Expires': '0',
-        },
-        params: {
-          timestamp: new Date().getTime(), // force unique URL to bust CDN cache
-        },
+          'Expires': '0'
+        }
       }
     );
-    return gettingNews.data;
+    if (!res.ok) throw new Error('Failed to fetch homepage news');
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error('Error fetching home page news:', error);
   }
 };
+
+
 
 
 
@@ -67,7 +70,7 @@ const Homepage = async () => {
       <RandomNews data={news} />
       <PoliticsSection data={news.politicalNews} />
       <InternationalNewsSection data={news.internationalNews} />
-      <Entertainment />
+      <Entertainment data={news.entertainment}/>
       <SportsNews data={news.sports}/>
       <PhotoSlider />
       <IslamAndLifeSection/>
