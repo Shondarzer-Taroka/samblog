@@ -141,6 +141,7 @@ import Image from 'next/image';
 import { NewsItem } from '@/types/news.types';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from 'react-icons/fa';
+import Link from 'next/link';
 
 const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const leftColumn = data?.slice(0, 2) || [];
@@ -166,38 +167,40 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           {/* Left Column */}
           <div className="space-y-6">
             {leftColumn.map((item) => (
-              <div 
-                key={item.id} 
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
-              >
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={item?.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
-                    alt={item.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="flex items-center text-sm text-gray-500">
-                      <FaClock className="mr-1" /> {new Date(item.createdAt).toLocaleDateString('bn-BD')}
-                    </span>
-                    <div className="flex space-x-2">
-                      <button className="text-gray-400 hover:text-red-600 transition-colors">
-                        <FaBookmark size={14} />
-                      </button>
-                      <button className="text-gray-400 hover:text-red-600 transition-colors">
-                        <FaShareAlt size={14} />
-                      </button>
+              <Link key={item.id} href={`/news/${item.category}/${item.id}}`}>
+                <div
+
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={item?.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="flex items-center text-sm text-gray-500">
+                        <FaClock className="mr-1" /> {new Date(item.createdAt).toLocaleDateString('bn-BD')}
+                      </span>
+                      <div className="flex space-x-2">
+                        <button className="text-gray-400 hover:text-red-600 transition-colors">
+                          <FaBookmark size={14} />
+                        </button>
+                        <button className="text-gray-400 hover:text-red-600 transition-colors">
+                          <FaShareAlt size={14} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -236,8 +239,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           {/* Right Column */}
           <div className="space-y-6">
             {rightColumn.map((item) => (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
                 <div className="relative h-48 w-full ">
@@ -275,8 +278,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
         {/* Bottom Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {bottomRow.map((item) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
             >
               <div className="flex">
