@@ -167,7 +167,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           {/* Left Column */}
           <div className="space-y-6">
             {leftColumn.map((item) => (
-              <Link key={item.id} href={`/news/${item.category}/${item.id}}`}>
+              <Link key={item.id} href={`/news/${item.category}/${item.id}`} className='block group'>
                 <div
 
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
@@ -205,40 +205,43 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           </div>
 
           {/* Center Column - Featured Story */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-            <div className="relative h-96 w-full overflow-hidden">
-              <Image
-                src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
-                alt={centerMain.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                প্রধান খবর
-              </span>
-            </div>
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
-                {centerMain.title}
-              </h2>
-              <p className="text-gray-600 mb-4">
-                {stripHtmlAndLimit(centerMain.content, 25).short}
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center text-sm text-gray-500">
-                  <FaClock className="mr-1" /> {new Date(centerMain.createdAt).toLocaleDateString('bn-BD')}
+
+          <Link href={`/news/${centerMain.category}/${centerMain.id}`} className='block group'>
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+              <div className="relative h-96 w-full overflow-hidden">
+                <Image
+                  src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
+                  alt={centerMain.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  প্রধান খবর
                 </span>
-                <button className="flex items-center text-red-600 hover:text-red-800 font-medium">
-                  বিস্তারিত <FaArrowRight className="ml-2" />
-                </button>
+              </div>
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
+                  {centerMain.title}
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  {stripHtmlAndLimit(centerMain.content, 25).short}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center text-sm text-gray-500">
+                    <FaClock className="mr-1" /> {new Date(centerMain.createdAt).toLocaleDateString('bn-BD')}
+                  </span>
+                  <button className="flex items-center text-red-600 hover:text-red-800 font-medium">
+                    বিস্তারিত <FaArrowRight className="ml-2" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-
+          </Link>
           {/* Right Column */}
           <div className="space-y-6">
             {rightColumn.map((item) => (
+              <Link href={`/news/${item.category}/${item.id}`} key={item.id}> 
               <div
                 key={item.id}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
@@ -271,6 +274,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                   </div>
                 </div>
               </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -278,6 +282,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
         {/* Bottom Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {bottomRow.map((item) => (
+            <Link key={item.id} href={`/news/${item.category}/${item.id}`} className='block group'> 
             <div
               key={item.id}
               className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
@@ -301,6 +306,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>
