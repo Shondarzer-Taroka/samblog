@@ -107,7 +107,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
 
       {/* Content Container */}
       <div className="p-4 md:p-5">
-        <h2 className="text-lg md:text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 mb-2">
+        <h2 className="text-lg md:text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors line-clamp-2 mb-2">
           {title}
         </h2>
         
