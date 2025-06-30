@@ -109,294 +109,280 @@
 
 
 
+
+
+
+
+
+
+
+
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 
-interface NewspaperPage {
+interface Article {
   id: number;
-  imageUrl: string;
-  articles: {
-    id: number;
-    title: string;
-    content: string;
-    bbox: { x: number; y: number; width: number; height: number };
-    category: string;
-  }[];
+  title: string;
+  content: string;
+  bbox: { x: number; y: number; width: number; height: number };
+  category: string;
 }
 
 export default function ProthomAloEPaper() {
-  // Sample data (replace with your actual API fetch)
-  const newspaperData: NewspaperPage[] = [
-    {
-      id: 1,
-      imageUrl: '/download.png',
-      articles: [
-        {
-          id: 1,
-          title: 'রাজধানীতে যানজট বৃদ্ধি',
-          content: 'গত কয়েকদিন ধরে রাজধানীর প্রধান সড়কগুলোতে যানজট অসহনীয় পর্যায়ে পৌঁছেছে...',
-          bbox: { x: 120, y: 200, width: 300, height: 150 },
-          category: 'জাতীয়'
-        },
-        {
-          id: 2,
-          title: 'বাজেট ঘোষণা আজ',
-          content: 'আজ জাতীয় সংসদে নতুন অর্থবছরের বাজেট উপস্থাপন করবেন অর্থমন্ত্রী...',
-          bbox: { x: 450, y: 180, width: 280, height: 120 },
-          category: 'অর্থনীতি'
-        }
-      ]
-    },
-    {
-      id: 2,
-      imageUrl: '/prothom-alo-page2.jpg',
-      articles: [
-        {
-          id: 3,
-          title: 'ক্রিকেটে বাংলাদেশের জয়',
-          content: 'আইসিসি ট্রফিতে বাংলাদেশ শ্রীলঙ্কাকে ৫ উইকেটে হারিয়েছে...',
-          bbox: { x: 150, y: 250, width: 320, height: 100 },
-          category: 'খেলা'
-        }
-      ]
-    }
-  ];
-
-  const [currentPage, setCurrentPage] = useState(0);
-  const [selectedArticle, setSelectedArticle] = useState<NewspaperPage['articles'][0] | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [showCategories, setShowCategories] = useState(false);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const [clickHistory, setClickHistory] = useState<{x: number, y: number, width: number, height: number}[]>([]);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectionBox, setSelectionBox] = useState({x1: 0, y1: 0, x2: 0, y2: 0});
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
 
-  // Filter articles based on search term
-  const filteredArticles = newspaperData[currentPage].articles.filter(article => 
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    article.content.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Detect mouse down to start selection
+  const handleMouseDown = (e: React.MouseEvent<HTMLImageElement>) => {
+    if (!imageRef.current) return;
+    
+    const rect = imageRef.current.getBoundingClientRect();
+    const scaleX = imageDimensions.width / rect.width;
+    const scaleY = imageDimensions.height / rect.height;
+    
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
 
-  // Handle article selection
-  const handleArticleClick = (article: NewspaperPage['articles'][0]) => {
-    setSelectedArticle(article);
+    setIsSelecting(true);
+    setSelectionBox({ x1: x, y1: y, x2: x, y2: y });
   };
 
-  // Handle page navigation
-  const goToPage = (pageIndex: number) => {
-    if (pageIndex >= 0 && pageIndex < newspaperData.length) {
-      setCurrentPage(pageIndex);
-      setSelectedArticle(null);
-    }
+  // Track mouse movement for selection box
+  const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
+    if (!isSelecting || !imageRef.current) return;
+
+    const rect = imageRef.current.getBoundingClientRect();
+    const scaleX = imageDimensions.width / rect.width;
+    const scaleY = imageDimensions.height / rect.height;
+    
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
+
+    setSelectionBox(prev => ({ ...prev, x2: x, y2: y }));
   };
 
-  // Zoom functionality
-  const handleZoom = (direction: 'in' | 'out') => {
+  // Finalize selection on mouse up
+  const handleMouseUp = () => {
+    if (!isSelecting) return;
+    setIsSelecting(false);
+
+    // Calculate article dimensions
+    const x = Math.min(selectionBox.x1, selectionBox.x2);
+    const y = Math.min(selectionBox.y1, selectionBox.y2);
+    const width = Math.abs(selectionBox.x2 - selectionBox.x1);
+    const height = Math.abs(selectionBox.y2 - selectionBox.y1);
+
+    // Only consider selections larger than 100x100 pixels
+    if (width < 100 || height < 100) return;
+
+    // Create a new article from the selection
+    const newArticle: Article = {
+      id: Date.now(),
+      title: `নতুন খবর ${clickHistory.length + 1}`,
+      content: 'এই খবরটি পত্রিকার এই অংশ থেকে নেওয়া হয়েছে। আপনি এখানে বিস্তারিত পড়তে পারেন।',
+      bbox: { x, y, width, height },
+      category: 'সাধারণ'
+    };
+
+    setClickHistory(prev => [...prev, {x, y, width, height}]);
+    setSelectedArticle(newArticle);
+    cropArticleImage(newArticle);
+  };
+
+  // Crop the selected article image
+  const cropArticleImage = (article: Article) => {
+    if (!imageRef.current) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const { x, y, width, height } = article.bbox;
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.drawImage(
+      imageRef.current,
+      x, y, width, height,
+      0, 0, width, height
+    );
+
+    setCroppedImage(canvas.toDataURL());
+  };
+
+  // Handle zoom functionality
+  const handleZoom = (direction: 'in' | 'out' | 'reset') => {
     setZoomLevel(prev => {
+      if (direction === 'reset') return 1;
       const newZoom = direction === 'in' ? prev + 0.2 : prev - 0.2;
-      return Math.min(Math.max(newZoom, 0.5), 3); // Limit zoom between 0.5x and 3x
+      return Math.min(Math.max(newZoom, 0.5), 3);
     });
   };
 
+  // Get actual image dimensions
+  const handleImageLoad = () => {
+    if (imageRef.current) {
+      setImageDimensions({
+        width: imageRef.current.naturalWidth,
+        height: imageRef.current.naturalHeight
+      });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-red-600 text-white py-3 shadow-md">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-[#d9232e] text-white py-3 shadow-md">
+        <div className="container mx-auto px-4">
           <h1 className="text-2xl font-bold">প্রথম আলো ই-পেপার</h1>
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="খুঁজুন..."
-                className="px-4 py-2 rounded text-gray-800 w-64"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              {searchTerm && (
-                <button 
-                  className="absolute right-3 top-2 text-gray-500"
-                  onClick={() => setSearchTerm('')}
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-            <button 
-              className="px-4 py-2 bg-white text-red-600 rounded font-medium"
-              onClick={() => setShowCategories(!showCategories)}
-            >
-              বিভাগ
-            </button>
-          </div>
+          <p className="text-sm mt-1">ছবির উপর নির্বাচন করুন (ড্র্যাগ করে আয়তাকার এলাকা বেছে নিন)</p>
         </div>
       </header>
 
-      {/* Category dropdown */}
-      {showCategories && (
-        <div className="bg-white shadow-lg absolute right-4 mt-1 z-10 w-48 rounded">
-          {['জাতীয়', 'আন্তর্জাতিক', 'অর্থনীতি', 'খেলা', 'বিনোদন'].map(category => (
-            <div 
-              key={category}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b"
-              onClick={() => {
-                setSearchTerm(category);
-                setShowCategories(false);
-              }}
-            >
-              {category}
-            </div>
-          ))}
-        </div>
-      )}
-
       <main className="container mx-auto px-4 py-6">
-        {/* Newspaper navigation */}
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 0}
-            className={`px-4 py-2 rounded ${currentPage === 0 ? 'bg-gray-300' : 'bg-red-600 text-white'}`}
-          >
-            পূর্বের পাতা
-          </button>
-          
-          <div className="text-center">
-            <h2 className="text-xl font-semibold">পাতা: {currentPage + 1}/{newspaperData.length}</h2>
-            <div className="flex justify-center space-x-2 mt-2">
-              {newspaperData.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToPage(index)}
-                  className={`w-3 h-3 rounded-full ${currentPage === index ? 'bg-red-600' : 'bg-gray-300'}`}
-                />
-              ))}
-            </div>
-          </div>
-          
-          <button
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === newspaperData.length - 1}
-            className={`px-4 py-2 rounded ${currentPage === newspaperData.length - 1 ? 'bg-gray-300' : 'bg-red-600 text-white'}`}
-          >
-            পরের পাতা
-          </button>
-        </div>
-
-        {/* Newspaper content */}
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Newspaper image with interactive areas */}
-          <div 
-            ref={imageContainerRef}
-            className="relative border shadow-lg bg-white flex-1 overflow-hidden"
-            style={{ height: '70vh' }}
-          >
+          {/* Newspaper image with selection */}
+          <div className="relative border-4 border-white shadow-xl bg-white flex-1 overflow-hidden rounded-lg">
             <div 
               className="absolute inset-0 overflow-auto"
               style={{ transform: `scale(${zoomLevel})`, transformOrigin: '0 0' }}
             >
               <img
-                src={newspaperData[currentPage].imageUrl}
-                alt={`Prothom Alo Page ${currentPage + 1}`}
-                className="w-full h-auto"
+                ref={imageRef}
+                src="/download.png"
+                alt="Prothom Alo Newspaper"
+                className="w-full h-auto select-none"
+                draggable="false"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onLoad={handleImageLoad}
               />
               
-              {/* Interactive article areas */}
-              {newspaperData[currentPage].articles.map(article => (
+              {/* Selection box */}
+              {isSelecting && (
                 <div
-                  key={article.id}
-                  className={`absolute border-2 ${selectedArticle?.id === article.id ? 'border-red-600 bg-red-100 bg-opacity-30' : 'border-transparent hover:border-red-400 hover:bg-red-100 hover:bg-opacity-20'} cursor-pointer transition-all`}
+                  className="absolute border-2 border-blue-500 bg-blue-500 bg-opacity-20"
                   style={{
-                    left: `${article.bbox.x}px`,
-                    top: `${article.bbox.y}px`,
-                    width: `${article.bbox.width}px`,
-                    height: `${article.bbox.height}px`,
+                    left: `${Math.min(selectionBox.x1, selectionBox.x2)}px`,
+                    top: `${Math.min(selectionBox.y1, selectionBox.y2)}px`,
+                    width: `${Math.abs(selectionBox.x2 - selectionBox.x1)}px`,
+                    height: `${Math.abs(selectionBox.y2 - selectionBox.y1)}px`,
                   }}
-                  onClick={() => handleArticleClick(article)}
+                />
+              )}
+              
+              {/* Previously selected areas */}
+              {clickHistory.map((area, index) => (
+                <div
+                  key={index}
+                  className="absolute border-2 border-[#d9232e] bg-[#d9232e] bg-opacity-10 cursor-pointer"
+                  style={{
+                    left: `${area.x}px`,
+                    top: `${area.y}px`,
+                    width: `${area.width}px`,
+                    height: `${area.height}px`,
+                  }}
+                  onClick={() => {
+                    const article: Article = {
+                      id: index,
+                      title: `পূর্বের নির্বাচন ${index + 1}`,
+                      content: 'আপনি পূর্বে এই অংশটি নির্বাচন করেছেন। এখানে খবরের বিস্তারিত থাকতে পারে।',
+                      bbox: { x: area.x, y: area.y, width: area.width, height: area.height },
+                      category: 'সাধারণ'
+                    };
+                    setSelectedArticle(article);
+                    cropArticleImage(article);
+                  }}
                 />
               ))}
             </div>
 
             {/* Zoom controls */}
-            <div className="absolute bottom-4 right-4 bg-white p-2 rounded shadow flex gap-2">
-              <button 
-                onClick={() => handleZoom('out')}
-                disabled={zoomLevel <= 0.5}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-              >
-                -
-              </button>
-              <span className="px-2">{(zoomLevel * 100).toFixed(0)}%</span>
+            <div className="absolute bottom-4 right-4 bg-white p-1 rounded-full shadow-lg flex flex-col gap-1">
               <button 
                 onClick={() => handleZoom('in')}
                 disabled={zoomLevel >= 3}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
               >
                 +
+              </button>
+              <button 
+                onClick={() => handleZoom('reset')}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-sm"
+              >
+                {Math.round(zoomLevel * 100)}%
+              </button>
+              <button 
+                onClick={() => handleZoom('out')}
+                disabled={zoomLevel <= 0.5}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+              >
+                -
               </button>
             </div>
           </div>
 
-          {/* Article sidebar */}
-          <div className="lg:w-80 bg-white p-4 shadow-lg rounded-lg overflow-y-auto" style={{ maxHeight: '70vh' }}>
-            <h3 className="text-lg font-semibold mb-4 border-b pb-2">
-              {searchTerm ? `Search Results for "${searchTerm}"` : 'আজকের খবর'}
-            </h3>
-            
-            {(searchTerm && filteredArticles.length === 0) ? (
-              <p className="text-gray-500">No articles found</p>
-            ) : (
-              <div className="space-y-4">
-                {(searchTerm ? filteredArticles : newspaperData[currentPage].articles).map(article => (
-                  <div
-                    key={article.id}
-                    className={`p-3 rounded cursor-pointer ${selectedArticle?.id === article.id ? 'bg-red-50 border-l-4 border-red-600' : 'hover:bg-gray-50'}`}
-                    onClick={() => handleArticleClick(article)}
-                  >
-                    <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">
-                      {article.category}
+          {/* Article details panel */}
+          <div className="lg:w-96">
+            {selectedArticle ? (
+              <div className="bg-white p-6 shadow-lg rounded-lg h-full">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-xs bg-[#d9232e] text-white px-2 py-1 rounded-full font-bold">
+                      {selectedArticle.category}
                     </span>
-                    <h4 className="font-medium mt-1">{article.title}</h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">{article.content}</p>
+                    <h2 className="text-2xl font-bold mt-3 mb-2 leading-tight">{selectedArticle.title}</h2>
                   </div>
-                ))}
+                  <button 
+                    onClick={() => setSelectedArticle(null)}
+                    className="text-gray-500 hover:text-gray-700 p-1"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Cropped article image */}
+                {croppedImage && (
+                  <div className="mb-4 border rounded overflow-hidden">
+                    <img 
+                      src={croppedImage} 
+                      alt="Cropped article" 
+                      className="w-full h-auto"
+                    />
+                    <div className="p-2 bg-gray-100 text-xs text-center">
+                      নির্বাচিত এলাকা: {selectedArticle.bbox.width}x{selectedArticle.bbox.height} পিক্সেল
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-2 text-gray-700 leading-relaxed">
+                  {selectedArticle.content}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white p-6 shadow-lg rounded-lg h-full flex items-center justify-center">
+                <div className="text-center text-gray-500">
+                  <p>খবর পড়তে পত্রিকার উপর আয়তাকার এলাকা নির্বাচন করুন</p>
+                  <p className="text-sm mt-2">(মাউস দিয়ে ড্র্যাগ করে কোনো খবরের অংশ বেছে নিন)</p>
+                </div>
               </div>
             )}
           </div>
         </div>
-
-        {/* Selected article detail */}
-        {selectedArticle && (
-          <div className="mt-6 bg-white p-6 shadow-lg rounded-lg">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">
-                  {selectedArticle.category}
-                </span>
-                <h2 className="text-2xl font-bold mt-2">{selectedArticle.title}</h2>
-              </div>
-              <button 
-                onClick={() => setSelectedArticle(null)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="mt-4 text-gray-700 leading-relaxed">
-              {selectedArticle.content.repeat(10)} {/* Simulate longer content */}
-            </div>
-          </div>
-        )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-6 mt-8">
+      <footer className="bg-[#333] text-white py-6 mt-8">
         <div className="container mx-auto px-4 text-center">
           <p>© {new Date().getFullYear()} প্রথম আলো ই-পেপার. সর্বস্বত্ব সংরক্ষিত</p>
-          <div className="flex justify-center space-x-6 mt-3">
-            <a href="#" className="hover:text-red-400">যোগাযোগ</a>
-            <a href="#" className="hover:text-red-400">গোপনীয়তা নীতি</a>
-            <a href="#" className="hover:text-red-400">সাহায্য</a>
-          </div>
         </div>
       </footer>
     </div>
