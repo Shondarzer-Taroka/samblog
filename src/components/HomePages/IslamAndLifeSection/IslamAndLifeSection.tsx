@@ -93,7 +93,7 @@ import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
 const IslamAndLifeSection = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-2 font-noto max-w-7xl mx-auto">
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto ">
       <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
@@ -189,7 +189,7 @@ const IslamAndLifeSection = () => {
 
               {/* Additional Featured Content */}
               <div className="mt-6 bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="p-6">
+                <div className="p-6 md:p-4">
                   <h4 className="font-bold text-lg text-gray-800 mb-3">আজকের ইসলামিক বাণী</h4>
                   <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
                     <p className="text-gray-700 italic">"যে ব্যক্তি আল্লাহর সন্তুষ্টির জন্য জ্ঞান অর্জন করে, আল্লাহ তাকে জান্নাতের পথ সহজ করে দেন।"</p>
