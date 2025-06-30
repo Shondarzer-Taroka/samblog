@@ -182,7 +182,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 h-[110px]">
                     <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
                 {splitTextByLength(item.title,12)}
                     </h3>
@@ -221,12 +221,12 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                   প্রধান খবর
                 </span>
               </div>
-              <div className="p-6">
+              <div className="p-5">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
                   {centerMain.title}
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  {stripHtmlAndLimit(centerMain.content, 25).short}
+                  {stripHtmlAndLimit(centerMain.content, 37).short}
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="flex items-center text-sm text-gray-500">
@@ -256,7 +256,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                 </div>
-                <div className="p-4">
+                <div className="p-4 h-[110px]">
                   <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
                     {splitTextByLength(item.title,5)}
                   </h3>
@@ -289,7 +289,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
               className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
             >
               <div className="flex">
-                <div className="relative w-1/3 min-h-[120px] overflow-hidden">
+                <div className="relative w-1/3 min-h-[110px] overflow-hidden">
                   <Image
                     src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                     alt={item.title}

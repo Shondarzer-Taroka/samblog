@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import { useRouter } from 'next/navigation';
+import Loading from '@/app/loading';
 
 const Category = ({ category }: { category: string }) => {
     const [news, setNews] = useState<NewsItem[]>([])
@@ -48,6 +49,10 @@ const Category = ({ category }: { category: string }) => {
             setPage(nextPage)
             fetchNews(nextPage)
         }
+    }
+
+    if (loading) {
+        return <Loading/>
     }
 
    

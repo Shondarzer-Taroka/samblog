@@ -4,6 +4,8 @@ import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 
 import Navsection from "@/components/HomePages/Navsection/Navsection";
+import { Suspense } from "react";
+import Loading from "./loading";
 // import { AuthProvider } from "@/context/AuthContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,8 +44,11 @@ export default function RootLayout({
         {/* <AuthProvider>{children}</AuthProvider> */}
 
         {/* <AuthProvider> */}
-        
+
+        {/* {children} */}
+        <Suspense fallback={<Loading />}>
           {children}
+        </Suspense>
         {/* </AuthProvider> */}
       </body>
     </html>
