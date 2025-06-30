@@ -8,7 +8,7 @@ const Entertainment = () => {
             <div>
                 <TitleNewsOverSection headline='বিনোদন'/>
             </div>
-            <h1 className="text-xl font-semibold text-red-600 mb-4">বিনোদন</h1>
+            {/* <h1 className="text-xl font-semibold text-red-600 mb-4">বিনোদন</h1> */}
             <NewsGrid/>
         </div>
     );
