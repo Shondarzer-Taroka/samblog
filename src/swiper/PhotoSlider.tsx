@@ -1,5 +1,6 @@
 'use client'
 
+import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import { ChevronsLeft, ChevronsRight, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
@@ -73,7 +74,9 @@ const PhotoSlider: React.FC = () => {
     <div className="bg-white  overflow-hidden relative py-6 px-2  md:px-4">
       {/* <h2 className="text-xl font-semibold text-red-600 mb-4 py-2.5">  গ্যালারি</h2> */}
 
-<div></div>
+<div>
+  <TitleNewsOverSection/>
+</div>
       {/* Progress bar */}
       <div
         key={`${current}-${isPaused}`}  // forces re-render to restart animation
