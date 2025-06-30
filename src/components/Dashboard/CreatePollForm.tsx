@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { useState } from 'react';
@@ -85,8 +86,9 @@ const CreatePollForm = () => {
           
 
         } catch (error) {
-            console.error('Poll creation error:', error);
-            toast.error(error.message || 'Failed to create poll. Please try again.');
+            const err= error as Error
+            console.error('Poll creation error:', err);
+            toast.error(err.message || 'Failed to create poll. Please try again.');
         } finally {
             setIsLoading(false);
         }

@@ -29,18 +29,12 @@ import MixedLayout from './MixedLayout/MixedLayout';
 
 
 
-
 const getHomePageNews = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`,
       {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache',
-          'Expires': '0'
-        }
+        next: { revalidate: 60 }, // Revalidate every 60 seconds
       }
     );
     if (!res.ok) throw new Error('Failed to fetch homepage news');
@@ -48,8 +42,10 @@ const getHomePageNews = async () => {
     return data;
   } catch (error) {
     console.error('Error fetching home page news:', error);
+    return null;
   }
 };
+
 
 
 
@@ -61,7 +57,7 @@ const Homepage = async () => {
   console.log(news);
 
   return (
-    <div className='max-w-7xl mx-auto font-noto'>
+    <div className='max-w-7xl mx-auto font-noto '>
 
       {/* <AuthServer/> */}
 

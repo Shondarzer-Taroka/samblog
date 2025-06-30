@@ -141,7 +141,7 @@ const InternationalNewsSection = ({ data }: { data: NewsItem[] }) => {
                       alt={item.title}
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover "
                     />
                     <div className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
                       আন্তর্জাতিক

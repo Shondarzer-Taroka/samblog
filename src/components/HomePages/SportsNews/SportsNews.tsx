@@ -142,6 +142,7 @@ import { NewsItem } from '@/types/news.types';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from 'react-icons/fa';
 import Link from 'next/link';
+import { splitTextByLength } from '@/utils/splitTextByLength';
 
 const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const leftColumn = data?.slice(0, 2) || [];
@@ -172,18 +173,18 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
 
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
                 >
-                  <div className="relative h-48 w-full">
+                  <div className="relative h-48 w-full overflow-hidden">
                     <Image
                       src={item?.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                       alt={item.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover "
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
-                      {item.title}
+                {splitTextByLength(item.title,12)}
                     </h3>
                     <div className="flex items-center justify-between mt-3">
                       <span className="flex items-center text-sm text-gray-500">
@@ -213,7 +214,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                   src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                   alt={centerMain.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover "
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -241,23 +242,23 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           {/* Right Column */}
           <div className="space-y-6">
             {rightColumn.map((item) => (
-              <Link href={`/news/${item.category}/${item.id}`} key={item.id}> 
+              <Link href={`/news/${item.category}/${item.id}`} key={item.id} className='block group'> 
               <div
                 key={item.id}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <div className="relative h-48 w-full ">
+                <div className="relative h-48 w-full overflow-hidden">
                   <Image
                     src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover "
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
-                    {item.title}
+                    {splitTextByLength(item.title,5)}
                   </h3>
                   <div className="flex items-center justify-between mt-3">
                     <span className="flex items-center text-sm text-gray-500">

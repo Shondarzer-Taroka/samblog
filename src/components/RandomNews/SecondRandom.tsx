@@ -212,7 +212,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                             src={newsData[0]?.imageUrl || '/default-news.jpg'}
                                             alt={newsData[0].title}
                                             fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="object-cover "
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                                     </div>
