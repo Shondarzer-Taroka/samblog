@@ -64,7 +64,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
   showActions = true
 }) => {
   return (
-    <div className="group relative flex items-start gap-4 p-3 hover:bg-gray-50/80 rounded-xl transition-all duration-300 cursor-pointer border border-transparent hover:border-gray-200">
+    <div className="group relative flex items-start gap-4 p-3  hover:bg-gray-50/80 rounded-xl transition-all duration-300 cursor-pointer border  border-gray-200">
       {/* Image Container */}
       <div className="relative flex-shrink-0 w-28 h-20 rounded-xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow duration-300">
         {image ? (

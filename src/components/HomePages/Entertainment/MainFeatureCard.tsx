@@ -20,7 +20,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
   return (
     <div className="w-full group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
       {/* Image Container with Hover Effect */}
-      <div className="relative h-48 md:h-56 w-full overflow-hidden">
+      <div className="relative h-48 md:h-52 w-full overflow-hidden">
         <Image
           src={image}
           alt={title}
