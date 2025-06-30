@@ -23,7 +23,9 @@ const VotingComponent = () => {
     try {
       const result = await submitVote(selectedOption);
       if (result.success) {
-        setVoteMessage('Your vote has been submitted!');
+        // setVoteMessage('Your vote has been submitted!');
+        setVoteMessage('আপনার ভোট জমা দেওয়া হয়েছে!');
+
         // Update the selected option immediately
         setSelectedOption(null);
       } else {
