@@ -50,7 +50,9 @@ const VotingComponent = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[200px]">
         <FaSpinner className="animate-spin text-blue-500 text-2xl mb-2" />
-        <p className="text-gray-600">Loading latest poll...</p>
+        {/* <p className="text-gray-600">Loading latest poll...</p> */}
+        <p className="text-gray-600">সর্বশেষ জরিপ লোড হচ্ছে...</p>
+
       </div>
     );
   }
