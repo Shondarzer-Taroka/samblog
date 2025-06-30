@@ -75,7 +75,7 @@ const PhotoSlider: React.FC = () => {
       {/* <h2 className="text-xl font-semibold text-red-600 mb-4 py-2.5">  গ্যালারি</h2> */}
 
 <div>
-  <TitleNewsOverSection/>
+  <TitleNewsOverSection headline="গ্যালারি"/>
 </div>
       {/* Progress bar */}
       <div
