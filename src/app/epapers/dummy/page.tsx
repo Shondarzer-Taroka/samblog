@@ -1,103 +1,207 @@
-/* eslint-disable @next/next/no-img-element */
-// app/epapers/dummy/page.tsx
-import Link from 'next/link';
 
-// Mock data for dummy e-paper
-const dummyEPapers = [
-  {
-    id: '1',
-    title: 'Daily News - June 2024',
-    description: 'The latest news and updates from around the world',
-    pdfUrl: 'https://example.com/sample.pdf',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c7e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    date: '2024-06-15T00:00:00Z',
-    isActive: true
-  },
-  {
-    id: '2',
-    title: 'Business Times - May 2024',
-    description: 'Financial markets and business insights',
-    pdfUrl: 'https://example.com/sample.pdf',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    date: '2024-05-28T00:00:00Z',
-    isActive: true
-  },
-  {
-    id: '3',
-    title: 'Sports Weekly - June 2024',
-    description: 'All the latest sports news and highlights',
-    pdfUrl: 'https://example.com/sample.pdf',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    date: '2024-06-10T00:00:00Z',
-    isActive: true
-  }
-];
+// 'use client';
 
-export default function DummyEPaperPage() {
+// import React, { useEffect, useRef, useState } from 'react';
+// import { createWorker } from 'tesseract.js';
+
+// export default function SmartNewsPage() {
+//   const [words, setWords] = useState<any[]>([]);
+//   const [selectedText, setSelectedText] = useState<string | null>(null);
+//   const [croppedUrl, setCroppedUrl] = useState<string | null>(null);
+//   const imageRef = useRef<HTMLImageElement>(null);
+
+//   useEffect(() => {
+//     const runOCR = async () => {
+//       const worker = await createWorker('eng'); // বাংলা OCR চাইলে 'ben' ব্যাবহার করো
+//       const { data } = await worker.recognize('/patrika.png');
+//       setWords(data.words);
+//       await worker.terminate();
+//     };
+
+//     runOCR();
+//   }, []);
+
+//   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
+//     const img = imageRef.current;
+//     if (!img) return;
+
+//     const rect = img.getBoundingClientRect();
+//     const x = e.clientX - rect.left;
+//     const y = e.clientY - rect.top;
+
+//     const scaleX = img.naturalWidth / rect.width;
+//     const scaleY = img.naturalHeight / rect.height;
+//     const realX = x * scaleX;
+//     const realY = y * scaleY;
+
+//     const foundWord = words.find((word) => {
+//       const { x0, y0, x1, y1 } = word.bbox;
+//       return realX >= x0 && realX <= x1 && realY >= y0 && realY <= y1;
+//     });
+
+//     if (foundWord) {
+//       setSelectedText(foundWord.text);
+//       setCroppedUrl(null);
+//     } else {
+//       setSelectedText(null);
+
+//       const canvas = document.createElement('canvas');
+//       const context = canvas.getContext('2d');
+//       if (!context) return;
+
+//       const cropSize = 100;
+//       canvas.width = cropSize;
+//       canvas.height = cropSize;
+
+//       context.drawImage(
+//         img,
+//         realX - cropSize / 2,
+//         realY - cropSize / 2,
+//         cropSize,
+//         cropSize,
+//         0,
+//         0,
+//         cropSize,
+//         cropSize
+//       );
+
+//       setCroppedUrl(canvas.toDataURL());
+//     }
+//   };
+
+//   return (
+//     <div className="p-4 max-w-4xl mx-auto">
+//       <h1 className="text-2xl font-bold mb-4">📰 Smart News Image Detector</h1>
+
+//       <img
+//         ref={imageRef}
+//         src="/download.png"
+//         alt="Patrika"
+//         onClick={handleClick}
+//         className="w-full border cursor-crosshair"
+//       />
+
+//       {selectedText && (
+//         <div className="mt-4 p-4 bg-green-100 rounded">
+//           <strong>📝 Selected Text:</strong> {selectedText}
+//         </div>
+//       )}
+
+//       {croppedUrl && (
+//         <div className="mt-4">
+//           <strong>🖼️ Cropped Image Preview:</strong>
+//           <img src={croppedUrl} alt="Cropped Section" className="mt-2 border rounded" />
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
+
+interface Zone {
+  id: string;
+  title: string;
+  bbox: { x: number; y: number; width: number; height: number };
+  content: string;
+  imageCrop: boolean;
+}
+
+export default function EpaperPage() {
+  const [zones, setZones] = useState<Zone[]>([]);
+  const [selected, setSelected] = useState<Zone | null>(null);
+  const [cropUrl, setCropUrl] = useState<string | null>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    fetch('/epaper-zones.json')
+      .then(res => res.json())
+      .then(setZones);
+  }, []);
+
+  const handleZoneClick = (zone: Zone) => {
+    setSelected(zone);
+    if (!zone.imageCrop || !imageRef.current) return;
+
+    const img = imageRef.current;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = zone.bbox.width;
+    canvas.height = zone.bbox.height;
+
+    ctx.drawImage(
+      img,
+      zone.bbox.x,
+      zone.bbox.y,
+      zone.bbox.width,
+      zone.bbox.height,
+      0,
+      0,
+      zone.bbox.width,
+      zone.bbox.height
+    );
+
+    const dataUrl = canvas.toDataURL();
+    setCropUrl(dataUrl);
+  };
+
+  const imageWidth = 959;
+  const imageHeight = 1057;
+
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Digital E-Paper Archive</h1>
-          <p className="text-lg text-gray-600">Browse our collection of digital newspapers</p>
-        </header>
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">📰 ই-পেপার (Manual JSON Based)</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {dummyEPapers.map((epaper) => (
-            <div key={epaper.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={epaper.thumbnailUrl}
-                  alt={epaper.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h2 className="text-xl font-bold text-gray-800">{epaper.title}</h2>
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                    {new Date(epaper.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric'
-                    })}
-                  </span>
-                </div>
-                <p className="text-gray-600 mb-4">{epaper.description}</p>
-                <div className="flex space-x-3">
-                  <Link
-                    href={`/epapers/viewer?url=${encodeURIComponent(epaper.pdfUrl)}`}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg transition"
-                  >
-                    Read Online
-                  </Link>
-                  <a
-                    href={epaper.pdfUrl}
-                    download
-                    className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 text-center py-2 px-4 rounded-lg transition"
-                  >
-                    Download
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="relative w-full">
+        <img
+          src="/download.png"
+          alt="E-paper"
+          ref={imageRef}
+          className="w-full border"
+        />
 
-        {/* Sample PDF Viewer Page Link */}
-        <div className="mt-16 bg-white p-8 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Try Our PDF Viewer</h2>
-          <p className="text-gray-600 mb-6">
-            Experience our interactive PDF viewer with these sample pages.
-          </p>
-          <Link
-            href="/epapers/viewer?url=https://example.com/sample.pdf"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg text-lg font-medium transition"
-          >
-            Open Sample PDF Viewer
-          </Link>
-        </div>
+        {/* Render zones */}
+        {zones.map((zone) => {
+          const style = {
+            left: `${(zone.bbox.x / imageWidth) * 100}%`,
+            top: `${(zone.bbox.y / imageHeight) * 100}%`,
+            width: `${(zone.bbox.width / imageWidth) * 100}%`,
+            height: `${(zone.bbox.height / imageHeight) * 100}%`,
+          };
+
+          return (
+            <div
+              key={zone.id}
+              className="absolute border-2 border-transparent hover:border-blue-500 cursor-pointer transition"
+              style={{ position: 'absolute', ...style }}
+              title={zone.title}
+              onClick={() => handleZoneClick(zone)}
+            />
+          );
+        })}
       </div>
+
+      {/* Show selected article */}
+      {selected && (
+        <div className="mt-6 p-4 bg-white rounded shadow border">
+          <h2 className="text-lg font-bold mb-2">{selected.title}</h2>
+          <p className="text-gray-800 mb-4">{selected.content}</p>
+          {cropUrl && <img src={cropUrl} alt="Zone crop" className="rounded border shadow max-w-md" />}
+        </div>
+      )}
     </div>
   );
 }
