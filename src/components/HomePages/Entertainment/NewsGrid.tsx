@@ -30,7 +30,7 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
 
       <div className="col-span-1">
         {
-          data.slice(0,3).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
+          data.slice(0, 3).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
         }
       </div>
 
@@ -43,31 +43,19 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
           time="৩৬ মিনিট আগে"
         /> */}
 
-         <MainFeatureCard
-          image={ data[3].imageUrl || "https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2Fwbd5nux5%2Fresize.jpg?rect=134%2C0%2C666%2C444&w=420&auto=format%2Ccompress&fmt=avif"}
-          title={ data[3].title}
-          description= {stripHtmlAndLimit( data[3].content,26).short}
-          time={getBengaliTimeAgo( data[3].createdAt)}
+        <MainFeatureCard
+          image={data[3].imageUrl || "https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2Fwbd5nux5%2Fresize.jpg?rect=134%2C0%2C666%2C444&w=420&auto=format%2Ccompress&fmt=avif"}
+          title={data[3].title}
+          description={stripHtmlAndLimit(data[3].content, 26).short}
+          time={getBengaliTimeAgo(data[3].createdAt)}
         />
       </div>
 
 
       <div className="">
-        <NewsCard
-          image="https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2Fy7q4l8y3%2FIMG-20250623-WA0004.jpg?rect=0%2C0%2C1600%2C1067&w=200&auto=format%2Ccompress&fmt=avif"
-          title="ভারতের সিনেমায় পাকিস্তানি অভিনেত্রী, বিতর্কের ঝড়"
-          time="২ ঘন্টা আগে"
-        />
-        <NewsCard
-          image="https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2F0j7zlfaw%2FIMG-20250623-WA0005.jpg?rect=0%2C0%2C1600%2C1067&w=200&auto=format%2Ccompress&fmt=avif"
-          title="লেখাটি পড়তে গিয়ে এতটাই ভালো লাগল যে চোখে পানি চলে এল"
-          time="১ ঘন্টা আগে"
-        />
-        <NewsCard
-          image="https://media.prothomalo.com/prothomalo-bangla%2F2025-05-14%2F9pwgzsjw%2F207259-ouxqhlbgfy-1747200838.jpeg?rect=175%2C0%2C945%2C630&w=200&auto=format%2Ccompress&fmt=avif"
-          title="তিন বছর পর ফিরেই চমকে দিলেন আফির"
-          time="৩০ মিনিট আগে"
-        />
+        {
+          data.slice(4, data.length+1).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
+        }
       </div>
     </div>
   );
