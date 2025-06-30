@@ -3,7 +3,10 @@ import NewsGrid from './NewsGrid';
 
 const Entertainment = () => {
     return (
-        <div className='mt-24 px-2 py-6'>
+        <div className=' px-2 md:px-4 py-6'>
+            <div>
+                
+            </div>
             <h1 className="text-xl font-semibold text-red-600 mb-4">বিনোদন</h1>
             <NewsGrid/>
         </div>
