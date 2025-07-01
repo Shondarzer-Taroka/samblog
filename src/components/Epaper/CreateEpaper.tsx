@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // 'use client';
 
@@ -856,6 +858,8 @@
 
 'use client';
 
+import { useToast } from '@/hooks/useToast';
+import Toast from '@/share/Toast';
 import { useState, useRef, useEffect } from 'react';
 import { FaNewspaper, FaPlus, FaTrash, FaImage, FaCalendarAlt, FaSave, FaSpinner, FaUpload, FaTimes } from 'react-icons/fa';
 
@@ -916,6 +920,7 @@ const CreateEpaper = () => {
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const contentFileInputRefs = useRef<{[key: number]: HTMLInputElement | null}>({});
+  const {toast,showToast,hideToast} =useToast()
 
   useEffect(() => {
     const completeUploads = uploadStatuses.filter(status => status.isComplete);
@@ -1179,8 +1184,40 @@ const CreateEpaper = () => {
       })),
     };
 
-    console.log('Submitted E-paper:', payload);
-    alert('E-paper created successfully!');
+try {
+  const response = await fetch('http://localhost:7700/api/epaper/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // Add Authorization header if needed:
+      // 'Authorization': `Bearer ${token}`,
+    },
+    credentials: 'include', // If you're using cookies/session auth
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to create e-paper');
+  }
+
+  const result = await response.json();
+  console.log('E-paper created:', result);
+ showToast('success', 'ই-পেপার তৈরি সফল হয়েছে');
+ //   alert('E-paper created successfully!');
+  
+  // Optionally reset the form:
+  setEpaperData({
+    mainEpaperImage: '',
+    date: '',
+    articles: []
+  });
+  setPreviewImage(null);
+} catch (err: any) {
+  console.error('Create error:', err);
+  showToast('failed','something went wrong')
+//   alert(err.message || 'Something went wrong.');
+}
   };
 
   return (
@@ -1308,7 +1345,7 @@ const CreateEpaper = () => {
 
             {epaperData.articles.length === 0 ? (
               <div className="text-center py-8 bg-gray-50 rounded-lg">
-                <p className="text-gray-500">No articles added yet. Click "Add Article" to get started.</p>
+                <p className="text-gray-500">No articles added yet. Click &rdquo;Add Article&rdquo; to get started.</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -1520,6 +1557,9 @@ const CreateEpaper = () => {
           </div>
         </form>
       </div>
+       {toast && (
+        <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+      )}
     </div>
   );
 };
