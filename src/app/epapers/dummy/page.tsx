@@ -43,7 +43,7 @@
 //           id: 2,
 //           title: 'বাজেট ঘোষণা আজ',
 //           content: 'আজ জাতীয় সংসদে নতুন অর্থবছরের বাজেট উপস্থাপন করবেন অর্থমন্ত্রী। ৭ লক্ষ কোটি টাকার এই বাজেটে স্বাস্থ্য ও শিক্ষাখাতে বরাদ্দ বৃদ্ধির কথা বলা হচ্ছে...',
-       
+
 //    bbox: { x: 10, y: 100, width: 240, height: 215 },
 //           category: 'অর্থনীতি'
 //         },
@@ -152,7 +152,7 @@
 //                 <span>▼</span>
 //               </button>
 //             </div>
-            
+
 //             <div className="flex items-center space-x-4">
 //               <div className="relative">
 //                 <input
@@ -179,7 +179,7 @@
 //               </button>
 //             </div>
 //           </div>
-          
+
 //           {/* Date picker dropdown */}
 //           {showDatePicker && (
 //             <div className="bg-white text-gray-800 mt-2 p-3 rounded shadow-lg absolute z-20 w-64">
@@ -232,7 +232,7 @@
 //           >
 //             ← পূর্বের পাতা
 //           </button>
-          
+
 //           <div className="text-center">
 //             <div className="flex justify-center space-x-1">
 //               {newspaperData.map((_, index) => (
@@ -247,7 +247,7 @@
 //               পাতা {currentPage + 1}/{newspaperData.length}
 //             </div>
 //           </div>
-          
+
 //           <button
 //             onClick={() => goToPage(currentPage + 1)}
 //             disabled={currentPage === newspaperData.length - 1}
@@ -275,7 +275,7 @@
 //                 className="w-full h-auto select-none"
 //                 draggable="false"
 //               />
-              
+
 //               {/* Interactive article areas */}
 //               {newspaperData[currentPage].articles.map(article => (
 //                 <div
@@ -325,7 +325,7 @@
 //             <h3 className="text-lg font-semibold mb-4 border-b-2 border-[#d9232e] pb-2 text-[#d9232e]">
 //               {searchTerm ? `"${searchTerm}" এর ফলাফল` : 'আজকের প্রধান খবর'}
 //             </h3>
-            
+
 //             {(searchTerm && filteredArticles.length === 0) ? (
 //               <div className="text-center py-8">
 //                 <p className="text-gray-500">কোনো খবর পাওয়া যায়নি</p>
@@ -494,6 +494,7 @@ interface NewspaperPage {
   articles: {
     id: number;
     title: string;
+    contentImage: string;
     content: string;
     bbox: { x: number; y: number; width: number; height: number };
     category: string;
@@ -515,7 +516,8 @@ export default function ProthomAloEPaper() {
           id: 1,
           title: 'রাজধানীতে যানজট বৃদ্ধি',
           content: 'গত কয়েকদিন ধরে রাজধানীর প্রধান সড়কগুলোতে যানজট অসহনীয় পর্যায়ে পৌঁছেছে। ট্রাফিক পুলিশের মতে, রাস্তা সংস্কার কাজ এবং যানবাহনের সংখ্যা বৃদ্ধিই মূল কারণ...',
-          bbox: { x:10, y: 20, width: 780, height: 70 }, 
+          bbox: { x: 10, y: 20, width: 780, height: 70 },
+          contentImage: '/download.png',
           category: 'জাতীয়',
           isLeading: true,
           pageNumber: 1
@@ -525,6 +527,7 @@ export default function ProthomAloEPaper() {
           title: 'বাজেট ঘোষণা আজ',
           content: 'আজ জাতীয় সংসদে নতুন অর্থবছরের বাজেট উপস্থাপন করবেন অর্থমন্ত্রী। ৭ লক্ষ কোটি টাকার এই বাজেটে স্বাস্থ্য ও শিক্ষাখাতে বরাদ্দ বৃদ্ধির কথা বলা হচ্ছে...',
           bbox: { x: 10, y: 100, width: 240, height: 215 },
+          contentImage: '/download.png',
           category: 'অর্থনীতি',
           pageNumber: 1
         },
@@ -533,6 +536,7 @@ export default function ProthomAloEPaper() {
           title: 'মুদ্রাস্ফীতি বেড়ে ৯.৫ শতাংশ',
           content: 'গত মাসে মুদ্রাস্ফীতি বেড়ে দাঁড়িয়েছে ৯.৫ শতাংশ যা গত দশ বছরের মধ্যে সর্বোচ্চ...',
           bbox: { x: 5, y: 380, width: 255, height: 480 },
+          contentImage: '/download.png',
           category: 'অর্থনীতি',
           pageNumber: 1
         },
@@ -541,6 +545,7 @@ export default function ProthomAloEPaper() {
           title: 'Hiril বেড়ে ৯.৫ শতাংশ',
           content: 'গত মাসে মুদ্রাস্ফীতি বেড়ে দাঁড়িয়েছে ৯.৫ শতাংশ যা গত দশ বছরের মধ্যে সর্বোচ্চ...',
           bbox: { x: 275, y: 97, width: 526, height: 350 },
+          contentImage: '/download.png',
           category: 'অর্থনীতি',
           pageNumber: 1
         }
@@ -556,6 +561,7 @@ export default function ProthomAloEPaper() {
           title: 'ক্রিকেটে বাংলাদেশের জয়',
           content: 'আইসিসি ট্রফিতে বাংলাদেশ শ্রীলঙ্কাকে ৫ উইকেটে হারিয়েছে। ম্যাচসেরা হন লিটন দাস যিনি করেন ৯৮ রানের ইনিংস...',
           bbox: { x: 150, y: 250, width: 320, height: 100 },
+          contentImage: '/download.png',
           category: 'খেলা',
           isLeading: true,
           pageNumber: 2
@@ -565,6 +571,7 @@ export default function ProthomAloEPaper() {
           title: 'নতুন সিনেমা মুক্তি পাচ্ছে আজ',
           content: 'প্রখ্যাত পরিচালক তারিক মাসুদ এর নতুন চলচ্চিত্র "মাটির ঠিকানা" আজ থেকে স nationwide মুক্তি পাচ্ছে...',
           bbox: { x: 500, y: 300, width: 280, height: 120 },
+          contentImage: '/download.png',
           category: 'বিনোদন',
           pageNumber: 2
         }
@@ -582,8 +589,8 @@ export default function ProthomAloEPaper() {
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   // Filter articles based on search term
-  const filteredArticles = newspaperData[currentPage].articles.filter(article => 
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredArticles = newspaperData[currentPage].articles.filter(article =>
+    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     article.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
     article.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -592,15 +599,15 @@ export default function ProthomAloEPaper() {
   const handleArticleClick = (article: NewspaperPage['articles'][0]) => {
     setSelectedArticle(article);
     // Find related articles (same category, different pages)
-    const related = newspaperData.flatMap(page => 
-      page.articles.filter(a => 
-        a.category === article.category && 
+    const related = newspaperData.flatMap(page =>
+      page.articles.filter(a =>
+        a.category === article.category &&
         a.id !== article.id &&
         a.pageNumber !== article.pageNumber
       )
     );
     setRelatedArticles(related.slice(0, 3)); // Show max 3 related articles
-    
+
     // Scroll to article details
     setTimeout(() => {
       document.getElementById('article-detail')?.scrollIntoView({ behavior: 'smooth' });
@@ -668,7 +675,7 @@ export default function ProthomAloEPaper() {
               <h1 className="text-2xl font-bold cursor-pointer" onClick={() => router.push('/')}>
                 প্রথম আলো ই-পেপার
               </h1>
-              <button 
+              <button
                 className="flex items-center space-x-1 px-3 py-1 bg-white bg-opacity-20 rounded date-picker"
                 onClick={() => setShowDatePicker(!showDatePicker)}
               >
@@ -676,7 +683,7 @@ export default function ProthomAloEPaper() {
                 <span>▼</span>
               </button>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <input
@@ -687,7 +694,7 @@ export default function ProthomAloEPaper() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 {searchTerm && (
-                  <button 
+                  <button
                     className="absolute right-3 top-2 text-gray-500"
                     onClick={() => setSearchTerm('')}
                   >
@@ -695,7 +702,7 @@ export default function ProthomAloEPaper() {
                   </button>
                 )}
               </div>
-              <button 
+              <button
                 className="px-4 py-2 bg-white text-[#d9232e] rounded font-medium hover:bg-gray-100"
                 onClick={() => setShowCategories(!showCategories)}
               >
@@ -703,14 +710,14 @@ export default function ProthomAloEPaper() {
               </button>
             </div>
           </div>
-          
+
           {/* Date picker dropdown */}
           {showDatePicker && (
             <div className="bg-white text-gray-800 mt-2 p-3 rounded shadow-lg absolute z-20 w-64 date-picker">
               <h4 className="font-bold mb-2">পুরনো সংস্করণ</h4>
               <div className="space-y-2">
                 {dates.map((date, index) => (
-                  <div 
+                  <div
                     key={index}
                     className={`p-2 rounded cursor-pointer ${index === 0 ? 'bg-[#d9232e] text-white' : 'hover:bg-gray-100'}`}
                     onClick={() => {
@@ -732,7 +739,7 @@ export default function ProthomAloEPaper() {
       {showCategories && (
         <div className="bg-white shadow-lg absolute right-4 mt-1 z-10 w-48 rounded category-dropdown">
           {['জাতীয়', 'আন্তর্জাতিক', 'অর্থনীতি', 'খেলা', 'বিনোদন', 'সম্পাদকীয়', 'চাকরি'].map(category => (
-            <div 
+            <div
               key={category}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b"
               onClick={() => {
@@ -756,7 +763,7 @@ export default function ProthomAloEPaper() {
           >
             ← পূর্বের পাতা
           </button>
-          
+
           <div className="text-center">
             <div className="flex justify-center space-x-1">
               {newspaperData.map((_, index) => (
@@ -771,7 +778,7 @@ export default function ProthomAloEPaper() {
               পাতা {currentPage + 1}/{newspaperData.length}
             </div>
           </div>
-          
+
           <button
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === newspaperData.length - 1}
@@ -784,12 +791,12 @@ export default function ProthomAloEPaper() {
         {/* Newspaper content */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Newspaper image with interactive areas */}
-          <div 
+          <div
             ref={imageContainerRef}
             className="relative border-4 border-white shadow-xl bg-white flex-1 overflow-hidden rounded"
             style={{ height: '75vh', boxShadow: '0 0 15px rgba(0,0,0,0.1)' }}
           >
-            <div 
+            <div
               className="absolute inset-0 overflow-auto"
               style={{ transform: `scale(${zoomLevel})`, transformOrigin: '0 0' }}
             >
@@ -800,13 +807,13 @@ export default function ProthomAloEPaper() {
                 draggable="false"
                 style={{ maxHeight: '100%', width: 'auto' }}
               />
-              
+
               {/* Interactive article areas */}
               {newspaperData[currentPage].articles.map(article => (
                 <div
                   key={article.id}
-                  className={`absolute border-2 ${selectedArticle?.id === article.id ? 
-                    'border-[#d9232e] bg-[#d9232e] bg-opacity-20' : 
+                  className={`absolute border-2 ${selectedArticle?.id === article.id ?
+                    'border-[#d9232e] bg-[#d9232e] bg-opacity-20' :
                     'border-transparent hover:border-[#d9232e] hover:bg-[#d9232e] hover:bg-opacity-10'} 
                     cursor-pointer transition-all`}
                   style={{
@@ -822,20 +829,20 @@ export default function ProthomAloEPaper() {
 
             {/* Zoom controls */}
             <div className="absolute bottom-4 right-4 bg-white p-1 rounded-full shadow-lg flex flex-col gap-1">
-              <button 
+              <button
                 onClick={() => handleZoom('in')}
                 disabled={zoomLevel >= 3}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
               >
                 +
               </button>
-              <button 
+              <button
                 onClick={() => handleZoom('reset')}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-sm"
               >
                 {Math.round(zoomLevel * 100)}%
               </button>
-              <button 
+              <button
                 onClick={() => handleZoom('out')}
                 disabled={zoomLevel <= 0.5}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -850,11 +857,11 @@ export default function ProthomAloEPaper() {
             <h3 className="text-lg font-semibold mb-4 border-b-2 border-[#d9232e] pb-2 text-[#d9232e]">
               {searchTerm ? `"${searchTerm}" এর ফলাফল` : 'আজকের প্রধান খবর'}
             </h3>
-            
+
             {(searchTerm && filteredArticles.length === 0) ? (
               <div className="text-center py-8">
                 <p className="text-gray-500">কোনো খবর পাওয়া যায়নি</p>
-                <button 
+                <button
                   className="mt-2 px-4 py-2 bg-[#d9232e] text-white rounded"
                   onClick={() => setSearchTerm('')}
                 >
@@ -866,33 +873,33 @@ export default function ProthomAloEPaper() {
                 {(searchTerm ? filteredArticles : newspaperData[currentPage].articles)
                   .sort((a, b) => (b.isLeading ? 1 : 0) - (a.isLeading ? 1 : 0))
                   .map(article => (
-                  <div
-                    key={article.id}
-                    className={`p-3 rounded-lg cursor-pointer transition-all ${selectedArticle?.id === article.id ? 
-                      'bg-[#d9232e] text-white' : 
-                      'hover:bg-[#f8f8f8] border border-gray-100'}`}
-                    onClick={() => handleArticleClick(article)}
-                  >
-                    {article.isLeading && !searchTerm && (
-                      <span className="text-xs bg-white text-[#d9232e] px-2 py-1 rounded-full font-bold mb-1 inline-block">
-                        প্রধান খবর
+                    <div
+                      key={article.id}
+                      className={`p-3 rounded-lg cursor-pointer transition-all ${selectedArticle?.id === article.id ?
+                        'bg-[#d9232e] text-white' :
+                        'hover:bg-[#f8f8f8] border border-gray-100'}`}
+                      onClick={() => handleArticleClick(article)}
+                    >
+                      {article.isLeading && !searchTerm && (
+                        <span className="text-xs bg-white text-[#d9232e] px-2 py-1 rounded-full font-bold mb-1 inline-block">
+                          প্রধান খবর
+                        </span>
+                      )}
+                      <span className={`text-xs px-2 py-1 rounded ${selectedArticle?.id === article.id ?
+                        'bg-white text-[#d9232e]' : 'bg-[#d9232e] text-white'}`}>
+                        {article.category}
                       </span>
-                    )}
-                    <span className={`text-xs px-2 py-1 rounded ${selectedArticle?.id === article.id ? 
-                      'bg-white text-[#d9232e]' : 'bg-[#d9232e] text-white'}`}>
-                      {article.category}
-                    </span>
-                    <h4 className={`font-bold mt-1 ${selectedArticle?.id === article.id ? 'text-white' : 'text-gray-800'}`}>
-                      {article.title}
-                    </h4>
-                    <p className={`text-sm ${selectedArticle?.id === article.id ? 'text-gray-100' : 'text-gray-600'} line-clamp-2`}>
-                      {article.content}
-                    </p>
-                    <div className={`text-xs mt-1 ${selectedArticle?.id === article.id ? 'text-gray-300' : 'text-gray-500'}`}>
-                      বিস্তারিত পড়ুন →
+                      <h4 className={`font-bold mt-1 ${selectedArticle?.id === article.id ? 'text-white' : 'text-gray-800'}`}>
+                        {article.title}
+                      </h4>
+                      <p className={`text-sm ${selectedArticle?.id === article.id ? 'text-gray-100' : 'text-gray-600'} line-clamp-2`}>
+                        {article.content}
+                      </p>
+                      <div className={`text-xs mt-1 ${selectedArticle?.id === article.id ? 'text-gray-300' : 'text-gray-500'}`}>
+                        বিস্তারিত পড়ুন →
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>
@@ -913,7 +920,7 @@ export default function ProthomAloEPaper() {
                   <span>{newspaperData[currentPage].date}</span>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setSelectedArticle(null)}
                 className="text-gray-500 hover:text-gray-700 p-1"
               >
@@ -935,7 +942,7 @@ export default function ProthomAloEPaper() {
                 <h3 className="text-xl font-semibold mb-4 text-[#d9232e]">সম্পর্কিত খবর</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {relatedArticles.map(article => (
-                    <div 
+                    <div
                       key={article.id}
                       className="p-3 border border-gray-200 rounded-lg hover:shadow-md cursor-pointer transition-all"
                       onClick={() => navigateToArticlePage(article)}

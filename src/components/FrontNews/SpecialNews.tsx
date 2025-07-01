@@ -108,7 +108,7 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                             alt={data.title}
                             width={1200}
                             height={675}
-                            className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="w-full h-[500px]"
                             priority
                         />
 
