@@ -1075,12 +1075,10 @@ const CreateEpaper = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:7700/api/epaper/create', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/epaper/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // Add Authorization header if needed:
-                    // 'Authorization': `Bearer ${token}`,
                 },
                 credentials: 'include', // If you're using cookies/session auth
                 body: JSON.stringify(payload),
@@ -1094,7 +1092,7 @@ const CreateEpaper = () => {
             const result = await response.json();
             console.log('E-paper created:', result);
             showToast('success', 'ই-পেপার তৈরি সফল হয়েছে');
-            //   alert('E-paper created successfully!');
+
 
             // Optionally reset the form:
             setEpaperData({
