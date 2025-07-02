@@ -27,7 +27,8 @@ export const getEpaperById = async (id: number) => {
 export const createEpaper = async (data: EpaperData ) => {
   const response = await axios.post(`${API_BASE_URL}/epaper/create`, data,{withCredentials:true});
 
-  return response.data;
+  // return response.data;
+  return {data:response.data,message:response.statusText};
 };
 
 export const updateEpaper = async (id: number, data: EpaperData) => {

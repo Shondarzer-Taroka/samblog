@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // // components/epapers/EpaperForm.tsx
 // 'use client';
@@ -33,115 +34,115 @@
 //   });
 
 //   console.log(epaperData,'data');
-  
 
-  // useEffect(() => {
-  //   if (epaperId) {
-  //     const fetchEpaper = async () => {
-  //       try {
-  //         const data = await getEpaperById(epaperId);
-  //         console.log(data,'here data found');
-          
-  //         setEpaperData({
-  //           mainEpaperImage: data.mainEpaperImage,
-  //           date: data.date.toISOString().split('T')[0],
-  //           articles: data.articles.map((article: { bboxX: any; bboxY: any; bboxWidth: any; bboxHeight: any; }) => ({
-  //             ...article,
-  //             bbox: {
-  //               x: article.bboxX,
-  //               y: article.bboxY,
-  //               width: article.bboxWidth,
-  //               height: article.bboxHeight
-  //             }
-  //           }))
-  //         });
-  //       } catch (error) {
-  //         console.error('Error fetching e-paper:', error);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  //     fetchEpaper();
-  //   }
-  // }, [epaperId]);
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setSaving(true);
-  //   try {
-  //     if (epaperId) {
-  //       await updateEpaper(epaperId, epaperData);
-  //     } else {
-  //       await createEpaper(epaperData);
-  //     }
-  //     router.push('/epapers');
-  //   } catch (error) {
-  //     console.error('Error saving e-paper:', error);
-  //   } finally {
-  //     setSaving(false);
-  //   }
-  // };
+// useEffect(() => {
+//   if (epaperId) {
+//     const fetchEpaper = async () => {
+//       try {
+//         const data = await getEpaperById(epaperId);
+//         console.log(data,'here data found');
 
-  // const addArticle = () => {
-  //   setEpaperData(prev => ({
-  //     ...prev,
-  //     articles: [
-  //       ...prev.articles,
-  //       {
-  //         title: '',
-  //         contentImage: '',
-  //         content: '',
-  //         bbox: { x: 0, y: 0, width: 100, height: 100 },
-  //         category: '',
-  //         isLeading: false,
-  //         pageNumber: 1
-  //       }
-  //     ]
-  //   }));
-  // };
+//         setEpaperData({
+//           mainEpaperImage: data.mainEpaperImage,
+//           date: data.date.toISOString().split('T')[0],
+//           articles: data.articles.map((article: { bboxX: any; bboxY: any; bboxWidth: any; bboxHeight: any; }) => ({
+//             ...article,
+//             bbox: {
+//               x: article.bboxX,
+//               y: article.bboxY,
+//               width: article.bboxWidth,
+//               height: article.bboxHeight
+//             }
+//           }))
+//         });
+//       } catch (error) {
+//         console.error('Error fetching e-paper:', error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchEpaper();
+//   }
+// }, [epaperId]);
 
-  // const removeArticle = (index: number) => {
-  //   setEpaperData(prev => ({
-  //     ...prev,
-  //     articles: prev.articles.filter((_, i) => i !== index)
-  //   }));
-  // };
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setSaving(true);
+//   try {
+//     if (epaperId) {
+//       await updateEpaper(epaperId, epaperData);
+//     } else {
+//       await createEpaper(epaperData);
+//     }
+//     router.push('/epapers');
+//   } catch (error) {
+//     console.error('Error saving e-paper:', error);
+//   } finally {
+//     setSaving(false);
+//   }
+// };
 
-  // const updateArticle = (index: number, field: string, value: any) => {
-  //   setEpaperData(prev => {
-  //     const updatedArticles = [...prev.articles];
-  //     if (field === 'bbox') {
-  //       updatedArticles[index].bbox = { ...updatedArticles[index].bbox, ...value };
-  //     } else {
-  //       (updatedArticles[index] as any)[field] = value;
-  //     }
-  //     return { ...prev, articles: updatedArticles };
-  //   });
-  // };
+// const addArticle = () => {
+//   setEpaperData(prev => ({
+//     ...prev,
+//     articles: [
+//       ...prev.articles,
+//       {
+//         title: '',
+//         contentImage: '',
+//         content: '',
+//         bbox: { x: 0, y: 0, width: 100, height: 100 },
+//         category: '',
+//         isLeading: false,
+//         pageNumber: 1
+//       }
+//     ]
+//   }));
+// };
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-64">
-  //       <LoadingSpinner size="lg" />
-  //     </div>
-  //   );
-  // }
+// const removeArticle = (index: number) => {
+//   setEpaperData(prev => ({
+//     ...prev,
+//     articles: prev.articles.filter((_, i) => i !== index)
+//   }));
+// };
 
-  // console.log(epaperData);
-  
+// const updateArticle = (index: number, field: string, value: any) => {
+//   setEpaperData(prev => {
+//     const updatedArticles = [...prev.articles];
+//     if (field === 'bbox') {
+//       updatedArticles[index].bbox = { ...updatedArticles[index].bbox, ...value };
+//     } else {
+//       (updatedArticles[index] as any)[field] = value;
+//     }
+//     return { ...prev, articles: updatedArticles };
+//   });
+// };
+
+// if (loading) {
+//   return (
+//     <div className="flex justify-center items-center h-64">
+//       <LoadingSpinner size="lg" />
+//     </div>
+//   );
+// }
+
+// console.log(epaperData);
+
 //   return (
 //     <div className="max-w-6xl mx-auto px-4 py-8">
 //       <h1 className="text-2xl font-bold text-gray-800 mb-6">
 //         {epaperId ? 'Edit E-Paper' : 'Create New E-Paper'}
 //       </h1>
-      
+
 //       <form onSubmit={handleSubmit} className="space-y-8">
 //         {/* Main E-Paper Info */}
 //         <div className="bg-white p-6 rounded-xl shadow-sm">
 //           <h2 className="text-xl font-semibold text-gray-800 mb-4">
 //             E-Paper Information
 //           </h2>
-          
+
 //           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 //             {/* Main Image */}
 //             <div>
@@ -312,13 +313,13 @@ interface EpaperFormProps {
 }
 
 export default function EpaperForm({ epaperId }: EpaperFormProps) {
-  const {hideToast,showToast,toast}=useToast()
+  const { hideToast, showToast, toast } = useToast()
   const router = useRouter();
   const [loading, setLoading] = useState(!!epaperId);
   const [saving, setSaving] = useState(false);
   const [uploadStatuses, setUploadStatuses] = useState<UploadStatus[]>([]);
   const mainImageInputRef = useRef<HTMLInputElement>(null);
-  
+
   const [epaperData, setEpaperData] = useState({
     mainEpaperImage: '',
     date: new Date().toISOString().split('T')[0],
@@ -339,7 +340,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const uploadId = `main-${Date.now()}`;
-      
+
       setUploadStatuses(prev => [...prev, {
         id: uploadId,
         type: 'main',
@@ -354,7 +355,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         xhr.upload.addEventListener('progress', (event) => {
           if (event.lengthComputable) {
             const progress = Math.round((event.loaded / event.total) * 100);
-            setUploadStatuses(prev => prev.map(status => 
+            setUploadStatuses(prev => prev.map(status =>
               status.id === uploadId ? { ...status, progress } : status
             ));
           }
@@ -363,7 +364,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
-        
+
         const response = await fetch(
           `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
           {
@@ -373,15 +374,15 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         );
 
         if (!response.ok) throw new Error('Upload failed');
-        
+
         const data = await response.json();
-        
+
         setEpaperData(prev => ({
           ...prev,
           mainEpaperImage: data.secure_url
         }));
 
-        setUploadStatuses(prev => prev.map(status => 
+        setUploadStatuses(prev => prev.map(status =>
           status.id === uploadId ? { ...status, progress: 100, message: 'Upload complete!', isError: false } : status
         ));
 
@@ -391,7 +392,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         }, 3000);
       } catch (error) {
         console.error('Upload error:', error);
-        setUploadStatuses(prev => prev.map(status => 
+        setUploadStatuses(prev => prev.map(status =>
           status.id === uploadId ? { ...status, message: 'Upload failed!', isError: true } : status
         ));
       }
@@ -403,7 +404,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const uploadId = `content-${articleIndex}-${Date.now()}`;
-      
+
       setUploadStatuses(prev => [...prev, {
         id: uploadId,
         type: 'content',
@@ -419,7 +420,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         xhr.upload.addEventListener('progress', (event) => {
           if (event.lengthComputable) {
             const progress = Math.round((event.loaded / event.total) * 100);
-            setUploadStatuses(prev => prev.map(status => 
+            setUploadStatuses(prev => prev.map(status =>
               status.id === uploadId ? { ...status, progress } : status
             ));
           }
@@ -428,7 +429,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
-        
+
         const response = await fetch(
           `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
           {
@@ -438,16 +439,16 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         );
 
         if (!response.ok) throw new Error('Upload failed');
-        
+
         const data = await response.json();
-        
+
         setEpaperData(prev => {
           const updatedArticles = [...prev.articles];
           updatedArticles[articleIndex].contentImage = data.secure_url;
           return { ...prev, articles: updatedArticles };
         });
 
-        setUploadStatuses(prev => prev.map(status => 
+        setUploadStatuses(prev => prev.map(status =>
           status.id === uploadId ? { ...status, progress: 100, message: 'Upload complete!', isError: false } : status
         ));
 
@@ -457,7 +458,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         }, 3000);
       } catch (error) {
         console.error('Upload error:', error);
-        setUploadStatuses(prev => prev.map(status => 
+        setUploadStatuses(prev => prev.map(status =>
           status.id === uploadId ? { ...status, message: 'Upload failed!', isError: true } : status
         ));
       }
@@ -471,14 +472,14 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
 
 
-  
+
   // useEffect(() => {
   //   if (epaperId) {
   //     const fetchEpaper = async () => {
   //       try {
   //         const data = await getEpaperById(epaperId);
   //         console.log(data,'here data found');
-          
+
   //         // // this is 
   //         setEpaperData({
   //           mainEpaperImage: data.mainEpaperImage,
@@ -514,61 +515,62 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
 
   // Inside EpaperForm.tsx
-useEffect(() => {
-  if (epaperId) {
-    const fetchEpaper = async () => {
-      try {
-        const data = await getEpaperById(epaperId);
-        
-        // Ensure proper date handling
-        let publicationDate;
+  useEffect(() => {
+    if (epaperId) {
+      const fetchEpaper = async () => {
         try {
-          publicationDate = data.date instanceof Date 
-            ? data.date 
-            : new Date(data.date);
-          
-          if (isNaN(publicationDate.getTime())) {
-            throw new Error('Invalid date');
-          }
-        } catch (error) {
-          console.error('Invalid date format, using current date instead');
-          publicationDate = new Date();
-        }
+          const data = await getEpaperById(epaperId);
 
-        setEpaperData({
-          mainEpaperImage: data.mainEpaperImage || '',
-          date: publicationDate.toISOString().split('T')[0],
-          articles: data.articles.map((article: any) => ({
-            id: article.id,
-            title: article.title || '',
-            contentImage: article.contentImage || '',
-            content: article.content || '',
-            bbox: {
-              x: typeof article.bboxX === 'number' ? article.bboxX : 0,
-              y: typeof article.bboxY === 'number' ? article.bboxY : 0,
-              width: typeof article.bboxWidth === 'number' ? article.bboxWidth : 100,
-              height: typeof article.bboxHeight === 'number' ? article.bboxHeight : 100
-            },
-            category: article.category || '',
-            isLeading: Boolean(article.isLeading),
-            pageNumber: typeof article.pageNumber === 'number' ? article.pageNumber : 1
-          }))
-        });
-      } catch (error) {
-        console.error('Error fetching e-paper:', error);
-        // Initialize with empty data if fetch fails
-        setEpaperData({
-          mainEpaperImage: '',
-          date: new Date().toISOString().split('T')[0],
-          articles: []
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchEpaper();
-  }
-}, [epaperId]);
+          // Ensure proper date handling
+          let publicationDate;
+          try {
+            publicationDate = data.date instanceof Date
+              ? data.date
+              : new Date(data.date);
+
+            if (isNaN(publicationDate.getTime())) {
+              throw new Error('Invalid date');
+            }
+          } catch (error) {
+
+            console.error('Invalid date format, using current date instead');
+            publicationDate = new Date();
+          }
+
+          setEpaperData({
+            mainEpaperImage: data.mainEpaperImage || '',
+            date: publicationDate.toISOString().split('T')[0],
+            articles: data.articles.map((article: any) => ({
+              id: article.id,
+              title: article.title || '',
+              contentImage: article.contentImage || '',
+              content: article.content || '',
+              bbox: {
+                x: typeof article.bboxX === 'number' ? article.bboxX : 0,
+                y: typeof article.bboxY === 'number' ? article.bboxY : 0,
+                width: typeof article.bboxWidth === 'number' ? article.bboxWidth : 100,
+                height: typeof article.bboxHeight === 'number' ? article.bboxHeight : 100
+              },
+              category: article.category || '',
+              isLeading: Boolean(article.isLeading),
+              pageNumber: typeof article.pageNumber === 'number' ? article.pageNumber : 1
+            }))
+          });
+        } catch (error) {
+          console.error('Error fetching e-paper:', error);
+          // Initialize with empty data if fetch fails
+          setEpaperData({
+            mainEpaperImage: '',
+            date: new Date().toISOString().split('T')[0],
+            articles: []
+          });
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchEpaper();
+    }
+  }, [epaperId]);
 
 
 
@@ -583,21 +585,27 @@ useEffect(() => {
     setSaving(true);
     try {
       if (epaperId) {
-       const data = await updateEpaper(epaperId, epaperData);
+        const data = await updateEpaper(epaperId, epaperData);
 
-       console.log(data,'data upd');
+        console.log(data, 'data upd');
 
-       if (data.message='od') {
-         showToast('success', '✅ ই-পেপার আপডেট হয়েছে');
-       }else{
-        showToast('failed', '✅ ই-পেপার আপডেট ব্যর্থ হয়েছে');
-       }
-       
+        if (data.message === 'ok') {
+          showToast('success', ' ই-পেপার আপডেট হয়েছে');
+        } else {
+          showToast('failed', 'ই-পেপার আপডেট ব্যর্থ হয়েছে');
+        }
+
       } else {
-        await createEpaper(epaperData);
+        const data = await createEpaper(epaperData);
+        if (data.message === 'ok') {
+          showToast('success', ' ই-পেপার আপডেট হয়েছে');
+        } else {
+          showToast('failed', 'ই-পেপার আপডেট ব্যর্থ হয়েছে');
+        }
       }
       // router.push('/epapers');
     } catch (error) {
+      showToast('error', 'Something went wrong');
       console.error('Error saving e-paper:', error);
     } finally {
       setSaving(false);
@@ -657,14 +665,14 @@ useEffect(() => {
       <h1 className="text-2xl font-bold text-gray-800 mb-6">
         {epaperId ? 'Edit E-Paper' : 'Create New E-Paper'}
       </h1>
-      
+
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Main E-Paper Info */}
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             E-Paper Information
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Main Image */}
             <div>
@@ -673,9 +681,9 @@ useEffect(() => {
               </label>
               <div className="flex items-center space-x-4">
                 {epaperData.mainEpaperImage ? (
-                  <img 
-                    src={epaperData.mainEpaperImage} 
-                    alt="E-paper cover" 
+                  <img
+                    src={epaperData.mainEpaperImage}
+                    alt="E-paper cover"
                     className="h-32 w-32 object-cover rounded-lg"
                   />
                 ) : (
@@ -703,18 +711,18 @@ useEffect(() => {
                   </p>
                 </div>
               </div>
-              
+
               {/* Upload status for main image */}
               {uploadStatuses
                 .filter(status => status.type === 'main')
                 .map(status => (
-                  <div 
+                  <div
                     key={status.id}
                     className={`mt-2 p-2 rounded text-sm ${status.isError ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}
                   >
                     <div className="flex justify-between items-center">
                       <span>{status.message}</span>
-                      <button 
+                      <button
                         onClick={() => removeUploadStatus(status.id)}
                         className="ml-2 text-xs"
                       >
@@ -723,8 +731,8 @@ useEffect(() => {
                     </div>
                     {!status.isError && (
                       <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                        <div 
-                          className="bg-blue-600 h-1.5 rounded-full" 
+                        <div
+                          className="bg-blue-600 h-1.5 rounded-full"
                           style={{ width: `${status.progress}%` }}
                         ></div>
                       </div>
@@ -808,11 +816,10 @@ useEffect(() => {
           <button
             type="submit"
             disabled={saving || uploadStatuses.some(status => !status.isError && status.progress < 100)}
-            className={`flex items-center px-6 py-2 rounded-lg transition ${
-              saving || uploadStatuses.some(status => !status.isError && status.progress < 100)
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-green-600 hover:bg-green-700 text-white'
-            }`}
+            className={`flex items-center px-6 py-2 rounded-lg transition ${saving || uploadStatuses.some(status => !status.isError && status.progress < 100)
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-green-600 hover:bg-green-700 text-white'
+              }`}
           >
             {saving ? (
               <>
