@@ -5,9 +5,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaSave, FaImage, FaCalendarAlt, FaPlus } from 'react-icons/fa';
-// import { categories } from '@/types/epaper';
-// import ArticleEditor from './ArticleEditor';
-// import LoadingSpinner from '../ui/LoadingSpinner';
 import { createEpaper, updateEpaper, getEpaperById } from '@/lib/api/epaper';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import ArticleEditor from './ArticleEditor';
@@ -43,7 +40,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
       const fetchEpaper = async () => {
         try {
           const data = await getEpaperById(epaperId);
-          console.log(data.mainEpaperImage,'id');
+          console.log(data,'here data found');
           
           setEpaperData({
             mainEpaperImage: data.mainEpaperImage,

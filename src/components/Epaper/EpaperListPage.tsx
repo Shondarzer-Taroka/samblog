@@ -77,7 +77,7 @@ export default function EpaperListPage() {
             </p>
           </div>
           <button
-            onClick={() => router.push('/epapers/create')}
+            onClick={() => router.push('/news/dashboard/createEpaper')}
             className="mt-4 md:mt-0 flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
           >
             <FaPlus className="mr-2" />
