@@ -35,11 +35,16 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     }>
   });
 
+  console.log(epaperData,'data');
+  
+
   useEffect(() => {
     if (epaperId) {
       const fetchEpaper = async () => {
         try {
           const data = await getEpaperById(epaperId);
+          console.log(data.mainEpaperImage,'id');
+          
           setEpaperData({
             mainEpaperImage: data.mainEpaperImage,
             date: data.date.toISOString().split('T')[0],
@@ -125,6 +130,8 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     );
   }
 
+  console.log(epaperData);
+  
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">

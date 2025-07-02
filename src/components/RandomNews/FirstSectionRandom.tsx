@@ -47,7 +47,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
 
       {/* Second Aside - 4 Cards */}
       <aside className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-        {randomNews.map((item, index) => (
+        {randomNews.slice(1).map((item, index) => (
           <div key={index + 987} className='h'>
             <Link href={`/news/${item.category}/${item.id}`} className='block group bg-white p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
               <div className="text-gray-800 text-[17.7px] leading-relaxed w-full h-full overflow-hidden">
