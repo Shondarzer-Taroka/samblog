@@ -18,21 +18,24 @@ export const getAllEpapers = async (params: {
 };
 
 export const getEpaperById = async (id: number) => {
+  console.log(id);
+  
   const response = await axios.get(`${API_BASE_URL}/epaper/${id}`);
   return response.data;
 };
 
 export const createEpaper = async (data: EpaperData ) => {
-  const response = await axios.post(`${API_BASE_URL}/epaper`, data);
+  const response = await axios.post(`${API_BASE_URL}/epaper/create`, data,{withCredentials:true});
+
   return response.data;
 };
 
 export const updateEpaper = async (id: number, data: EpaperData) => {
-  const response = await axios.put(`${API_BASE_URL}/epaper/${id}`, data);
-  return response.data;
+  const response = await axios.put(`${API_BASE_URL}/epaper/${id}`, data,{withCredentials:true});
+  return {data:response.data,message:response.statusText};
 };
 
 export const deleteEpaper = async (id: number) => {
-  const response = await axios.delete(`${API_BASE_URL}/epaper/${id}`);
+  const response = await axios.delete(`${API_BASE_URL}/epaper/${id}`,{withCredentials:true});
   return response.data;
 };

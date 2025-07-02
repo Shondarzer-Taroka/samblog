@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation';
 export default function EditEpaperPage() {
   const params = useParams();
   const epaperId = Number(params.id);
-
+  console.log(epaperId,'id ed');
+  
   return <EpaperForm epaperId={epaperId} />;
 }

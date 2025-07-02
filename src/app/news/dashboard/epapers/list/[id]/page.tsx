@@ -66,7 +66,7 @@ export default function EpaperDetailPage() {
           Back to E-papers
         </button>
         <button
-          onClick={() => router.push(`/epapers/${epaper.id}/edit`)}
+          onClick={() => router.push(`/news/dashboard/epapers/list/${epaper.id}/edit`)}
           className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
         >
           <FaEdit className="mr-2" />

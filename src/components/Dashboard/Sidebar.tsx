@@ -1,5 +1,5 @@
 'use client';
-import { FiHome, FiEdit, FiUsers, FiSettings } from 'react-icons/fi';
+import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi';
 import Link from 'next/link';
 
 const links = [
@@ -7,6 +7,7 @@ const links = [
     { label: 'লেখা যুক্ত করুন', icon: <FiEdit />, href: '/news/dashboard/createNews' },
     { label: 'ইউজার', icon: <FiUsers />, href: '#' },
     { label: 'সেটিংস', icon: <FiSettings />, href: '#' },
+    { label: 'ই-পেপার', icon: <FiPaperclip />, href: '/news/dashboard/epapers/list' },
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
