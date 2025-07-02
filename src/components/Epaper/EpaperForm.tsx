@@ -298,6 +298,7 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 import ArticleEditor from './ArticleEditor';
 import { createEpaper, getEpaperById, updateEpaper } from '@/lib/api/epaper';
 import { useToast } from '@/hooks/useToast';
+import Toast from '@/share/Toast';
 
 interface UploadStatus {
   id: string;
@@ -598,9 +599,9 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
       } else {
         const data = await createEpaper(epaperData);
         if (data.message === 'ok') {
-          showToast('success', ' ই-পেপার আপডেট হয়েছে');
+          showToast('success', ' ই-পেপার তৈরি হয়েছে');
         } else {
-          showToast('failed', 'ই-পেপার আপডেট ব্যর্থ হয়েছে');
+          showToast('failed', 'ই-পেপার তৈরি ব্যর্থ হয়েছে');
         }
       }
       // router.push('/epapers');
@@ -835,6 +836,9 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
           </button>
         </div>
       </form>
+      {toast && (
+        <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+      )}
     </div>
   );
 }
