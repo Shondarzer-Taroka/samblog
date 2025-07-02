@@ -292,10 +292,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaSave, FaImage, FaCalendarAlt, FaPlus, FaSpinner, FaTimes } from 'react-icons/fa';
-import { uploadToCloudinary } from '@/lib/cloudinary';
+// import { uploadToCloudinary } from '@/lib/cloudinary';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import ArticleEditor from './ArticleEditor';
 import { createEpaper, getEpaperById, updateEpaper } from '@/lib/api/epaper';
+import { useToast } from '@/hooks/useToast';
 
 interface UploadStatus {
   id: string;
@@ -311,6 +312,7 @@ interface EpaperFormProps {
 }
 
 export default function EpaperForm({ epaperId }: EpaperFormProps) {
+  const {hideToast,showToast,toast}=useToast()
   const router = useRouter();
   const [loading, setLoading] = useState(!!epaperId);
   const [saving, setSaving] = useState(false);
@@ -582,7 +584,14 @@ useEffect(() => {
     try {
       if (epaperId) {
        const data = await updateEpaper(epaperId, epaperData);
+
        console.log(data,'data upd');
+
+       if (data.message='od') {
+         showToast('success', '✅ ই-পেপার আপডেট হয়েছে');
+       }else{
+        showToast('failed', '✅ ই-পেপার আপডেট ব্যর্থ হয়েছে');
+       }
        
       } else {
         await createEpaper(epaperData);
