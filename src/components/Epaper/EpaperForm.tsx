@@ -590,7 +590,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
         console.log(data, 'data upd');
 
-        if (data.message === 'ok') {
+        if (data.message === 'OK') {
           showToast('success', ' ই-পেপার আপডেট হয়েছে');
         } else {
           showToast('failed', 'ই-পেপার আপডেট ব্যর্থ হয়েছে');
@@ -598,7 +598,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
       } else {
         const data = await createEpaper(epaperData);
-        if (data.message === 'ok') {
+        if (data.message === 'OK') {
           showToast('success', ' ই-পেপার তৈরি হয়েছে');
         } else {
           showToast('failed', 'ই-পেপার তৈরি ব্যর্থ হয়েছে');
