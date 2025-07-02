@@ -516,7 +516,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
         <div className="flex justify-end space-x-4">
           <button
             type="button"
-            onClick={() => router.push('/epapers')}
+            onClick={() => router.push('/news/dashboard/epapers/list')}
             className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
           >
             Cancel
