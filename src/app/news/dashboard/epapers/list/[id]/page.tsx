@@ -59,7 +59,7 @@ export default function EpaperDetailPage() {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <button
-          onClick={() => router.push('/epapers')}
+          onClick={() => router.push('/news/dashboard/epapers/list')}
           className="flex items-center text-blue-600 hover:text-blue-800"
         >
           <FaArrowLeft className="mr-2" />

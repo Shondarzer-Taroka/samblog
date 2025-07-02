@@ -137,7 +137,7 @@ export default function EpaperListPage() {
                 <EpaperCard 
                   key={epaper.id} 
                   epaper={epaper} 
-                  onEdit={() => router.push(`/news/dashbaord/epapers/${epaper.id}/edit`)}
+                  onEdit={() => router.push(`/news/dashboard/epapers/list/${epaper.id}/edit`)}
                   onView={() => router.push(`/news/dashboard/epapers/list/${epaper.id}`)}
                 />
               ))}
