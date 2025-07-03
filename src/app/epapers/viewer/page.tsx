@@ -187,7 +187,7 @@
 //       try {
 //         const page = typeof searchParams.page === 'string' ? searchParams.page : '1';
 //         const limit = '10'; // Default limit
-        
+
 //         const response = await fetch(
 //           `/api/epapers?page=${page}&limit=${limit}`,
 //           { cache: 'no-store' }
@@ -210,7 +210,7 @@
 //   }, [searchParams]);
 
 //   const handleNext = () => {
-    
+
 //     setSelectedIndex((prev) => (prev === epapers.length - 1 ? 0 : prev + 1));
 //   };
 
@@ -272,7 +272,7 @@
 //                 className="object-contain"
 //                 priority
 //               />
-              
+
 //               {/* Navigation Arrows for Large Image */}
 //               {epapers.length > 1 && (
 //                 <>
@@ -603,12 +603,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Slider from 'react-slick';
 import Image from 'next/image';
-import { 
-  FaChevronLeft, 
-  FaChevronRight, 
-  FaFont, 
-  FaImage, 
-  FaSearchPlus, 
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaFont,
+  FaImage,
+  FaSearchPlus,
   FaSearchMinus,
   FaDownload,
   FaShare,
@@ -659,10 +659,10 @@ const Arrow = ({ dir, onClick }: { dir: 'left' | 'right'; onClick?: () => void }
 );
 
 /* ---------- Article Detail Page ---------- */
-function ArticleDetailPage({ article, epaper, onBack }: { 
-  article: Article, 
+function ArticleDetailPage({ article, epaper, onBack }: {
+  article: Article,
   epaper: Epaper,
-  onBack: () => void 
+  onBack: () => void
 }) {
   const [viewMode, setViewMode] = useState<'text' | 'image'>('text');
   const [fontSize, setFontSize] = useState(16);
@@ -706,14 +706,14 @@ function ArticleDetailPage({ article, epaper, onBack }: {
     <div className="max-w-6xl mx-auto p-4 bg-gray-50 min-h-screen">
       {/* Enhanced Navigation Bar */}
       <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
-        <button 
+        <button
           onClick={onBack}
           className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all"
         >
           <FaChevronLeft />
           <span>Back to Epaper</span>
         </button>
-        
+
         <div className="flex items-center space-x-4">
           {/* View Mode Toggle */}
           <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
@@ -734,10 +734,10 @@ function ArticleDetailPage({ article, epaper, onBack }: {
               <span className="text-sm hidden md:inline">Image</span>
             </button>
           </div>
-          
+
           {/* Font Size Controls */}
           <div className="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
-            <button 
+            <button
               onClick={() => setFontSize(f => Math.max(12, f - 1))}
               className="p-2 rounded-lg hover:bg-gray-200"
               title="Decrease Font Size"
@@ -745,7 +745,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
               <FaSearchMinus className="text-gray-700" />
             </button>
             <span className="text-sm w-8 text-center font-medium">{fontSize}px</span>
-            <button 
+            <button
               onClick={() => setFontSize(f => Math.min(24, f + 1))}
               className="p-2 rounded-lg hover:bg-gray-200"
               title="Increase Font Size"
@@ -756,41 +756,41 @@ function ArticleDetailPage({ article, epaper, onBack }: {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-1">
-            <button 
+            <button
               onClick={toggleBookmark}
               className={`p-2 rounded-lg ${isBookmarked ? 'text-yellow-500 bg-yellow-50' : 'text-gray-700 hover:bg-gray-200'}`}
               title={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
             >
               <FaBookmark />
             </button>
-            
-            <button 
+
+            <button
               onClick={handleDownload}
               className="p-2 rounded-lg text-gray-700 hover:bg-gray-200"
               title="Download"
             >
               <FaDownload />
             </button>
-            
+
             <div className="relative">
-              <button 
+              <button
                 onClick={handleShare}
                 className="p-2 rounded-lg text-gray-700 hover:bg-gray-200"
                 title="Share"
               >
                 <FaShare />
               </button>
-              
+
               {showShareOptions && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                  <button 
+                  <button
                     onClick={handleEmail}
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
                     <FaEnvelope className="mr-2" />
                     Email
                   </button>
-                  <button 
+                  <button
                     onClick={handlePrint}
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
@@ -823,10 +823,10 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           </div>
           <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
         </div>
-        
+
         {/* Article Body */}
         {viewMode === 'text' ? (
-          <div 
+          <div
             className="prose max-w-none"
             style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
             dangerouslySetInnerHTML={{ __html: article.content }}
@@ -871,9 +871,9 @@ export default function EpaperViewerPage() {
     (async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/epapers?page=${page}&limit=10`, { 
-          cache: 'no-store', 
-          signal: controller.signal 
+        const res = await fetch(`/api/epapers?page=${page}&limit=10`, {
+          cache: 'no-store',
+          signal: controller.signal
         });
         if (!res.ok) throw new Error('Failed to fetch epapers');
         const json: PaginatedResponse = await res.json();
@@ -918,7 +918,7 @@ export default function EpaperViewerPage() {
       { breakpoint: 1280, settings: { slidesToShow: Math.min(5, epapers.length) } },
       { breakpoint: 1024, settings: { slidesToShow: Math.min(4, epapers.length) } },
       { breakpoint: 768, settings: { slidesToShow: Math.min(3, epapers.length) } },
-      { breakpoint: 480,  settings: { slidesToShow: Math.min(2, epapers.length) } },
+      { breakpoint: 480, settings: { slidesToShow: Math.min(2, epapers.length) } },
     ],
   };
 
@@ -933,11 +933,11 @@ export default function EpaperViewerPage() {
   if (articleId) {
     const article = currentEpaper.articles.find(a => a.id === Number(articleId));
     if (!article) return <ErrorBlock msg="Article not found" />;
-    
-    return <ArticleDetailPage 
-      article={article} 
-      epaper={currentEpaper} 
-      onBack={handleBackToEpaper} 
+
+    return <ArticleDetailPage
+      article={article}
+      epaper={currentEpaper}
+      onBack={handleBackToEpaper}
     />;
   }
 
@@ -951,19 +951,25 @@ export default function EpaperViewerPage() {
   return (
     <section>
       {/* ===== Big preview with bbox ===== */}
-      <div className="bg-white p-4 mb-6 shadow-md">
-        <div ref={containerRef} className="relative w-full h-[100vh] max-w-6xl mx-auto">
-          {/* big image */}
-          <Image
-            src={currentEpaper.mainEpaperImage}
-            alt={`Epaper ${currentEpaper.date}`}
-            fill
-            priority
-            className="object-contain"
-            onLoadingComplete={({ naturalWidth, naturalHeight }) =>
-              setNatural({ w: naturalWidth, h: naturalHeight })
-            }
-          />
+      <div className="bg-white p-4 mb-6 shadow-md  h-screen">
+        <div ref={containerRef} className="relative max-w-6xl mx-auto">
+
+          <div className="h-[100vh] ">
+            <Image
+              src={currentEpaper.mainEpaperImage}
+              alt={`Epaper ${currentEpaper.date}`}
+            
+              
+             width={1000}
+             height={1000}
+              className="w-full" // ⬅️ Scale বড় করতে
+              onLoadingComplete={({ naturalWidth, naturalHeight }) =>
+                setNatural({ w: naturalWidth, h: naturalHeight })
+              }
+            />
+          </div>
+
+
 
           {/* bounding boxes */}
           {currentEpaper.articles.map((article) => {
@@ -992,14 +998,14 @@ export default function EpaperViewerPage() {
           {/* nav arrows */}
           {epapers.length > 1 && (
             <>
-              <button 
-                onClick={handlePrev} 
+              <button
+                onClick={handlePrev}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-4 rounded-full z-10"
               >
                 <FaChevronLeft size={24} />
               </button>
-              <button 
-                onClick={handleNext} 
+              <button
+                onClick={handleNext}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-4 rounded-full z-10"
               >
                 <FaChevronRight size={24} />
@@ -1013,7 +1019,7 @@ export default function EpaperViewerPage() {
       </div>
 
       {/* ===== Thumbnail slider ===== */}
-      <div className="bg-gray-100 py-6 px-2">
+      <div className="bg-gray-100 py-6 px-2 ">
         <Slider {...settings}>
           {epapers.map((epaper, idx) => (
             <div key={epaper.id} className="px-2">
@@ -1023,12 +1029,12 @@ export default function EpaperViewerPage() {
                   ${selectedIndex === idx ? 'border-red-600 scale-105' : 'border-transparent hover:border-gray-300'}
                 `}
               >
-                <Image 
-                  src={epaper.mainEpaperImage} 
-                  alt={`Epaper ${epaper.date}`} 
-                  width={150} 
-                  height={200} 
-                  className="object-cover w-full h-auto" 
+                <Image
+                  src={epaper.mainEpaperImage}
+                  alt={`Epaper ${epaper.date}`}
+                  width={150}
+                  height={200}
+                  className="object-cover w-full h-[130]"
                 />
               </div>
               <p className="mt-2 text-center text-sm bg-gray-800 text-white py-1 rounded">
