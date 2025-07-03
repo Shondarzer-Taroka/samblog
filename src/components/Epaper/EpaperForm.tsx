@@ -860,6 +860,8 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(epaperData,'e pa data quil');
+    
     setSaving(true);
     try {
       if (epaperId) {
