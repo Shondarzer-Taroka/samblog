@@ -1030,6 +1030,7 @@ export default function NewsForm({
     const [isUploading, setIsUploading] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [modifiedContent,setModifiedContent]=useState('')
 
     console.log(formData, 'nws form');
 
@@ -1079,11 +1080,11 @@ export default function NewsForm({
     // }, [content]);
 
 
-    // useEffect(() => {
-    //     setContent(newContent);
-    //     setFormData(prev => ({ ...prev, content }));
-    //     console.log('Content updated:', newContent); // Debugging
-    // }, [])
+    useEffect(() => {
+        // setContent(newContent);
+        setFormData(prev => ({ ...prev, content }));
+        console.log('Content updated:', content); // Debugging
+    }, [content])
 
 
     // ফর্ম সাবমিশন
@@ -1136,6 +1137,9 @@ export default function NewsForm({
             subKeywords: prev.subKeywords.filter((_, i) => i !== index)
         }));
     };
+
+    console.log(formData);
+    
 
     return (
         <section className="max-w-4xl mx-auto py-10 px-4 bg-white shadow-md rounded">
