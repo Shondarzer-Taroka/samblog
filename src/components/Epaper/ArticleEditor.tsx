@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
@@ -123,7 +124,7 @@
 //               </p>
 //             </div>
 //           </div>
-          
+
 //           {/* Upload status for content image */}
 //           {uploadStatuses.map(status => (
 //             <div 
@@ -243,9 +244,19 @@
 // components/epapers/ArticleEditor.tsx
 'use client';
 
+import {  useRef } from 'react';
 import { FaTrash, FaImage, FaTimes } from 'react-icons/fa';
 import { categories } from '@/types/epaper';
-import { useRef } from 'react';
+import 'quill/dist/quill.snow.css'; // Import snow theme
+// import dynamic from 'next/dynamic';
+
+
+
+// const QuillEditor = dynamic(() => import('@/QuillEditor/QuillEditor'), {
+//   ssr: false,
+// });
+
+
 
 interface ArticleEditorProps {
   article: any;
@@ -283,6 +294,8 @@ export default function ArticleEditor({
 }: ArticleEditorProps) {
   const contentImageInputRef = useRef<HTMLInputElement>(null);
   const contentImageDropRef = useRef<HTMLDivElement>(null);
+  // const [content, setContent] = useState('');
+  // console.log(content);
 
   // Ensure numeric values are properly handled
   const safeBbox = {
@@ -305,6 +318,14 @@ export default function ArticleEditor({
       onUpdate('bbox', { [field]: numValue });
     }
   };
+
+
+  // useEffect(() => {
+  //   console.log(article.title,'uy');
+    
+  //   onUpdate('content', content)
+  // }, [content])
+
 
   return (
     <div className="p-6 border border-gray-200 rounded-lg bg-gray-50">
@@ -340,7 +361,7 @@ export default function ArticleEditor({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Content Image
           </label>
-          <div 
+          <div
             ref={contentImageDropRef}
             onDragEnter={(e) => onDragEnter(e, index)}
             onDragLeave={onDragLeave}
@@ -349,9 +370,9 @@ export default function ArticleEditor({
             className={`flex items-center space-x-4 ${isDragging ? 'ring-2 ring-blue-500 bg-blue-50' : ''}`}
           >
             {article.contentImage ? (
-              <img 
-                src={article.contentImage} 
-                alt="Article content" 
+              <img
+                src={article.contentImage}
+                alt="Article content"
                 className="h-32 w-32 object-cover rounded-lg"
               />
             ) : (
@@ -379,16 +400,16 @@ export default function ArticleEditor({
               </p>
             </div>
           </div>
-          
+
           {/* Upload status for content image */}
           {uploadStatuses.map(status => (
-            <div 
+            <div
               key={status.id}
               className={`mt-2 p-2 rounded text-sm ${status.isError ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}
             >
               <div className="flex justify-between items-center">
                 <span>{status.message}</span>
-                <button 
+                <button
                   onClick={() => onRemoveUploadStatus(status.id)}
                   className="ml-2 text-xs"
                 >
@@ -397,8 +418,8 @@ export default function ArticleEditor({
               </div>
               {!status.isError && (
                 <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                  <div 
-                    className="bg-blue-600 h-1.5 rounded-full" 
+                  <div
+                    className="bg-blue-600 h-1.5 rounded-full"
                     style={{ width: `${status.progress}%` }}
                   ></div>
                 </div>
@@ -450,6 +471,19 @@ export default function ArticleEditor({
           rows={4}
         />
       </div>
+
+      
+
+
+      {/* <div className="mt-4">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Content*
+        </label>
+        <QuillEditor onContentChange={article.content} />
+      </div> */}
+
+
+
 
       <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
         {[

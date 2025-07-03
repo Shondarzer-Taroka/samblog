@@ -54,6 +54,8 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     }>
   });
 
+  console.log(epaperData,'e paper data e paper form');
+  
   // Handle file upload to Cloudinary
   const uploadFile = async (file: File, type: 'main' | 'content', articleIndex?: number) => {
     const uploadId = type === 'main' ? `main-${Date.now()}` : `content-${articleIndex}-${Date.now()}`;
@@ -333,6 +335,8 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
   };
 
   const updateArticle = (index: number, field: string, value: any) => {
+    console.log(value,'valoe');
+    
     setEpaperData(prev => {
       const updatedArticles = [...prev.articles];
       if (field === 'bbox') {

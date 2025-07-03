@@ -1,4 +1,4 @@
-
+// // // // /src/components/Dashboard/CreateNews
 
 'use client';
 
@@ -388,13 +388,7 @@ console.log(authLoading);
                 {/* Content Editor */}
 
                 <div>
-                    {/* {isClient && (
-                        <div
-                            ref={editorRef}
-                            className="bg-white border rounded"
-                            style={{ height: '16rem' }}
-                        />
-                    )} */}
+
 
                     <QuillEditor onContentChange={setContent} />
                 </div>

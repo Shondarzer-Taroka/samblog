@@ -549,6 +549,15 @@ export default function ProthomAloEPaper() {
           contentImage: '/download.png',
           category: 'অর্থনীতি',
           pageNumber: 1
+        },
+          {
+          id: 5,
+          title: 'Brility বেড়ে ৯.৫ শতাংশ',
+          content: 'গত মাসে মুদ্রাস্ফীতি বেড়ে দাঁড়িয়েছে ৯.৫ শতাংশ যা গত দশ বছরের মধ্যে সর্বোচ্চ...',
+          bbox: { x:0, y: 286, width: 526, height: 350 },
+          contentImage: '/download.png',
+          category: 'অর্থনীতি',
+          pageNumber: 1
         }
       ]
     },
