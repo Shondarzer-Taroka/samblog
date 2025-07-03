@@ -14,6 +14,7 @@ import EduMedGrid from './EduMedGrid/EduMedGrid';
 import OpinionSection from './OpinionSection/OpinionSection';
 import MixedLayout from './MixedLayout/MixedLayout';
 import Image from 'next/image';
+import NewsEditor from '@/share/NewsEditor';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
@@ -77,7 +78,7 @@ const Homepage = async () => {
 
 
       <div>
-        <Image width={1000} height={1000} alt='ph'  src='https://images.eprothomalo.com/PA/2025/07/03/dh/5_01/d445b0df_01_mr.jpg' className='w-screen' />
+        <NewsEditor/>
       </div>
     </div>
   );

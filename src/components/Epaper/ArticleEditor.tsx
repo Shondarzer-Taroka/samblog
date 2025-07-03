@@ -244,10 +244,12 @@
 // components/epapers/ArticleEditor.tsx
 'use client';
 
-import {  useRef } from 'react';
+import {  useEffect, useRef, useState} from 'react';
+// import {  useEffect, useRef, useState } from 'react';
 import { FaTrash, FaImage, FaTimes } from 'react-icons/fa';
 import { categories } from '@/types/epaper';
-import 'quill/dist/quill.snow.css'; // Import snow theme
+import QuillEditor from '@/QuillEditor/QuillEditor';
+// import 'quill/dist/quill.snow.css'; // Import snow theme
 // import dynamic from 'next/dynamic';
 
 
@@ -295,8 +297,9 @@ export default function ArticleEditor({
   const contentImageInputRef = useRef<HTMLInputElement>(null);
   const contentImageDropRef = useRef<HTMLDivElement>(null);
   // const [content, setContent] = useState('');
+  // const [Existcontent, setExistContent] = useState('');
   // console.log(content);
-
+const [editorContent, setEditorContent] = useState('');
   // Ensure numeric values are properly handled
   const safeBbox = {
     x: article.bbox?.x || 0,
@@ -320,13 +323,14 @@ export default function ArticleEditor({
   };
 
 
-  // useEffect(() => {
-  //   console.log(article.title,'uy');
+  useEffect(() => {
+    console.log(article.title,'uy');
     
-  //   onUpdate('content', content)
-  // }, [content])
+    onUpdate('content', editorContent)
+  }, [editorContent])
 
-
+   console.log(editorContent);
+   
   return (
     <div className="p-6 border border-gray-200 rounded-lg bg-gray-50">
       <div className="flex justify-between items-start mb-4">
@@ -459,7 +463,7 @@ export default function ArticleEditor({
         </div>
       </div>
 
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Content*
         </label>
@@ -470,17 +474,16 @@ export default function ArticleEditor({
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           rows={4}
         />
-      </div>
+      </div> */}
 
       
-
-
-      {/* <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Content*
-        </label>
-        <QuillEditor onContentChange={article.content} />
-      </div> */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">Editor</h2>
+        <QuillEditor 
+          onContentChange={setEditorContent} 
+          initialContent={article.content}
+        />
+      </div>
 
 
 
