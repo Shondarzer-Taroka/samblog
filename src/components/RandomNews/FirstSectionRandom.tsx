@@ -66,7 +66,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
                 <Image
                   width={400}
                   height={300}
-                  src={item.imageUrl || ''}
+                  src={item.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                   alt={item.title}
                   className="float-left w-[160px] h-auto mr-2 rounded"
                 />

@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const limit = searchParams.get('limit') || '10';
 
   try {
-    const backendUrl = `http://localhost:7700/api/epaper/getAllEpapers?page=${page}&limit=${limit}`;
+    const backendUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/epaper/getAllEpapers?page=${page}&limit=${limit}`;
     const response = await fetch(backendUrl);
     
     if (!response.ok) {

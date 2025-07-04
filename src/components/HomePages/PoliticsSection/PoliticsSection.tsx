@@ -113,7 +113,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                     <div className="w-full bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden p-2">
                         <div className="relative w-full h-[460px] rounded-lg overflow-hidden ">
                             <Image
-                                src={politicalNews[0]?.imageUrl || ''}
+                                src={politicalNews[0]?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                 alt={politicalNews[0].title}
                                 fill
                                 className="object-cover"
@@ -145,7 +145,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                         >
                             <div className="relative w-28 h-20 flex-shrink-0 overflow-hidden rounded-md">
                                 <Image
-                                    src={imageUrl || ''}
+                                    src={imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                     alt={title}
                                     fill
                                     className="object-cover "

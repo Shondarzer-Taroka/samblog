@@ -802,6 +802,9 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     setUploadStatuses(prev => prev.filter(status => status.id !== id));
   };
 
+
+ 
+
   // Fetch e-paper data
   useEffect(() => {
     if (epaperId) {
@@ -860,6 +863,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     console.log(epaperData,'e pa data quil');
     
     setSaving(true);
@@ -1071,6 +1075,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
             <div className="space-y-6">
               {epaperData.articles.map((article, index) => (
                 <ArticleEditor
+
                   key={index}
                   article={article}
                   index={index}
@@ -1086,6 +1091,7 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
                   onDragOver={handleArticleDragOver}
                   onDrop={(e) => handleArticleDrop(e, index)}
                   isDragging={activeDragIndex === index}
+             
                 />
               ))}
             </div>

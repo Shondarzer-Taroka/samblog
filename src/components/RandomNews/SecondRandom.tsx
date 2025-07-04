@@ -177,7 +177,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                     <div className="flex gap-4 p-2">
                                         <div className="relative w-24 h-24 flex-shrink-0">
                                             <Image
-                                                src={news?.imageUrl || '/default-news.jpg'}
+                                                src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                                 alt={news.title}
                                                 fill
                                                 className="object-cover rounded-md group-hover:opacity-90 transition-opacity"
@@ -209,7 +209,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                 <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                                     <div className="relative h-60 w-full overflow-hidden">
                                         <Image
-                                            src={newsData[0]?.imageUrl || '/default-news.jpg'}
+                                            src={newsData[0]?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                             alt={newsData[0].title}
                                             fill
                                             className="object-cover "
@@ -254,7 +254,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                         <div className="flex gap-3 p-2">
                                             <div className="relative w-20 h-20 flex-shrink-0">
                                                 <Image
-                                                    src={news?.imageUrl || '/default-news.jpg'}
+                                                    src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                                     alt={news.title}
                                                     fill
                                                     className="object-cover rounded-md"
@@ -288,7 +288,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                     <div className="flex gap-4 p-2">
                                         <div className="relative w-24 h-24 flex-shrink-0">
                                             <Image
-                                                src={news?.imageUrl || '/default-news.jpg'}
+                                                src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                                 alt={news.title}
                                                 fill
                                                 className="object-cover rounded-md group-hover:opacity-90 transition-opacity"
