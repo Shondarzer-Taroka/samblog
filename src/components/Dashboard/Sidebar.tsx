@@ -5,7 +5,7 @@ import Link from 'next/link';
 const links = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/' },
     { label: 'লেখা যুক্ত করুন', icon: <FiEdit />, href: '/news/dashboard/createNews' },
-    { label: 'ইউজার', icon: <FiUsers />, href: '#' },
+    { label: 'ইউজার', icon: <FiUsers />, href: '/news/dashboard/allUsers' },
     { label: 'সেটিংস', icon: <FiSettings />, href: '#' },
     { label: 'ই-পেপার', icon: <FiPaperclip />, href: '/news/dashboard/epapers/list' },
 ];
