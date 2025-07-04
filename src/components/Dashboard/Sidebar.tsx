@@ -1,6 +1,7 @@
 'use client';
 import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi';
 import Link from 'next/link';
+import { Newspaper } from 'lucide-react';
 
 const links = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/' },
@@ -8,6 +9,7 @@ const links = [
     { label: 'ইউজার', icon: <FiUsers />, href: '/news/dashboard/allUsers' },
     { label: 'সেটিংস', icon: <FiSettings />, href: '#' },
     { label: 'ই-পেপার', icon: <FiPaperclip />, href: '/news/dashboard/epapers/list' },
+    { label: 'খবর', icon: <Newspaper />, href: '/news/dashboard/allNews' },
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
