@@ -7,14 +7,12 @@ import PoliticsSection from './PoliticsSection/PoliticsSection';
 import InternationalNewsSection from './InternationalNewsSection/InternationalNewsSection';
 import Entertainment from './Entertainment/Entertainment';
 import PhotoSlider from '@/swiper/PhotoSlider';
-
 import SportsNews from './SportsNews/SportsNews';
 import IslamAndLifeSection from './IslamAndLifeSection/IslamAndLifeSection';
 import EduMedGrid from './EduMedGrid/EduMedGrid';
 import OpinionSection from './OpinionSection/OpinionSection';
 import MixedLayout from './MixedLayout/MixedLayout';
-import Image from 'next/image';
-import NewsEditor from '@/share/NewsEditor';
+
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
@@ -77,9 +75,9 @@ const Homepage = async () => {
       <MixedLayout/>
 
 
-      <div>
+      {/* <div>
         <NewsEditor/>
-      </div>
+      </div> */}
     </div>
   );
 };

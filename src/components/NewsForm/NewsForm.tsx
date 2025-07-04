@@ -1014,7 +1014,9 @@ export default function NewsForm({
 
     const [formData, setFormData] = useState({
         title: initialData?.title || '',
-        content: initialData?.content || '',
+        // content: initialData?.content || '',
+        content:  '',
+
         category: initialData?.category || '',
         subCategory: initialData?.subCategory || '',
         keywords: initialData?.keywords || [],
@@ -1030,7 +1032,7 @@ export default function NewsForm({
     const [isUploading, setIsUploading] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [modifiedContent,setModifiedContent]=useState('')
+    const [modifiedContent, setModifiedContent] = useState('')
 
     console.log(formData, 'nws form');
 
@@ -1080,6 +1082,13 @@ export default function NewsForm({
     // }, [content]);
 
 
+    // useEffect(() => {
+    //     // setContent(newContent);
+    //     // setFormData(prev => ({ ...prev, content }));
+    //     console.log('Content updated:', content); // Debugging
+    // }, [content])
+
+
     useEffect(() => {
         // setContent(newContent);
         setFormData(prev => ({ ...prev, content }));
@@ -1090,7 +1099,7 @@ export default function NewsForm({
     // ফর্ম সাবমিশন
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        // setFormData(prev => ({ ...prev, content }));
         // ভ্যালিডেশন
         // if (!formData.title || !formData.content || !formData.category) {
         //   alert('দয়া করে সকল আবশ্যক ফিল্ড পূরণ করুন');
@@ -1139,7 +1148,7 @@ export default function NewsForm({
     };
 
     console.log(formData);
-    
+
 
     return (
         <section className="max-w-4xl mx-auto py-10 px-4 bg-white shadow-md rounded">
@@ -1298,7 +1307,7 @@ export default function NewsForm({
                 <div>
                     <h1>Content Write</h1>
                     <QuillEditor
-                        initialContent={formData.content}
+                        initialContent={initialData?.content}
                         onContentChange={setContent}
                     />
                 </div>
