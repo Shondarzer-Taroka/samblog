@@ -325,8 +325,8 @@ const AllNews = () => {
   const handleDelete = async (id: string) => {
     showAlert('warning', {
       title: 'নিশ্চিত করুন',
-      message: 'Are you sure you want to delete this news item?',
-      confirmText: 'Delete',
+      message: 'আপনি কি নিশ্চিতভাবে এই আইটেমটি মুছতে চান?',
+      confirmText: 'হ্যাঁ, মুছুন',
       cancelText: 'Cancel',
       onConfirm: async () => {
         try {
