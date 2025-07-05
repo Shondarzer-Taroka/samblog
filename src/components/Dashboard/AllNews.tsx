@@ -327,7 +327,7 @@ const AllNews = () => {
       title: 'নিশ্চিত করুন',
       message: 'আপনি কি নিশ্চিতভাবে এই আইটেমটি মুছতে চান?',
       confirmText: 'হ্যাঁ, মুছুন',
-      cancelText: 'Cancel',
+      cancelText: 'না, বাতিল করুন',
       onConfirm: async () => {
         try {
           await deleteNews(id);
