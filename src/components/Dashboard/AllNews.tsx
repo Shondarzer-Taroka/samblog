@@ -324,7 +324,7 @@ const AllNews = () => {
 
   const handleDelete = async (id: string) => {
     showAlert('warning', {
-      title: 'Confirm Delete',
+      title: 'নিশ্চিত করুন',
       message: 'Are you sure you want to delete this news item?',
       confirmText: 'Delete',
       cancelText: 'Cancel',

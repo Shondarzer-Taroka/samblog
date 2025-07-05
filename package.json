@@ -27,6 +27,7 @@
     "bd-address": "^1.0.3",
     "bd-divisions-to-unions": "^1.0.3",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.0",
     "he": "^1.2.0",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
