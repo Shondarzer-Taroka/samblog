@@ -18,7 +18,7 @@ export const fetchNews = async (params = {}) => {
 
 export const deleteNews = async (id: string) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`,{withCredentials:true});
+    const response = await axios.delete(`${API_URL}/deleteNews/${id}`,{withCredentials:true});
     return response.data;
   } catch (error) {
     console.error('Error deleting news:', error);
