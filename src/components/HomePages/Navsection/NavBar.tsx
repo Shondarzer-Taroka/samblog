@@ -192,7 +192,9 @@ const NavBar: React.FC = () => {
         {loading ? (
           <h1 className='text-white'>লোড হচ্ছে...</h1>
         ) : user?.email ? (
-          <button onClick={logout} className='text-white cursor-pointer'>লগ আউট</button>
+          <>
+            <button onClick={logout} className='text-white cursor-pointer'>লগ আউট</button>
+          </>
         ) : (
           <button onClick={handleNavigateLogInPage} className='text-white cursor-pointer'>লগ ইন</button>
         )}
