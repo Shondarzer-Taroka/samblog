@@ -240,7 +240,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
               alt={article.title}
               width={1000}
               height={1000}
-              className="object-contain bg-gray-100"
+              className="w-full object-contain bg-gray-100"
             />
           </div>
         )}
