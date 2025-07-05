@@ -4,25 +4,25 @@ import { notFound } from 'next/navigation';
 import ArticleDetails from '@/components/EpaperForUsers/ArticleDetails';
 
 async function getEpaper(id: string) {
-  const res = await fetch(`http://localhost:7700/api/epaper/${id}`);
-  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/epaper/${id}`);
+
   if (!res.ok) {
     if (res.status === 404) {
       return null;
     }
     throw new Error('Failed to fetch data');
   }
-  
+
   return res.json();
 }
 
 export default async function EpaperViewer({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const epaper = await getEpaper(params.id);
-  
+  const epaper = await getEpaper((await params).id);
+
   if (!epaper) {
     notFound();
   }
