@@ -112,6 +112,7 @@
 'use client'
 import DropDownItems from '@/components/DropDownItems/DropDownItems';
 import { useAuthProvider } from '@/Providers/AuthProvider';
+
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -193,7 +194,11 @@ const NavBar: React.FC = () => {
           <h1 className='text-white'>লোড হচ্ছে...</h1>
         ) : user?.email ? (
           <>
+            <div className='flex items-center gap-2.5'>
             <button onClick={logout} className='text-white cursor-pointer'>লগ আউট</button>
+
+              {/* <Image src={user?.image} alt='profile' width={60} height={60} className='w-[40px] h-[40px] rounded-full'/> */}
+            </div>
           </>
         ) : (
           <button onClick={handleNavigateLogInPage} className='text-white cursor-pointer'>লগ ইন</button>
