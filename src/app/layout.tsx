@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
+import { Noto_Serif_Bengali } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
 import Navsection from "@/components/HomePages/Navsection/Navsection";
 import { Suspense } from "react";

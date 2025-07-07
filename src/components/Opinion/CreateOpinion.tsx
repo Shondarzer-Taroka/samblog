@@ -1,12 +1,13 @@
 'use client'
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import React from 'react';
+import OpinionForm from './OpinionForm';
 
 const CreateOpinion = () => {
-    const { loading, user } = useAuthProvider()
+    
     return (
         <div>
-
+<OpinionForm/>
         </div>
     );
 };
