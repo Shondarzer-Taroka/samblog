@@ -4,13 +4,15 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useRef, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-const QuillEditor = dynamic(
-    () => import('@/QuillEditor/QuillEditor'),
-    {
-        ssr: false
-    }
-);
+import { useToast } from '@/hooks/useToast';
+import Toast from '@/share/Toast';
 
+const QuillEditor = dynamic(
+  () => import('@/QuillEditor/QuillEditor'),
+  {
+    ssr: false
+  }
+);
 
 interface OpinionFormData {
   title: string;
@@ -24,6 +26,8 @@ const OpinionForm = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [content, setContent] = useState('');
+  const {hideToast,showToast,toast}=useToast()
   const [formData, setFormData] = useState<OpinionFormData>({
     title: '',
     content: '',
@@ -36,6 +40,14 @@ const OpinionForm = () => {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handleEditorChange = (content: string) => {
+    setContent(content);
+    setFormData(prev => ({
+      ...prev,
+      content: content
     }));
   };
 
@@ -75,76 +87,79 @@ const OpinionForm = () => {
       fileInputRef.current.value = '';
     }
   };
+const uploadImageToCloudinary = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'my-uploads'); // Your upload preset
+  formData.append('cloud_name', 'dw72swggv'); // Your cloud name
 
-  const uploadImageToServer = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'your_upload_preset');
-
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/your_cloud_name/image/upload`,
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('ছবি আপলোড ব্যর্থ হয়েছে');
-      }
-
-      const data = await response.json();
-      return data.secure_url;
-    } catch (error) {
-      console.error('আপলোড ত্রুটি:', error);
-      throw error;
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.title.trim() || !formData.content.trim()) {
-      alert('শিরোনাম এবং মতামত অবশ্যই填写 করতে হবে');
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      let imageUrl = null;
-      if (formData.image) {
-        imageUrl = await uploadImageToServer(formData.image);
-      }
-
-      const response = await fetch('/api/opinions', {
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/dw72swggv/image/upload`,
+      {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: formData.title,
-          content: formData.content,
-          imageUrl,
-          authorId: user?.id
-        }),
-      });
-
-      if (response.ok) {
-        alert('আপনার মতামত সফলভাবে প্রকাশিত হয়েছে!');
-        router.push('/opinions');
-      } else {
-        throw new Error('মতামত জমা দিতে ব্যর্থ হয়েছে');
+        body: formData,
       }
-    } catch (error) {
-      alert('কিছু সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    );
 
+    if (!response.ok) {
+      throw new Error('Image upload failed');
+    }
+
+    const data = await response.json();
+    return data.secure_url;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
+
+const handleSubmit = async (e: React.FormEvent) => {
+  console.log(formData);
+  
+  e.preventDefault();
+  
+  if (!formData.title.trim() || !formData.content.trim()) {
+    alert('শিরোনাম এবং মতামত অবশ্যই পূরণ করতে হবে');
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    let imageUrl = null;
+    if (formData.image) {
+      imageUrl = await uploadImageToCloudinary(formData.image);
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: formData.title,
+        content: formData.content,
+        imageUrl,
+        authorId: user?.id
+      }),
+    });
+
+    if (response.ok) {
+      showToast('success','আপনার মতামত সফলভাবে প্রকাশিত হয়েছে!');
+      router.push('/opinions');
+    } else {
+      throw new Error('মতামত জমা দিতে ব্যর্থ হয়েছে');
+    }
+  } catch (error) {
+    showToast('error','কিছু সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
+    console.error(error);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+ 
   if (loading) return <div className="text-center py-12">লোড হচ্ছে...</div>;
   if (!user) {
     router.push('/login');
@@ -182,15 +197,9 @@ const OpinionForm = () => {
               <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
                 আপনার মতামত <span className="text-red-500">*</span>
               </label>
-              <textarea
-                id="content"
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                required
-                rows={8}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                placeholder="আপনার বিস্তারিত মতামত এখানে লিখুন..."
+              <QuillEditor 
+                onContentChange={handleEditorChange} 
+                initialContent={formData.content}
               />
             </div>
 
@@ -271,6 +280,10 @@ const OpinionForm = () => {
           </form>
         </div>
       </div>
+
+         {toast && (
+        <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+      )}
     </div>
   );
 };
