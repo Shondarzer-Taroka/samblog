@@ -3,6 +3,14 @@
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useRef, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+const QuillEditor = dynamic(
+    () => import('@/QuillEditor/QuillEditor'),
+    {
+        ssr: false
+    }
+);
+
 
 interface OpinionFormData {
   title: string;
