@@ -14,7 +14,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
   return (
     <section className=" grid grid-cols-1 xl:grid-cols-2">
       {/* First Aside - Image with text wrapping */}
-      <aside className="mb-6 w-full lg:w-[600px] h-[460px]">
+      <aside className="mb-6 w-full lg:w-[600px] md:h-[460px]">
         <Link href={`/news/${data[0].category}/${data[0].id}`} className='block group bg-white p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
           <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">
             {/* Title & Date */}
