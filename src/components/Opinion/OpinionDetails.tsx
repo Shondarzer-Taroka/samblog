@@ -28,7 +28,7 @@
 //     const fetchData = async () => {
 //       try {
 //         setLoading(true);
-        
+
 //         // Fetch the opinion
 //         const opinionRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/getSingleOpinion/${id}`);
 //         const opinionData = await opinionRes.json();
@@ -278,6 +278,8 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { FiShare2, FiClock, FiUser } from 'react-icons/fi';
 import { FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaTelegram } from 'react-icons/fa';
+// import { Advertisement } from '@/share/DetailsPageNewsSection';
+import { Advertisement } from '@/share/Advertisement';
 
 interface Opinion {
   id: string;
@@ -303,7 +305,7 @@ export default function OpinionDetails() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
+
         const [opinionRes, relatedRes] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/getSingleOpinion/${id}`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/related?currentId=${id}`)
@@ -354,8 +356,8 @@ export default function OpinionDetails() {
   const shareOnSocial = (platform: string) => {
     const url = window.location.href;
     const text = `${opinion.title} - ${opinion.author.name}`;
-    
-    switch(platform) {
+
+    switch (platform) {
       case 'facebook':
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
         break;
@@ -487,7 +489,7 @@ export default function OpinionDetails() {
           )}
 
           {/* Article Content */}
-          <div 
+          <div
             className="prose max-w-none text-gray-800 text-lg leading-relaxed"
             dangerouslySetInnerHTML={{ __html: opinion.content }}
           />
@@ -498,7 +500,7 @@ export default function OpinionDetails() {
               <h3 className="text-lg font-medium text-gray-900 mb-3">ট্যাগসমূহ:</h3>
               <div className="flex flex-wrap gap-2">
                 {opinion.tags.map(tag => (
-                  <Link 
+                  <Link
                     key={tag}
                     href={`/opinions/tags/${tag}`}
                     className="px-4 py-2 bg-gray-100 text-gray-800 text-sm rounded-full hover:bg-gray-200 transition-colors"
@@ -513,6 +515,10 @@ export default function OpinionDetails() {
 
         {/* Sidebar */}
         <div className="lg:w-1/3 space-y-8">
+
+          {/* <Advertisement position='Sidebar' /> */}
+          <Advertisement/>
+
           {/* Related Opinions */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 className="font-bold text-xl text-gray-900 mb-6 pb-3 border-b border-gray-200">
@@ -520,8 +526,8 @@ export default function OpinionDetails() {
             </h3>
             <div className="space-y-5">
               {relatedOpinions.map((item) => (
-                <Link 
-                  key={item.id} 
+                <Link
+                  key={item.id}
                   href={`/news/opinions/${item.id}`}
                   className="block group transition"
                 >
@@ -561,14 +567,14 @@ export default function OpinionDetails() {
             <h3 className="font-bold text-lg text-blue-800 mb-3">নিউজলেটার সাবস্ক্রাইব করুন</h3>
             <p className="text-sm text-blue-700 mb-4">সর্বশেষ মতামত এবং খবর পেতে ইমেইল নিবন্ধন করুন</p>
             <form className="space-y-3">
-              <input 
-                type="email" 
-                placeholder="আপনার ইমেইল ঠিকানা" 
+              <input
+                type="email"
+                placeholder="আপনার ইমেইল ঠিকানা"
                 className="w-full px-4 py-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 required
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
               >
                 সাবস্ক্রাইব করুন
@@ -603,8 +609,8 @@ export default function OpinionDetails() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {relatedOpinions.slice(0, 3).map((item) => (
-            <Link 
-              key={item.id} 
+            <Link
+              key={item.id}
               href={`/news/opinions/${item.id}`}
               className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
             >
@@ -643,8 +649,8 @@ export default function OpinionDetails() {
           ))}
         </div>
         <div className="mt-8 text-center">
-          <Link 
-            href="/opinions" 
+          <Link
+            href="/opinions"
             className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             সকল মতামত দেখুন

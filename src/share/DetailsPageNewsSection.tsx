@@ -14,7 +14,7 @@ const getTitleForDescription = async (category: string): Promise<NewsItem[]> => 
 }
 
 // Advertisement component
-const Advertisement = ({ position }: { position: string }) => {
+export const Advertisement = ({ position }: { position: string }) => {
     return (
         <div className="my-6 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
             <p className="text-xs text-gray-500 mb-2">Advertisement</p>
