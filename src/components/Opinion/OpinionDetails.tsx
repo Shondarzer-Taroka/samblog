@@ -288,6 +288,9 @@ interface Opinion {
   content: string;
   imageUrl: string;
   createdAt: string;
+  likesCount: number;
+  commentsCount: number;
+  isLiked: boolean;
   author: {
     name: string;
     image?: string;
@@ -497,14 +500,19 @@ export default function OpinionDetails() {
               dangerouslySetInnerHTML={{ __html: opinion.content }}
             />
 
+
+
             <LikeComment
-              initialLikes={42}
-              initialComments={5}
-              initialIsLiked={false}
-              onLike={(liked) => console.log(liked ? 'Liked!' : 'Unliked')}
-              onComment={() => console.log('Comment clicked')}
-              onShare={() => console.log('Share clicked')}
+              opinionId={opinion.id}
+              initialLikes={opinion.likesCount || 0}
+              initialComments={opinion.commentsCount || 0}
+              initialIsLiked={opinion.isLiked || false}
             />
+
+
+
+
+
           </div>
 
 
