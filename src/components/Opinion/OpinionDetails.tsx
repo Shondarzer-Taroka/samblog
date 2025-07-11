@@ -91,7 +91,7 @@ export default function OpinionDetails() {
                   alt={opinion.author.name}
                   width={48}
                   height={48}
-                  className="object-cover"
+                  className="object-cover rounded-full w-[48px] h-[48px]"
                 />
               </div>
             )}
@@ -214,7 +214,7 @@ export default function OpinionDetails() {
                 className="object-cover"
               />
             </div>
-            <p className="text-sm text-green-700">Limited time discount - Don't miss out!</p>
+            <p className="text-sm text-green-700">Limited time discount - Don&#39;t miss out!</p>
           </div>
         </div>
       </div>
