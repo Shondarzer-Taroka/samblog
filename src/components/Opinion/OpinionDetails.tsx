@@ -278,8 +278,9 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { FiShare2, FiClock, FiUser } from 'react-icons/fi';
 import { FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaTelegram } from 'react-icons/fa';
-// import { Advertisement } from '@/share/DetailsPageNewsSection';
-import { Advertisement } from '@/share/Advertisement';
+import { Advertisement } from '@/share/DetailsPageNewsSection';
+import LikeComment from '@/share/LikeComment';
+// import { Advertisement } from '@/share/Advertisement';
 
 interface Opinion {
   id: string;
@@ -489,10 +490,25 @@ export default function OpinionDetails() {
           )}
 
           {/* Article Content */}
-          <div
-            className="prose max-w-none text-gray-800 text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: opinion.content }}
-          />
+
+          <div>
+            <div
+              className="prose max-w-none text-gray-800 text-lg leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: opinion.content }}
+            />
+
+            <LikeComment
+              initialLikes={42}
+              initialComments={5}
+              initialIsLiked={false}
+              onLike={(liked) => console.log(liked ? 'Liked!' : 'Unliked')}
+              onComment={() => console.log('Comment clicked')}
+              onShare={() => console.log('Share clicked')}
+            />
+          </div>
+
+
+
 
           {/* Tags */}
           {opinion.tags && opinion.tags.length > 0 && (
@@ -516,8 +532,9 @@ export default function OpinionDetails() {
         {/* Sidebar */}
         <div className="lg:w-1/3 space-y-8">
 
-          {/* <Advertisement position='Sidebar' /> */}
-          <Advertisement/>
+          <Advertisement position='Sidebar' />
+
+
 
           {/* Related Opinions */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
@@ -601,6 +618,9 @@ export default function OpinionDetails() {
           </div>
         </div>
       </div>
+
+
+
 
       {/* More Opinions Section */}
       <div className="mt-16">
