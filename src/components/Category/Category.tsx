@@ -159,7 +159,7 @@ const Category = ({ category }: { category: string }) => {
                 {/* ---------- RIGHT‑SIDE AD ---------- */}
                 <aside className="hidden lg:block w-[300px] sticky top-24">
                     <Advertisement
-                        src="https://tpc.googlesyndication.com/simgad/4478729317642725440"
+                        src="https://tpc.googlesyndication.com/simgad/16100251881965925614"
                         href="https://your-advertiser.com"
                         alt="Buy your dream laptop today!"
                         orientation="vertical"   /* 300×600 */
