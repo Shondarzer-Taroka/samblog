@@ -11,7 +11,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FaHeart, FaRegHeart, FaComment, FaRegComment, FaShare, FaEllipsisH } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaComment, FaRegComment, FaShare, FaEllipsisH, FaUserAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import useSWR from 'swr';
 import axios from 'axios';
@@ -83,6 +83,8 @@ export default function LikeComment({
           withCredentials: true
         });
         setComment('');
+        console.log(data);
+        
         setCommentCount(data.commentCount);
         mutateComments();
       } catch (error) {
@@ -162,7 +164,7 @@ export default function LikeComment({
               <div className="flex space-x-3">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-500">👤</span>
+                    <span className="text-gray-500"><FaUserAlt/></span>
                   </div>
                 </div>
                 <div className="flex-1">
@@ -210,7 +212,7 @@ export default function LikeComment({
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-gray-500">👤</span>
+                        <span className="text-gray-500"><FaUserAlt className="text-gray-500 w-5 h-5" /></span>
                       )}
                     </div>
                   </div>

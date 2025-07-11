@@ -304,6 +304,7 @@ export default function OpinionDetails() {
   const [opinion, setOpinion] = useState<Opinion | null>(null);
   const [relatedOpinions, setRelatedOpinions] = useState<Opinion[]>([]);
   const [loading, setLoading] = useState(true);
+console.log(opinion);
 
   useEffect(() => {
     const fetchData = async () => {
