@@ -39,6 +39,8 @@ export default function UpdateNewsPage() {
   }, [id, showToast]);
 
   const handleSubmit = async (data: any) => {
+    console.log(data,'submit');
+    
     setIsSubmitting(true);
     
     try {
