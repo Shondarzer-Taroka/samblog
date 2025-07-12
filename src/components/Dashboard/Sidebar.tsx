@@ -2,6 +2,7 @@
 import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi';
 import Link from 'next/link';
 import { ClipboardPen, Newspaper } from 'lucide-react';
+import { useAuthProvider } from '@/Providers/AuthProvider';
 
 
 const links = [
@@ -15,6 +16,7 @@ const links = [
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
+    const {loading,logout,user}=useAuthProvider()
     return (
         <aside
             className={`bg-gray-900 text-white w-64 space-y-4 px-4 py-6 
