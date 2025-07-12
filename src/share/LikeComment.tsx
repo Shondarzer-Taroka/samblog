@@ -1,19 +1,24 @@
-
-
-
-
-
-
-
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { FaHeart, FaRegHeart, FaComment, FaRegComment, FaShare, FaEllipsisH, FaUserAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { 
+  FaHeart, 
+  FaRegHeart, 
+  FaComment, 
+  FaRegComment, 
+  FaShare, 
+  FaEllipsisH, 
+  FaUserAlt, 
+  FaEdit, 
+  FaTrash, 
+  FaTimes, 
+  FaCheck 
+} from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 
 interface LikeCommentProps {
@@ -21,8 +26,20 @@ interface LikeCommentProps {
   initialLikes: number;
   initialComments: number;
   initialIsLiked: boolean;
+  currentUserId?: string;
   onComment?: () => void;
   onShare?: () => void;
+}
+
+interface Comment {
+  id: string;
+  content: string;
+  createdAt: string;
+  user: {
+    id: string;
+    name: string;
+    image?: string;
+  };
 }
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -32,6 +49,7 @@ export default function LikeComment({
   initialLikes = 0,
   initialComments = 0,
   initialIsLiked = false,
+  currentUserId,
   onComment,
   onShare,
 }: LikeCommentProps) {
@@ -40,29 +58,38 @@ export default function LikeComment({
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [comment, setComment] = useState('');
   const [commentCount, setCommentCount] = useState(initialComments);
+  const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const [editCommentContent, setEditCommentContent] = useState('');
 
-  // Fetch like status on mount
-  const { data: likeData } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/like-status`, fetcher, {
-    revalidateOnFocus: false,
-    fallbackData: { liked: initialIsLiked, likeCount: initialLikes }
-  });
+  // Fetch like status
+  const { data: likeData } = useSWR(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/like-status`, 
+    fetcher, 
+    {
+      revalidateOnFocus: false,
+      fallbackData: { liked: initialIsLiked, likeCount: initialLikes }
+    }
+  );
 
-  // Fetch comments with pagination
-  const { data: commentsData, mutate: mutateComments } = useSWR(
-    showCommentBox ? `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments?page=1&limit=5` : null,
+  // Fetch comments
+  const { data: commentsData } = useSWR(
+    showCommentBox ? `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments?page=1&limit=10` : null,
     fetcher
   );
 
-  useEffect(() => {
-    if (likeData) {
-      setIsLiked(likeData.liked);
-      setLikes(likeData.likeCount);
-    }
-  }, [likeData]);
+  // Update state when data changes
+  if (likeData && (likeData.liked !== isLiked || likeData.likeCount !== likes)) {
+    setIsLiked(likeData.liked);
+    setLikes(likeData.likeCount);
+  }
 
   const handleLike = async () => {
     try {
-      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/like`);
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/like`,
+        {},
+        { withCredentials: true }
+      );
       setIsLiked(data.liked);
       setLikes(data.likeCount);
     } catch (error) {
@@ -72,30 +99,72 @@ export default function LikeComment({
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (comment.trim()) {
-      try {
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments`, {
-          content: comment
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+    if (!comment.trim()) return;
+
+    try {
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments`,
+        { content: comment },
+        {
+          headers: { 'Content-Type': 'application/json' },
           withCredentials: true
-        });
-        setComment('');
-        console.log(data);
-        
-        setCommentCount(data.commentCount);
-        mutateComments();
-      } catch (error) {
-        
-        console.error('Comment failed:', error);
-        if (axios.isAxiosError(error) && error.response?.status === 401) {
-          // Handle authentication required
-          alert('Please login to comment');
         }
+      );
+      
+      setComment('');
+      setCommentCount(data.commentCount);
+      mutate(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments?page=1&limit=10`);
+    } catch (error) {
+      console.error('Comment failed:', error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        alert('Please login to comment');
       }
     }
+  };
+
+  const handleUpdateComment = async (commentId: string) => {
+    if (!editCommentContent.trim()) return;
+    
+    try {
+      const { data } = await axios.put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/comments/${commentId}`,
+        { content: editCommentContent },
+        { withCredentials: true }
+      );
+      
+      setEditingCommentId(null);
+      setEditCommentContent('');
+      setCommentCount(data.commentCount);
+      mutate(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments?page=1&limit=10`);
+    } catch (error) {
+      console.error('Update comment failed:', error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    if (!window.confirm('Are you sure you want to delete this comment?')) return;
+    
+    try {
+      const { data } = await axios.delete(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/comments/${commentId}`,
+        { withCredentials: true }
+      );
+      
+      setCommentCount(data.commentCount);
+      mutate(`${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/comments?page=1&limit=10`);
+    } catch (error) {
+      console.error('Delete comment failed:', error);
+    }
+  };
+
+  const startEditing = (comment: Comment) => {
+    setEditingCommentId(comment.id);
+    setEditCommentContent(comment.content);
+  };
+
+  const cancelEditing = () => {
+    setEditingCommentId(null);
+    setEditCommentContent('');
   };
 
   return (
@@ -108,6 +177,7 @@ export default function LikeComment({
           className={`flex items-center space-x-1 px-4 py-2 rounded-full transition-colors ${
             isLiked ? 'text-red-500' : 'text-gray-500 hover:text-gray-700'
           }`}
+          aria-label={isLiked ? 'Unlike' : 'Like'}
         >
           {isLiked ? (
             <motion.div
@@ -130,6 +200,7 @@ export default function LikeComment({
             onComment?.();
           }}
           className="flex items-center space-x-1 px-4 py-2 rounded-full text-gray-500 hover:text-blue-500 transition-colors"
+          aria-label={showCommentBox ? 'Hide comments' : 'Show comments'}
         >
           {showCommentBox ? <FaComment className="text-blue-500" /> : <FaRegComment />}
           <span className="text-sm font-medium">{commentCount}</span>
@@ -139,13 +210,17 @@ export default function LikeComment({
         <button
           onClick={onShare}
           className="flex items-center space-x-1 px-4 py-2 rounded-full text-gray-500 hover:text-green-500 transition-colors"
+          aria-label="Share"
         >
           <FaShare />
           <span className="text-sm font-medium">Share</span>
         </button>
 
         {/* Options Button */}
-        <button className="p-2 rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+        <button 
+          className="p-2 rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+          aria-label="More options"
+        >
           <FaEllipsisH />
         </button>
       </div>
@@ -160,11 +235,12 @@ export default function LikeComment({
             transition={{ duration: 0.3 }}
             className="px-4 overflow-hidden"
           >
-            <form onSubmit={handleCommentSubmit} className="space-y-3">
+            {/* Comment Form */}
+            <form onSubmit={handleCommentSubmit} className="space-y-3 mb-4">
               <div className="flex space-x-3">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-500"><FaUserAlt/></span>
+                    <FaUserAlt className="text-gray-500" />
                   </div>
                 </div>
                 <div className="flex-1">
@@ -174,6 +250,7 @@ export default function LikeComment({
                     placeholder="Write a comment..."
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent resize-none"
                     rows={2}
+                    aria-label="Comment input"
                   />
                 </div>
               </div>
@@ -200,9 +277,9 @@ export default function LikeComment({
             </form>
 
             {/* Comments List */}
-            <div className="mt-4 space-y-4">
-              {commentsData?.comments?.map((comment: any) => (
-                <div key={comment.id} className="flex space-x-3">
+            <div className="space-y-4">
+              {commentsData?.comments?.map((comment: Comment) => (
+                <div key={comment.id} className="flex space-x-3 group">
                   <div className="flex-shrink-0">
                     <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                       {comment.user.image ? (
@@ -212,34 +289,68 @@ export default function LikeComment({
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-gray-500"><FaUserAlt className="text-gray-500 w-5 h-5" /></span>
+                        <FaUserAlt className="text-gray-500 w-5 h-5" />
                       )}
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-medium text-sm">{comment.user.name}</span>
-                        <span className="text-xs text-gray-400">
-                          {new Date(comment.createdAt).toLocaleString()}
-                        </span>
+                  <div className="flex-1 relative">
+                    {editingCommentId === comment.id ? (
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <textarea
+                          value={editCommentContent}
+                          onChange={(e) => setEditCommentContent(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none"
+                          rows={3}
+                          aria-label="Edit comment"
+                        />
+                        <div className="flex justify-end space-x-2 mt-2">
+                          <button
+                            onClick={cancelEditing}
+                            className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800 flex items-center"
+                          >
+                            <FaTimes className="mr-1" /> Cancel
+                          </button>
+                          <button
+                            onClick={() => handleUpdateComment(comment.id)}
+                            className="px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center"
+                          >
+                            <FaCheck className="mr-1" /> Save
+                          </button>
+                        </div>
                       </div>
-                      <p className="mt-1 text-sm text-gray-700">{comment.content}</p>
-                    </div>
+                    ) : (
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium text-sm">{comment.user.name}</span>
+                          <span className="text-xs text-gray-400">
+                            {new Date(comment.createdAt).toLocaleString()}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-sm text-gray-700">{comment.content}</p>
+                        
+                        {currentUserId === comment.user.id && (
+                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2">
+                            <button
+                              onClick={() => startEditing(comment)}
+                              className="p-1 text-gray-500 hover:text-blue-500 transition-colors"
+                              aria-label="Edit comment"
+                            >
+                              <FaEdit size={14} />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteComment(comment.id)}
+                              className="p-1 text-gray-500 hover:text-red-500 transition-colors"
+                              aria-label="Delete comment"
+                            >
+                              <FaTrash size={14} />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
-              
-              {commentsData?.hasMore && (
-                <button
-                  onClick={async () => {
-                    // Implement pagination loading here
-                  }}
-                  className="w-full py-2 text-sm text-blue-500 hover:text-blue-700 transition-colors"
-                >
-                  Load more comments...
-                </button>
-              )}
             </div>
           </motion.div>
         )}
