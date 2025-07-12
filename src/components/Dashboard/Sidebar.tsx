@@ -1,7 +1,8 @@
 'use client';
 import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi';
 import Link from 'next/link';
-import { Newspaper } from 'lucide-react';
+import { ClipboardPen, Newspaper } from 'lucide-react';
+
 
 const links = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/' },
@@ -10,15 +11,12 @@ const links = [
     { label: 'সেটিংস', icon: <FiSettings />, href: '#' },
     { label: 'ই-পেপার', icon: <FiPaperclip />, href: '/news/dashboard/epapers/list' },
     { label: 'খবর', icon: <Newspaper />, href: '/news/dashboard/allNews' },
+    { label: 'মতামত', icon: <ClipboardPen />, href: '/news/dashboard/opinions' },
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
     return (
         <aside
-            //   className={`bg-gray-900 text-white w-64 space-y-4 px-4 py-6 fixed md:sticky top-0 left-0 z-50 transform transition-transform duration-300 ${
-            //     isOpen ? 'translate-x-0' : '-translate-x-full md:-translate-x-full'
-            //   } md:translate-x-0`}
-
             className={`bg-gray-900 text-white w-64 space-y-4 px-4 py-6 
         fixed md:sticky  md:top-0 h-screen z-50 
         transform transition-transform duration-300 
