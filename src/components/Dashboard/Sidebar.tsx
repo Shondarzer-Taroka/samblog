@@ -75,7 +75,7 @@ const allLinks = [
     { label: 'সেটিংস', icon: <FiSettings />, href: '#', roles: ['admin'] },
     { label: 'ই-পেপার', icon: <FiPaperclip />, href: '/news/dashboard/epapers/list', roles: ['admin'] },
     { label: 'খবর', icon: <Newspaper />, href: '/news/dashboard/allNews', roles: ['admin', 'editor'] },
-    { label: 'মতামত', icon: <ClipboardPen />, href: '/news/dashboard/opinions', roles: ['admin', 'user'] },
+    { label: 'মতামত', icon: <ClipboardPen />, href: '/news/dashboard/opinion', roles: ['admin', 'user'] },
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
