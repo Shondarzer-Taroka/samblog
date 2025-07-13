@@ -23,7 +23,7 @@
 
 
 .more-read-btn:hover{
-  
+  @apply bg-gradient-to-r from-orange-500 to-red-500
 }
 
 
