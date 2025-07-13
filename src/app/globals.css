@@ -19,19 +19,39 @@
 
 .more-read-btn {
   transition: all .5s;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   color: black;
-  @apply bg-gradient-to-r from-orange-500 to-red-500
+  position: relative;
+  font-size: 1.5rem;
+  z-index: 1;
+  transition: .5s;
+  /* @apply bg-gradient-to-r from-orange-500 to-red-500 */
+  background: red;
 }
 
-.more-read-btn::before{
+.more-read-btn:hover{
+  color: white;
+}
+
+.more-read-btn::before {
   content: '';
   position: absolute;
-  z-index: 1;
-  transform-origin: calc(1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 8px;
+  z-index: -1;
+  transform-origin: left;
+  transition: transform 0.5s ease;
+  transform: scaleX(1);
 }
 
-.more-read-btn:hover {
+.more-read-btn:hover::before {
+  transform-origin: right;
+  transition: transform 0.5s ease;
+  transform: scaleX(0);
   border: none;
   color: white;
 
