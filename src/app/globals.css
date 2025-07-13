@@ -26,6 +26,7 @@
 
 .more-read-btn:hover{
   border: none;
+  color: white;
   @apply bg-gradient-to-r from-orange-500 to-red-500
 }
 
