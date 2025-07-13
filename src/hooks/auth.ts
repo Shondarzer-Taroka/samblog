@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 export async function getUserFromCookie() {
   const cookieStore = await cookies(); // ✅ Await here
   const token = cookieStore.get('refreshToken')?.value;
-  console.log(token);
+  console.log(token,'tok in auth.ts');
 
   if (!token) return null;
 

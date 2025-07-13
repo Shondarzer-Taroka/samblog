@@ -1,11 +1,18 @@
+'use client'
 import DashboardCards from "@/components/Dashboard/DashboardCards";
+import { useAuthProvider } from "@/Providers/AuthProvider";
 
-import { getUserFromCookie } from "@/hooks/auth";
+// import { getUserFromCookie } from "@/hooks/auth";
 import { redirect } from "next/navigation";
 
-export default async function DashboardPage() {
-  const user = await getUserFromCookie();
+export default  function DashboardPage() {
+  // const user = await getUserFromCookie();
+  const {user,loading}=useAuthProvider()
+  if (loading) {
+    return  <p className="text-center py-10">লোড হচ্ছে...</p>
+  }
 
+  
   if (!user?.email) {
     return redirect('/login'); // ✅ server-side redirect
   }

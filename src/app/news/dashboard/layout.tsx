@@ -11,9 +11,11 @@ import { useState } from 'react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const { user } = useAuthProvider()
+  const { user, loading } = useAuthProvider()
 
-
+if (loading) {
+  return  <p className="text-center py-10">লোড হচ্ছে...</p>
+}
   return (
     //  <RouteProtector>
     <AuthMiddleware>
