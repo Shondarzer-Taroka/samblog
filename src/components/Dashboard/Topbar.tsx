@@ -24,7 +24,7 @@ export default function Topbar({
         <button className="text-2xl md:hidden" onClick={toggleSidebar}>
           {isSidebarOpen ? <FiX /> : <FiMenu />}
         </button>
-        <h1 className="text-xl font-semibold">স্বাগতম, অ্যাডমিন!</h1>
+        <h1 className="text-xl font-semibold">স্বাগতম, {user?.role ==='user' && 'ইউজার' || user?.role ==='admin' && "অ্যাডমিন!"}</h1>
       </div>
       {loading ? <h1>loading...</h1> : <button className="flex items-center gap-2 bg-black text-white px-4 py-1 rounded">
         {<> { user?.image ? <Image alt='profile' src={user?.image} width={30} height={30} className='rounded-full w-[30px] h-[30px]' />: <FiUser />} </> }

@@ -1,5 +1,4 @@
 'use client'
-import { useAuthProvider } from '@/Providers/AuthProvider';
 import React from 'react';
 import OpinionForm from './OpinionForm';
 

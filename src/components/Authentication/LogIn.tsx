@@ -65,39 +65,6 @@ const Login = () => {
   };
 
 
-// const handleSubmit = async (e: React.FormEvent) => {
-//   e.preventDefault();
-
-//   try {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/login`, {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(formData),
-//       credentials: 'include' // Important for cookies
-//     });
-
-//     if (res.ok) {
-//       // First verify the cookie was set
-//       const authCheck = await fetch('/api/auth/check', {
-//         credentials: 'include'
-//       });
-
-//       if (authCheck.ok) {
-//         const urlParams = new URLSearchParams(window.location.search)
-//         const redirect = urlParams.get('redirect') || '/news/dashboard'
-//         window.location.href = redirect
-//       } else {
-//         throw new Error('Authentication check failed after login')
-//       }
-//     } else {
-//       // Handle login error
-//     }
-//   } catch (error) {
-//     console.error('Login error:', error)
-//     // Show error to user
-//   }
-// };
-
   return (
     <section className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-center">
       <form
