@@ -18,11 +18,11 @@
 
 
 .more-read-btn{
-  font-size: xx-small;
+ transition: all .5s;
 }
 
 
-.more-read-btn:{
+.more-read-btn:hover{
   font-size: xx-small;
 }
 
