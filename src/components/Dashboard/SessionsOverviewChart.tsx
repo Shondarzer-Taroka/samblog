@@ -517,12 +517,14 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  console.log(data,'dash');
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [dashboardRes, historicalRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`),
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/historical`)
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,{credentials:'include'}),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/historical`,{credentials:'include'})
         ]);
         
         if (!dashboardRes.ok || !historicalRes.ok) {
@@ -577,7 +579,8 @@ const Dashboard = () => {
         { period: 'Year', count: modelData.year },
       ];
 
-      const width = container.node()?.getBoundingClientRect().width || 300;
+      const width = (container.node() as HTMLElement)?.getBoundingClientRect().width || 300;
+;
       const height = 200;
       const margin = { top: 20, right: 20, bottom: 40, left: 40 };
 
@@ -649,7 +652,7 @@ const Dashboard = () => {
     const container = d3.select('#trend-chart');
     container.selectAll('*').remove();
 
-    const width = container.node()?.getBoundingClientRect().width || 800;
+    const width = (container.node() as HTMLElement)?.getBoundingClientRect().width  || 800;
     const height = 400;
     const margin = { top: 20, right: 30, bottom: 40, left: 50 };
 
@@ -745,7 +748,7 @@ const Dashboard = () => {
       { label: 'Likes', value: data.likes.year, color: '#EF4444' },
     ];
 
-    const width = container.node()?.getBoundingClientRect().width || 400;
+    const width = (container.node() as HTMLElement)?.getBoundingClientRect().width ||  400;
     const height = 400;
     const radius = Math.min(width, height) / 2 - 20;
 
@@ -838,7 +841,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+    <div className=" bg-gray-50 p-4 md:p-6">
       <header className="mb-6 md:mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Admin Dashboard</h1>
         <p className="text-gray-600">Overview of your application metrics</p>
@@ -887,17 +890,17 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
-        <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow">
+        <div className=" hover:shadow-lg transition-shadow">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Growth Trends (Last 6 Months)</h3>
           <div id="trend-chart" className="h-80"></div>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow">
+        <div className=" hover:shadow-lg transition-shadow">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Content Distribution (Year)</h3>
           <div id="distribution-chart" className="h-80"></div>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow">
+      <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow mt-[120px]">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Stats (Year)</h3>
         {data && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
