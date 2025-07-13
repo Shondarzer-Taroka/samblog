@@ -23,7 +23,7 @@ export default function UsersPage() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${API_URL}/users`, {
          credentials:'include'
         });
 
@@ -45,7 +45,7 @@ export default function UsersPage() {
 
   const handleRoleChange = async (userId: string, newRole: string) => {
     try {
-      const response = await fetch(`${API_URL}/${userId}/role`, {
+      const response = await fetch(`${API_URL}/users/${userId}/role`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ export default function UsersPage() {
 
   const handleStatusChange = async (userId: string, currentStatus: boolean) => {
     try {
-      const response = await fetch(`${API_URL}/${userId}/status`, {
+      const response = await fetch(`${API_URL}/users/${userId}/status`, {
         method: 'PUT',
        credentials:'include'
       });
@@ -97,7 +97,7 @@ export default function UsersPage() {
     if (!confirm('Are you sure you want to delete this user?')) return;
     
     try {
-      const response = await fetch(`${API_URL}/${userId}`, {
+      const response = await fetch(`${API_URL}/users/${userId}`, {
         method: 'DELETE',
        credentials:'include'
       });
