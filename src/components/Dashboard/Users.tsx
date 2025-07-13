@@ -99,7 +99,7 @@ export default function UsersPage() {
     try {
       const response = await fetch(`${API_URL}/${userId}`, {
         method: 'DELETE',
-       
+       credentials:'include'
       });
 
       if (!response.ok) {
