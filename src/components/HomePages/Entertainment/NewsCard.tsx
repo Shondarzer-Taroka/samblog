@@ -54,6 +54,7 @@ interface NewsCardProps {
   time: string;
   category?: string;
   showActions?: boolean;
+  id:string;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ 

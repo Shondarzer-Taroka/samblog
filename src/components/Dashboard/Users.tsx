@@ -131,7 +131,7 @@ export default function UsersPage() {
       {error && (
         <div className="alert error">
           {error}
-          <button onClick={() => setError('')} className="close-btn">
+          <button onClick={() => setError('')} className="close-btn button-of-users">
             &times;
           </button>
         </div>
@@ -140,7 +140,7 @@ export default function UsersPage() {
       {success && (
         <div className="alert success">
           {success}
-          <button onClick={() => setSuccess('')} className="close-btn">
+          <button onClick={() => setSuccess('')} className="close-btn button-of-users">
             &times;
           </button>
         </div>
@@ -192,7 +192,7 @@ export default function UsersPage() {
                   <button
                     onClick={() => handleDelete(user.id)}
                     disabled={user.role === 'admin'}
-                    className="delete-btn"
+                    className="delete-btn button-of-users"
                   >
                     Delete
                   </button>
