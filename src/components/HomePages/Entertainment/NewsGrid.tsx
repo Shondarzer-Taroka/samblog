@@ -30,7 +30,7 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
 
       <div className="col-span-1 space-y-6">
         {
-          data.slice(0, 3).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
+          data.slice(0, 3).map((news, i) => <NewsCard id={news.id} image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
         }
       </div>
 
@@ -48,13 +48,15 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
           title={data[3].title}
           description={stripHtmlAndLimit(data[3].content, 26).short}
           time={getBengaliTimeAgo(data[3].createdAt)}
+          id={data[3].id}
+          category={data[3].category}
         />
       </div>
 
 
       <div className=" space-y-6">
         {
-          data.slice(4, data.length+1).map((news, i) => <NewsCard image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
+          data.slice(4, data.length+1).map((news, i) => <NewsCard id={news.id} image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
         }
       </div>
     </div>

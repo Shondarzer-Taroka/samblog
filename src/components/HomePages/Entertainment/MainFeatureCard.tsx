@@ -8,6 +8,7 @@ interface MainFeatureCardProps {
   description: string;
   time: string;
   category?: string;
+  id:string;
 }
 
 const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
@@ -15,6 +16,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
   title,
   description,
   time,
+  id,
   category,
 }) => {
   return (
