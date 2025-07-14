@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FiClock, FiShare2, FiBookmark, FiHeart } from "react-icons/fi";
 
@@ -20,6 +21,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
   category,
 }) => {
   return (
+    <Link href={`/news/${category}/${id}`} className="block"> 
     <div className="w-full group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
 
       <div className="relative h-48 md:h-52 w-full overflow-hidden">
@@ -27,7 +29,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
@@ -73,6 +75,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
