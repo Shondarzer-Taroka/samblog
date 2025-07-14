@@ -95,7 +95,8 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
       {/* Content */}
       <div className="flex-1 min-w-0 space-y-1.5">
-        <h2 className="text-sm font-semibold text-gray-800 group-hover:text-primary line-clamp-2 transition-colors duration-200 leading-snug">
+        <h2 className="text-sm font-semibold text-gray-800 group-hover:text-primary line-clamp-2 
+         duration-200 leading-snug group-hover:text-red-600 transition-colors">
           {title}
         </h2>
         
