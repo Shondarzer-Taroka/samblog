@@ -4,6 +4,10 @@ import React from 'react';
 
 const MyProfile = () => {
     const{user, loading}=useAuthProvider()
+
+    if (loading) {
+        
+    }
     return (
         <div>
             
