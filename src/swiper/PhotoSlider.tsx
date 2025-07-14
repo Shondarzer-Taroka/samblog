@@ -267,7 +267,7 @@ const PhotoSliderWithNews: React.FC = () => {
         {/* Photo Slider - Left Side */}
         <div className="lg:w-2/3 h-full">
           <div className="relative group overflow-hidden rounded-xl shadow-xl h-full flex flex-col">
-            <div className="relative flex-grow">
+            <div className="relative flex-grow overflow-hidden">
               <h2 className="absolute top-4 left-4 z-20 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 গ্যালারি
               </h2>
