@@ -232,8 +232,7 @@ export default function UsersPage() {
           100% { transform: rotate(360deg); }
         }
 
-        /* Add all other CSS styles from previous example */
-        /* ... */
+     
       `}</style>
     </div>
   );
