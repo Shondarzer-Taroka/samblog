@@ -67,6 +67,7 @@ import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi
 import Link from 'next/link';
 import { ClipboardPen, Newspaper, UserRoundPen } from 'lucide-react';
 import { useAuthProvider } from '@/Providers/AuthProvider';
+import { FaClosedCaptioning } from 'react-icons/fa';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/', roles: ['admin', 'editor', 'user'] },
@@ -80,14 +81,14 @@ const allLinks = [
 ];
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
-    const { loading,user } = useAuthProvider();
+    const { loading, user } = useAuthProvider();
 
     if (loading) {
         return <div className='bg-gray-900 text-white w-64 space-y-4 px-4 py-6 
         fixed md:sticky  md:top-0 h-screen z-50 
         transform transition-transform duration-300'>
 
-             <p className="mt-4 text-lg font-medium flex justify-center items-center">লোড হচ্ছে...</p>
+            <p className="mt-4 text-lg font-medium flex justify-center items-center">লোড হচ্ছে...</p>
         </div>
     }
 
@@ -102,6 +103,11 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
         transform transition-transform duration-300 
         ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
         >
+
+            <div>
+                <FaClosedCaptioning />
+            </div>
+
             <h2 className="text-2xl font-bold mb-6">ড্যাশবোর্ড</h2>
             <ul className="space-y-4">
                 {filteredLinks.map((link) => (
