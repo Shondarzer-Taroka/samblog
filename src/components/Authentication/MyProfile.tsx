@@ -3,7 +3,7 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import React from 'react';
 
 const MyProfile = () => {
-    useAuthProvider()
+    const{}=useAuthProvider()
     return (
         <div>
             
