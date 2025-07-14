@@ -65,12 +65,12 @@
 
 import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip } from 'react-icons/fi';
 import Link from 'next/link';
-import { ClipboardPen, Newspaper } from 'lucide-react';
+import { ClipboardPen, Newspaper, UserRoundPen } from 'lucide-react';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/', roles: ['admin', 'editor', 'user'] },
-    { label: 'আমার প্রোফাইল', icon: <FiHome />, href: '/news/dashboard/myProfile', roles: ['admin', 'editor', 'user'] },
+    { label: 'আমার প্রোফাইল', icon: <UserRoundPen />, href: '/news/dashboard/myProfile', roles: ['admin', 'editor', 'user'] },
     { label: 'লেখা যুক্ত করুন', icon: <FiEdit />, href: '/news/dashboard/createNews', roles: ['admin', 'editor'] },
     { label: 'ইউজার', icon: <FiUsers />, href: '/news/dashboard/allUsers', roles: ['admin'] },
     { label: 'সেটিংস', icon: <FiSettings />, href: '#', roles: ['admin'] },
