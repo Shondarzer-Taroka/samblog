@@ -26,7 +26,7 @@ const MyProfile = () => {
         async function getUserInfo() {
             setSpinner(true)
             const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/users/singleUserInfo/${user?.id}`, { withCredentials: true })
-            const result = res.data
+            const result = res.data?.user
             setUserInfo(result)
             setSpinner(false)
         }
