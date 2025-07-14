@@ -67,7 +67,8 @@ const NewsCard: React.FC<NewsCardProps> = ({
   showActions = true
 }) => {
   return (
-    <Link href={`/news/${category}/${id}`} className="group relative flex items-start gap-4 p-3  hover:bg-gray-50/80 rounded-xl transition-all duration-300 cursor-pointer border  border-gray-200">
+      <Link href={`/news/${category}/${id}`} className="block">
+    <div className=" group relative flex items-start gap-4 p-3  hover:bg-gray-50/80 rounded-xl transition-all duration-300 cursor-pointer border  border-gray-200">
       {/* Image Container */}
       <div className="relative flex-shrink-0 w-28 h-20 rounded-xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow duration-300">
         {image ? (
@@ -75,7 +76,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
             src={image}
             alt={title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
@@ -122,6 +123,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
       {/* Hover indicator */}
       <div className="absolute inset-0 rounded-xl pointer-events-none border-2 border-transparent group-hover:border-primary/20 transition-all duration-300" />
+    </div>
     </Link>
   );
 };
