@@ -280,6 +280,7 @@ import { FiShare2, FiClock, FiUser } from 'react-icons/fi';
 import { FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaTelegram } from 'react-icons/fa';
 import { Advertisement } from '@/share/DetailsPageNewsSection';
 import LikeComment from '@/share/LikeComment';
+import { useAuthProvider } from '@/Providers/AuthProvider';
 // import { Advertisement } from '@/share/Advertisement';
 
 interface Opinion {
@@ -304,8 +305,14 @@ export default function OpinionDetails() {
   const [opinion, setOpinion] = useState<Opinion | null>(null);
   const [relatedOpinions, setRelatedOpinions] = useState<Opinion[]>([]);
   const [loading, setLoading] = useState(true);
-console.log(opinion);
+  const {user,loading:spring}=useAuthProvider()
+  console.log(opinion);
 
+  
+const handleUnauthorized = () => {
+  // Show login modal or redirect
+  alert('Please login to like');
+};
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -344,6 +351,10 @@ console.log(opinion);
         </div>
       </div>
     );
+  }
+
+  if (spring) {
+    return <h1>loading</h1>
   }
 
   if (!opinion) {
@@ -508,6 +519,9 @@ console.log(opinion);
               initialLikes={opinion.likesCount || 0}
               initialComments={opinion.commentsCount || 0}
               initialIsLiked={opinion.isLiked || false}
+              onUnauthorized={handleUnauthorized}
+              currentUserId={user?.id}
+
             />
 
 
