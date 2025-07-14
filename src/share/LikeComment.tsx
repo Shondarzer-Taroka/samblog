@@ -26,6 +26,7 @@ interface LikeCommentProps {
   initialIsLiked: boolean;
   currentUserId?: string;
   onUnauthorized?: () => void;
+  handleShare:()=> void;
 }
 
 interface Comment {
@@ -57,7 +58,6 @@ export default function LikeComment({
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editCommentContent, setEditCommentContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showShareOptions, setShowShareOptions] = useState(false);
   // Fetch like status
   const { data: likeData, mutate: mutateLike } = useSWR(
     `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/opinions/${opinionId}/like-status`,
@@ -206,11 +206,12 @@ export default function LikeComment({
   };
 
 
-    const handleEmail = () => {
-    // Implement email functionality
-    console.log('Emailing article...');
-  };
-  
+
+
+
+
+ 
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between border-t border-b border-gray-100 py-3">

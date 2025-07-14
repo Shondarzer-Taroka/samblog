@@ -306,8 +306,21 @@ export default function OpinionDetails() {
   const [relatedOpinions, setRelatedOpinions] = useState<Opinion[]>([]);
   const [loading, setLoading] = useState(true);
   const {user,loading:spring}=useAuthProvider()
+  const [showShareOptions, setShowShareOptions] = useState(false);
+  
   console.log(opinion);
 
+   const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: opinion?.title,
+        text: opinion?.content.substring(0, 100) + '...',
+        url: window.location.href,
+      }).catch(err => console.log('Error sharing:', err));
+    } else {
+      setShowShareOptions(!showShareOptions);
+    }
+  };
   
 const handleUnauthorized = () => {
   // Show login modal or redirect
@@ -521,7 +534,7 @@ const handleUnauthorized = () => {
               initialIsLiked={opinion.isLiked || false}
               onUnauthorized={handleUnauthorized}
               currentUserId={user?.id}
-
+              handleShare={handleShare}
             />
 
 
