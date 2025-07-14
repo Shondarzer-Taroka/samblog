@@ -48,7 +48,8 @@ export default function LikeComment({
   initialComments = 0,
   initialIsLiked = false,
   currentUserId,
-  onUnauthorized
+  onUnauthorized,
+  handleShare
 }: LikeCommentProps) {
   const [localLiked, setLocalLiked] = useState(initialIsLiked);
   const [localLikes, setLocalLikes] = useState(initialLikes);
@@ -259,6 +260,7 @@ export default function LikeComment({
         <button
           className="flex items-center space-x-1 px-4 py-2 rounded-full text-gray-500 hover:text-green-500 transition-colors"
           aria-label="Share"
+          onClick={handleShare}
         >
           <FaShare />
           <span className="text-sm font-medium">Share</span>
@@ -266,7 +268,7 @@ export default function LikeComment({
 
         {/* Options Button */}
         <button 
-          className="p-2 rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+          className="hidden p-2 rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
           aria-label="More options"
         >
           <FaEllipsisH />
