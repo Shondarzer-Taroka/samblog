@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // 'use client'
 // import { useAuthProvider } from '@/Providers/AuthProvider';
 // import axios from 'axios';
@@ -78,6 +79,7 @@
 'use client'
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import axios from 'axios';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaSpinner } from 'react-icons/fa';
@@ -120,7 +122,7 @@ const MyProfile = () => {
         }
 
         getUserInfo()
-    }, [ user?.id])
+    }, [user?.id])
 
     if (loading || spinner) {
         return (
@@ -142,7 +144,9 @@ const MyProfile = () => {
                 <div className="bg-blue-600 p-4 text-white flex items-center">
                     <div className="mr-4">
                         {userInfo.image ? (
-                            <img
+                            <Image
+                                width={64}
+                                height={64}
                                 src={userInfo.image}
                                 alt="Profile"
                                 className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white object-cover"
@@ -226,9 +230,9 @@ const MyProfile = () => {
 
                 {/* Edit Button */}
                 <div className="px-4 pb-4 md:px-6">
-                    <button 
-                    onClick={()=> router.push(`/news/dashboard/myProfile/${user?.id}`)}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-200">
+                    <button
+                        onClick={() => router.push(`/news/dashboard/myProfile/${user?.id}`)}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-200">
                         প্রোফাইল সম্পাদনা করুন
                     </button>
                 </div>
