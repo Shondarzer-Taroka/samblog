@@ -99,11 +99,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className={clsx(
             "flex-1 flex flex-col",
             "transition-all duration-300 ease-in-out",
-            "mr-1 lg:ml-0" // Match sidebar widths
+            "mr-1 lg:ml-0 " // Match sidebar widths
           )}>
             <Topbar toggleSidebar={toggleSidebar} />
             
-            <main className="flex-1 p-4 md:p-6 bg-gray-50">
+            <main className="flex-1 p-4 md:p-6 bg-gray-50 w-full overflow-x-scroll">
               {children}
             </main>
           </div>
