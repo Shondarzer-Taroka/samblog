@@ -57,7 +57,7 @@
 
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import Image from 'next/image';
-import { FiMenu, FiUser } from 'react-icons/fi';
+import {  FiUser } from 'react-icons/fi';
 import clsx from 'clsx';
 
 export default function Topbar({
@@ -78,9 +78,9 @@ export default function Topbar({
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
         >
-          <FiMenu />
+          {/* <FiMenu /> */}
         </button>
-        <h1 className="text-xl font-semibold text-gray-800">
+        <h1 className="text-xl font-semibold text-gray-800 ml-2.5 md:ml-0">
           {user?.role === 'user' ? 'স্বাগতম ইউজার!' : 
            user?.role === 'admin' ? 'স্বাগতম অ্যাডমিন!' : 
            'ড্যাশবোর্ড'}

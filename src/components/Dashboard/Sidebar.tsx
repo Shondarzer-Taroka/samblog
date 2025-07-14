@@ -155,7 +155,7 @@ export default function Sidebar() {
             'bg-indigo-900 text-white h-screen fixed md:sticky md:top-0 z-50',
             'transition-all duration-300 ease-in-out',
             'flex flex-col',
-            isCollapsed ? 'w-20' : 'w-64'
+            isCollapsed ? 'w-[45px] md:w-20' : 'w-64'
         )}>
             {/* Sidebar Header */}
             <div className={clsx(
@@ -176,14 +176,14 @@ export default function Sidebar() {
             </div>
 
             {/* Sidebar Links */}
-            <nav className="flex-1 overflow-y-auto">
-                <ul className="space-y-2 p-2">
+            <nav className="flex-1 overflow-y-auto custom-scrollbar">
+                <ul className="space-y-2 md:p-2">
                     {filteredLinks.map((link) => (
                         <li key={link.label}>
                             <Link
                                 href={link.href}
                                 className={clsx(
-                                    'flex items-center gap-3 hover:bg-indigo-800 p-3 rounded-lg transition',
+                                    'flex items-center gap-3 hover:bg-indigo-800 p-2 md:p-3 rounded-lg transition',
                                     'whitespace-nowrap overflow-hidden'
                                 )}
                                 title={isCollapsed ? link.label : undefined}
@@ -198,7 +198,7 @@ export default function Sidebar() {
 
             {/* Sidebar Footer */}
             <div className={clsx(
-                'p-4 border-t border-indigo-800',
+                'p-1 md:p-4 border-t border-indigo-800',
                 'flex items-center gap-3',
                 isCollapsed ? 'justify-center' : 'justify-between'
             )}>

@@ -103,7 +103,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           )}>
             <Topbar toggleSidebar={toggleSidebar} />
             
-            <main className="flex-1 p-4 md:p-6 bg-gray-50 w-full overflow-x-scroll">
+            <main className="flex-1 p-4 md:p-6 bg-gray-50 w-[90%] ml-auto md:w-full overflow-x-scroll">
               {children}
             </main>
           </div>

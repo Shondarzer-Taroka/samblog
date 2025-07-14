@@ -465,7 +465,7 @@ const AllNews = () => {
   };
 
   return (
-    <div className="container mx-auto lg:p-4">
+    <div className=" md:container mx-auto lg:p-4">
       <h1 className="text-2xl font-bold mb-6">সমস্ত খবর</h1>
       
       <AlertDialog />
