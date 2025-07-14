@@ -22,7 +22,7 @@
   /* border: 1px solid black; */
   color: black;
   position: relative;
-  font-size: 1.5rem;
+
   z-index: 1;
   transition: .5s;
   /* @apply bg-gradient-to-r from-orange-500 to-red-500 */
