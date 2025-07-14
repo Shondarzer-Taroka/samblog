@@ -111,36 +111,85 @@ const ProfileForm = ({
   const [submitting, setSubmitting] = useState(false);
   const { toast, showToast, hideToast } = useToast();
 
-  useEffect(() => {
-    setDivisions(BdAddress.divisions());
+  // useEffect(() => {
+  //   setDivisions(BdAddress.divisions());
     
-    // If initial data has division, load its districts
-    if (initialData.division) {
-      const selectedDivision = divisions.find(d => d.bn_name === initialData.division);
-      if (selectedDivision) {
-        const divisionDistricts = BdAddress.district(selectedDivision.id);
-        setDistricts(divisionDistricts);
-      }
-    }
+  //   // If initial data has division, load its districts
+  //   if (initialData.division) {
+  //     const selectedDivision = divisions.find(d => d.bn_name === initialData.division);
+  //     if (selectedDivision) {
+  //       const divisionDistricts = BdAddress.district(selectedDivision.id);
+  //       setDistricts(divisionDistricts);
+  //     }
+  //   }
 
-    // If initial data has district, load its thanas
-    if (initialData.district) {
-      const selectedDistrict = districts.find(d => d.bn_name === initialData.district);
-      if (selectedDistrict) {
-        const districtThanas = BdAddress.upazilla(selectedDistrict.id);
-        setThanas(districtThanas);
-      }
-    }
+  //   // If initial data has district, load its thanas
+  //   if (initialData.district) {
+  //     const selectedDistrict = districts.find(d => d.bn_name === initialData.district);
+  //     if (selectedDistrict) {
+  //       const districtThanas = BdAddress.upazilla(selectedDistrict.id);
+  //       setThanas(districtThanas);
+  //     }
+  //   }
 
-    // If initial data has thana, load its unions
-    if (initialData.thana) {
-      const selectedThana = thanas.find(t => t.bn_name === initialData.thana);
-      if (selectedThana) {
-        const thanaUnions = bdUnions().filter((u: { upazilla_id: string }) => u.upazilla_id === selectedThana.id);
-        setUnions(thanaUnions);
-      }
+  //   // If initial data has thana, load its unions
+  //   if (initialData.thana) {
+  //     const selectedThana = thanas.find(t => t.bn_name === initialData.thana);
+  //     if (selectedThana) {
+  //       const thanaUnions = bdUnions().filter((u: { upazilla_id: string }) => u.upazilla_id === selectedThana.id);
+  //       setUnions(thanaUnions);
+  //     }
+  //   }
+  // }, [initialData, divisions, districts, thanas]);
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+  // Load divisions only once
+  if (divisions.length === 0) {
+    setDivisions(BdAddress.divisions());
+  }
+}, []); // Empty dependency array to run only once
+
+useEffect(() => {
+  // Load districts when division changes
+  if (initialData.division && divisions.length > 0) {
+    const selectedDivision = divisions.find(d => d.bn_name === initialData.division);
+    if (selectedDivision) {
+      const divisionDistricts = BdAddress.district(selectedDivision.id);
+      setDistricts(divisionDistricts);
     }
-  }, [initialData, divisions, districts, thanas]);
+  }
+}, [initialData.division, divisions]);
+
+useEffect(() => {
+  // Load thanas when district changes
+  if (initialData.district && districts.length > 0) {
+    const selectedDistrict = districts.find(d => d.bn_name === initialData.district);
+    if (selectedDistrict) {
+      const districtThanas = BdAddress.upazilla(selectedDistrict.id);
+      setThanas(districtThanas);
+    }
+  }
+}, [initialData.district, districts]);
+
+useEffect(() => {
+  // Load unions when thana changes
+  if (initialData.thana && thanas.length > 0) {
+    const selectedThana = thanas.find(t => t.bn_name === initialData.thana);
+    if (selectedThana) {
+      const thanaUnions = bdUnions().filter((u: { upazilla_id: string }) => u.upazilla_id === selectedThana.id);
+      setUnions(thanaUnions);
+    }
+  }
+}, [initialData.thana, thanas]);
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

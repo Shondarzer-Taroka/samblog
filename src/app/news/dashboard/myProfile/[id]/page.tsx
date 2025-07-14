@@ -5,6 +5,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { useToast } from '@/hooks/useToast';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 
@@ -26,7 +27,9 @@ const ProfilePage = () => {
     const { showToast } = useToast();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
-
+    const {id}=useParams()
+    
+    
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -56,7 +59,7 @@ const ProfilePage = () => {
             
             setLoading(true);
             const res = await axios.put(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/users/updateUser/${user.id}`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/users/updateUser/${id}`,
                 formData,
                 { withCredentials: true }
             );

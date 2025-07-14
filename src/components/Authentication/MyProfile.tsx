@@ -120,7 +120,7 @@ const MyProfile = () => {
         }
 
         getUserInfo()
-    }, [user?.email, user?.id])
+    }, [ user?.id])
 
     if (loading || spinner) {
         return (
