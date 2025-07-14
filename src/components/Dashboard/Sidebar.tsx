@@ -70,6 +70,7 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome />, href: '/', roles: ['admin', 'editor', 'user'] },
+    { label: 'আমার প্রোফাইল', icon: <FiHome />, href: '/news/dashboard/myProfile', roles: ['admin', 'editor', 'user'] },
     { label: 'লেখা যুক্ত করুন', icon: <FiEdit />, href: '/news/dashboard/createNews', roles: ['admin', 'editor'] },
     { label: 'ইউজার', icon: <FiUsers />, href: '/news/dashboard/allUsers', roles: ['admin'] },
     { label: 'সেটিংস', icon: <FiSettings />, href: '#', roles: ['admin'] },
