@@ -24,11 +24,21 @@ const MyProfile = () => {
     const [spinner, setSpinner] = useState<boolean>(true)
     useEffect(() => {
         async function getUserInfo() {
-            setSpinner(true)
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/users/singleUserInfo/${user?.id}`, { withCredentials: true })
-            const result = res.data?.user
-            setUserInfo(result)
-            setSpinner(false)
+
+            if (!user?.email) {
+                return
+            }
+            try {
+                setSpinner(true)
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/users/singleUserInfo/${user?.id}`, { withCredentials: true })
+                const result = res.data?.user
+                setUserInfo(result)
+                setSpinner(false)
+            } catch (error) {
+                console.log(error);
+                // console.log(error.message);
+
+            }
         }
 
         getUserInfo()
@@ -38,6 +48,7 @@ const MyProfile = () => {
     if (loading || spinner) {
         return <p className="mt-4 text-lg font-medium text-gray-700">লোড হচ্ছে...</p>
     }
+    console.log(userInfo);
 
 
     return (
