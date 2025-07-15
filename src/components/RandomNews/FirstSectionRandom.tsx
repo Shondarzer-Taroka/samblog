@@ -146,7 +146,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
 
       {/* 4 News cards */}
       <aside className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-        {randomNews.slice(1).map((item, index) => (
+        {randomNews.slice(1,randomNews.length+1).map((item, index) => (
           <div key={index + 987}>
             <NewsCardWrapper
               id={item.id}

@@ -159,7 +159,7 @@ import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 const SecondRandom = ({ data }: { data: NewsItem[] }) => {
     const newsData = Array.isArray(data) ? data.slice(0, 3) : [];
     const newsList1 = Array.isArray(data) ? data.slice(3, 6) : [];
-    const newsList2 = Array.isArray(data) ? data.slice(6, 9) : [];
+    const newsList2 = Array.isArray(data) ? data.slice(6, data.length+1) : [];
 
     return (
         <section className="">
@@ -252,7 +252,7 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                 >
                                     <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full">
                                         <div className="flex gap-3 p-2">
-                                            <div className="relative w-20 h-20 flex-shrink-0">
+                                            <div className="relative w-24 md:w-20 h-24 md:h-20 flex-shrink-0">
                                                 <Image
                                                     src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                                     alt={news.title}
