@@ -295,7 +295,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
         {/* Bottom Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {bottomRow.map((item) => (
-            <Link key={item.id} href={`/news/${item.category}/${item.id}`} className='block group'>
+            <div key={item.id}> 
+            <div  className='block group'>
               <div
                 key={item.id}
                 className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
@@ -319,7 +320,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
+            </div>
           ))}
         </div>
       </div>
