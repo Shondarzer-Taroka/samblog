@@ -66,7 +66,8 @@ export const CATEGORIES = [
   'সংস্কৃতি',
   'আন্তর্জাতিক',
   'সাহিত্য',
-  'মতামত'
+  'মতামত',
+  'ইসলাম'
 ];
 
 export const SUB_CATEGORIES = [
@@ -77,5 +78,6 @@ export const SUB_CATEGORIES = [
   'বিনোদন',
   'প্রযুক্তি',
   'স্বাস্থ্য',
-  'মতামত'
+  'মতামত',
+  'ইসলাম'
 ];
