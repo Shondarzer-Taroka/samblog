@@ -212,78 +212,82 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
 
           {/* Center Column - Featured Story */}
           <div>
-            <NewsCardWrapper href={`/news/${centerMain.category}/${centerMain.id}`} id={centerMain.id}> 
-            <div className='block group'>
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-                <div className="relative h-96 w-full overflow-hidden">
-                  <Image
-                    src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
-                    alt={centerMain.title}
-                    fill
-                    className="object-cover "
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    প্রধান খবর
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
-                    {centerMain.title}
-                  </h2>
-                  <p className="text-gray-600 mb-4">
-                    {stripHtmlAndLimit(centerMain.content, 37).short}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="flex items-center text-sm text-gray-500">
-                      <FaClock className="mr-1" /> {new Date(centerMain.createdAt).toLocaleDateString('bn-BD')}
-                    </span>
-                    <button className="flex items-center text-red-600 hover:text-red-800 font-medium">
-                      বিস্তারিত <FaArrowRight className="ml-2" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </NewsCardWrapper>
-            </div>
-          {/* Right Column */}
-          <div className="space-y-6">
-            {rightColumn.map((item) => (
-              <Link href={`/news/${item.category}/${item.id}`} key={item.id} className='block group'>
-                <div
-                  key={item.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
-                >
-                  <div className="relative h-48 w-full overflow-hidden">
+            <NewsCardWrapper href={`/news/${centerMain.category}/${centerMain.id}`} id={centerMain.id}>
+              <div className='block group'>
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                  <div className="relative h-96 w-full overflow-hidden">
                     <Image
-                      src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
-                      alt={item.title}
+                      src={centerMain.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
+                      alt={centerMain.title}
                       fill
                       className="object-cover "
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      প্রধান খবর
+                    </span>
                   </div>
-                  <div className="p-4 h-[110px]">
-                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
-                      {splitTextByLength(item.title, 5)}
-                    </h3>
-                    <div className="flex items-center justify-between mt-3">
+                  <div className="p-5">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
+                      {centerMain.title}
+                    </h2>
+                    <p className="text-gray-600 mb-4">
+                      {stripHtmlAndLimit(centerMain.content, 37).short}
+                    </p>
+                    <div className="flex items-center justify-between">
                       <span className="flex items-center text-sm text-gray-500">
-                        <FaClock className="mr-1" /> {new Date(item.createdAt).toLocaleDateString('bn-BD')}
+                        <FaClock className="mr-1" /> {new Date(centerMain.createdAt).toLocaleDateString('bn-BD')}
                       </span>
-                      <div className="flex space-x-2">
-                        <button className="text-gray-400 hover:text-red-600 transition-colors">
-                          <FaBookmark size={14} />
-                        </button>
-                        <button className="text-gray-400 hover:text-red-600 transition-colors">
-                          <FaShareAlt size={14} />
-                        </button>
-                      </div>
+                      <button className="flex items-center text-red-600 hover:text-red-800 font-medium">
+                        বিস্তারিত <FaArrowRight className="ml-2" />
+                      </button>
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
+            </NewsCardWrapper>
+          </div>
+          {/* Right Column */}
+          <div className="space-y-6">
+            {rightColumn.map((item) => (
+              <div key={item.id}>
+                <NewsCardWrapper href={`/news/${item.category}/${item.id}`} id={item.id}>
+                <div className='block group'>
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                  >
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image
+                        src={item.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/Ben-Duckett-685ab3e5d7432.gif'}
+                        alt={item.title}
+                        fill
+                        className="object-cover "
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    </div>
+                    <div className="p-4 h-[110px]">
+                      <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
+                        {splitTextByLength(item.title, 5)}
+                      </h3>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="flex items-center text-sm text-gray-500">
+                          <FaClock className="mr-1" /> {new Date(item.createdAt).toLocaleDateString('bn-BD')}
+                        </span>
+                        <div className="flex space-x-2">
+                          <button className="text-gray-400 hover:text-red-600 transition-colors">
+                            <FaBookmark size={14} />
+                          </button>
+                          <button className="text-gray-400 hover:text-red-600 transition-colors">
+                            <FaShareAlt size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                </NewsCardWrapper>
+              </div>
             ))}
           </div>
         </div>
