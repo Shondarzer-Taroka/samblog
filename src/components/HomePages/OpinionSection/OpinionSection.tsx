@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+// /* eslint-disable @next/next/no-img-element */
 
 
 
@@ -173,7 +173,11 @@ import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
 import Image from "next/image";
 import React from "react";
 
-export default function OpinionSection({ data }: { data: NewsItem[] }) {
+interface OpinionItems extends NewsItem {
+  role: string;
+}
+
+export default function OpinionSection({ data }: { data: OpinionItems[] }) {
   // const opinions = [
   //   {
   //     title: "আওয়ামী সমর্থকেরা কাকে ভোট দেবে",
@@ -200,8 +204,8 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
 
   const opinions = data || []
 
-  if (data.length===0) {
-    return <LoadingSpinner/>
+  if (data.length === 0) {
+    return <LoadingSpinner />
   }
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto">
@@ -231,7 +235,7 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
               </span>
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
-              { opinions[0].title}
+              {opinions[0].title}
               {/* এসএসসির ফলাফল যেন আত্মহত্যার কারণ না হয় */}
             </h3>
             <p className="text-gray-600 mb-4 flex-grow">
@@ -274,8 +278,8 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md">
                   {item.imageUrl ? (
                     <Image
-                    width={56}
-                    height={56}
+                      width={56}
+                      height={56}
                       src={item?.author?.image || 'https://randomuser.me/api/portraits/men/42.jpg'}
                       alt="avatar"
                       className="w-full h-full object-cover"
