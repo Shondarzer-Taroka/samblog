@@ -151,6 +151,7 @@ import { useRouter } from 'next/navigation';
 
 interface Story {
   id: string;
+  category:string;
   title: string;
   href?: string;
   highlight?: boolean;
@@ -169,13 +170,13 @@ export default function TopStoriesPage() {
         const latestData = res.data.latest.map((item: any, i: number) => ({
           id: item.id,
           title: item.title,
-          href: `/news/category/${item.id}`,
+          href: `/news/${item.category}/${item.id}`,
           highlight: i === 2, // example: highlight 3rd item
         }));
         const popularData = res.data.mostRead.map((item: any, i: number) => ({
           id: item.id,
           title: item.title,
-          href: `/news/category/${item.id}`,
+          href: `/news/${item.category}/${item.id}`,
         }));
         setLatest(latestData);
         setPopular(popularData);
