@@ -158,8 +158,8 @@ import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
 const SecondRandom = ({ data }: { data: NewsItem[] }) => {
     const newsData = Array.isArray(data) ? data.slice(0, 3) : [];
-    const newsList1 = Array.isArray(data) ? data.slice(3, 6) : [];
-    const newsList2 = Array.isArray(data) ? data.slice(6, data.length+1) : [];
+    const newsList1 = Array.isArray(data) ? data.slice(3, 7) : [];
+    const newsList2 = Array.isArray(data) ? data.slice(7, data.length+1) : [];
 
     return (
         <section className="">
