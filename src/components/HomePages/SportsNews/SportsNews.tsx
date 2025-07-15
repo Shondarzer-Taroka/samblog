@@ -296,6 +296,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {bottomRow.map((item) => (
             <div key={item.id}> 
+            <NewsCardWrapper  href={`/news/${item.category}/${item.id}`} id={item.id}> 
             <div  className='block group'>
               <div
                 key={item.id}
@@ -321,6 +322,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                 </div>
               </div>
             </div>
+            </NewsCardWrapper>
             </div>
           ))}
         </div>
