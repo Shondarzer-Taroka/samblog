@@ -164,7 +164,8 @@
 
 
 
-/* eslint-disable @next/next/no-img-element */
+
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import { NewsItem } from "@/types/news.types";
 import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
@@ -198,6 +199,10 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
   // ];
 
   const opinions = data || []
+
+  if (data.length===0) {
+    return <LoadingSpinner/>
+  }
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto">
       {/* <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center relative pb-4">
@@ -226,7 +231,7 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
               </span>
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
-              { }
+              { opinions[0].title}
               {/* এসএসসির ফলাফল যেন আত্মহত্যার কারণ না হয় */}
             </h3>
             <p className="text-gray-600 mb-4 flex-grow">
@@ -239,14 +244,17 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
                 <Image
                   width={40}
                   height={40}
-                  src={opinions[0].author.image || "https://randomuser.me/api/portraits/men/32.jpg"}
+                  src={opinions[0].author?.image || "https://randomuser.me/api/portraits/men/32.jpg"}
                   // src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt="author"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-700">ড. রফিকুল ইসলাম</p>
+                <p className="text-sm font-semibold text-gray-700">
+                  {/* ড. রফিকুল ইসলাম */}
+                  {opinions[0]?.author?.name}
+                </p>
                 <p className="text-xs text-gray-500">মনোবিজ্ঞানী ও শিক্ষাবিদ</p>
               </div>
             </div>
@@ -265,7 +273,9 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
               <div className="flex-shrink-0 mr-4 relative">
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md">
                   {item.imageUrl ? (
-                    <img
+                    <Image
+                    width={56}
+                    height={56}
                       src={item?.author?.image || 'https://randomuser.me/api/portraits/men/42.jpg'}
                       alt="avatar"
                       className="w-full h-full object-cover"
@@ -291,7 +301,7 @@ export default function OpinionSection({ data }: { data: NewsItem[] }) {
                 </h3>
                 {item.author && (
                   <div className="flex items-center text-sm text-gray-600">
-                    <span className="font-medium mr-1">{item.author.name}</span>
+                    <span className="font-medium mr-1">{item?.author.name}</span>
                     {item.author.email && <span className="text-xs text-gray-500 before:content-['•'] before:mx-1">{item.role}</span>}
                   </div>
                 )}
