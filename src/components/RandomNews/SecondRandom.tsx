@@ -153,7 +153,6 @@ import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimitForArray } from '@/utils/stripAndLimitHtml';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
