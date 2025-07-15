@@ -252,32 +252,32 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                         {/* Two smaller news cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {newsData.slice(1).map((news, idx) => (
-                                <div  key={idx}> 
-                                <NewsCardWrapper id={news.id}  href={`/news/${news.category}/${news.id}`}> 
-                                <div className="block group">
-                                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full">
-                                        <div className="flex gap-3 p-2">
-                                            <div className="relative w-24 md:w-20 h-24 md:h-20 flex-shrink-0">
-                                                <Image
-                                                    src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
-                                                    alt={news.title}
-                                                    fill
-                                                    className="object-cover rounded-md"
-                                                />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-600 transition-colors">
-                                                    {news.title}
-                                                </h3>
-                                                <div className="flex items-center mt-1 text-xs text-gray-500">
-                                                    <FaClock className="mr-1" />
-                                                    <span>{formatBengaliDate(news.createdAt)}</span>
+                                <div key={idx}>
+                                    <NewsCardWrapper id={news.id} href={`/news/${news.category}/${news.id}`}>
+                                        <div className="block group">
+                                            <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full">
+                                                <div className="flex gap-3 p-2">
+                                                    <div className="relative w-24 md:w-20 h-24 md:h-20 flex-shrink-0">
+                                                        <Image
+                                                            src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
+                                                            alt={news.title}
+                                                            fill
+                                                            className="object-cover rounded-md"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-600 transition-colors">
+                                                            {news.title}
+                                                        </h3>
+                                                        <div className="flex items-center mt-1 text-xs text-gray-500">
+                                                            <FaClock className="mr-1" />
+                                                            <span>{formatBengaliDate(news.createdAt)}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                </NewsCardWrapper>
+                                    </NewsCardWrapper>
                                 </div>
                             ))}
                         </div>
@@ -286,32 +286,35 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                     {/* Right Column */}
                     <div className="space-y-4">
                         {newsList2.map((news, index) => (
-                            <div key={index} > 
-                            <NewsCardWrapper> 
-                            <div className="block group">
-                                <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-                                    <div className="flex gap-4 p-2">
-                                        <div className="relative w-24 h-24 flex-shrink-0">
-                                            <Image
-                                                src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
-                                                alt={news.title}
-                                                fill
-                                                className="object-cover rounded-md group-hover:opacity-90 transition-opacity"
-                                            />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-md font-semibold text-gray-800 group-hover:text-red-600 transition-colors leading-snug">
-                                                {news.title}
-                                            </h3>
-                                            <div className="flex items-center mt-2 text-xs text-gray-500">
-                                                <FaClock className="mr-1" />
-                                                <span>{formatBengaliDate(news.createdAt)}</span>
+                            <div key={index} >
+                                <NewsCardWrapper
+                                    href={`/news/${news.category}/${news.id}`}
+                                    id={news.id}
+                                >
+                                    <div className="block group">
+                                        <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+                                            <div className="flex gap-4 p-2">
+                                                <div className="relative w-24 h-24 flex-shrink-0">
+                                                    <Image
+                                                        src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
+                                                        alt={news.title}
+                                                        fill
+                                                        className="object-cover rounded-md group-hover:opacity-90 transition-opacity"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-md font-semibold text-gray-800 group-hover:text-red-600 transition-colors leading-snug">
+                                                        {news.title}
+                                                    </h3>
+                                                    <div className="flex items-center mt-2 text-xs text-gray-500">
+                                                        <FaClock className="mr-1" />
+                                                        <span>{formatBengaliDate(news.createdAt)}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            </NewsCardWrapper>
+                                </NewsCardWrapper>
                             </div>
                         ))}
                     </div>
