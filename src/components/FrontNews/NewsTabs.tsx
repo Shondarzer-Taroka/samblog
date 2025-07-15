@@ -79,16 +79,16 @@
 // export default NewsTabs;
 
 
-
 'use client';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { incrementNewsView } from '@/utils/incrementNewsView'; // Adjust path as needed
 
 interface NewsItem {
   id: string;
   title: string;
-  imageUrl: string;
+  imageUrl: string | null;
 }
 
 const NewsTabs = () => {
@@ -101,7 +101,7 @@ const NewsTabs = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/news-tabs`);
+        const res = await axios.get('http://localhost:7700/api/news/news-tabs');
         setNews(res.data);
       } catch (error) {
         console.error('Failed to load news', error);
@@ -110,6 +110,13 @@ const NewsTabs = () => {
 
     fetchNews();
   }, []);
+
+  const handleNewsClick = async (id: string) => {
+    await incrementNewsView(id);
+
+    // Optional: Navigate or open detail
+    // router.push(`/news/${id}`);
+  };
 
   const itemsToDisplay = activeTab === 'latest' ? news.latest : news.mostRead;
 
@@ -135,15 +142,16 @@ const NewsTabs = () => {
         </button>
       </div>
 
-      {/* News Items */}
+      {/* News List */}
       <div className="divide-y overflow-y-auto h-[300px]">
-        {itemsToDisplay.map((item, idx) => (
+        {itemsToDisplay.map((item) => (
           <div
-            key={idx}
+            key={item.id}
             className="flex gap-3 p-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => handleNewsClick(item.id)}
           >
             <Image
-              src={item.imageUrl || '/default.jpg'}
+              src={item.imageUrl || '/fallback.jpg'}
               alt="news"
               width={80}
               height={64}
