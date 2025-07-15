@@ -252,11 +252,9 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                         {/* Two smaller news cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {newsData.slice(1).map((news, idx) => (
-                                <Link
-                                    key={idx}
-                                    href={`/news/${news.category}/${news.id}`}
-                                    className="block group"
-                                >
+                                <div  key={idx}> 
+                                <NewsCardWrapper id={news.id}  href={`/news/${news.category}/${news.id}`}> 
+                                <div className="block group">
                                     <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full">
                                         <div className="flex gap-3 p-2">
                                             <div className="relative w-24 md:w-20 h-24 md:h-20 flex-shrink-0">
@@ -278,7 +276,9 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
+                                </NewsCardWrapper>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -286,11 +286,9 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                     {/* Right Column */}
                     <div className="space-y-4">
                         {newsList2.map((news, index) => (
-                            <Link
-                                key={index}
-                                href={`/news/${news.category}/${news.id}`}
-                                className="block group"
-                            >
+                            <div key={index} > 
+                            <NewsCardWrapper> 
+                            <div className="block group">
                                 <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                                     <div className="flex gap-4 p-2">
                                         <div className="relative w-24 h-24 flex-shrink-0">
@@ -312,7 +310,9 @@ const SecondRandom = ({ data }: { data: NewsItem[] }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
+                            </NewsCardWrapper>
+                            </div>
                         ))}
                     </div>
                 </div>
