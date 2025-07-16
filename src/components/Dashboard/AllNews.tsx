@@ -412,7 +412,8 @@ const AllNews = () => {
       'উপ-বিভাগ': item.subCategory,
       'লেখক': item.author.name,
       'তারিখ': new Date(item.createdAt).toLocaleDateString('bn-BD'),
-      'কন্টেন্ট': stripHtmlAndLimit(item.content, 100).short
+      'কন্টেন্ট':item.content,
+
     }));
 
     // Create CSV content
@@ -431,12 +432,12 @@ const AllNews = () => {
   const downloadExcel = () => {
     // Prepare data for Excel
     const excelData = news.map(item => ({
-      'শিরোনাম': item.title,
-      'বিভাগ': item.category,
-      'উপ-বিভাগ': item.subCategory,
+      'title': item.title,
+      'category': item.category,
+      'subCategory': item.subCategory,
       'লেখক': item.author.name,
       'তারিখ': new Date(item.createdAt).toLocaleDateString('bn-BD'),
-      'কন্টেন্ট': item.content
+      'content': item.content
     }));
 
     // Create worksheet
