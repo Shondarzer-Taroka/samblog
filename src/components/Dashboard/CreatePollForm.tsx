@@ -282,6 +282,7 @@ import { FiPlus, FiX, FiCalendar, FiClock } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useToast } from '@/hooks/useToast';
+import Toast from '@/share/Toast';
 
 interface PollData {
     question: string;
@@ -298,12 +299,12 @@ const CreatePollForm = () => {
     const [options, setOptions] = useState(['', '']);
     const [endDate, setEndDate] = useState('');
     const [endTime, setEndTime] = useState('');
-   const {}=useToast()
+   const {hideToast,toast,showToast}=useToast()
     const addOption = () => {
         if (options.length < 10) {
             setOptions([...options, '']);
         } else {
-            toast.error('সর্বোচ্চ ১০টি অপশন যোগ করা যাবে');
+            showToast('error','সর্বোচ্চ ১০টি অপশন যোগ করা যাবে');
         }
     };
 
@@ -326,20 +327,22 @@ const CreatePollForm = () => {
         setIsLoading(true);
 
         if (!question.trim()) {
-            toast.error('প্রশ্ন লিখুন');
+            showToast('error','প্রশ্ন লিখুন');
             setIsLoading(false);
             return;
         }
 
         const validOptions = options.filter(opt => opt.trim() !== '');
         if (validOptions.length < 2) {
-            toast.error('অন্তত ২টি অপশন দিন');
+            
+            showToast('error','অন্তত ২টি অপশন দিন');
             setIsLoading(false);
             return;
         }
 
         if (!endDate) {
-            toast.error('শেষ হওয়ার তারিখ নির্বাচন করুন');
+      
+            showToast('error','শেষ হওয়ার তারিখ নির্বাচন করুন');
             setIsLoading(false);
             return;
         }
@@ -367,13 +370,14 @@ const CreatePollForm = () => {
             }
 
             const data = await response.json();
-            toast.success('পোল সফলভাবে তৈরি হয়েছে!');
+        
+            showToast('success','পোল সফলভাবে তৈরি হয়েছে!');
             router.push(`/news/dashboard/polls/${data.id}`);
 
         } catch (error) {
             const err = error as Error;
             console.error('পোল তৈরিতে ত্রুটি:', err);
-            toast.error(err.message || 'পোল তৈরি করতে ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+            showToast('error',err.message || 'পোল তৈরি করতে ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
         } finally {
             setIsLoading(false);
         }
@@ -534,6 +538,9 @@ const CreatePollForm = () => {
             <div className="mt-6 text-center text-sm text-gray-500">
                 <p>পোলটি শেষ হওয়ার তারিখ পর্যন্ত সকল ব্যবহারকারীর জন্য দেখা যাবে</p>
             </div>
+              {toast && (
+      <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+    )}
         </div>
     );
 };
