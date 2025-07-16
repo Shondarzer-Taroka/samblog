@@ -46,7 +46,6 @@
 
 import NewsCardWrapper from "@/share/NewsCardWrapper";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { FiClock, FiBookmark, FiShare2, FiHeart } from "react-icons/fi";
 

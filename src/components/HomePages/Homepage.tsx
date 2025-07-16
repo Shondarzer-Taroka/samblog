@@ -71,7 +71,7 @@ const Homepage = async () => {
       <PhotoSlider />
       <IslamAndLifeSection/>
       <EduMedGrid/>
-      <OpinionSection data={news.opinions}/>
+      <OpinionSection data={news?.opinions}/>
       <MixedLayout/>
 
 

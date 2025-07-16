@@ -129,14 +129,15 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                         </div>
 
 
-                        <p className="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-3">
-                            {stripHtmlAndLimit(politicalNews[0].content, 55).short}
+                        <p className="text-[14.6px] text-gray-600 mt-2 leading-relaxed">
+                            {stripHtmlAndLimit(politicalNews[0].content, 95).short}
+                            {/* {politicalNews[0].content} */}
                         </p>
                     </div>
                 </Link>
 
                 {/* ---------- List of Other News ---------- */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                     {politicalNews.slice(1).map(({ title, imageUrl, category, createdAt, id }, i) => (
                         <Link
                             href={`/news/${category}/${id}`}

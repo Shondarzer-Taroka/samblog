@@ -165,7 +165,7 @@
 
 
 
-import LoadingSpinner from "@/components/ui/LoadingSpinner";
+// import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import NewsCardWrapper from "@/share/NewsCardWrapper";
 import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import { NewsItem } from "@/types/news.types";
@@ -177,7 +177,7 @@ import React from "react";
 
 interface OpinionItems extends NewsItem {
   role: string;
-  _count:{Like:string}
+  _count: { Like: string }
 }
 
 export default function OpinionSection({ data }: { data: OpinionItems[] }) {
@@ -208,8 +208,10 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
   const opinions = data || []
 
   if (data.length === 0) {
-    return <LoadingSpinner />
+    return <div className="flex justify-center"> <h1>কোন তথ্য পাওয়া যায়নি</h1></div>
   }
+
+
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto">
       {/* <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center relative pb-4">
@@ -226,49 +228,49 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Highlighted Opinion Card */}
         <div className="block">
-          <NewsCardWrapper id={opinions[0].id} href={`/news/opinions/${opinions[0].id}`}> 
-          <div className="relative group h-full">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
-            <div className="relative bg-white p-6 rounded-xl shadow-xl border border-gray-100 h-full flex flex-col">
-              <div className="flex items-center mb-4">
-                <span className="bg-blue-800 text-white px-3 py-1 rounded-full text-sm font-bold mr-2">
-                  বিশেষ মতামত
-                </span>
-                <span className="bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
-                  {/* এসএসসির ফলাফল */}
-                  {opinions[0].keywords[0]}
-                </span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
-                {opinions[0].title}
-                {/* এসএসসির ফলাফল যেন আত্মহত্যার কারণ না হয় */}
-              </h3>
-              <p className="text-gray-600 mb-4 flex-grow">
-                {/* আত্মহত্যার পেছনে নানা কারণ রয়েছে—মানসিক অবসাদ, সামাজিক বিচ্ছিন্নতা, বুলিং, বৈষম্য ও
-              বিশেষভাবে উল্লেখযোগ্য একটি কারণ হলো পাবলিক পরীক্ষায় কাঙ্ক্ষিত ফল না পাওয়া। */}
-                {stripHtmlAndLimit(opinions[0].content, 20).short}
-              </p>
-              <div className="flex items-center mt-auto">
-                <div className="w-10 h-10 rounded-full overflow-hidden mr-3 border-2 border-blue-200">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={opinions[0].author?.image || "https://randomuser.me/api/portraits/men/32.jpg"}
-                    // src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="author"
-                    className="w-full h-full object-cover"
-                  />
+          <NewsCardWrapper id={opinions[0]?.id} href={`/news/opinions/${opinions[0]?.id}`}>
+            <div className="relative group h-full">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
+              <div className="relative bg-white p-6 rounded-xl shadow-xl border border-gray-100 h-full flex flex-col">
+                <div className="flex items-center mb-4">
+                  <span className="bg-blue-800 text-white px-3 py-1 rounded-full text-sm font-bold mr-2">
+                    বিশেষ মতামত
+                  </span>
+                  <span className="bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+                    {/* এসএসসির ফলাফল */}
+                    {opinions[0].keywords[0]}
+                  </span>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-gray-700">
-                    {/* ড. রফিকুল ইসলাম */}
-                    {opinions[0]?.author?.name}
-                  </p>
-                  <p className="text-xs text-gray-500">মনোবিজ্ঞানী ও শিক্ষাবিদ</p>
+                <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
+                  {opinions[0].title}
+                  {/* এসএসসির ফলাফল যেন আত্মহত্যার কারণ না হয় */}
+                </h3>
+                <p className="text-gray-600 mb-4 flex-grow">
+                  {/* আত্মহত্যার পেছনে নানা কারণ রয়েছে—মানসিক অবসাদ, সামাজিক বিচ্ছিন্নতা, বুলিং, বৈষম্য ও
+              বিশেষভাবে উল্লেখযোগ্য একটি কারণ হলো পাবলিক পরীক্ষায় কাঙ্ক্ষিত ফল না পাওয়া। */}
+                  {stripHtmlAndLimit(opinions[0].content, 20).short}
+                </p>
+                <div className="flex items-center mt-auto">
+                  <div className="w-10 h-10 rounded-full overflow-hidden mr-3 border-2 border-blue-200">
+                    <Image
+                      width={40}
+                      height={40}
+                      src={opinions[0].author?.image || "https://randomuser.me/api/portraits/men/32.jpg"}
+                      // src="https://randomuser.me/api/portraits/men/32.jpg"
+                      alt="author"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700">
+                      {/* ড. রফিকুল ইসলাম */}
+                      {opinions[0]?.author?.name}
+                    </p>
+                    <p className="text-xs text-gray-500">মনোবিজ্ঞানী ও শিক্ষাবিদ</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </NewsCardWrapper>
         </div>
         {/* Other Opinions */}
