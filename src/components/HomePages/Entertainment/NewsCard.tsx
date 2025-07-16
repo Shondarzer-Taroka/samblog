@@ -53,7 +53,7 @@ interface NewsCardProps {
   image?: string;
   title: string;
   time: string;
-  category?: string;
+  category: string;
   showActions?: boolean;
   id:string;
 }

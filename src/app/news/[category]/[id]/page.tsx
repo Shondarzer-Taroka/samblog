@@ -39,7 +39,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
 
             <p className="border-b-2 border-black inline-block pb-1 font-bold text-2xl mt-4">{news.category}</p>
 
-            <h1 className='text-[45px] font-bold mt-4'>{news.title}</h1>
+            <h1 className='text-3xl md:text-[40px] font-bold mt-4'>{news.title}</h1>
 
 
             <div className=' mb-4'>
