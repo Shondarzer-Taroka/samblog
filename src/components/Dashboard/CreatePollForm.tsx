@@ -280,8 +280,8 @@
 import React, { useState } from 'react';
 import { FiPlus, FiX, FiCalendar, FiClock } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-hot-toast';
 import { useAuthProvider } from '@/Providers/AuthProvider';
+import { useToast } from '@/hooks/useToast';
 
 interface PollData {
     question: string;
@@ -298,7 +298,7 @@ const CreatePollForm = () => {
     const [options, setOptions] = useState(['', '']);
     const [endDate, setEndDate] = useState('');
     const [endTime, setEndTime] = useState('');
-
+   const {}=useToast()
     const addOption = () => {
         if (options.length < 10) {
             setOptions([...options, '']);
@@ -354,7 +354,7 @@ const CreatePollForm = () => {
                 user
             };
 
-            const response = await fetch(`${}/polls`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/poll/createPoll`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -368,7 +368,7 @@ const CreatePollForm = () => {
 
             const data = await response.json();
             toast.success('পোল সফলভাবে তৈরি হয়েছে!');
-            router.push(`/polls/${data.id}`);
+            router.push(`/news/dashboard/polls/${data.id}`);
 
         } catch (error) {
             const err = error as Error;
