@@ -435,9 +435,14 @@ const AllNews = () => {
       'title': item.title,
       'category': item.category,
       'subCategory': item.subCategory,
-      'লেখক': item.author.name,
-      'তারিখ': new Date(item.createdAt).toLocaleDateString('bn-BD'),
-      'content': item.content
+      'author': item.author.name,
+      'createdAt':item.createdAt,
+      'content': item.content,
+      'imageSource':item.imageSource,
+      'imageTitle':item.imageTitle,
+      'imageUrl':item.imageUrl,
+      'keywords':item.keywords,
+      'subKeywords':item.subKeywords
     }));
 
     // Create worksheet
