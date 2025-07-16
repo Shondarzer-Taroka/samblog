@@ -28,6 +28,7 @@
     "bd-divisions-to-unions": "^1.0.3",
     "d3": "^7.9.0",
     "date-fns": "^4.1.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^12.23.0",
     "he": "^1.2.0",
     "install": "^0.13.0",
@@ -52,7 +53,8 @@
     "swiper": "^11.2.8",
     "swr": "^2.3.3",
     "tesseract.js": "^6.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "xlsx": "^0.18.5"
   },
   "engines": {
     "node": "20.x"
