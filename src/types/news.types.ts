@@ -19,6 +19,7 @@ export interface NewsItem {
   updatedAt: string; // or Date, if you parse it
   authorId: string;
   author: Author;
+  views:number
 }
 
 
@@ -54,6 +55,7 @@ export interface NewsFormProps {
     image?: string;
   };
 }
+
 
 export const CATEGORIES = [
   'চলমান ইস্যু',

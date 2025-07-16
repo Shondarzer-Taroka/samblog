@@ -404,55 +404,78 @@ const AllNews = () => {
     router.push(`/news/dashboard/updateNews/${id}`);
   };
 
-  const downloadCSV = () => {
-    // Prepare data for CSV
-    const csvData = news.map(item => ({
-      'শিরোনাম': item.title,
-      'বিভাগ': item.category,
-      'উপ-বিভাগ': item.subCategory,
-      'লেখক': item.author.name,
-      'তারিখ': new Date(item.createdAt).toLocaleDateString('bn-BD'),
-      'কন্টেন্ট':item.content,
+// CSV DOWNLOAD (full NewsItem)
+const downloadCSV = () => {
+  if (!news.length) return;
 
-    }));
+  const csvData = news.map((item) => ({
+    id: item.id,
+    title: item.title,
+    content: item.content,
+    category: item.category,
+    subCategory: item.subCategory,
+    imageSource: item.imageSource,
+    imageTitle: item.imageTitle,
+    keywords: item.keywords.join(', '),
+    subKeywords: item.subKeywords.join(', '),
+    imageUrl: item.imageUrl || '',
+    createdAt: item.createdAt,
+    updatedAt:item.updatedAt,
+    authorId: item.authorId,
+    name: item.author?.name || '',
+    email: item.author?.email || '',
+    image: item.author?.image || '',
+    views:item.views
+  }));
 
-    // Create CSV content
-    const headers = Object.keys(csvData[0]).join(',') + '\n';
-    const rows = csvData.map(item => 
-      Object.values(item).map(value => 
-        `"${String(value).replace(/"/g, '""')}"`
-      ).join(',')
-    ).join('\n');
+  const headers = Object.keys(csvData[0]).join(',') + '\n';
+  const rows = csvData
+    .map((item) =>
+      Object.values(item)
+        .map((val) => `"${String(val).replace(/"/g, '""')}"`)
+        .join(',')
+    )
+    .join('\n');
 
-    const csvContent = headers + rows;
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    saveAs(blob, `news_${new Date().toISOString().slice(0, 10)}.csv`);
-  };
+  const csvContent = headers + rows;
+  const blob = new Blob([csvContent], {
+    type: 'text/csv;charset=utf-8;',
+  });
+  saveAs(blob, `news_${new Date().toISOString().slice(0, 10)}.csv`);
+};
 
-  const downloadExcel = () => {
-    // Prepare data for Excel
-    const excelData = news.map(item => ({
-      'title': item.title,
-      'category': item.category,
-      'subCategory': item.subCategory,
-      'author': item.author.name,
-      'createdAt':item.createdAt,
-      'content': item.content,
-      'imageSource':item.imageSource,
-      'imageTitle':item.imageTitle,
-      'imageUrl':item.imageUrl,
-      'keywords':item.keywords,
-      'subKeywords':item.subKeywords
-    }));
 
-    // Create worksheet
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "খবর");
+ // EXCEL DOWNLOAD (full NewsItem)
+const downloadExcel = () => {
+  if (!news.length) return;
 
-    // Generate Excel file
-    XLSX.writeFile(workbook, `news_${new Date().toISOString().slice(0, 10)}.xlsx`);
-  };
+  const excelData = news.map((item) => ({
+    id: item.id,
+    title: item.title,
+    content: item.content,
+    category: item.category,
+    subCategory: item.subCategory,
+    imageSource: item.imageSource,
+    imageTitle: item.imageTitle,
+    keywords: item.keywords.join(', '),
+    subKeywords: item.subKeywords.join(', '),
+    imageUrl: item.imageUrl || '',
+    createdAt: item.createdAt,
+    updatedAt: item.updatedAt,
+    authorId: item.authorId,
+    name: item.author?.name || '',
+    email: item.author?.email || '',
+    image: item.author?.image || '',
+    views:item.views || 0
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(excelData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'News');
+
+  XLSX.writeFile(workbook, `news_${new Date().toISOString().slice(0, 10)}.xlsx`);
+};
+
 
   return (
     <div className="md:container mx-auto lg:p-4">
@@ -528,9 +551,11 @@ const AllNews = () => {
             disabled={!selectedCategory}
           >
             <option value="">সব উপ-বিভাগ</option>
-            {selectedCategory && SUB_CATEGORIES[selectedCategory]?.map(subCat => (
+
+            {/* {selectedCategory && SUB_CATEGORIES[selectedCategory]?.map(subCat => (
               <option key={subCat.key} value={subCat.key}>{subCat.value}</option>
-            ))}
+            ))} */}
+
           </select>
         </div>
         
