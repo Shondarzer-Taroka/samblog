@@ -1305,7 +1305,7 @@ export default function NewsForm({
 
 
                 <div>
-                    <h1>Content Write</h1>
+                    <h1>বিষয়বস্তু লিখুন</h1>
                     <QuillEditor
                         initialContent={initialData?.content}
                         onContentChange={setContent}

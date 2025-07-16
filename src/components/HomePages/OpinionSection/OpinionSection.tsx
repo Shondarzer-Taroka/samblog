@@ -314,7 +314,7 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
                     {item.author && (
                       <div className="flex items-center text-sm text-gray-600">
                         <span className="font-medium mr-1">{item?.author.name}</span>
-                        {item.author.email && <span className="text-xs text-gray-500 before:content-['•'] before:mx-1">{item.role}</span>}
+                        {item.author?.email && <span className="text-xs text-gray-500 before:content-['•'] before:mx-1">{item.role}</span>}
                       </div>
                     )}
                     <div className="mt-2 flex items-center text-xs text-gray-400">
