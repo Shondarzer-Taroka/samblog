@@ -79,9 +79,9 @@
 //   return (
 //     <div className=" md:container mx-auto lg:p-4">
 //       <h1 className="text-2xl font-bold mb-6">সমস্ত খবর</h1>
-      
+
 //       <AlertDialog />
-      
+
 //       {/* Filters */}
 //       <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
 //         <div>
@@ -97,7 +97,7 @@
 //             }}
 //           />
 //         </div>
-        
+
 //         <div>
 //           <label className="block mb-2">বিভাগ</label>
 //           <select
@@ -114,7 +114,7 @@
 //             ))}
 //           </select>
 //         </div>
-        
+
 //         <div>
 //           <label className="block mb-2">উপ-বিভাগ</label>
 //           <select
@@ -131,7 +131,7 @@
 //             ))}
 //           </select>
 //         </div>
-        
+
 //         <div className="flex items-end">
 //           <button
 //             onClick={() => {
@@ -229,7 +229,7 @@
 //                 পরবর্তী
 //               </button>
 //             </div>
-            
+
 //             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 //               <div>
 //                 <p className="text-sm text-gray-700">
@@ -256,7 +256,7 @@
 //                     <span className="sr-only">পূর্ববর্তী</span>
 //                     &lsaquo;
 //                   </button>
-                  
+
 //                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
 //                     let pageNum;
 //                     if (totalPages <= 5) {
@@ -268,7 +268,7 @@
 //                     } else {
 //                       pageNum = currentPage - 2 + i;
 //                     }
-                    
+
 //                     return (
 //                       <button
 //                         key={pageNum}
@@ -283,7 +283,7 @@
 //                       </button>
 //                     );
 //                   })}
-                  
+
 //                   <button
 //                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
 //                     disabled={currentPage === totalPages}
@@ -343,8 +343,8 @@ const AllNews = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedSubCategory, setSelectedSubCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
 
   const itemsPerPage = 10;
 
@@ -404,77 +404,77 @@ const AllNews = () => {
     router.push(`/news/dashboard/updateNews/${id}`);
   };
 
-// CSV DOWNLOAD (full NewsItem)
-const downloadCSV = () => {
-  if (!news.length) return;
+  // CSV DOWNLOAD (full NewsItem)
+  const downloadCSV = () => {
+    if (!news.length) return;
 
-  const csvData = news.map((item) => ({
-    id: item.id,
-    title: item.title,
-    content: item.content,
-    category: item.category,
-    subCategory: item.subCategory,
-    imageSource: item.imageSource,
-    imageTitle: item.imageTitle,
-    keywords: item.keywords.join(', '),
-    subKeywords: item.subKeywords.join(', '),
-    imageUrl: item.imageUrl || '',
-    createdAt: item.createdAt,
-    updatedAt:item.updatedAt,
-    authorId: item.authorId,
-    name: item.author?.name || '',
-    email: item.author?.email || '',
-    image: item.author?.image || '',
-    views:item.views
-  }));
+    const csvData = news.map((item) => ({
+      id: item.id,
+      title: item.title,
+      content: item.content,
+      category: item.category,
+      subCategory: item.subCategory,
+      imageSource: item.imageSource,
+      imageTitle: item.imageTitle,
+      keywords: item.keywords.join(', '),
+      subKeywords: item.subKeywords.join(', '),
+      imageUrl: item.imageUrl || '',
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt,
+      authorId: item.authorId,
+      name: item.author?.name || '',
+      email: item.author?.email || '',
+      image: item.author?.image || '',
+      views: item.views
+    }));
 
-  const headers = Object.keys(csvData[0]).join(',') + '\n';
-  const rows = csvData
-    .map((item) =>
-      Object.values(item)
-        .map((val) => `"${String(val).replace(/"/g, '""')}"`)
-        .join(',')
-    )
-    .join('\n');
+    const headers = Object.keys(csvData[0]).join(',') + '\n';
+    const rows = csvData
+      .map((item) =>
+        Object.values(item)
+          .map((val) => `"${String(val).replace(/"/g, '""')}"`)
+          .join(',')
+      )
+      .join('\n');
 
-  const csvContent = headers + rows;
-  const blob = new Blob([csvContent], {
-    type: 'text/csv;charset=utf-8;',
-  });
-  saveAs(blob, `news_${new Date().toISOString().slice(0, 10)}.csv`);
-};
+    const csvContent = headers + rows;
+    const blob = new Blob([csvContent], {
+      type: 'text/csv;charset=utf-8;',
+    });
+    saveAs(blob, `news_${new Date().toISOString().slice(0, 10)}.csv`);
+  };
 
 
- // EXCEL DOWNLOAD (full NewsItem)
-const downloadExcel = () => {
-  if (!news.length) return;
+  // EXCEL DOWNLOAD (full NewsItem)
+  const downloadExcel = () => {
+    if (!news.length) return;
 
-  const excelData = news.map((item) => ({
-    id: item.id,
-    title: item.title,
-    content: item.content,
-    category: item.category,
-    subCategory: item.subCategory,
-    imageSource: item.imageSource,
-    imageTitle: item.imageTitle,
-    keywords: item.keywords.join(', '),
-    subKeywords: item.subKeywords.join(', '),
-    imageUrl: item.imageUrl || '',
-    createdAt: item.createdAt,
-    updatedAt: item.updatedAt,
-    authorId: item.authorId,
-    name: item.author?.name || '',
-    email: item.author?.email || '',
-    image: item.author?.image || '',
-    views:item.views || 0
-  }));
+    const excelData = news.map((item) => ({
+      id: item.id,
+      title: item.title,
+      content: item.content,
+      category: item.category,
+      subCategory: item.subCategory,
+      imageSource: item.imageSource,
+      imageTitle: item.imageTitle,
+      keywords: item.keywords.join(', '),
+      subKeywords: item.subKeywords.join(', '),
+      imageUrl: item.imageUrl || '',
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt,
+      authorId: item.authorId,
+      name: item.author?.name || '',
+      email: item.author?.email || '',
+      image: item.author?.image || '',
+      views: item.views || 0
+    }));
 
-  const worksheet = XLSX.utils.json_to_sheet(excelData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'News');
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'News');
 
-  XLSX.writeFile(workbook, `news_${new Date().toISOString().slice(0, 10)}.xlsx`);
-};
+    XLSX.writeFile(workbook, `news_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  };
 
 
   return (
@@ -502,9 +502,9 @@ const downloadExcel = () => {
           </button>
         </div>
       </div>
-      
+
       <AlertDialog />
-      
+
       {/* Filters */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
@@ -520,7 +520,7 @@ const downloadExcel = () => {
             }}
           />
         </div>
-        
+
         <div>
           <label className="block mb-2">বিভাগ</label>
           <select
@@ -538,7 +538,7 @@ const downloadExcel = () => {
             ))}
           </select>
         </div>
-        
+
         <div>
           <label className="block mb-2">উপ-বিভাগ</label>
           <select
@@ -555,10 +555,14 @@ const downloadExcel = () => {
             {/* {selectedCategory && SUB_CATEGORIES[selectedCategory]?.map(subCat => (
               <option key={subCat.key} value={subCat.key}>{subCat.value}</option>
             ))} */}
+            { selectedCategory && SUB_CATEGORIES.map((subCat) => (
+              <option key={subCat} value={subCat}>{subCat}</option>
+            ))}
+
 
           </select>
         </div>
-        
+
         <div className="flex items-end">
           <button
             onClick={() => {
@@ -667,7 +671,7 @@ const downloadExcel = () => {
                 পরবর্তী
               </button>
             </div>
-            
+
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm text-gray-700">
@@ -694,7 +698,7 @@ const downloadExcel = () => {
                     <span className="sr-only">পূর্ববর্তী</span>
                     &lsaquo;
                   </button>
-                  
+
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum;
                     if (totalPages <= 5) {
@@ -706,22 +710,21 @@ const downloadExcel = () => {
                     } else {
                       pageNum = currentPage - 2 + i;
                     }
-                    
+
                     return (
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                          currentPage === pageNum
+                        className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${currentPage === pageNum
                             ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
                             : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                        }`}
+                          }`}
                       >
                         {pageNum}
                       </button>
                     );
                   })}
-                  
+
                   <button
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
