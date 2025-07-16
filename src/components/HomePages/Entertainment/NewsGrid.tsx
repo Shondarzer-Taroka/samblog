@@ -30,7 +30,7 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
 
       <div className="col-span-1 space-y-6">
         {
-          data.slice(0, 3).map((news, i) => <NewsCard id={news.id} image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
+          data.slice(0, 3).map((news, i) => <NewsCard category={news.category} id={news.id} image={news.imageUrl} time={getBengaliTimeAgo(news.createdAt)} title={news.title} key={i} />)
         }
       </div>
 
