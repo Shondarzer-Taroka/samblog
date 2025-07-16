@@ -283,6 +283,7 @@ import { useRouter } from 'next/navigation';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/share/Toast';
+import Image from 'next/image';
 
 interface PollData {
     question: string;
@@ -392,7 +393,9 @@ const CreatePollForm = () => {
 
                     <div className="mt-4 flex items-center">
                         {user?.image && (
-                            <img
+                            <Image
+                            width={32}
+                            height={32}
                                 src={user.image}
                                 alt={user.name}
                                 className="w-8 h-8 rounded-full mr-2"
