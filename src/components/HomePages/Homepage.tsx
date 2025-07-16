@@ -16,25 +16,12 @@ import MixedLayout from './MixedLayout/MixedLayout';
 // import AuthProvider from '@/Providers/AuthProvider';
 // import AuthServer from '@/Providers/AuthServer';
 
-// const getHomePageNews = async () => {
-//     try {
-//         const gettingNews = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`)
-//         return gettingNews.data
-//     } catch (error) {
-//         console.log(error);
-
-//     }
-// }
-
-
-
-
 const getHomePageNews = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`,
       {
-        next: { revalidate: 60 }, // Revalidate every 60 seconds
+        cache: 'no-store', // 🧨 disables caching
       }
     );
     if (!res.ok) throw new Error('Failed to fetch homepage news');
@@ -45,6 +32,25 @@ const getHomePageNews = async () => {
     return null;
   }
 };
+
+// // this is scalable
+
+// const getHomePageNews = async () => {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/news/homepagenews`,
+//       {
+//         next: { revalidate: 60 }, // Revalidate every 60 seconds
+//       }
+//     );
+//     if (!res.ok) throw new Error('Failed to fetch homepage news');
+//     const data = await res.json();
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching home page news:', error);
+//     return null;
+//   }
+// };
 
 
 

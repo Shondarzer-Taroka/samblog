@@ -98,12 +98,14 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
+import { FaSquarePollVertical } from 'react-icons/fa6';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome size={20} />, href: '/', roles: ['admin', 'editor', 'user'] },
     { label: 'আমার প্রোফাইল', icon: <UserRoundPen size={20} />, href: '/news/dashboard/myProfile', roles: ['admin', 'editor', 'user'] },
     { label: 'লেখা যুক্ত করুন', icon: <FiEdit size={20} />, href: '/news/dashboard/createNews', roles: ['admin', 'editor'] },
     { label: 'ইউজার', icon: <FiUsers size={20} />, href: '/news/dashboard/allUsers', roles: ['admin'] },
+    { label: 'অনলাইন ভোট যুক্ত করুন', icon: <FaSquarePollVertical size={20} />, href: '/news/dashboard/createPoll', roles: ['admin'] },
     { label: 'সেটিংস', icon: <FiSettings size={20} />, href: '#', roles: ['admin'] },
     { label: 'ই-পেপার', icon: <FiPaperclip size={20} />, href: '/news/dashboard/epapers/list', roles: ['admin'] },
     { label: 'খবর', icon: <Newspaper size={20} />, href: '/news/dashboard/allNews', roles: ['admin', 'editor'] },
