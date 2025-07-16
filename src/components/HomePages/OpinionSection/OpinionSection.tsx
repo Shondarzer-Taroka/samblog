@@ -169,6 +169,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import NewsCardWrapper from "@/share/NewsCardWrapper";
 import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import { NewsItem } from "@/types/news.types";
+import { englishToBengali } from "@/utils/englishToBengali";
 import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
 import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
 import Image from "next/image";
@@ -224,9 +225,9 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Highlighted Opinion Card */}
-        <div>
+        <div className="block">
           <NewsCardWrapper id={opinions[0].id} href={`/news/opinions/${opinions[0].id}`}> 
-          <div className="relative group">
+          <div className="relative group h-full">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
             <div className="relative bg-white p-6 rounded-xl shadow-xl border border-gray-100 h-full flex flex-col">
               <div className="flex items-center mb-4">
@@ -322,7 +323,7 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                         </svg>
-                        {item._count.Like}
+                        {englishToBengali(item._count.Like)}
                       </span>
                     </div>
                   </div>
