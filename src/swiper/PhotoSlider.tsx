@@ -550,7 +550,7 @@ console.log(newsItems);
               <Image
                 width={1000}
                 height={600}
-                src={slides[current].image}
+                src={newsItems[current].imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg'}
                 alt="slide"
                 className="w-full h-[470px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
