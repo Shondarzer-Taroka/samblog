@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 // 'use client'
 
@@ -339,7 +340,7 @@
 //             <div className="bg-gradient-to-r from-red-600 to-red-800 p-4">
 //               <h2 className="text-xl font-semibold text-white">সর্বশেষ সংবাদ</h2>
 //             </div>
-            
+
 //             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 p-4 flex-grow">
 //               {newsItems.map((item) => (
 //                 <div 
@@ -368,7 +369,7 @@
 //                 </div>
 //               ))}
 //             </div>
-            
+
 //             <div className="p-4 border-t border-gray-100">
 //               <button className="w-full py-2 text-sm font-medium text-blue-600 hover:text-white hover:bg-blue-600 rounded-md border border-blue-600 transition-colors duration-300">
 //                 আরও সংবাদ দেখুন
@@ -429,35 +430,8 @@ import { ChevronsLeft, ChevronsRight, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 
-interface Slide {
-  id: number;
-  image: string;
-  caption: string;
-  overlay: string;
-}
 
 
-
-const slides: Slide[] = [
-  {
-    id: 1,
-    image: "https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-2-6855596957bc7.jpg",
-    caption: "ইরানের রাস্তায় লাখো মানুষের ঢল, দেখুন ছবিতে",
-    overlay: "তেহরানের বেতুলেমে ক্ষয়ক্ষতির জুমার নামাজের পর ইসরাইলের হামলার বিরুদ্ধে আন্দোলনে যোগ দিচ্ছে লাখো মানুষ",
-  },
-  {
-    id: 2,
-    image: "https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg",
-    caption: "দ্বিতীয় ছবির ক্যাপশন",
-    overlay: "দ্বিতীয় ছবির বিস্তারিত বর্ণনা এখানে থাকবে।",
-  },
-  {
-    id: 3,
-    image: "https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg",
-    caption: "তৃতীয় ছবির ক্যাপশন",
-    overlay: "তৃতীয় ছবির বিস্তারিত বর্ণনা এখানে থাকবে।",
-  },
-];
 
 // const newsItems: NewsItem[] = [
 //   {
@@ -485,20 +459,20 @@ const slides: Slide[] = [
 // ];
 
 
-const PhotoSlider = ( { data }: { data: NewsItem[] } ) => {
+const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
-  const [newsItems,setnewsItems]=useState<NewsItem[]>(data||[])
-console.log(newsItems);
+  const [newsItems, setnewsItems] = useState<NewsItem[]>(data || [])
+  console.log(newsItems);
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % newsItems.slice(0,6).length);
+    setCurrent((prev) => (prev + 1) % newsItems.slice(0, 6).length);
     resetProgress();
   };
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 +  newsItems.slice(0,6).length) %  newsItems.slice(0,6).length);
+    setCurrent((prev) => (prev - 1 + newsItems.slice(0, 6).length) % newsItems.slice(0, 6).length);
     resetProgress();
   };
 
@@ -551,14 +525,14 @@ console.log(newsItems);
               <Image
                 width={1000}
                 height={600}
-                src={ newsItems.slice(0,6)[current].imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg'}
+                src={newsItems.slice(0, 6)[current].imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg'}
                 alt="slide"
                 className="w-full h-[470px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Overlay Text */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <p className="text-white text-lg font-medium">{stripHtmlAndLimit( newsItems.slice(0,6)[current].content,13).short}</p>
+                <p className="text-white text-lg font-medium">{stripHtmlAndLimit(newsItems.slice(0, 6)[current].content, 13).short}</p>
               </div>
 
               {/* Controls */}
@@ -588,14 +562,14 @@ console.log(newsItems);
 
               {/* Counter */}
               <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                {englishToBengali(current + 1)} / { englishToBengali(newsItems.slice(0,6).length)}
+                {englishToBengali(current + 1)} / {englishToBengali(newsItems.slice(0, 6).length)}
               </div>
             </div>
 
             {/* Caption Below */}
             <div className="p-4 bg-white">
               <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
-                { newsItems.slice(0,6)[current].title}
+                {newsItems.slice(0, 6)[current].title}
               </h3>
             </div>
           </div>
@@ -607,11 +581,11 @@ console.log(newsItems);
             <div className="bg-gradient-to-r from-red-600 to-red-800 p-4">
               <h2 className="text-xl font-semibold text-white">সর্বশেষ সংবাদ</h2>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 p-4 flex-grow">
-              {newsItems.slice(6,newsItems.length+1).map((item) => (
-                <div 
-                  key={item.id} 
+              {newsItems.slice(6, newsItems.length + 1).map((item) => (
+                <div
+                  key={item.id}
                   className="border-b border-gray-100 pb-4 last:border-0 group cursor-pointer"
                 >
                   <div className="flex items-start space-x-3">
@@ -626,7 +600,7 @@ console.log(newsItems);
                         {item.title}
                       </h3>
                       <p className="text-[14.5px] text-gray-600 mt-1 line-clamp-2">
-                        {stripHtmlAndLimit(item.content,20).short}
+                        {stripHtmlAndLimit(item.content, 20).short}
                       </p>
                       <span className="text-xs text-gray-500 mt-1 block">
                         {getBengaliTimeAgo(item.createdAt)}
@@ -636,7 +610,7 @@ console.log(newsItems);
                 </div>
               ))}
             </div>
-            
+
           </div>
         </div>
       </div>
