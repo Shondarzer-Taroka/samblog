@@ -422,6 +422,7 @@
 'use client'
 
 import { NewsItem } from "@/types/news.types";
+import { englishToBengali } from "@/utils/englishToBengali";
 import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
 import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
 import { ChevronsLeft, ChevronsRight, Pause, Play } from "lucide-react";
@@ -492,12 +493,12 @@ const PhotoSlider = ( { data }: { data: NewsItem[] } ) => {
 console.log(newsItems);
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+    setCurrent((prev) => (prev + 1) % newsItems.slice(0,6).length);
     resetProgress();
   };
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrent((prev) => (prev - 1 +  newsItems.slice(0,6).length) %  newsItems.slice(0,6).length);
     resetProgress();
   };
 
@@ -550,14 +551,14 @@ console.log(newsItems);
               <Image
                 width={1000}
                 height={600}
-                src={newsItems[current].imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg'}
+                src={ newsItems.slice(0,6)[current].imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/20/tehran-protest-68555969e663a.jpg'}
                 alt="slide"
                 className="w-full h-[470px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Overlay Text */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <p className="text-white text-lg font-medium">{stripHtmlAndLimit(newsItems[current].content,13).short}</p>
+                <p className="text-white text-lg font-medium">{stripHtmlAndLimit( newsItems.slice(0,6)[current].content,13).short}</p>
               </div>
 
               {/* Controls */}
@@ -587,14 +588,14 @@ console.log(newsItems);
 
               {/* Counter */}
               <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                {current + 1} / {newsItems.length}
+                {englishToBengali(current + 1)} / { englishToBengali(newsItems.slice(0,6).length)}
               </div>
             </div>
 
             {/* Caption Below */}
             <div className="p-4 bg-white">
               <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
-                {slides[current].caption}
+                { newsItems.slice(0,6)[current].title}
               </h3>
             </div>
           </div>
