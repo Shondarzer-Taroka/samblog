@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { NewsItem } from '@/types/news.types';
-import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import { stripHtmlAndLimitWithSpace } from '@/utils/stripAndLimitHtml';
 import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from 'react-icons/fa';
 import { splitTextByLength } from '@/utils/splitTextByLength';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
@@ -92,8 +92,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                     <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
                       {centerMain.title}
                     </h2>
-                    <p className="text-gray-600 mb-4">
-                      {stripHtmlAndLimit(centerMain.content, 37).short}
+                    <p className="text-gray-600 mb-4 text-[16px]">
+                      {stripHtmlAndLimitWithSpace(centerMain.content,300).short}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center text-sm text-gray-500">
