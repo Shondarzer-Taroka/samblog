@@ -569,10 +569,11 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
 
             {/* Caption Below */}
             <div className="p-4 bg-white">
-              <NewsCardWrapper href={`/news/${}`}> </NewsCardWrapper>
+              <NewsCardWrapper href={`/news/${newsItems.slice(0, 6)[current].category}/${newsItems.slice(0, 6)[current].id}`} id={`${newsItems.slice(0, 6)[current].id}`}> 
               <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
                 {newsItems.slice(0, 6)[current].title}
               </h3>
+              </NewsCardWrapper>
             </div>
           </div>
         </div>
