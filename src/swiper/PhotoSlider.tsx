@@ -569,10 +569,10 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
 
             {/* Caption Below */}
             <div className="p-4 bg-white">
-              <NewsCardWrapper href={`/news/${newsItems.slice(0, 6)[current].category}/${newsItems.slice(0, 6)[current].id}`} id={`${newsItems.slice(0, 6)[current].id}`}> 
-              <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
-                {newsItems.slice(0, 6)[current].title}
-              </h3>
+              <NewsCardWrapper href={`/news/${newsItems.slice(0, 6)[current].category}/${newsItems.slice(0, 6)[current].id}`} id={`${newsItems.slice(0, 6)[current].id}`}>
+                <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
+                  {newsItems.slice(0, 6)[current].title}
+                </h3>
               </NewsCardWrapper>
             </div>
           </div>
@@ -591,6 +591,8 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
                   key={item.id}
                   className="border-b border-gray-100 pb-4 last:border-0 group cursor-pointer"
                 >
+                  <div className="block group"> 
+                    <NewsCardWrapper   href={`/news/${item.category}/${item.id}`} id={`${item.id}`} >
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0 mt-1">
                       <div className="w-2 h-2 bg-red-600 rounded-full"></div>
@@ -610,6 +612,8 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
                       </span>
                     </div>
                   </div>
+                  </NewsCardWrapper>
+                </div>
                 </div>
               ))}
             </div>
