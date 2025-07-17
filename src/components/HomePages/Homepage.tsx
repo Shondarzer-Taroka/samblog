@@ -61,7 +61,7 @@ const getHomePageNews = async () => {
 const Homepage = async () => {
 
   const news = await getHomePageNews()
-  console.log(news);
+  console.log(news.galleryNews,'gle');
 
   return (
     <div className='max-w-7xl mx-auto font-noto '>
@@ -75,7 +75,7 @@ const Homepage = async () => {
       <InternationalNewsSection data={news.internationalNews} />
       <Entertainment data={news.entertainment}/>
       <SportsNews data={news.sports}/>
-      <PhotoSlider />
+      <PhotoSlider data={news.galleryNews} />
       <IslamAndLifeSection/>
       <EduMedGrid/>
       <OpinionSection data={news?.opinions}/>
