@@ -90,7 +90,7 @@
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
-import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import { stripHtmlAndLimitWithSpace } from '@/utils/stripAndLimitHtml';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -129,8 +129,8 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                         </div>
 
 
-                        <p className="text-[14.6px] text-gray-600 mt-2 leading-relaxed">
-                            {stripHtmlAndLimit(politicalNews[0].content, 95).short}
+                        <p className="text-[15px] text-gray-600 mt-2 leading-relaxed">
+                            {stripHtmlAndLimitWithSpace(politicalNews[0].content, 1028).short}
                             {/* {politicalNews[0].content} */}
                         </p>
                     </div>
@@ -144,7 +144,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
                             key={i}
                             className="flex gap-4 items-start group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden p-2"
                         >
-                            <div className="relative w-28 h-20 flex-shrink-0 overflow-hidden rounded-md">
+                            <div className="relative w-28 md:h-[96px] flex-shrink-0 overflow-hidden rounded-md">
                                 <Image
                                     src={imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                                     alt={title}
