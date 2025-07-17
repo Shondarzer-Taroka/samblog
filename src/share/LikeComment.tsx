@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import useSWR from 'swr';
 import axios from 'axios';
+import { formatBengaliDate } from '@/utils/formatBengaliDate';
 
 interface LikeCommentProps {
   opinionId: string;
@@ -382,7 +383,8 @@ export default function LikeComment({
                         <div className="flex items-center space-x-2">
                           <span className="font-medium text-sm">{comment.user.name}</span>
                           <span className="text-xs text-gray-400">
-                            {new Date(comment.createdAt).toLocaleString()}
+                            {formatBengaliDate(comment.createdAt)}
+                            {/* {new Date(comment.createdAt).toLocaleString()} */}
                           </span>
                         </div>
                         <p className="mt-1 text-sm text-gray-700">{comment.content}</p>
