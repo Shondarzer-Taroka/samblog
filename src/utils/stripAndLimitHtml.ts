@@ -42,3 +42,26 @@ export const stripHtmlAndLimitForArray = (
 
   return { short, isTruncated };
 };
+
+
+
+
+
+export const stripHtmlAndLimitWithSpace = (
+  raw: string,
+  limit: number = 100
+): { short: string; isTruncated: boolean } => {
+  // Decode HTML entities (e.g. &lt; → <)
+  const decoded = he.decode(raw);
+
+  // Strip all HTML tags and normalize spaces
+  const plainText = decoded.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  const isTruncated = plainText.length > limit;
+
+  const short = isTruncated
+    ? plainText.slice(0, limit) + '...'
+    : plainText;
+
+  return { short, isTruncated };
+};
