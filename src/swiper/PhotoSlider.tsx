@@ -557,7 +557,7 @@ console.log(newsItems);
 
               {/* Overlay Text */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <p className="text-white text-lg font-medium">{slides[current].overlay}</p>
+                <p className="text-white text-lg font-medium">{stripHtmlAndLimit(newsItems[current].content,13).short}</p>
               </div>
 
               {/* Controls */}
@@ -587,7 +587,7 @@ console.log(newsItems);
 
               {/* Counter */}
               <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                {current + 1} / {slides.length}
+                {current + 1} / {newsItems.length}
               </div>
             </div>
 
