@@ -422,6 +422,7 @@
 
 'use client'
 
+import NewsCardWrapper from "@/share/NewsCardWrapper";
 import { NewsItem } from "@/types/news.types";
 import { englishToBengali } from "@/utils/englishToBengali";
 import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
@@ -568,6 +569,7 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
 
             {/* Caption Below */}
             <div className="p-4 bg-white">
+              <NewsCardWrapper href={`/news/${}`}> </NewsCardWrapper>
               <h3 className="text-xl font-bold text-gray-800 hover:text-red-600 transition-colors cursor-pointer">
                 {newsItems.slice(0, 6)[current].title}
               </h3>
