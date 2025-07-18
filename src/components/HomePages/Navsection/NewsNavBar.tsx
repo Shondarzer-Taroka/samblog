@@ -635,7 +635,7 @@ const NewsNavBar: React.FC = () => {
             className="text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0" 
             onClick={() => router.push('/')}
           >
-            আপনার<span className="text-blue-600">লোগো</span>
+            টিএন<span className="text-blue-600">নিউজ</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -745,14 +745,14 @@ const NewsNavBar: React.FC = () => {
                           <p className="text-xs text-gray-500 truncate">{user.email}</p>
                         </div>
                         <button 
-                          onClick={() => handleNavigate('/dashboard')}
+                          onClick={() => handleNavigate('/news/dashboard')}
                           className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                         >
                           <FiUser className="mr-3 text-gray-500" />
                           ড্যাশবোর্ড
                         </button>
                         <button 
-                          onClick={() => handleNavigate('/profile')}
+                          onClick={() => handleNavigate('/news/dashboard/myProfile')}
                           className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                         >
                           <FiSettings className="mr-3 text-gray-500" />
@@ -867,7 +867,7 @@ const NewsNavBar: React.FC = () => {
                   {user?.email ? (
                     <>
                       <button 
-                        onClick={() => handleNavigate('/dashboard')}
+                        onClick={() => handleNavigate('/news/dashboard')}
                         className="w-full text-left px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 flex items-center"
                       >
                         <FiUser className="mr-3 text-gray-500" />
