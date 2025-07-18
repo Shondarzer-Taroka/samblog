@@ -87,6 +87,7 @@
 
 
 
+import NewsCardWrapper from '@/share/NewsCardWrapper';
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
 import { getBengaliTimeAgo } from '@/utils/getBengaliTimeAgo';
@@ -94,9 +95,9 @@ import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import React from 'react';
 import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
-const IslamAndLifeSection = ({islamicNews,maxim}:{islamicNews:NewsItem[];maxim:NewsItem}) => {
+const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; maxim: NewsItem }) => {
 
-  if (islamicNews.length===0) {
+  if (islamicNews.length === 0) {
     return
   }
 
@@ -107,7 +108,7 @@ const IslamAndLifeSection = ({islamicNews,maxim}:{islamicNews:NewsItem[];maxim:N
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
 
-          <TitleNewsOverSection headline='   ইসলাম ও জীবন'/>
+          <TitleNewsOverSection headline='   ইসলাম ও জীবন' />
           <button className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
             সব দেখুন →
           </button>
@@ -117,17 +118,19 @@ const IslamAndLifeSection = ({islamicNews,maxim}:{islamicNews:NewsItem[];maxim:N
           {/* Left Side: Articles */}
           <div className="lg:col-span-2 space-y-6">
             {islamicNews.map((article, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors mb-2">
-                        {article.title}
-                      </h3>
-                      <p className="text-gray-600 mb-3">{stripHtmlAndLimit(article.content,8).short}</p>
+                      <NewsCardWrapper href={`/news/${article.category}/${article.id}`} id={article.id}>
+                        <h3 className="text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors mb-2">
+                          {article.title}
+                        </h3>
+                      </NewsCardWrapper>
+                      <p className="text-gray-600 mb-3">{stripHtmlAndLimit(article.content, 8).short}</p>
                     </div>
                     <div className="flex space-x-2">
                       <button className="text-gray-400 hover:text-red-600 transition-colors">
@@ -152,8 +155,8 @@ const IslamAndLifeSection = ({islamicNews,maxim}:{islamicNews:NewsItem[];maxim:N
             <div className="sticky top-4">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] duration-300">
                 <div className="relative h-48 bg-red-700 flex items-center justify-center">
-                  <img 
-                    src={ "https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"}
+                  <img
+                    src={"https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"}
                     alt="যুগান্তর"
                     className="max-h-full max-w-full object-contain p-4"
                   />
