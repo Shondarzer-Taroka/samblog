@@ -998,8 +998,23 @@ import { NewsFormProps, CATEGORIES, SUB_CATEGORIES } from '@/types/news.types';
 import dynamic from 'next/dynamic';
 
 
+export const categoriesOpitons = [
+  'বাণী',
+  'dsfk',
+  'চলমান ইস্যু',
+  'রাজনীতি',
+  'অর্থনীতি',
+  'ধর্ম',
+  
+  'সারাদেশ',
+  'সংস্কৃতি',
+  'আন্তর্জাতিক',
+  'সাহিত্য',
+  'মতামত',
+  'ইসলাম',
+];
 
-
+console.log(CATEGORIES)
 
 const QuillEditor = dynamic(
     () => import('@/QuillEditor/QuillEditor'),
@@ -1329,9 +1344,15 @@ export default function NewsForm({
                         disabled={isSubmitting}
                     >
                         <option value="">ক্যাটেগরি নির্বাচন করুন</option>
-                        {CATEGORIES.map(category => (
+                        {/* {CATEGORIES.map(category => (
+                            <option key={category} value={category}>{category}</option>
+                        ))} */}
+                        {categoriesOpitons.map(category => (
+                            
+                            
                             <option key={category} value={category}>{category}</option>
                         ))}
+
                     </select>
                 </div>
 

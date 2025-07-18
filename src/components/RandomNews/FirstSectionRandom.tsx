@@ -106,6 +106,9 @@ import NewsCardWrapper from '@/share/NewsCardWrapper';
 
 const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
   const randomNews = data;
+ if (data.length === 0) {
+  return <h1>No data found</h1>
+ }
 
   return (
     <section className="grid grid-cols-1 xl:grid-cols-2">

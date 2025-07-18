@@ -76,7 +76,7 @@ const Homepage = async () => {
       <Entertainment data={news.entertainment}/>
       <SportsNews data={news.sports}/>
       <PhotoSlider data={news.galleryNews} />
-      <IslamAndLifeSection/>
+      <IslamAndLifeSection islamicNews={news.islamicNews}  maxim={news.maxim}/>
       <EduMedGrid/>
       <OpinionSection data={news?.opinions}/>
       <MixedLayout/>

@@ -88,10 +88,19 @@
 
 
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
+import { NewsItem } from '@/types/news.types';
+import { getBengaliTimeAgo } from '@/utils/getBengaliTimeAgo';
+import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import React from 'react';
 import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
-const IslamAndLifeSection = () => {
+const IslamAndLifeSection = ({islamicNews,maxim}:{islamicNews:NewsItem[];maxim:NewsItem}) => {
+
+  if (islamicNews.length===0) {
+    return
+  }
+
+
   return (
     <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-2 md:px-4 font-noto ">
       <div className="">
@@ -107,28 +116,7 @@ const IslamAndLifeSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Side: Articles */}
           <div className="lg:col-span-2 space-y-6">
-            {[
-              {
-                title: 'হজ শেষ করেছেন ৫৪ হাজার ৩৬৩ রোহিঙ্গা',
-                time: '২৮ জুন ২০২৫, ০৪:৪১ পূর্বাহ্ণ',
-                excerpt: 'এ বছর হজ পালন করেছেন ৫৪ হাজার ৩৬৩ রোহিঙ্গা মুসলিম। সৌদি আরবের বিভিন্ন স্থান থেকে তারা হজ পালন করেছেন।'
-              },
-              {
-                title: 'পবিত্র আরাফাত ও জুমা',
-                time: '২৮ জুন ২০২৫, ০৩:৫১ পূর্বাহ্ণ',
-                excerpt: 'আরাফাতের মাঠে সমবেত হজযাত্রীদের জন্য বিশেষ দোয়া ও জুমার নামাজের গুরুত্ব সম্পর্কে আলোচনা।'
-              },
-              {
-                title: 'ফরজ গোসলের বিস্তারিত নিয়ম, কী করা যাবে কী যাবে না',
-                time: '২৭ জুন ২০২৫, ১০:২৬ পিএম',
-                excerpt: 'ইসলামে ফরজ গোসলের সঠিক পদ্ধতি ও এ সময় কী কী কাজ করা যাবে এবং কী কী কাজ থেকে বিরত থাকতে হবে।'
-              },
-              {
-                title: 'মিল্লাত জান্নাতের পর পুরুষদের সাধারণ প্রশ্ন করা হবে?',
-                time: '২৭ জুন ২০২৫, ০৫:১৪ পিএম',
-                excerpt: 'জান্নাতে প্রবেশের পর পুরুষদের কী ধরনের প্রশ্ন করা হতে পারে সে সম্পর্কে ইসলামি ব্যাখ্যা।'
-              },
-            ].map((article, idx) => (
+            {islamicNews.map((article, idx) => (
               <div 
                 key={idx} 
                 className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
@@ -139,7 +127,7 @@ const IslamAndLifeSection = () => {
                       <h3 className="text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors mb-2">
                         {article.title}
                       </h3>
-                      <p className="text-gray-600 mb-3">{article.excerpt}</p>
+                      <p className="text-gray-600 mb-3">{stripHtmlAndLimit(article.content,8).short}</p>
                     </div>
                     <div className="flex space-x-2">
                       <button className="text-gray-400 hover:text-red-600 transition-colors">
@@ -152,7 +140,7 @@ const IslamAndLifeSection = () => {
                   </div>
                   <div className="flex items-center text-sm text-gray-500">
                     <FaClock className="mr-1" />
-                    <span>প্রকাশ: {article.time}</span>
+                    <span>প্রকাশ: {getBengaliTimeAgo(article.createdAt)}</span>
                   </div>
                 </div>
               </div>
@@ -165,7 +153,7 @@ const IslamAndLifeSection = () => {
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] duration-300">
                 <div className="relative h-48 bg-red-700 flex items-center justify-center">
                   <img 
-                    src="https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"
+                    src={ "https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"}
                     alt="যুগান্তর"
                     className="max-h-full max-w-full object-contain p-4"
                   />

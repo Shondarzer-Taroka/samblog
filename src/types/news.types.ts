@@ -58,18 +58,18 @@ export interface NewsFormProps {
 
 
 export const CATEGORIES = [
+  'বাণী',
   'চলমান ইস্যু',
   'রাজনীতি',
   'অর্থনীতি',
   'ধর্ম',
-  'ইতিহাস',
+  // 'ইতিহাস',
   'সারাদেশ',
   'সংস্কৃতি',
   'আন্তর্জাতিক',
   'সাহিত্য',
   'মতামত',
   'ইসলাম',
-  'বাণী'
 ];
 
 export const SUB_CATEGORIES = [
