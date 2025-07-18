@@ -64,7 +64,7 @@ const Homepage = async () => {
   console.log(news.galleryNews,'gle');
 
   return (
-    <div className='max-w-7xl mx-auto font-noto '>
+    <div className='max-w-7xl mx-auto font-noto mt-12'>
 
       {/* <AuthServer/> */}
 

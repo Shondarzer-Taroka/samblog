@@ -46,9 +46,11 @@ export default function RootLayout({
         {/* <AuthProvider> */}
 
         {/* {children} */}
-        <Suspense fallback={<Loading />}>
+        <div className="mt-12"> 
+        <Suspense fallback={<Loading />} >
           {children}
         </Suspense>
+        </div>
         {/* </AuthProvider> */}
       </body>
     </html>
