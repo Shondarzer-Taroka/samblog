@@ -69,6 +69,7 @@ export const CATEGORIES = [
   'সাহিত্য',
   'মতামত',
   'ইসলাম',
+  'বাণী'
 ];
 
 export const SUB_CATEGORIES = [
