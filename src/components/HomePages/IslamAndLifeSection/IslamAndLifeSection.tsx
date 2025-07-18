@@ -168,6 +168,7 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-3">
                     {/* মহররমের রোজা কেন রাখা উত্তম? */}
+                    {maxim.title}
                   </h3>
                   <p className="text-gray-600 mb-4">
                     হিজরি ১৪৪৭ সালের মহররম মাস চলছে। ইসলামের ইতিহাসে মহররম অত্যন্ত গুরুত্বপূর্ণ একটি মাস। রাসুল (সা.) বলেছেন, &lsquo;রমজান মাসের পর সর্বশ্রেষ্ঠ রোজা হলো আল্লাহর মাস মহররমের রোজা।' (সহিহ মুসলিম)।
