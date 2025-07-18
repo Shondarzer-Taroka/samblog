@@ -57,11 +57,17 @@ import AuthMiddleware from '@/middleware/AuthMiddleware';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuthProvider();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+
+  console.log(pathname);
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,6 +83,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+
+  useEffect(()=>{
+    if (pathname.startsWith('/news/dashboard')) {
+      
+      document.getElementById('mainSection')?.classList.remove('mt-12')
+    }
+  },[])
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

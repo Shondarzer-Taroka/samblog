@@ -46,11 +46,11 @@ export default function RootLayout({
         {/* <AuthProvider> */}
 
         {/* {children} */}
-        <div className="mt-12"> 
+        <section className="mt-12" id="mainSection"> 
         <Suspense fallback={<Loading />} >
           {children}
         </Suspense>
-        </div>
+        </section>
         {/* </AuthProvider> */}
       </body>
     </html>
