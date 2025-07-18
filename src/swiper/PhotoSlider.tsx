@@ -582,7 +582,7 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
         <div className="lg:w-1/3 h-full">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">
             <div className="bg-gradient-to-r from-red-600 to-red-800 p-4">
-              <h2 className="text-xl font-semibold text-white">সর্বশেষ সংবাদ</h2>
+              <h2 className="text-xl font-semibold text-white">আপনার জন্য সংবাদ</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 p-4 flex-grow">
