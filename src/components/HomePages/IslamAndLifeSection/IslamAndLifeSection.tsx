@@ -151,13 +151,13 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
           </div>
 
           {/* Right Side: Feature Box */}
-        { maxim.content &&  <div className="relative">
+          {islamicNews.length>0 && <div className="relative">
             <div className="sticky top-4">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] duration-300">
                 <div className="relative h-48 bg-red-700 flex items-center justify-center">
                   <img
-                    src={maxim.imageUrl || "https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"}
-                    alt={maxim.title}
+                    src={islamicNews[4]?.imageUrl || "https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"}
+                    alt={islamicNews[4].title}
                     className="max-h-full max-w-full object-contain p-4"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -168,10 +168,11 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-3">
                     {/* মহররমের রোজা কেন রাখা উত্তম? */}
-                    {maxim.title}
+                    {islamicNews[4].title}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    হিজরি ১৪৪৭ সালের মহররম মাস চলছে। ইসলামের ইতিহাসে মহররম অত্যন্ত গুরুত্বপূর্ণ একটি মাস। রাসুল (সা.) বলেছেন, &lsquo;রমজান মাসের পর সর্বশ্রেষ্ঠ রোজা হলো আল্লাহর মাস মহররমের রোজা।' (সহিহ মুসলিম)।
+                  {stripHtmlAndLimit(islamicNews[4].content,25).short}
+                    {/* হিজরি ১৪৪৭ সালের মহররম মাস চলছে। ইসলামের ইতিহাসে মহররম অত্যন্ত গুরুত্বপূর্ণ একটি মাস। রাসুল (সা.) বলেছেন, &lsquo;রমজান মাসের পর সর্বশ্রেষ্ঠ রোজা হলো আল্লাহর মাস মহররমের রোজা।' (সহিহ মুসলিম)। */}
                   </p>
                   <button className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
                     সম্পূর্ণ পড়ুন
@@ -182,10 +183,16 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
               {/* Additional Featured Content */}
               <div className="mt-6 bg-white rounded-xl shadow-md overflow-hidden">
                 <div className="p-6 md:p-4">
-                  <h4 className="font-bold text-lg text-gray-800 mb-3">আজকের ইসলামিক বাণী</h4>
+                  <h4 className="font-bold text-lg text-gray-800 mb-3">
+
+                    {/* আজকের ইসলামিক বাণী */}
+                    {maxim.title}
+
+                  </h4>
                   <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
-                    <p className="text-gray-700 italic">"যে ব্যক্তি আল্লাহর সন্তুষ্টির জন্য জ্ঞান অর্জন করে, আল্লাহ তাকে জান্নাতের পথ সহজ করে দেন।"</p>
-                    <p className="text-right text-sm text-gray-500 mt-2">- সহিহ বুখারী</p>
+                    <p className="text-gray-700 italic">{maxim.content}</p>
+                    {/* <p className="text-gray-700 italic">"যে ব্যক্তি আল্লাহর সন্তুষ্টির জন্য জ্ঞান অর্জন করে, আল্লাহ তাকে জান্নাতের পথ সহজ করে দেন।"</p> */}
+                    {/* <p className="text-right text-sm text-gray-500 mt-2">- সহিহ বুখারী</p> */}
                   </div>
                 </div>
               </div>
