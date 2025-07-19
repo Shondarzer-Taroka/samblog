@@ -466,7 +466,7 @@ import DropDownItems from '@/components/DropDownItems/DropDownItems';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
-import { FiChevronDown, FiUser, FiLogOut, FiHome, FiBookmark, FiSettings, FiBell, FiSearch, FiMenu, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiUser, FiLogOut, FiSettings, FiBell, FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
