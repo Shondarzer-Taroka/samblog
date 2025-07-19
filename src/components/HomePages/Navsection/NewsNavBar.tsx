@@ -185,7 +185,7 @@
 //               >
 //                 <FiSearch size={20} />
 //               </button>
-              
+
 //               <AnimatePresence>
 //                 {searchOpen && (
 //                   <motion.div
@@ -482,7 +482,7 @@ const mobileCategories = {
 const menuItems = [
   { key: 'home', label: 'মূলপাতা', href: '/' },
   {
-    key: 'categories', 
+    key: 'categories',
     label: 'বিষয়শ্রেণি',
     dropdown: [
       ['চরমান ইস্যু', 'রাজনীতি', 'অর্থনীতি', 'ধর্ম', 'ইসলাম', 'ইতিহাস', 'সংস্কৃতি', 'সাহিত্য'],
@@ -492,7 +492,7 @@ const menuItems = [
     ]
   },
   {
-    key: 'learn', 
+    key: 'learn',
     label: 'জানুন',
     dropdown: [
       ['রাজনীতি', 'চরমান ইস্যু', 'বিবিধ', 'ধর্ম', 'ইসলাম', 'ইতিহাস', 'সংস্কৃতি', 'সাহিত্য'],
@@ -613,7 +613,7 @@ const NewsNavBar: React.FC = () => {
   }
 
   return (
-    <motion.section 
+    <motion.section
       className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-sm transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-sm'}`}
       initial={{ y: 0 }}
       animate={{ y: 0 }}
@@ -622,7 +622,7 @@ const NewsNavBar: React.FC = () => {
       <div className="container mx-auto px-4">
         <nav className='flex items-center justify-between py-3'>
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={toggleMobileMenu}
             className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors"
             aria-label="Menu"
@@ -631,8 +631,8 @@ const NewsNavBar: React.FC = () => {
           </button>
 
           {/* Logo/Brand - Centered on mobile */}
-          <div 
-            className="text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0" 
+          <div
+            className="text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0"
             onClick={() => router.push('/')}
           >
             টিএন<span className="text-blue-600">নিউজ</span>
@@ -661,14 +661,14 @@ const NewsNavBar: React.FC = () => {
           <div className="flex items-center gap-4">
             {/* Search Button */}
             <div className="relative" ref={searchRef}>
-              <button 
+              <button
                 onClick={toggleSearch}
                 className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
                 aria-label="Search"
               >
                 <FiSearch size={20} />
               </button>
-              
+
               <AnimatePresence>
                 {searchOpen && (
                   <motion.div
@@ -687,7 +687,7 @@ const NewsNavBar: React.FC = () => {
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                         autoFocus
                       />
-                      <button 
+                      <button
                         type="submit"
                         className="bg-blue-600 text-white px-3 py-2 rounded-r-md hover:bg-blue-700 transition-colors"
                       >
@@ -705,22 +705,48 @@ const NewsNavBar: React.FC = () => {
               </div>
             ) : user?.email ? (
               <>
-                <button className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative">
-                  <FiBell size={20} />
-                  <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                <button className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative flex gap-0.5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    enableBackground="new 0 0 24 24"
+                    xmlSpace="preserve"
+                    className={` hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
+                    fill="currentColor"
+                  >
+                    <path
+                      fillOpacity={0.8}
+                      d="M4.058,20.75c-0.497,0-0.923-0.177-1.277-0.531s-0.531-0.78-0.531-1.277V4.49
+        c0-0.247,0.06-0.396,0.181-0.447c0.121-0.051,0.268,0.011,0.442,0.185l0.802,0.802l1.017-1.027C4.786,3.91,4.885,3.842,4.99,3.798
+        c0.105-0.044,0.217-0.065,0.337-0.065c0.12,0,0.233,0.019,0.341,0.058c0.108,0.039,0.208,0.105,0.3,0.198L7,5.031l1.033-1.042
+        C8.124,3.895,8.223,3.83,8.33,3.791c0.107-0.039,0.221-0.058,0.343-0.058c0.122,0,0.235,0.022,0.339,0.065
+        C9.115,3.842,9.214,3.91,9.308,4.004l1.017,1.027l1.042-1.042c0.094-0.094,0.193-0.16,0.297-0.198
+        c0.105-0.038,0.217-0.058,0.337-0.058c0.12,0,0.231,0.019,0.335,0.058c0.104,0.038,0.203,0.104,0.296,0.198l1.042,1.042l1.017-1.027
+        c0.094-0.094,0.193-0.162,0.297-0.206c0.105-0.044,0.217-0.065,0.337-0.065c0.12,0,0.233,0.019,0.341,0.058
+        c0.108,0.039,0.208,0.105,0.3,0.198L17,5.031l1.033-1.042c0.091-0.093,0.191-0.159,0.297-0.198c0.107-0.039,0.221-0.058,0.343-0.058
+        c0.122,0,0.235,0.022,0.339,0.065c0.104,0.044,0.203,0.112,0.296,0.206l1.017,1.027l0.802-0.802
+        c0.174-0.174,0.322-0.236,0.442-0.185c0.12,0.051,0.181,0.2,0.181,0.447v14.452c0,0.497-0.177,0.923-0.531,1.277
+        s-0.78,0.531-1.277,0.531H4.058z M4.058,19.25h7.192v-6.5h-7.5v6.192c0,0.09,0.029,0.163,0.087,0.221
+        C3.894,19.221,3.968,19.25,4.058,19.25z M12.75,19.25h7.192c0.09,0,0.163-0.029,0.221-0.087c0.058-0.058,0.087-0.131,0.087-0.221
+        V16.75h-7.5V19.25z M12.75,15.25h7.5v-2.5h-7.5V15.25z M3.75,11.25h16.5V7.654H3.75V11.25z"
+                    />
+                  </svg>
+                  <span>ই-পেপার</span>
+                  {/* <FiBell size={20} /> */}
+                  {/* <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span> */}
                 </button>
 
                 <div ref={profileRef} className="relative">
-                  <div 
+                  <div
                     className="flex items-center gap-2 cursor-pointer"
                     onClick={toggleProfileDropdown}
                   >
                     {user.image ? (
-                      <Image 
-                        src={user.image} 
-                        alt={user.name || 'Profile'} 
-                        width={36} 
-                        height={36} 
+                      <Image
+                        src={user.image}
+                        alt={user.name || 'Profile'}
+                        width={36}
+                        height={36}
                         className="w-9 h-9 rounded-full object-cover border-2 border-gray-200 hover:border-blue-500 transition-colors"
                       />
                     ) : (
@@ -744,21 +770,21 @@ const NewsNavBar: React.FC = () => {
                           <p className="text-sm font-medium text-gray-900">{user.name}</p>
                           <p className="text-xs text-gray-500 truncate">{user.email}</p>
                         </div>
-                        <button 
+                        <button
                           onClick={() => handleNavigate('/news/dashboard')}
                           className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                         >
                           <FiUser className="mr-3 text-gray-500" />
                           ড্যাশবোর্ড
                         </button>
-                        <button 
+                        <button
                           onClick={() => handleNavigate('/news/dashboard/myProfile')}
                           className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                         >
                           <FiSettings className="mr-3 text-gray-500" />
                           প্রোফাইল সেটিংস
                         </button>
-                        <button 
+                        <button
                           onClick={logout}
                           className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                         >
@@ -771,7 +797,7 @@ const NewsNavBar: React.FC = () => {
                 </div>
               </>
             ) : (
-              <button 
+              <button
                 onClick={() => router.push('/login')}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors flex items-center"
               >
@@ -803,7 +829,7 @@ const NewsNavBar: React.FC = () => {
                     placeholder="খোঁজ করুন..."
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
-                  <button 
+                  <button
                     type="submit"
                     className="bg-blue-600 text-white px-3 py-2 rounded-r-md hover:bg-blue-700 transition-colors"
                   >
@@ -866,14 +892,14 @@ const NewsNavBar: React.FC = () => {
                   {/* Mobile Auth Buttons - Same as desktop */}
                   {user?.email ? (
                     <>
-                      <button 
+                      <button
                         onClick={() => handleNavigate('/news/dashboard')}
                         className="w-full text-left px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 flex items-center"
                       >
                         <FiUser className="mr-3 text-gray-500" />
                         ড্যাশবোর্ড
                       </button>
-                      <button 
+                      <button
                         onClick={logout}
                         className="w-full text-left px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 flex items-center"
                       >
@@ -882,7 +908,7 @@ const NewsNavBar: React.FC = () => {
                       </button>
                     </>
                   ) : (
-                    <button 
+                    <button
                       onClick={() => router.push('/login')}
                       className="w-full text-left px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 flex items-center"
                     >
