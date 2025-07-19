@@ -553,7 +553,7 @@ const NewsNavBar: React.FC = () => {
 
   const navigateSearch = () => {
     //  router.push('/news/search')
-     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+    router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
     setDropdownContent(null);
     setProfileDropdownOpen(false);
   };
@@ -721,15 +721,15 @@ const NewsNavBar: React.FC = () => {
                       <FiSearch size={14.8} />
                     </button>
 
-                   
+
                   </div >
-                  <div className=' group flex gap-2 items-center'>
+                  <div className='conterinerOFsvgAndeppertext flex gap-2 items-center' onClick={() => router.push('/epapers/viewer')}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       enableBackground="new 0 0 24 24"
                       xmlSpace="preserve"
-                      className={` group-hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
+                      className={`svgclass w-5 h-5 text-gray-600}`}
                       fill="currentColor"
                     >
                       <path
@@ -750,10 +750,10 @@ const NewsNavBar: React.FC = () => {
                       />
                     </svg>
                     {/* <span className='h-[20px]'>ই-পেপার</span> */}
-                      <span className='h-[20px] text-gray-600 group-hover:text-blue-600'>ই-পেপার</span>
+                    <span className='h-[20px] text-gray-600 epaperNav'>ই-পেপার</span>
                   </div>
 
-               
+
                 </div>
 
                 <div ref={profileRef} className="relative">

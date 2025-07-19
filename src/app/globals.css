@@ -219,7 +219,23 @@ input:checked + .slider:before {
 }
 
 
+.svgclass:hover,.epaperNav:hover{
+  color: #155dfc;
+}
 
+.svgclass:hover {
+  color: #155dfc;
+}
+
+
+.conterinerOFsvgAndeppertext:hover .epaperNav{
+  color: #155dfc;
+}
+
+
+.conterinerOFsvgAndeppertext:hover .svgclass{
+  color: #155dfc;
+}
 
 
 
