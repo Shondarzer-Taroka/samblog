@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import TitleNewsOverSection from "@/share/TitleNewsOverSection";
 import { NewsItem } from "@/types/news.types";
+import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
+import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
+import Image from "next/image";
 import React from "react";
 
 const leftArticles = [
@@ -84,7 +87,12 @@ type mixedLayoutProps = {
   }
 }
 
-export default function MixedLayout({ data }:) {
+export default function MixedLayout({ data }: { data: mixedLayoutProps }) {
+
+  if (data === undefined) {
+    return <h1>data not found</h1>
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-2 md:px-4  py-6">
       {/* Left Section */}
@@ -107,26 +115,28 @@ export default function MixedLayout({ data }:) {
         {/* Featured Article */}
         <div className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
-          <img
-            src={leftArticles[0].image}
+          <Image
+            height={320}
+            width={340}
+            src={data.randomNews.imageUrl || 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0'}
             alt="main"
             className="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute bottom-0 left-0 z-20 p-6 w-full">
             <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded mb-2">
-              {leftArticles[0].category}
+              {data.randomNews.category}
             </span>
             <h3 className="text-xl font-bold text-white mb-2 leading-tight">
-              {leftArticles[0].title}
+              {data.randomNews.title}
             </h3>
             <p className="text-sm text-gray-200 mb-3 line-clamp-2">
-              {leftArticles[0].excerpt}
+              {stripHtmlAndLimit(data.randomNews.content,25).short}
             </p>
             <div className="flex items-center text-xs text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              {leftArticles[0].time}
+              {getBengaliTimeAgo(data.randomNews.createdAt)}
             </div>
           </div>
         </div>
