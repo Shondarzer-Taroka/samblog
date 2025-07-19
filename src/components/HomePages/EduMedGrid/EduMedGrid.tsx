@@ -247,7 +247,7 @@ const categories = [
 interface Headline {
   id: string;
   category: string;
-  title:string
+  title: string
 }
 
 interface CategoryNews {
@@ -261,11 +261,11 @@ interface EduMedGridProps {
 }
 
 
-const EduMedGrid = ({data}:EduMedGridProps) => {
- 
- console.log(data,'edo');
- 
-  
+const EduMedGrid = ({ data }: EduMedGridProps) => {
+
+  console.log(data, 'edo');
+
+
   return (
     <div className="bg-gray-50 py-6 md:px-4 px-2 font-noto">
       <div className="max-w-7xl mx-auto">
@@ -273,7 +273,7 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             <span className="relative inline-block">
               <span className="relative z-10">সর্বশেষ সংবাদ</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-yellow-300/60 -z-0" style={{transform: 'skewY(-2deg)'}}></span>
+              <span className="absolute bottom-0 left-0 w-full h-3 bg-yellow-300/60 -z-0" style={{ transform: 'skewY(-2deg)' }}></span>
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">বিভিন্ন বিভাগ থেকে বাছাইকৃত গুরুত্বপূর্ণ সংবাদসমূহ</p>
@@ -283,8 +283,8 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
           {/* Featured Category - Takes full width on mobile, half on desktop */}
           <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70 z-10"></div>
-            <img 
-              src={categories[0].image} 
+            <img
+              src={categories[0].image}
               alt={categories[0].title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -302,13 +302,13 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
 
           {/* Other Categories Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {data.slice(1).map((cat, idx) => (
+            {data.map((cat, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative h-40 overflow-hidden">
                   <Image
                     width={250}
                     height={160}
-                    src={cat.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'} 
+                    src={cat.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}
                     alt={cat.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
@@ -323,10 +323,10 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
                     {cat.headlines.map((hl, hIdx) => (
                       <li key={hIdx} className="flex items-start">
                         <span className="flex-shrink-0 w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-2"></span>
-                        <NewsCardWrapper href={`/news/${hl.category}/${hl.id}`} id={hl.id}> 
-                        <p className="text-gray-800 hover:text-red-600 cursor-pointer transition-colors">
-                          {hl.title}
-                        </p>
+                        <NewsCardWrapper href={`/news/${hl.category}/${hl.id}`} id={hl.id}>
+                          <p className="text-gray-800 hover:text-red-600 cursor-pointer transition-colors">
+                            {hl.title}
+                          </p>
                         </NewsCardWrapper>
                       </li>
                     ))}
@@ -352,8 +352,8 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
             {data.map((cat, idx) => (
               <div key={idx} className="flex-shrink-0 w-64 mr-4 bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="h-32 relative">
-                  <img 
-                    src={cat.imageUrl} 
+                  <img
+                    src={cat.imageUrl}
                     alt={cat.title}
                     className="w-full h-full object-cover"
                   />
@@ -364,9 +364,11 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
                   </div>
                 </div>
                 <div className="p-3">
-                  <p className="text-sm text-gray-800 font-medium mb-2 line-clamp-2">
-                    {cat.headlines[0].title}
-                  </p>
+                  <NewsCardWrapper href={`/news/${cat.headlines[0].category}/${cat.headlines[0].id}`} id={cat.headlines[0].id}>
+                    <p className="text-sm text-gray-800 font-medium mb-2 line-clamp-2">
+                      {cat.headlines[0].title}
+                    </p>
+                  </NewsCardWrapper>
                   <button className="text-xs text-red-600 hover:text-red-700 font-medium">
                     বিস্তারিত
                   </button>
