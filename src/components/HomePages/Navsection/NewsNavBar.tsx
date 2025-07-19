@@ -501,7 +501,12 @@ const menuItems = [
       ['প্রম', 'রান্নাবান্না', 'তথ্যপ্রযুক্তি', 'ব্যবস্থা', 'স্বাস্থ্যকথা', 'অর্থনীতি'],
     ]
   },
-  { key: 'notice', label: 'নোটিশ', href: '/notice' },
+  { key: 'রাজনীতি', label: 'রাজনীতি', href: '/news/রাজনীতি' },
+  { key: 'আন্তর্জাতিক', label: 'আন্তর্জাতিক', href: '/news/আন্তর্জাতিক' },
+  { key: 'ইসলাম', label: 'ইসলাম', href: '/news/ইসলাম' },
+  { key: 'খেলাধুলা', label: 'খেলাধুলা', href: '/news/খেলাধুলা' },
+  { key: 'মুক্তিযুদ্ধ', label: 'মুক্তিযুদ্ধ', href: '/news/মুক্তিযুদ্ধ' },
+  { key: 'চাকরি', label: 'চাকরি', href: '/news/চাকরি' },
 ];
 
 const NewsNavBar: React.FC = () => {
@@ -547,7 +552,8 @@ const NewsNavBar: React.FC = () => {
   };
 
   const navigateSearch = () => {
-     router.push('/news/search')
+    //  router.push('/news/search')
+     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
     setDropdownContent(null);
     setProfileDropdownOpen(false);
   };
