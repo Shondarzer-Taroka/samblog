@@ -707,6 +707,7 @@ const NewsNavBar: React.FC = () => {
 
             {loading ? (
               <div className="animate-pulse flex items-center gap-2">
+                
                 <div className="h-8 w-8 rounded-full bg-gray-200"></div>
               </div>
             ) : user?.email ? (

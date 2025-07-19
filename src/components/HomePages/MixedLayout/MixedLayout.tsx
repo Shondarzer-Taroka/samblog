@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import TitleNewsOverSection from "@/share/TitleNewsOverSection";
+import { NewsItem } from "@/types/news.types";
 import React from "react";
 
 const leftArticles = [
@@ -73,7 +74,17 @@ const rightArticles = [
   },
 ];
 
-export default function MixedLayout() {
+type mixedLayoutProps = {
+  randomNews: NewsItem;
+  categoryStats: {
+    id: string;
+    category: string;
+    imageUrl: string;
+    count: number
+  }
+}
+
+export default function MixedLayout({ data }:) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-2 md:px-4  py-6">
       {/* Left Section */}

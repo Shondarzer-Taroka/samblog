@@ -79,7 +79,7 @@ const Homepage = async () => {
       <IslamAndLifeSection islamicNews={news.islamicNews} maxim={news.maxim} />
       <EduMedGrid data={news.transformed} />
       <OpinionSection data={news?.opinions} />
-      <MixedLayout />
+      <MixedLayout data={news.funNews}/>
 
 
       {/* <div>

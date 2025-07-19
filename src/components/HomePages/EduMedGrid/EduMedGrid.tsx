@@ -265,6 +265,9 @@ const EduMedGrid = ({ data }: EduMedGridProps) => {
 
   console.log(data, 'edo');
 
+if (!data || data.length === 0 || !Array.isArray(data)) {
+  return <div className='flex justify-center'>  <h1>কোনো খবর পাওয়া যায়নি</h1></div>;
+}
 
   return (
     <div className="bg-gray-50 py-6 md:px-4 px-2 font-noto">
@@ -302,7 +305,7 @@ const EduMedGrid = ({ data }: EduMedGridProps) => {
 
           {/* Other Categories Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {data.map((cat, idx) => (
+            {data && data.map((cat, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative h-40 overflow-hidden">
                   <Image
@@ -344,7 +347,7 @@ const EduMedGrid = ({ data }: EduMedGridProps) => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>
-                      </NewsCardWrapper>
+                    </NewsCardWrapper>
                   </div>
                 </div>
               </div>
