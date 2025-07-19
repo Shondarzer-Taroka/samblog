@@ -546,8 +546,8 @@ const NewsNavBar: React.FC = () => {
     setSearchOpen(false);
   };
 
-  const toggleSearch = () => {
-    setSearchOpen(prev => !prev);
+  const navigateSearch = () => {
+     router.push('/news/search')
     setDropdownContent(null);
     setProfileDropdownOpen(false);
   };
@@ -660,9 +660,9 @@ const NewsNavBar: React.FC = () => {
           {/* Right Side Actions */}
           <div className="flex items-center gap-4">
             {/* Search Button */}
-            <div className="relative" ref={searchRef}>
+            <div className="relative hidden" ref={searchRef}>
               <button
-                onClick={toggleSearch}
+                onClick={navigateSearch}
                 className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
                 aria-label="Search"
               >
@@ -678,7 +678,7 @@ const NewsNavBar: React.FC = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute right-0 top-full mt-2 w-72 bg-white rounded-md shadow-lg z-50 p-2"
                   >
-                    <form onSubmit={handleSearch} className="flex">
+                    <form onSubmit={handleSearch} className="flex md:hidden">
                       <input
                         type="text"
                         value={searchQuery}
@@ -705,18 +705,57 @@ const NewsNavBar: React.FC = () => {
               </div>
             ) : user?.email ? (
               <>
-                <div className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative flex gap-2 items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    enableBackground="new 0 0 24 24"
-                    xmlSpace="preserve"
-                    className={` hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
-                    fill="currentColor"
-                  >
-                    <path
-                      fillOpacity={0.8}
-                      d="M4.058,20.75c-0.497,0-0.923-0.177-1.277-0.531s-0.531-0.78-0.531-1.277V4.49
+                <div className="p-2 text-gray-600 relative flex gap-2 items-center">
+                  <div className="relative" ref={searchRef}>
+                    <button
+                      onClick={navigateSearch}
+                      className="py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                      aria-label="Search"
+                    >
+                      <FiSearch size={20} />
+                    </button>
+
+                    {/* <AnimatePresence>
+                      {searchOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute right-0 top-full mt-2 w-72 bg-white rounded-md shadow-lg z-50 p-2"
+                        >
+                          <form onSubmit={handleSearch} className="flex md:hidden">
+                            <input
+                              type="text"
+                              value={searchQuery}
+                              onChange={(e) => setSearchQuery(e.target.value)}
+                              placeholder="খোঁজ করুন..."
+                              className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              autoFocus
+                            />
+                            <button
+                              type="submit"
+                              className="bg-blue-600 text-white px-3 py-2 rounded-r-md hover:bg-blue-700 transition-colors"
+                            >
+                              <FiSearch size={18} />
+                            </button>
+                          </form>
+                        </motion.div>
+                      )}
+                    </AnimatePresence> */}
+                  </div >
+                  <div className=' hover:text-blue-600 flex gap-2 items-center'>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      enableBackground="new 0 0 24 24"
+                      xmlSpace="preserve"
+                      className={` hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
+                      fill="currentColor"
+                    >
+                      <path
+                        fillOpacity={0.8}
+                        d="M4.058,20.75c-0.497,0-0.923-0.177-1.277-0.531s-0.531-0.78-0.531-1.277V4.49
         c0-0.247,0.06-0.396,0.181-0.447c0.121-0.051,0.268,0.011,0.442,0.185l0.802,0.802l1.017-1.027C4.786,3.91,4.885,3.842,4.99,3.798
         c0.105-0.044,0.217-0.065,0.337-0.065c0.12,0,0.233,0.019,0.341,0.058c0.108,0.039,0.208,0.105,0.3,0.198L7,5.031l1.033-1.042
         C8.124,3.895,8.223,3.83,8.33,3.791c0.107-0.039,0.221-0.058,0.343-0.058c0.122,0,0.235,0.022,0.339,0.065
@@ -729,9 +768,11 @@ const NewsNavBar: React.FC = () => {
         s-0.78,0.531-1.277,0.531H4.058z M4.058,19.25h7.192v-6.5h-7.5v6.192c0,0.09,0.029,0.163,0.087,0.221
         C3.894,19.221,3.968,19.25,4.058,19.25z M12.75,19.25h7.192c0.09,0,0.163-0.029,0.221-0.087c0.058-0.058,0.087-0.131,0.087-0.221
         V16.75h-7.5V19.25z M12.75,15.25h7.5v-2.5h-7.5V15.25z M3.75,11.25h16.5V7.654H3.75V11.25z"
-                    />
-                  </svg>
-                  <span className='h-[20px]'>ই-পেপার</span>
+                      />
+                    </svg>
+                    <span className='h-[20px]'>ই-পেপার</span>
+                  </div>
+
                   {/* <FiBell size={20} /> */}
                   {/* <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span> */}
                 </div>
