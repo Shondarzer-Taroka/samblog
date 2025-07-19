@@ -61,7 +61,7 @@ const getHomePageNews = async () => {
 const Homepage = async () => {
 
   const news = await getHomePageNews()
-  console.log(news,'home page news');
+  console.log(news, 'home page news');
 
   return (
     <div className='max-w-7xl mx-auto font-noto mt-12'>
@@ -73,13 +73,13 @@ const Homepage = async () => {
       <RandomNews data={news} />
       <PoliticsSection data={news.politicalNews} />
       <InternationalNewsSection data={news.internationalNews} />
-      <Entertainment data={news.entertainment}/>
-      <SportsNews data={news.sports}/>
+      <Entertainment data={news.entertainment} />
+      <SportsNews data={news.sports} />
       <PhotoSlider data={news.galleryNews} />
-      <IslamAndLifeSection islamicNews={news.islamicNews}  maxim={news.maxim}/>
-      <EduMedGrid/>
-      <OpinionSection data={news?.opinions}/>
-      <MixedLayout/>
+      <IslamAndLifeSection islamicNews={news.islamicNews} maxim={news.maxim} />
+      <EduMedGrid data={news.transformed} />
+      <OpinionSection data={news?.opinions} />
+      <MixedLayout />
 
 
       {/* <div>
