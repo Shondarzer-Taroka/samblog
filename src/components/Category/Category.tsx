@@ -65,7 +65,7 @@ const Category = ({ category }: { category: string }) => {
 
 
     return (
-        <section className="px-2 py-6 max-w-7xl mx-auto">
+        <section className="px-2 py-6 max-w-7xl mx-auto mt-7">
             <h2 className="text-2xl font-bold text-red-600 mb-6">{decodeURIComponent(category)}</h2>
 
             {/* --- Main layout: content + right‑side ad --- */}

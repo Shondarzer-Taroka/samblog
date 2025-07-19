@@ -88,7 +88,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useEffect(()=>{
     if (pathname.startsWith('/news/dashboard')) {
       
-      document.getElementById('mainSection')?.classList.remove('mt-12')
+      document.getElementById('mainSection')?.classList.remove('mt-[60px]')
     }
   },[])
 

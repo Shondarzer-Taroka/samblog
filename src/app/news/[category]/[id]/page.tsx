@@ -35,7 +35,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
     }
 
     return (
-        <section className=" max-w-6xl mx-auto   px-2 py-6 font-noto">
+        <section className=" max-w-7xl mx-auto   px-2 py-6 font-noto">
 
             <p className="border-b-2 border-black inline-block pb-1 font-bold text-2xl mt-4">{news.category}</p>
 
