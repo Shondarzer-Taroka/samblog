@@ -151,7 +151,7 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
           </div>
 
           {/* Right Side: Feature Box */}
-          {islamicNews.length>0 && <div className="relative">
+          {islamicNews.length > 0 && <div className="relative">
             <div className="sticky top-4">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] duration-300">
                 <div className="relative h-48 bg-red-700 flex items-center justify-center">
@@ -171,12 +171,14 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
                     {islamicNews[4].title}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                  {stripHtmlAndLimit(islamicNews[4].content,25).short}
+                    {stripHtmlAndLimit(islamicNews[4].content, 25).short}
                     {/* হিজরি ১৪৪৭ সালের মহররম মাস চলছে। ইসলামের ইতিহাসে মহররম অত্যন্ত গুরুত্বপূর্ণ একটি মাস। রাসুল (সা.) বলেছেন, &lsquo;রমজান মাসের পর সর্বশ্রেষ্ঠ রোজা হলো আল্লাহর মাস মহররমের রোজা।' (সহিহ মুসলিম)। */}
                   </p>
-                  <button className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
-                    সম্পূর্ণ পড়ুন
-                  </button>
+                  <NewsCardWrapper id={islamicNews[4].id} href={`/news/${islamicNews[4].category}/${islamicNews[4].id}`}>
+                    <button className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
+                      সম্পূর্ণ পড়ুন
+                    </button>
+                  </NewsCardWrapper>
                 </div>
               </div>
 
