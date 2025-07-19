@@ -705,7 +705,7 @@ const NewsNavBar: React.FC = () => {
               </div>
             ) : user?.email ? (
               <>
-                <button className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative flex gap-0.5 items-center">
+                <div className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative flex gap-2 items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -734,7 +734,7 @@ const NewsNavBar: React.FC = () => {
                   <span className='h-[20px]'>ই-পেপার</span>
                   {/* <FiBell size={20} /> */}
                   {/* <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span> */}
-                </button>
+                </div>
 
                 <div ref={profileRef} className="relative">
                   <div
