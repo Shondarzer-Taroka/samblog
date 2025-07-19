@@ -721,42 +721,15 @@ const NewsNavBar: React.FC = () => {
                       <FiSearch size={14.8} />
                     </button>
 
-                    {/* <AnimatePresence>
-                      {searchOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute right-0 top-full mt-2 w-72 bg-white rounded-md shadow-lg z-50 p-2"
-                        >
-                          <form onSubmit={handleSearch} className="flex md:hidden">
-                            <input
-                              type="text"
-                              value={searchQuery}
-                              onChange={(e) => setSearchQuery(e.target.value)}
-                              placeholder="খোঁজ করুন..."
-                              className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              autoFocus
-                            />
-                            <button
-                              type="submit"
-                              className="bg-blue-600 text-white px-3 py-2 rounded-r-md hover:bg-blue-700 transition-colors"
-                            >
-                              <FiSearch size={18} />
-                            </button>
-                          </form>
-                        </motion.div>
-                      )}
-                    </AnimatePresence> */}
+                   
                   </div >
-                  <div className=' hover:text-blue-600 flex gap-2 items-center'>
+                  <div className=' group flex gap-2 items-center'>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       enableBackground="new 0 0 24 24"
                       xmlSpace="preserve"
-                      className={` hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
+                      className={` group-hover:text-blue-600 w-5 h-5 ${profileDropdownOpen ? 'text-blue-600' : 'text-gray-600'}`}
                       fill="currentColor"
                     >
                       <path
@@ -776,11 +749,11 @@ const NewsNavBar: React.FC = () => {
         V16.75h-7.5V19.25z M12.75,15.25h7.5v-2.5h-7.5V15.25z M3.75,11.25h16.5V7.654H3.75V11.25z"
                       />
                     </svg>
-                    <span className='h-[20px]'>ই-পেপার</span>
+                    {/* <span className='h-[20px]'>ই-পেপার</span> */}
+                      <span className='h-[20px] text-gray-600 group-hover:text-blue-600'>ই-পেপার</span>
                   </div>
 
-                  {/* <FiBell size={20} /> */}
-                  {/* <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span> */}
+               
                 </div>
 
                 <div ref={profileRef} className="relative">
