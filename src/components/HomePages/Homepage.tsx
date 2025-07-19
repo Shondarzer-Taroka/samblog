@@ -61,7 +61,7 @@ const getHomePageNews = async () => {
 const Homepage = async () => {
 
   const news = await getHomePageNews()
-  console.log(news.galleryNews,'gle');
+  console.log(news,'home page news');
 
   return (
     <div className='max-w-7xl mx-auto font-noto mt-12'>
