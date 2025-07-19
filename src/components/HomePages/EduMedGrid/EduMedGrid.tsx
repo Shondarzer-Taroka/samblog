@@ -332,12 +332,19 @@ const EduMedGrid = ({ data }: EduMedGridProps) => {
                     ))}
                   </ul>
                   <div className="mt-4 pt-3 border-t border-gray-100">
-                    <button className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center">
-                      আরও দেখুন
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                    <NewsCardWrapper
+                      href={`/news/${cat.title}`}
+                      id={
+                        cat.headlines[Math.floor(Math.random() * cat.headlines.length)]?.id
+                      }
+                    >
+                      <button className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center">
+                        আরও দেখুন
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      </NewsCardWrapper>
                   </div>
                 </div>
               </div>
@@ -363,16 +370,16 @@ const EduMedGrid = ({ data }: EduMedGridProps) => {
                     </span>
                   </div>
                 </div>
-                <div className="p-3">
-                  <NewsCardWrapper href={`/news/${cat.headlines[0].category}/${cat.headlines[0].id}`} id={cat.headlines[0].id}>
+                <NewsCardWrapper href={`/news/${cat.headlines[0].category}/${cat.headlines[0].id}`} id={cat.headlines[0].id}>
+                  <div className="p-3">
                     <p className="text-sm text-gray-800 font-medium mb-2 line-clamp-2">
                       {cat.headlines[0].title}
                     </p>
-                  </NewsCardWrapper>
-                  <button className="text-xs text-red-600 hover:text-red-700 font-medium">
-                    বিস্তারিত
-                  </button>
-                </div>
+                    <button className="text-xs text-red-600 hover:text-red-700 font-medium">
+                      বিস্তারিত
+                    </button>
+                  </div>
+                </NewsCardWrapper>
               </div>
             ))}
           </div>
