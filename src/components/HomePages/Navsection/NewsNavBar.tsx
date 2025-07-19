@@ -712,7 +712,7 @@ const NewsNavBar: React.FC = () => {
                       className="py-2 text-gray-600 hover:text-blue-600 transition-colors"
                       aria-label="Search"
                     >
-                      <FiSearch size={20} />
+                      <FiSearch size={14.8} />
                     </button>
 
                     {/* <AnimatePresence>
