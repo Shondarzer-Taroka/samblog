@@ -193,9 +193,9 @@
 
 
 /* eslint-disable @next/next/no-img-element */
-import { NewsItem } from '@/types/news.types';
+import NewsCardWrapper from '@/share/NewsCardWrapper';
+import Image from 'next/image';
 import React from 'react';
-
 const categories = [
   {
     title: 'শিক্ষাঙ্গন',
@@ -305,8 +305,10 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
             {data.slice(1).map((cat, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src={cat.imageUrl} 
+                  <Image
+                    width={250}
+                    height={160}
+                    src={cat.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'} 
                     alt={cat.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
@@ -321,9 +323,11 @@ const EduMedGrid = ({data}:EduMedGridProps) => {
                     {cat.headlines.map((hl, hIdx) => (
                       <li key={hIdx} className="flex items-start">
                         <span className="flex-shrink-0 w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-2"></span>
+                        <NewsCardWrapper href={`/news/${hl.category}/${hl.id}`} id={hl.id}> 
                         <p className="text-gray-800 hover:text-red-600 cursor-pointer transition-colors">
                           {hl.title}
                         </p>
+                        </NewsCardWrapper>
                       </li>
                     ))}
                   </ul>
