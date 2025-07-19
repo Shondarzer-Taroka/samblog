@@ -731,7 +731,7 @@ const NewsNavBar: React.FC = () => {
         V16.75h-7.5V19.25z M12.75,15.25h7.5v-2.5h-7.5V15.25z M3.75,11.25h16.5V7.654H3.75V11.25z"
                     />
                   </svg>
-                  <span>ই-পেপার</span>
+                  <span className='h-[20px]'>ই-পেপার</span>
                   {/* <FiBell size={20} /> */}
                   {/* <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span> */}
                 </button>
