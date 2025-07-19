@@ -466,7 +466,7 @@ import DropDownItems from '@/components/DropDownItems/DropDownItems';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
-import { FiChevronDown, FiUser, FiLogOut, FiSettings, FiBell, FiSearch, FiMenu, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiUser, FiLogOut, FiSettings, FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -638,7 +638,7 @@ const NewsNavBar: React.FC = () => {
 
           {/* Logo/Brand - Centered on mobile */}
           <div
-            className="text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0"
+            className="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0"
             onClick={() => router.push('/')}
           >
             টিএন<span className="text-blue-600">নিউজ</span>
@@ -664,7 +664,7 @@ const NewsNavBar: React.FC = () => {
           </ul>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1 md:gap-4">
             {/* Search Button */}
             <div className="relative hidden" ref={searchRef}>
               <button

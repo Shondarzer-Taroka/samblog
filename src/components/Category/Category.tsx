@@ -186,7 +186,7 @@ const Category = ({ category }: { category: string }) => {
 
             <div>
 
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">আরও দেখুন  <span className='underline'>{decodeURIComponent(category)}</span> সংবাদ</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 mt-10">আরও দেখুন  <span className='underline'>{decodeURIComponent(category)}</span> সংবাদ</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {news.length > 0 && news.slice(5, news.length + 1).map((news) => (
                         <article

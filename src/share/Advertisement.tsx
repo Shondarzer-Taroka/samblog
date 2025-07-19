@@ -124,8 +124,8 @@ export default function Advertisement({
 
   return (
     <div
-      className={`bg-white shadow-md overflow-hidden ${className}`}
-      style={{ width: w }}
+      className={`bg-white shadow-md overflow-hidden ${className} w-[${w}px]`}
+      // style={{ width: w }}
     >
       {href ? (
         <Link href={href} target="_blank" rel="noopener noreferrer">
