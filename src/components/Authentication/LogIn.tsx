@@ -209,11 +209,11 @@ const Login = () => {
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-6">
         <div className="text-center">
           <div className="flex justify-center mb-4">
-            <Image 
-              src="/logo.png" 
-              alt="Logo" 
-              width={80} 
-              height={80} 
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={80}
+              height={80}
               className="rounded-full"
             />
           </div>
@@ -249,8 +249,8 @@ const Login = () => {
               />
             </div>
           </div>
-
-          <div className="flex items-center justify-between">
+          {/* for forgotten password */}
+          {/* <div className="flex items-center justify-between">
             <button
               type="button"
               onClick={() => router.push('/forgot-password')}
@@ -258,7 +258,7 @@ const Login = () => {
             >
               পাসওয়ার্ড ভুলে গেছেন?
             </button>
-          </div>
+          </div> */}
 
           <button
             type="submit"
@@ -286,8 +286,8 @@ const Login = () => {
 
         <div className="text-center text-sm text-gray-600">
           <p>অ্যাকাউন্ট নেই?{' '}
-            <button 
-              onClick={() => router.push('/register')} 
+            <button
+              onClick={() => router.push('/register')}
               className="text-blue-600 hover:text-blue-800 font-medium hover:underline"
             >
               রেজিস্টার করুন
