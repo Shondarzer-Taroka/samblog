@@ -53,7 +53,7 @@ const SearchPanel = () => {
         <div className="relative" ref={calendarRef}>
           <div
             onClick={() => setShowCalendar(!showCalendar)}
-            className="flex items-center border border-gray-200 px-3 py-2 rounded-md bg-gray-50 cursor-pointer"
+            className="flex h-full items-center border border-gray-200 px-3 py-2 rounded-md bg-gray-50 cursor-pointer"
           >
             <FiCalendar className="text-gray-500 mr-2" />
             <span className="text-sm">
