@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navsection from "@/components/HomePages/Navsection/Navsection";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Footer from "@/components/Footer/Footer";
 // import { AuthProvider } from "@/context/AuthContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
           {children}
         </Suspense>
         </section>
+        <Footer/>
         {/* </AuthProvider> */}
       </body>
     </html>

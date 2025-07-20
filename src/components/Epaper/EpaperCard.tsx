@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // components/epapers/EpaperCard.tsx
 'use client';
 
