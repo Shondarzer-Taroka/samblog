@@ -91,8 +91,9 @@ const SearchPanel = () => {
 
         {/* Type */}
         <div>
-          <label className="block text-sm text-blue-700 font-bold">ধরণ</label>
+          {/* <label className="block text-sm text-blue-700 font-bold">ধরণ</label> */}
           <select className="border border-gray-200 px-3 py-2 rounded-md bg-gray-50 w-full">
+            <option>ধরণ</option>
             <option>সব</option>
             <option>খবর</option>
             <option>ফিচার</option>
