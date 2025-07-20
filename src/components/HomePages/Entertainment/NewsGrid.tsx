@@ -46,7 +46,7 @@ const NewsGrid = ({ data }: { data: NewsItem[] }) => {
         <MainFeatureCard
           image={data[3].imageUrl || "https://media.prothomalo.com/prothomalo-bangla%2F2025-06-23%2Fwbd5nux5%2Fresize.jpg?rect=134%2C0%2C666%2C444&w=420&auto=format%2Ccompress&fmt=avif"}
           title={data[3].title}
-          description={stripHtmlAndLimit(data[3].content, 12).short}
+          description={stripHtmlAndLimit(data[3].content, 40).short}
           time={getBengaliTimeAgo(data[3].createdAt)}
           id={data[3].id}
           category={data[3].category}
