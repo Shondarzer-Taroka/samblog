@@ -270,7 +270,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
 }
 
   return (
-    <div className="bg-gray-50 py-6 md:px-4 px-2 font-noto">
+    data && <div className="bg-gray-50 py-6 md:px-4 px-2 font-noto">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -336,7 +336,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
                   </ul>
                   <div className="mt-4 pt-3 border-t border-gray-100">
                     <NewsCardWrapper
-                      href={`/news/${cat.title}`}
+                      href={`/news/${cat?.title}`}
                       id={
                         cat.headlines[Math.floor(Math.random() * cat.headlines.length)]?.id
                       }
@@ -373,7 +373,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
                     </span>
                   </div>
                 </div>
-                <NewsCardWrapper href={`/news/${cat.headlines[0].category}/${cat.headlines[0].id}`} id={cat.headlines[0].id}>
+                <NewsCardWrapper href={`/news/${cat.headlines[0]?.category}/${cat.headlines[0]?.id}`} id={cat?.headlines[0].id}>
                   <div className="p-3">
                     <p className="text-sm text-gray-800 font-medium mb-2 line-clamp-2">
                       {cat.headlines[0].title}

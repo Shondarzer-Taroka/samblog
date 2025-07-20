@@ -426,7 +426,7 @@ import NewsCardWrapper from "@/share/NewsCardWrapper";
 import { NewsItem } from "@/types/news.types";
 import { englishToBengali } from "@/utils/englishToBengali";
 import { getBengaliTimeAgo } from "@/utils/getBengaliTimeAgo";
-import { stripHtmlAndLimit } from "@/utils/stripAndLimitHtml";
+import { stripHtmlAndLimit, stripHtmlAndLimitWithSpace } from "@/utils/stripAndLimitHtml";
 import { ChevronsLeft, ChevronsRight, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
@@ -602,10 +602,10 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
                         {item.category}
                       </span>
                       <h3 className="text-base font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
-                        {item.title}
+                        {stripHtmlAndLimit(item.title, 7).short}
                       </h3>
-                      <p className="text-[14.5px] text-gray-600 mt-1 line-clamp-2">
-                        {stripHtmlAndLimit(item.content, 20).short}
+                      <p className="text-[14.6px] text-gray-600 mt-1 line-clamp-2">
+                        {stripHtmlAndLimitWithSpace(item.content, 90).short}
                       </p>
                       <span className="text-xs text-gray-500 mt-1 block">
                         {getBengaliTimeAgo(item.createdAt)}

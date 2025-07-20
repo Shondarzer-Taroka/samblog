@@ -97,9 +97,11 @@ import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
 const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; maxim: NewsItem }) => {
 
-  if (islamicNews.length === 0) {
+  if (islamicNews.length === 0 || !islamicNews || !maxim) {
     return
   }
+
+
 
 
   return (

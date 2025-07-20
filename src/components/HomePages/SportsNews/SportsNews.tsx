@@ -12,6 +12,10 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const bottomRow = data?.slice(3, 6) || [];
   const rightColumn = data?.slice(6, 8) || [];
 
+  if (!data) {
+    return
+  }
+
   return (
     <section className="bg-gray-50 py-6 md:px-4 px-2">
       <div className="">
@@ -92,8 +96,8 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                     <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
                       {centerMain.title}
                     </h2>
-                    <p className="text-gray-600 mb-4 text-[16px]">
-                      {stripHtmlAndLimitWithSpace(centerMain.content,300).short}
+                    <p className="text-gray-600 mb-4 text-[15px]">
+                      {stripHtmlAndLimitWithSpace(centerMain.content,250).short}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center text-sm text-gray-500">
