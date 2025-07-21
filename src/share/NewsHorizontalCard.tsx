@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import { stripHtmlAndLimit, stripHtmlAndLimitWithSpace } from '@/utils/stripAndLimitHtml';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { NewsItem } from '@/types/news.types';
 
@@ -25,7 +25,7 @@ const NewsHorizontalCard = ({ news }: NewsCardProps) => {
         {/* Content */}
         <div className="p-4 flex-1">
           <h3 className="text-md sm:text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">
-            {news.title}
+            {stripHtmlAndLimitWithSpace(news.title,37).short}
           </h3>
           <p className="text-sm text-gray-600 mt-2 line-clamp-2">
             {stripHtmlAndLimit(news.content, 30).short}
@@ -34,7 +34,8 @@ const NewsHorizontalCard = ({ news }: NewsCardProps) => {
         </div>
 
         {/* Image */}
-        <div className="min-w-[120px] sm:min-w-[160px] h-[100px] sm:h-auto relative">
+        <div className="w-[192px] h-[100px] sm:h-auto relative">
+          {/* min-w-[120px] sm:min-w-[160px]  */}
           <Image
             src={news.imageUrl || ''}
             alt={news?.title}

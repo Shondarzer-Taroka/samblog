@@ -113,7 +113,7 @@ const SearchPanel = () => {
   useEffect(() => {
     updateUrlParams(currentPage);
     fetchNews(currentPage);
-  }, [sectionFilter, typeFilter, selectedDate, sortBy]);
+  }, [ sectionFilter, typeFilter, selectedDate, sortBy]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -183,7 +183,7 @@ const SearchPanel = () => {
   };
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner/>;
   }
 
   return (
@@ -226,9 +226,9 @@ const SearchPanel = () => {
           />
         </div>
 
-        <select
-          className="border rounded px-3 py-2 bg-gray-50"
-          value={sectionFilter}
+        <select 
+          className="border rounded px-3 py-2 bg-gray-50" 
+          value={sectionFilter} 
           onChange={(e) => setSectionFilter(e.target.value)}
         >
           <option>সেকশন</option>
@@ -238,9 +238,9 @@ const SearchPanel = () => {
           <option>বিনোদন</option>
         </select>
 
-        <select
-          className="border rounded px-3 py-2 bg-gray-50"
-          value={typeFilter}
+        <select 
+          className="border rounded px-3 py-2 bg-gray-50" 
+          value={typeFilter} 
           onChange={(e) => setTypeFilter(e.target.value)}
         >
           <option>ধরণ</option>
@@ -253,9 +253,9 @@ const SearchPanel = () => {
       {/* Sort */}
       <div className="flex justify-between mb-4">
         <p>ফলাফল: {toBengaliNumber(totalResults)}</p>
-        <select
-          className="border rounded px-3 py-2"
-          value={sortBy}
+        <select 
+          className="border rounded px-3 py-2" 
+          value={sortBy} 
           onChange={(e) => setSortBy(e.target.value)}
         >
           <option>প্রাসঙ্গিক</option>
@@ -268,7 +268,7 @@ const SearchPanel = () => {
       {news.length === 0 ? (
         <p>ফলাফল পাওয়া যায়নি।</p>
       ) : (
-        <>
+        <section className=' grid grid-cols-1 gap-4 md:grid-cols-2'>
           {news.map(item => (
             // <div key={item.id} className="mb-6 border-b pb-4">
             //   <h3 className="text-xl font-bold">{item.title}</h3>
@@ -277,10 +277,10 @@ const SearchPanel = () => {
             //     {item.author?.name} • {new Date(item.createdAt).toLocaleDateString('bn-BD')} • {toBengaliNumber(item.views)} বার দেখা
             //   </p>
             // </div>
-            <div key={item.id} > <NewsHorizontalCard news={item} /></div>
-
+            
+            <NewsHorizontalCard key={item.id} news={item}/>
           ))}
-        </>
+        </section>
       )}
 
       {/* Pagination */}
