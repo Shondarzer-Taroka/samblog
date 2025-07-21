@@ -5,6 +5,7 @@ import { stripHtmlAndLimitWithSpace } from '@/utils/stripAndLimitHtml';
 import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from 'react-icons/fa';
 import { splitTextByLength } from '@/utils/splitTextByLength';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
+import Link from 'next/link';
 
 const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const leftColumn = data?.slice(0, 2) || [];
@@ -25,7 +26,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
             <span className="text-red-600">ক্রীড়া</span> সংবাদ
           </h2>
           <button className="flex items-center text-red-600 hover:text-red-800 font-medium transition-colors">
-            সব খবর <FaArrowRight className="ml-2" />
+            <Link href={'/news/'}> সব খবর <FaArrowRight className="ml-2" /> </Link>
           </button>
         </div>
 
