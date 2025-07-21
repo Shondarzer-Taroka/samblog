@@ -168,7 +168,7 @@ const InternationalNewsSection = ({ data }: { data: NewsItem[] }) => {
 
         {/* Online Vote - Improved spacing and user experience */}
 
-<VotingComponent/>
+        <VotingComponent />
 
 
       </div>

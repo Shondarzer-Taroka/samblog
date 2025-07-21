@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaShareAlt, FaFacebookF, FaTwitter, FaEnvelope, FaLink, FaDownload, FaSpinner } from 'react-icons/fa';
 import useLatestPoll from '@/hooks/useLatestPoll';
+import { englishToBengali } from '@/utils/englishToBengali';
 
 const VotingComponent = () => {
   const { latestPoll, loading, error, formatDate, isActive, submitVote, voterId } = useLatestPoll();
@@ -39,6 +40,7 @@ const VotingComponent = () => {
   };
 
   // Calculate total voters from all options
+  // const totalVoters = latestPoll?.options.reduce((sum, option) => sum + option.votes, 0) || 0;
   const totalVoters = latestPoll?.options.reduce((sum, option) => sum + option.votes, 0) || 0;
   console.log(totalVoters);
   
@@ -138,7 +140,7 @@ const VotingComponent = () => {
                       </div>
                     </label>
                     <div className="text-right">
-                      <span className="font-semibold text-gray-700 block">{percentage}%</span>
+                      <span className="font-semibold text-gray-700 block">{englishToBengali(percentage)}%</span>
                       <span className="text-xs text-gray-500">{option.votes} votes</span>
                     </div>
                   </div>
@@ -164,7 +166,7 @@ const VotingComponent = () => {
           <div className="bg-gray-50 p-3 rounded-lg mb-4">
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-600">
-                <span className="font-medium">মোট ভোটদাতা:</span> {totalVoters} জন
+                <span className="font-medium">মোট ভোটদাতা:</span> {englishToBengali(totalVoters===0? latestPoll.totalVotes : totalVoters)} জন
               </div>
               <button 
                 onClick={handleVoteSubmit}
@@ -216,6 +218,7 @@ const VotingComponent = () => {
 };
 
 export default VotingComponent;
+
 
 
 
