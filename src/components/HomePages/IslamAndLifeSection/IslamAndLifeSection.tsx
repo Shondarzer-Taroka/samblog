@@ -92,6 +92,7 @@ import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
 import { getBengaliTimeAgo } from '@/utils/getBengaliTimeAgo';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
+import Link from 'next/link';
 import React from 'react';
 import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
 
@@ -112,7 +113,9 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
 
           <TitleNewsOverSection headline='   ইসলাম ও জীবন' />
           <button className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
-            সব দেখুন →
+            <Link href={'/news/ইসলাম'}>
+              সব দেখুন →
+            </Link>
           </button>
         </div>
 

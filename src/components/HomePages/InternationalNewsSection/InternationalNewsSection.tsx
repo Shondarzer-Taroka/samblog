@@ -123,7 +123,7 @@ const InternationalNewsSection = ({ data }: { data: NewsItem[] }) => {
               <span className="absolute left-0 top-1/2 transform -translate-y-1/2 w-2 h-6 bg-red-600 rounded-full"></span>
               আন্তর্জাতিক
             </h2>
-            <Link href="/international" className="text-sm font-medium text-red-600 hover:text-red-800 flex items-center">
+            <Link href="/news/আন্তর্জাতিক" className="text-sm font-medium text-red-600 hover:text-red-800 flex items-center">
               সব দেখুন
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
