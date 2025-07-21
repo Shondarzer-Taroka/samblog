@@ -602,7 +602,7 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
                         {item.category}
                       </span>
                       <h3 className="text-base font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
-                        {stripHtmlAndLimit(item.title, 7).short}
+                        {stripHtmlAndLimit(item.title, 6).short}
                       </h3>
                       <p className="text-[14.6px] text-gray-600 mt-1 line-clamp-2">
                         {stripHtmlAndLimitWithSpace(item.content, 90).short}
