@@ -44,7 +44,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
 
             <div className=' mb-4'>
                 <div className='grid lg:grid-cols-2'>
-                    <div className='flex gap-2.5 items-center'>
+                    <div className='flex gap-2.5 items-center mt-4'>
                         <Image
                             src={news.author?.image || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
                             // src={'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
@@ -62,14 +62,14 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                     </div>
 
 
-                    <div>
+                    <div className='mt-4 '>
                         <ShareBar />
                     </div>
                 </div>
             </div>
 
 
-            <div className="w-full">
+            <div className="w-full mt-7">
                 <Image
                     className='w-full'
                     width={1000}
