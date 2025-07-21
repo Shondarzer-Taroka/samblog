@@ -1,8 +1,10 @@
 
 
 
+import NewsCardWrapper from '@/share/NewsCardWrapper';
 import { NewsItem } from '@/types/news.types';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 // const newsCards = [
@@ -28,9 +30,9 @@ import React from 'react';
 //   },
 // ];
 
-const BottomNewsCard = ({data}:{data:NewsItem[]}) => {
+const BottomNewsCard = ({ data }: { data: NewsItem[] }) => {
 
-  if (data.length===0 || !data) {
+  if (data.length === 0 || !data) {
     return
   }
 
@@ -53,8 +55,11 @@ const BottomNewsCard = ({data}:{data:NewsItem[]}) => {
 
             {/* Overlay */}
             <div className="absolute inset-0 bg-[#000000a3] flex flex-col justify-end p-4 text-white">
-              <span className="text-yellow-400 font-semibold">{`${index===3 ?'একটু থামুন':card.category}`}</span>
-              <p className="text-sm font-medium leading-snug">{card.title}</p>
+
+              <Link href={`/news/${card.category}`}>  <span className="text-yellow-400 font-semibold">{`${index === 3 ? 'একটু থামুন' : card.category}`}</span></Link>
+              <NewsCardWrapper href={`/news/${card.category}/${card.id}`} id={card.id}>
+                <p className="text-sm font-medium leading-snug">{card.title}</p>
+              </NewsCardWrapper>
             </div>
           </div>
         ))}
