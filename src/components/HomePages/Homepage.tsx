@@ -69,7 +69,7 @@ const Homepage = async () => {
       {/* <AuthServer/> */}
 
       <SpecialNews data={news.specialNews} />
-      <BottomNewsCard />
+      <BottomNewsCard data={news.allFunNewsforBottom}/>
       <RandomNews data={news} />
       <PoliticsSection data={news.politicalNews} />
       <InternationalNewsSection data={news.internationalNews} />
