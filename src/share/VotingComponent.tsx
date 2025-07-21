@@ -319,21 +319,20 @@ const VotingComponent = () => {
   };
 
   const shareViaEmail = () => {
-    if (typeof window === 'undefined') return; // Ensure we're on client-side
-    
-    const subject = `Poll: ${latestPoll?.question || 'Interesting Poll'}`;
-    const body = `I found this interesting poll and wanted to share it with you:\n\n${latestPoll?.question || ''}\n\nVote here: ${getPollUrl()}`;
-    
-    // Encode the subject and body for mailto URL
-    const encodedSubject = encodeURIComponent(subject);
-    const encodedBody = encodeURIComponent(body);
-    
-    // Create mailto link
-    const mailtoLink = `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
-    
-    // Open in new tab (works better in modern browsers)
-    window.open(mailtoLink, '_blank');
-  };
+  if (typeof window === 'undefined') return;
+
+  const subject = `Poll: ${latestPoll?.question || 'Interesting Poll'}`;
+  const body = `I found this interesting poll and wanted to share it with you:\n\n${latestPoll?.question || ''}\n\nVote here: ${getPollUrl()}`;
+
+  const encodedSubject = encodeURIComponent(subject);
+  const encodedBody = encodeURIComponent(body);
+
+  const mailtoLink = `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+
+  // ✅ Use location.href instead of window.open
+  window.location.href = mailtoLink;
+};
+
 
 
   // Copy link to clipboard

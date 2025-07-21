@@ -12,6 +12,8 @@ import { FaSearch, FaUser } from 'react-icons/fa';
 import { FiCalendar } from 'react-icons/fi';
 import BengaliDatePicker from './BengaliDatePicker';
 import LoadingSpinner from '../ui/LoadingSpinner';
+import NewsHorizontalCard from '@/share/NewsHorizontalCard';
+import { NewsItem } from '@/types/news.types';
 
 const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
 const bengaliMonths = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
@@ -19,16 +21,6 @@ const bengaliMonths = ['জানুয়ারি', 'ফেব্রুয়�
 const toBengaliNumber = (num: number): string =>
   num.toString().split('').map(d => bengaliDigits[+d]).join('');
 
-interface NewsItem {
-  id: string;
-  title: string;
-  content: string;
-  category: string;
-  subCategory: string;
-  createdAt: string;
-  author: { name: string };
-  views: number;
-}
 
 const SearchPanel = () => {
   const router = useRouter();
@@ -121,7 +113,7 @@ const SearchPanel = () => {
   useEffect(() => {
     updateUrlParams(currentPage);
     fetchNews(currentPage);
-  }, [ sectionFilter, typeFilter, selectedDate, sortBy]);
+  }, [sectionFilter, typeFilter, selectedDate, sortBy]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -191,7 +183,7 @@ const SearchPanel = () => {
   };
 
   if (isLoading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -234,9 +226,9 @@ const SearchPanel = () => {
           />
         </div>
 
-        <select 
-          className="border rounded px-3 py-2 bg-gray-50" 
-          value={sectionFilter} 
+        <select
+          className="border rounded px-3 py-2 bg-gray-50"
+          value={sectionFilter}
           onChange={(e) => setSectionFilter(e.target.value)}
         >
           <option>সেকশন</option>
@@ -246,9 +238,9 @@ const SearchPanel = () => {
           <option>বিনোদন</option>
         </select>
 
-        <select 
-          className="border rounded px-3 py-2 bg-gray-50" 
-          value={typeFilter} 
+        <select
+          className="border rounded px-3 py-2 bg-gray-50"
+          value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
         >
           <option>ধরণ</option>
@@ -261,9 +253,9 @@ const SearchPanel = () => {
       {/* Sort */}
       <div className="flex justify-between mb-4">
         <p>ফলাফল: {toBengaliNumber(totalResults)}</p>
-        <select 
-          className="border rounded px-3 py-2" 
-          value={sortBy} 
+        <select
+          className="border rounded px-3 py-2"
+          value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
         >
           <option>প্রাসঙ্গিক</option>
@@ -278,13 +270,15 @@ const SearchPanel = () => {
       ) : (
         <>
           {news.map(item => (
-            <div key={item.id} className="mb-6 border-b pb-4">
-              <h3 className="text-xl font-bold">{item.title}</h3>
-              <p className="text-gray-700">{item.content}</p>
-              <p className="text-sm text-gray-500 mt-1">
-                {item.author?.name} • {new Date(item.createdAt).toLocaleDateString('bn-BD')} • {toBengaliNumber(item.views)} বার দেখা
-              </p>
-            </div>
+            // <div key={item.id} className="mb-6 border-b pb-4">
+            //   <h3 className="text-xl font-bold">{item.title}</h3>
+            //   <p className="text-gray-700">{item.content}</p>
+            //   <p className="text-sm text-gray-500 mt-1">
+            //     {item.author?.name} • {new Date(item.createdAt).toLocaleDateString('bn-BD')} • {toBengaliNumber(item.views)} বার দেখা
+            //   </p>
+            // </div>
+            <div key={item.id} > <NewsHorizontalCard news={item} /></div>
+
           ))}
         </>
       )}
