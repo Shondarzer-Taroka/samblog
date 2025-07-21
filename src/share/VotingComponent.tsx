@@ -236,12 +236,11 @@
 
 
 
-
 /* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import React, { useState, useRef } from 'react';
-import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaShareAlt, FaFacebookF, FaTwitter, FaEnvelope, FaLink, FaDownload, FaSpinner } from 'react-icons/fa';
+import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaShareAlt, FaFacebookF, FaTwitter, FaEnvelope, FaLink, FaDownload, FaSpinner, FaCheck } from 'react-icons/fa';
 import useLatestPoll from '@/hooks/useLatestPoll';
 import { englishToBengali } from '@/utils/englishToBengali';
 import { toPng } from 'html-to-image';
@@ -252,6 +251,7 @@ const VotingComponent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [voteMessage, setVoteMessage] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleVoteSubmit = async () => {
@@ -286,7 +286,7 @@ const VotingComponent = () => {
       const dataUrl = await toPng(componentRef.current, {
         backgroundColor: '#ffffff',
         quality: 1,
-        pixelRatio: 2 // Higher quality
+        pixelRatio: 2
       });
 
       const link = document.createElement('a');
@@ -297,6 +297,43 @@ const VotingComponent = () => {
       console.error('Error generating image:', error);
     } finally {
       setIsDownloading(false);
+    }
+  };
+
+  // Get current URL for sharing
+  const getPollUrl = () => {
+    return typeof window !== 'undefined' ? `${window.location.origin}/polls/${latestPoll?.id}` : '';
+  };
+
+  // Share on Facebook
+  const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getPollUrl())}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+
+  // Share on Twitter
+  const shareOnTwitter = () => {
+    const text = `Check out this poll: ${latestPoll?.question}`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(getPollUrl())}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+
+  // Share via Email
+  const shareViaEmail = () => {
+    const subject = `Poll: ${latestPoll?.question}`;
+    const body = `I found this interesting poll and wanted to share it with you:\n\n${latestPoll?.question}\n\nVote here: ${getPollUrl()}`;
+    const url = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  };
+
+  // Copy link to clipboard
+  const copyLinkToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(getPollUrl());
+      setIsLinkCopied(true);
+      setTimeout(() => setIsLinkCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link: ', err);
     }
   };
 
@@ -459,18 +496,34 @@ const VotingComponent = () => {
           <h4 className="text-sm font-medium text-gray-600 mb-3">এই পোল শেয়ার করুন:</h4>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <button className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition-colors shadow-sm">
+              <button 
+                onClick={shareOnFacebook}
+                className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition-colors shadow-sm"
+                aria-label="Share on Facebook"
+              >
                 <FaFacebookF />
               </button>
-              <button className="w-9 h-9 rounded-full bg-sky-100 text-sky-500 flex items-center justify-center hover:bg-sky-200 transition-colors shadow-sm">
+              <button 
+                onClick={shareOnTwitter}
+                className="w-9 h-9 rounded-full bg-sky-100 text-sky-500 flex items-center justify-center hover:bg-sky-200 transition-colors shadow-sm"
+                aria-label="Share on Twitter"
+              >
                 <FaTwitter />
               </button>
-              <button className="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center hover:bg-green-200 transition-colors shadow-sm">
+              <button 
+                onClick={shareViaEmail}
+                className="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center hover:bg-green-200 transition-colors shadow-sm"
+                aria-label="Share via Email"
+              >
                 <FaEnvelope />
               </button>
             </div>
-            <button className="w-9 h-9 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center hover:bg-gray-300 transition-colors shadow-sm">
-              <FaLink />
+            <button 
+              onClick={copyLinkToClipboard}
+              className="w-9 h-9 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center hover:bg-gray-300 transition-colors shadow-sm"
+              aria-label="Copy link to clipboard"
+            >
+              {isLinkCopied ? <FaCheck className="text-green-500" /> : <FaLink />}
             </button>
           </div>
         </div>
@@ -480,8 +533,5 @@ const VotingComponent = () => {
 };
 
 export default VotingComponent;
-
-
-
 
 
