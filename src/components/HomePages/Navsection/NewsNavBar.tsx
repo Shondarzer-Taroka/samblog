@@ -162,7 +162,7 @@ const NewsNavBar: React.FC = () => {
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto md:px-4">
         <nav className='flex items-center justify-between py-3'>
           {/* Mobile Menu Button */}
           <button
