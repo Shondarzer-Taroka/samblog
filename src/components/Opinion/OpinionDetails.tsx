@@ -436,7 +436,7 @@ const handleUnauthorized = () => {
         </div>
         <div className="mt-8 text-center">
           <Link
-            href="/opinions"
+            href="/news/opinions"
             className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             সকল মতামত দেখুন
