@@ -42,17 +42,17 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                             </h2>
 
                             {/* News Excerpt */}
-                            <p className="text-[13px] md:text-xl mb-6 text-gray-100 line-clamp-2">
+                            <p className="text-[13px] md:text-xl mb-1 md:mb-6 text-gray-100 line-clamp-2">
                                 {short}
                             </p>
 
                             {/* Meta Information */}
                             <div className="flex flex-wrap items-center justify-between gap-4">
                                 <div className="flex items-center space-x-4">
-                                    <span className="flex items-center text-sm text-gray-200">
+                                    <span className="flex items-center text-gray-200  text-[11px] md:text-sm">
                                         <FaClock className="mr-1" /> {formatBengaliDate(data.createdAt)}
                                     </span>
-                                    <span className="flex items-center text-sm text-gray-200">
+                                    <span className="flex items-center  text-[11px] md:text-sm text-gray-200">
                                         <FaEye className="mr-1" /> ১২.৫k বার দেখা
                                     </span>
                                 </div>
