@@ -207,7 +207,7 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
 
   const opinions = data || []
 
-  if (data.length === 0) {
+  if (data.length === 0 || !data) {
     return <div className="flex justify-center"> <h1>কোন তথ্য পাওয়া যায়নি</h1></div>
   }
 
