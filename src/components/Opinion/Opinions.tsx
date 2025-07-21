@@ -1,14 +1,5 @@
-// import React from 'react';
+/* eslint-disable prefer-const */
 
-// const Opinions = () => {
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default Opinions;
 
 'use client'
 
@@ -104,6 +95,31 @@ const Opinions: React.FC = () => {
     }
   };
 
+  const renderPaginationNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, pagination.page - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(pagination.totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-3 py-1 rounded ${pagination.page === i ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pages;
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
@@ -149,26 +165,58 @@ const Opinions: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex justify-between items-center">
-            <button
-              onClick={() => handlePageChange(pagination.page - 1)}
-              disabled={pagination.page === 1}
-              className={`px-4 py-2 rounded ${pagination.page === 1 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
-            >
-              পূর্ববর্তী
-            </button>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-gray-700">
+              দেখানো হচ্ছে {(pagination.page - 1) * pagination.limit + 1} থেকে {Math.min(pagination.page * pagination.limit, pagination.total)} এর মধ্যে {pagination.total} টি রেকর্ডের
+            </div>
             
-            <span className="text-gray-700">
-              পৃষ্ঠা {pagination.page} / {pagination.totalPages}
-            </span>
-            
-            <button
-              onClick={() => handlePageChange(pagination.page + 1)}
-              disabled={pagination.page === pagination.totalPages}
-              className={`px-4 py-2 rounded ${pagination.page === pagination.totalPages ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
-            >
-              পরবর্তী
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => handlePageChange(1)}
+                disabled={pagination.page === 1}
+                className={`p-2 rounded ${pagination.page === 1 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+              >
+                {'<<'}
+              </button>
+              <button
+                onClick={() => handlePageChange(pagination.page - 1)}
+                disabled={pagination.page === 1}
+                className={`p-2 rounded ${pagination.page === 1 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+              >
+                {'<'}
+              </button>
+              
+              {renderPaginationNumbers()}
+              
+              <button
+                onClick={() => handlePageChange(pagination.page + 1)}
+                disabled={pagination.page === pagination.totalPages}
+                className={`p-2 rounded ${pagination.page === pagination.totalPages ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+              >
+                {'>'}
+              </button>
+              <button
+                onClick={() => handlePageChange(pagination.totalPages)}
+                disabled={pagination.page === pagination.totalPages}
+                className={`p-2 rounded ${pagination.page === pagination.totalPages ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+              >
+                {'>>'}
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700">প্রতি পৃষ্ঠায়:</span>
+              <select
+                value={pagination.limit}
+                onChange={(e) => setPagination({...pagination, limit: Number(e.target.value), page: 1})}
+                className="border rounded px-2 py-1 text-sm"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </div>
           </div>
         </>
       )}
