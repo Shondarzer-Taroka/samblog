@@ -66,7 +66,7 @@ const Category = ({ category }: { category: string }) => {
 
     return (
         <section className="px-2 py-6 max-w-7xl mx-auto mt-7">
-            <h2 className="text-2xl font-bold text-red-600 mb-6">{decodeURIComponent(category)}</h2>
+            <h2 className="text-2xl font-bold text-red-600 mb-3">{decodeURIComponent(category)}</h2>
 
             {/* --- Main layout: content + right‑side ad --- */}
            { loading ? <><div className="mt-8 text-center">
@@ -173,7 +173,7 @@ const Category = ({ category }: { category: string }) => {
             {/* Optional: banner ad below the section */}
             <div className="mt-10">
                 <Advertisement
-                    src="/ads/banner-728x90.jpg"
+                    src="https://tpc.googlesyndication.com/simgad/3633464827223362908"
                     href="https://another‑sponsor.com"
                     alt="Special discount — limited time"
                     orientation="horizontal"  /* 728×90 */
