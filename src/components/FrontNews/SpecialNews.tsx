@@ -37,12 +37,12 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                             </span>
 
                             {/* News Title */}
-                            <h2 className="sm:text-2xl md:text-4xl font-bold leading-tight md:mb-4 drop-shadow-lg">
+                            <h2 className="sm:text-2xl md:text-4xl font-bold leading-tight mb-2 md:mb-4 drop-shadow-lg">
                                 {data.title}
                             </h2>
 
                             {/* News Excerpt */}
-                            <p className="text-[13px] md:text-xl mb-1 md:mb-6 text-gray-100 line-clamp-2">
+                            <p className="text-[13px] md:text-xl mb-2 md:mb-6 text-gray-100 line-clamp-2">
                                 {short}
                             </p>
 
