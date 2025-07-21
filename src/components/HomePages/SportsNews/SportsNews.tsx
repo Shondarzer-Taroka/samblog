@@ -24,10 +24,11 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
         <div className="flex items-center justify-between mb-8 border-b-2 border-red-600 pb-2">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
             <span className="text-red-600">ক্রীড়া</span> সংবাদ
-          </h2>
+          </h2> <Link href={'/news/খেলাধুলা'}>
           <button className="flex items-center text-red-600 hover:text-red-800 font-medium transition-colors">
-            <Link href={'/news/'}> সব খবর <FaArrowRight className="ml-2" /> </Link>
+            সব খবর <FaArrowRight className="ml-2" /> 
           </button>
+          </Link>
         </div>
 
         {/* Main Grid */}
