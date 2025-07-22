@@ -73,36 +73,9 @@ function ArticleDetailPage({ article, epaper, onBack }: {
   const [showShareOptions, setShowShareOptions] = useState(false);
 
 
-  const handleDownload = async () => {
-  if (!article?.contentImage) return;
-
-  try {
-    const response = await fetch(article.contentImage, {
-      mode: 'cors',
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch the image');
-    }
-
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = blobUrl;
-
-    const fileName = `${article.title?.replace(/\s+/g, '_') || 'epaper_article'}.jpg`;
-    link.download = fileName;
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    window.URL.revokeObjectURL(blobUrl); // Clean up
-  } catch (error) {
-    console.error('Image download failed:', error);
-    alert('ডাউনলোডে সমস্যা হয়েছে। অনুগ্রহ করে পুনরায় চেষ্টা করুন।');
-  }
+const handleDownload = () => {
+  const encodedUrl = encodeURIComponent(article.contentImage);
+  window.location.href = `/api/download?url=${encodedUrl}`;
 };
 
 
