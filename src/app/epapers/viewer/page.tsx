@@ -123,7 +123,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setViewMode('text')}
-              className={`p-2 rounded-lg flex items-center space-x-1 ${viewMode === 'text' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+              className={`md:p-2 rounded-lg flex items-center md:space-x-1 ${viewMode === 'text' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
               title="Text View"
             >
               <FaFont className="text-gray-700" />
@@ -131,7 +131,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
             </button>
             <button
               onClick={() => setViewMode('image')}
-              className={`p-2 rounded-lg flex items-center space-x-1 ${viewMode === 'image' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+              className={`md:p-2 rounded-lg flex items-center space-x-1 ${viewMode === 'image' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
               title="Image View"
             >
               <FaImage className="text-gray-700" />
@@ -140,7 +140,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           </div>
 
           {/* Font Size Controls */}
-          <div className="flex items-center space-x-1 bg-gray-100 p-1 rounded-lg">
+          <div className="flex items-center md:space-x-1 bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setFontSize(f => Math.max(12, f - 1))}
               className="p-2 rounded-lg hover:bg-gray-200"
@@ -217,7 +217,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
               {article.category}
             </span>
             {article.isLeading && (
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-blue-100 text-blue-800 text-[12px] font-medium rounded-full">
                 Leading Story
               </span>
             )}
