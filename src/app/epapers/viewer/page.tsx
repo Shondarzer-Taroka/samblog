@@ -21,6 +21,7 @@ import {
 } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { formatBengaliDate } from '@/utils/formatBengaliDate';
 
 /* ---------- Types ---------- */
 interface Article {
@@ -106,12 +107,12 @@ function ArticleDetailPage({ article, epaper, onBack }: {
 
   
   return (
-    <div className="max-w-6xl mx-auto p-4 bg-gray-50 min-h-screen">
+    <div className="max-w-7xl mx-auto p-4 bg-gray-50 min-h-screen">
       {/* Enhanced Navigation Bar */}
-      <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
+      <div className="md:flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
         <button
           onClick={onBack}
-          className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all"
+          className="flex items-center space-x-2 mb-6 md:mb-0 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all"
         >
           <FaChevronLeft />
           <span>Back to Epaper</span>
@@ -221,7 +222,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
               </span>
             )}
             <span className="text-gray-500 text-sm">
-              Page {article.pageNumber} • {new Date(epaper.date).toLocaleDateString()}
+              Page {article.pageNumber} • {formatBengaliDate(epaper.date)}
             </span>
           </div>
           <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
