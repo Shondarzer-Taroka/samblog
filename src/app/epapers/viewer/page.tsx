@@ -143,7 +143,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           <div className="flex items-center md:space-x-1 bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setFontSize(f => Math.max(12, f - 1))}
-              className="p-2 rounded-lg hover:bg-gray-200"
+              className="md:p-2 rounded-lg hover:bg-gray-200"
               title="Decrease Font Size"
             >
               <FaSearchMinus className="text-gray-700" />
@@ -151,7 +151,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
             <span className="text-sm w-8 text-center font-medium">{fontSize}px</span>
             <button
               onClick={() => setFontSize(f => Math.min(24, f + 1))}
-              className="p-2 rounded-lg hover:bg-gray-200"
+              className="md:p-2 rounded-lg hover:bg-gray-200"
               title="Increase Font Size"
             >
               <FaSearchPlus className="text-gray-700" />
@@ -162,7 +162,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           <div className="flex items-center space-x-1">
             <button
               onClick={toggleBookmark}
-              className={`p-2 rounded-lg ${isBookmarked ? 'text-yellow-500 bg-yellow-50' : 'text-gray-700 hover:bg-gray-200'}`}
+              className={`md:p-2 rounded-lg ${isBookmarked ? 'text-yellow-500 bg-yellow-50' : 'text-gray-700 hover:bg-gray-200'}`}
               title={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
             >
               <FaBookmark />
@@ -170,7 +170,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
 
             <button
               onClick={handleDownload}
-              className="p-2 rounded-lg text-gray-700 hover:bg-gray-200"
+              className="md:p-2 rounded-lg text-gray-700 hover:bg-gray-200"
               title="Download"
             >
               <FaDownload />
@@ -179,7 +179,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
             <div className="relative">
               <button
                 onClick={handleShare}
-                className="p-2 rounded-lg text-gray-700 hover:bg-gray-200"
+                className="md:p-2 rounded-lg text-gray-700 hover:bg-gray-200"
                 title="Share"
               >
                 <FaShare />
