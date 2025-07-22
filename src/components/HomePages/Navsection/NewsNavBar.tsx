@@ -162,12 +162,12 @@ const NewsNavBar: React.FC = () => {
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
-      <div className="container mx-auto md:px-4">
+      <div className="container mx-auto px-1 md:px-4">
         <nav className='flex items-center justify-between py-3'>
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors"
+            className="md:hidden p-1 md:p-2 text-gray-600 hover:text-blue-600 transition-colors"
             aria-label="Menu"
           >
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
