@@ -72,10 +72,41 @@ function ArticleDetailPage({ article, epaper, onBack }: {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showShareOptions, setShowShareOptions] = useState(false);
 
-  const handleDownload = () => {
-    // Implement download functionality
-    console.log('Downloading article...');
-  };
+
+  const handleDownload = async () => {
+  if (!article?.contentImage) return;
+
+  try {
+    const response = await fetch(article.contentImage, {
+      mode: 'cors',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch the image');
+    }
+
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = blobUrl;
+
+    const fileName = `${article.title?.replace(/\s+/g, '_') || 'epaper_article'}.jpg`;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    window.URL.revokeObjectURL(blobUrl); // Clean up
+  } catch (error) {
+    console.error('Image download failed:', error);
+    alert('ডাউনলোডে সমস্যা হয়েছে। অনুগ্রহ করে পুনরায় চেষ্টা করুন।');
+  }
+};
+
+
+
 
   const handleEmail = () => {
     // Implement email functionality
@@ -277,7 +308,7 @@ export default function EpaperViewerPage() {
     (async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/epapers?page=${page}&limit=10`, {
+        const res = await fetch(`/api/epapers?page=${page}&limit=17`, {
           cache: 'no-store',
           signal: controller.signal
         });
