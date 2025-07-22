@@ -6,6 +6,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FiChevronDown, FiUser, FiLogOut, FiSettings, FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaBookmark } from 'react-icons/fa';
+import BookmarkSidebar from '@/components/Bookmark/BookmarkSidebar';
 
 // Organized categories for mobile view
 const mobileCategories = {
@@ -61,6 +63,7 @@ const NewsNavBar: React.FC = () => {
   const { user, loading, logout } = useAuthProvider();
   const router = useRouter();
   const pathname = usePathname();
+   const [showBookmark, setShowBookmark] = useState(false);
 
   // Handle scroll event
   useEffect(() => {
@@ -178,6 +181,7 @@ const NewsNavBar: React.FC = () => {
             className="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0"
             onClick={() => router.push('/')}
           >
+             
             টিএন<span className="text-blue-600">নিউজ</span>
           </div>
 
@@ -202,6 +206,12 @@ const NewsNavBar: React.FC = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-1 md:gap-4">
+            <button
+            onClick={() => setShowBookmark(true)}
+            className="text-blue-600 hover:underline flex items-center gap-1"
+          >
+            <FaBookmark />
+            </button>
             {/* Search Button */}
             <div className="relative hidden" ref={searchRef}>
               <button
@@ -498,6 +508,9 @@ const NewsNavBar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Sidebar Component */}
+      <BookmarkSidebar show={showBookmark} onClose={() => setShowBookmark(false)} />
     </motion.section>
   );
 };
