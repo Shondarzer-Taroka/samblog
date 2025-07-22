@@ -123,7 +123,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
           <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setViewMode('text')}
-              className={`md:p-2 rounded-lg flex items-center md:space-x-1 ${viewMode === 'text' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+              className={`p-2 rounded-lg flex items-center md:space-x-1 ${viewMode === 'text' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
               title="Text View"
             >
               <FaFont className="text-gray-700" />
@@ -131,7 +131,7 @@ function ArticleDetailPage({ article, epaper, onBack }: {
             </button>
             <button
               onClick={() => setViewMode('image')}
-              className={`md:p-2 rounded-lg flex items-center space-x-1 ${viewMode === 'image' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+              className={`p-2 rounded-lg flex items-center space-x-1 ${viewMode === 'image' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
               title="Image View"
             >
               <FaImage className="text-gray-700" />
