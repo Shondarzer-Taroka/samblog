@@ -1,3 +1,4 @@
+'use client'
 import { NewsItem } from "@/types/news.types";
 import { getBookmarks } from "@/utils/bookmark.utils";
 import Link from "next/link";

@@ -1,3 +1,4 @@
+'use client'
 // ✅ components/BookmarkButton.tsx
 import { FaBookmark } from 'react-icons/fa';
 import { useEffect, useState } from 'react';

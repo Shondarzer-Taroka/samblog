@@ -87,6 +87,7 @@
 
 
 
+import BookmarkButton from '@/components/Bookmark/BookmarkButton';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
@@ -138,9 +139,11 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
                       <p className="text-gray-600 mb-3">{stripHtmlAndLimit(article.content, 8).short}</p>
                     </div>
                     <div className="flex space-x-2">
-                      <button className="text-gray-400 hover:text-red-600 transition-colors">
-                        <FaBookmark />
-                      </button>
+                      {/* <button className=""> */}
+                        <BookmarkButton article={article}/>
+                        {/* <FaBookmark /> */}
+                        
+                      {/* </button> */}
                       <button className="text-gray-400 hover:text-red-600 transition-colors">
                         <FaShareAlt />
                       </button>
