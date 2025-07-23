@@ -7,6 +7,7 @@ import { FaClock, FaShareAlt, FaBookmark, FaEye } from 'react-icons/fa';
 import { MdOutlineArrowForward } from 'react-icons/md';
 import FloatingSocial from '@/share/FloatingSocial';
 import Link from 'next/link';
+import BookmarkButton from '../Bookmark/BookmarkButton';
 
 const SpecialNews = ({ data }: { data: NewsItem }) => {
     const { short, isTruncated } = stripHtmlAndLimit(data.content, 40);
@@ -61,20 +62,21 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
 
                             {/* Action Buttons */}
                             <div className="flex space-x-3">
-                                <button
+                                <div
                                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                                     aria-label="Share"
                                 >
-                                    <FaShareAlt />
-                                </button>
-                                <button
+                                    {/* <FaShareAlt /> */}
+                                </div>
+                                <div
                                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                                     aria-label="Bookmark"
                                 >
-                                    <FaBookmark />
-                                </button>
+                                    {/* <FaBookmark /> */}
+                                    <BookmarkButton article={data}/>
+                                </div>
                                 {isTruncated && (
-                                    <Link href={`/news/${data.category}/${data.id}`} >
+                                    <Link href={`/news/${data.category}/${data.id}`} className='block'>
                                     <button className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-colors">
                                         আরও পড়ুন <MdOutlineArrowForward className="ml-1" />
                                     </button>
