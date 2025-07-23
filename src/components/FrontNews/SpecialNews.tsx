@@ -3,10 +3,9 @@ import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import Image from 'next/image';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import TopStoriesPage from '@/share/TopStories';
-import { FaClock, FaShareAlt, FaBookmark, FaEye } from 'react-icons/fa';
+import { FaClock, FaEye } from 'react-icons/fa';
 import { MdOutlineArrowForward } from 'react-icons/md';
 import FloatingSocial from '@/share/FloatingSocial';
-import Link from 'next/link';
 import BookmarkButton from '../Bookmark/BookmarkButton';
 import ClientShareTrigger from '../SocialShare/ClientShareTrigger';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
@@ -41,11 +40,11 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                         </span>
 
                         {/* News Title */}
-                        <Link href={`/news/${data.category}/${data.id}`}>
+                        <NewsCardWrapper id={data.id} href={`/news/${data.category}/${data.id}`}>
                             <h2 className="sm:text-2xl md:text-4xl font-bold leading-tight mb-2 md:mb-4 drop-shadow-lg">
                                 {data.title}
                             </h2>
-                        </Link>
+                        </NewsCardWrapper>
                         {/* News Excerpt */}
                         <p className="text-[13px] md:text-xl mb-2 md:mb-6 text-gray-100 line-clamp-2">
                             {short}
