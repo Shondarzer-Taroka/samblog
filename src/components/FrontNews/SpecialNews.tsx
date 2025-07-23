@@ -9,6 +9,7 @@ import FloatingSocial from '@/share/FloatingSocial';
 import Link from 'next/link';
 import BookmarkButton from '../Bookmark/BookmarkButton';
 import ClientShareTrigger from '../SocialShare/ClientShareTrigger';
+import NewsCardWrapper from '@/share/NewsCardWrapper';
 
 const SpecialNews = ({ data }: { data: NewsItem }) => {
     const { short, isTruncated } = stripHtmlAndLimit(data.content, 40);
@@ -78,11 +79,11 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                                     <BookmarkButton article={data}/>
                                 </div>
                                 {isTruncated && (
-                                    <Link href={`/news/${data.category}/${data.id}`} className='block'>
+                                    <NewsCardWrapper  href={`/news/${data.category}/${data.id}`} id={data.id}>
                                     <button className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-colors">
                                         আরও পড়ুন <MdOutlineArrowForward className="ml-1" />
                                     </button>
-                                    </Link>
+                                    </NewsCardWrapper>
                                 )}
                             </div>
                         </div>
