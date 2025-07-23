@@ -8,6 +8,7 @@ import { MdOutlineArrowForward } from 'react-icons/md';
 import FloatingSocial from '@/share/FloatingSocial';
 import Link from 'next/link';
 import BookmarkButton from '../Bookmark/BookmarkButton';
+import ClientShareTrigger from '../SocialShare/ClientShareTrigger';
 
 const SpecialNews = ({ data }: { data: NewsItem }) => {
     const { short, isTruncated } = stripHtmlAndLimit(data.content, 40);
@@ -67,6 +68,7 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                                     aria-label="Share"
                                 >
                                     {/* <FaShareAlt /> */}
+                                    <ClientShareTrigger title={data.title} url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.category}/${data.id}`}/>
                                 </div>
                                 <div
                                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
