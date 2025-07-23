@@ -1,93 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
-// import React from 'react';
-
-// const IslamAndLifeSection = () => {
-//   return (
-//     <div className="bg-gray-100 py-8 px-4 font-noto">
-//       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-//         {/* Left Side: Articles */}
-//         <div className="col-span-2">
-//           <h2 className="text-xl font-bold text-red-600 border-b border-red-600 pb-2 mb-4 flex items-center">
-//             <span className="inline-block w-2 h-2 bg-red-600 rounded-full mr-2"></span>
-//             ইসলাম ও জীবন
-//           </h2>
-
-//           <ul className="space-y-6">
-//             {[
-//               {
-//                 title: 'হজ শেষ করেছেন ৫৪ হাজার ৩৬৩ রোহিঙ্গা',
-//                 time: '২৮ জুন ২০২৫, ০৪:৪১ পূর্বাহ্ণ'
-//               },
-//               {
-//                 title: 'পবিত্র আরাফাত ও জুমা',
-//                 time: '২৮ জুন ২০২৫, ০৩:৫১ পূর্বাহ্ণ'
-//               },
-//               {
-//                 title: 'ফরজ গোসলদের বিস্তারিত নিয়ম, কী করা যাবে কী যাবে না',
-//                 time: '২৭ জুন ২০২৫, ১০:২৬ পিএম'
-//               },
-//               {
-//                 title: 'মেলা জান্নাতের পর পুরুষদের সাধারণ প্রশ্ন করা হবে?',
-//                 time: '২৭ জুন ২০২৫, ০৫:১৪ পিএম'
-//               },
-//             ].map((article, idx) => (
-//               <li key={idx} className="group border-b pb-3 cursor-pointer">
-//                 <h3 className="text-lg font-semibold text-gray-800 group-hover:text-red-600 transition">
-//                   {article.title}
-//                 </h3>
-//                 <p className="text-sm text-gray-500 mt-1">প্রকাশ: {article.time}</p>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-
-//         {/* Right Side: Feature Box */}
-//         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-//           <img 
-//             src="https://cdn.jugantor.com/assets/news_photos/2025/06/28/Untitled-1-685fce9f5b9b1.jpg"
-//             alt="যুগান্তর"
-//             className="w-full object-contain p-4 bg-red-700"
-//           />
-//           <div className="p-4">
-//             <h3 className="text-lg font-bold text-gray-800 mb-2">
-//               মহররমের রোজা কেন রাখা উত্তম?
-//             </h3>
-//             <p className="text-sm text-gray-600">
-//               হিজরি ১৪৪৭ সালের মহররম মাস চলছে। ইসলামের ইতিহাসে মহররম অত্যন্ত গুরুত্বপূর্ণ একটি মাস। রাসুল (সা.) বলেছেন, ‘রমজান মাসের পর সর্বশ্রেষ্ঠ রোজা হলো আল্লাহর মাস মহররমের রোজা।’ (সহিহ মুসলিম)।
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default IslamAndLifeSection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import BookmarkButton from '@/components/Bookmark/BookmarkButton';
+import ClientShareTrigger from '@/components/SocialShare/ClientShareTrigger';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
@@ -95,7 +8,7 @@ import { getBengaliTimeAgo } from '@/utils/getBengaliTimeAgo';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import Link from 'next/link';
 import React from 'react';
-import { FaClock, FaBookmark, FaShareAlt } from 'react-icons/fa';
+import { FaClock} from 'react-icons/fa';
 
 const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; maxim: NewsItem }) => {
 
@@ -144,9 +57,11 @@ const IslamAndLifeSection = ({ islamicNews, maxim }: { islamicNews: NewsItem[]; 
                         {/* <FaBookmark /> */}
                         
                       {/* </button> */}
-                      <button className="text-gray-400 hover:text-red-600 transition-colors">
+                      {/* <button className="text-gray-400 hover:text-red-600 transition-colors">
                         <FaShareAlt />
-                      </button>
+                      </button> */}
+                    <ClientShareTrigger title={article.title} url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${article.title}`}/>
+
                     </div>
                   </div>
                   <div className="flex items-center text-sm text-gray-500">
