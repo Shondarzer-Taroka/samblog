@@ -212,7 +212,7 @@ const ShareModal = ({ url, title, show, onClose }: ShareModalProps) => {
             {/* Modal Footer */}
             <div className="bg-white px-5 py-3 border-t border-gray-200">
               <p className="text-sm text-gray-500 text-center">
-                Jugantor-এর খবর শেয়ার করে ছড়িয়ে দিন
+              টিএননিউজ এর খবর শেয়ার করে ছড়িয়ে দিন
               </p>
             </div>
           </motion.div>

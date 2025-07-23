@@ -64,14 +64,17 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                             {/* Action Buttons */}
                             <div className="flex space-x-3">
                                 <div
-                                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                                    aria-label="Share"
+                                    className=" rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                                    // aria-label="Share"
                                 >
                                     {/* <FaShareAlt /> */}
+                                    <div className='flex justify-center items-center w-[40px] h-[40px]'> 
+
                                     <ClientShareTrigger title={data.title} url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.category}/${data.id}`}/>
+                                    </div>
                                 </div>
                                 <div
-                                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                                    className="flex justify-center items-center w-[40px] h-[40px] rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                                     aria-label="Bookmark"
                                 >
                                     {/* <FaBookmark /> */}
