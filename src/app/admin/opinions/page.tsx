@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // app/admin/opinions/page.tsx
 'use client';
 
@@ -62,7 +63,7 @@ export default function AdminOpinionsPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-800">Access Denied</h2>
-          <p className="mt-2 text-gray-600">You don't have permission to view this page.</p>
+          <p className="mt-2 text-gray-600">You don&#39;t have permission to view this page.</p>
         </div>
       </div>
     );
