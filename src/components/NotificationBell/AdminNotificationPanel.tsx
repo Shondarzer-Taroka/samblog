@@ -6,7 +6,7 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useSocket } from '@/context/SocketContext';
 import { FiBell } from 'react-icons/fi';
 
-export default function NotificationPanel({ onClose }: { onClose: () => void }) {
+export default function AdminNotificationPanel({ onClose }: { onClose: () => void }) {
   const { user } = useAuthProvider();
   const { socket } = useSocket();
   const [notifications, setNotifications] = useState<any[]>([]);

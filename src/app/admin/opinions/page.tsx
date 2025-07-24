@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,12 +10,13 @@ import { FiRefreshCw } from 'react-icons/fi';
 import clsx from 'clsx';
 import { useSocket } from '@/context/SocketContext';
 import OpinionsTable from '@/components/NotificationBell/OpinionsTable';
+import Toast from '@/share/Toast';
 
 const fetcher = (url: string) => fetch(url,{credentials:'include'}).then(res => res.json());
 
 export default function AdminOpinionsPage() {
   const { user } = useAuthProvider();
-  const { showToast } = useToast();
+  const { showToast,hideToast,toast } = useToast();
   const { socket } = useSocket();
   const [statusFilter, setStatusFilter] = useState<string>('PENDING');
   const [page, setPage] = useState(1);
@@ -32,7 +34,7 @@ export default function AdminOpinionsPage() {
 
     const handleNewOpinion = () => {
       mutate();
-      showToast('info', 'New opinion submitted');
+      showToast('error', 'New opinion submitted');
     };
 
     socket.on('new_opinion', handleNewOpinion);
@@ -131,6 +133,10 @@ export default function AdminOpinionsPage() {
               Next
             </button>
           </div>
+
+            {toast && (
+      <Toast type={toast.type} message={toast.message} onClose={hideToast} />
+    )}
         </>
       )}
     </div>
