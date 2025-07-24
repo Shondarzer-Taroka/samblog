@@ -346,6 +346,7 @@ export default function OpinionForm() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials:'include',
         body: JSON.stringify(payload),
       });
 

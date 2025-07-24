@@ -77,3 +77,88 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     </AuthMiddleware>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+
+// import Sidebar from '@/components/Dashboard/Sidebar';
+// import Topbar from '@/components/Dashboard/Topbar';
+// import AuthMiddleware from '@/middleware/AuthMiddleware';
+// import { useAuthProvider } from '@/Providers/AuthProvider';
+// import { useState, useEffect } from 'react';
+// import clsx from 'clsx';
+// import { usePathname } from 'next/navigation';
+
+// export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+//   const { user, loading } = useAuthProvider();
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const [isMobile, setIsMobile] = useState(false);
+//   const pathname = usePathname();
+
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth < 768);
+//       if (window.innerWidth >= 768) {
+//         setIsSidebarOpen(true);
+//       } else {
+//         setIsSidebarOpen(false);
+//       }
+//     };
+
+//     handleResize();
+//     window.addEventListener('resize', handleResize);
+//     return () => window.removeEventListener('resize', handleResize);
+//   }, []);
+
+//   useEffect(() => {
+//     if (pathname.startsWith('/dashboard')) {
+//       document.getElementById('mainSection')?.classList.remove('mt-[60px]');
+//     }
+//   }, [pathname]);
+
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="flex justify-center items-center min-h-screen">
+//         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <AuthMiddleware>
+//       {user?.email && (
+//         <div className="flex min-h-screen bg-gray-50">
+//           <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+          
+//           <div className={clsx(
+//             "flex-1 flex flex-col",
+//             "transition-all duration-300 ease-in-out",
+//             "ml-0 md:ml-64" // Match sidebar width
+//           )}>
+//             <Topbar toggleSidebar={toggleSidebar} />
+            
+//             <main className="flex-1 p-4 md:p-6 bg-gray-50 overflow-x-auto">
+//               {children}
+//             </main>
+//           </div>
+//         </div>
+//       )}
+//     </AuthMiddleware>
+//   );
+// }

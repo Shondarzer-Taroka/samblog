@@ -21,7 +21,7 @@ export default function NotificationBell() {
     // Fetch initial unread count
     const fetchUnreadCount = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notifications/unread-count?userId=${user.id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notifications/unread-count?userId=${user.id}`);
         const data = await res.json();
         if (res.ok) {
           setUnreadCount(data.count);
@@ -50,8 +50,9 @@ export default function NotificationBell() {
 
   const markAsRead = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notifications/mark-as-read`, {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notifications/mark-as-read`, {
         method: 'POST',
+        credentials:'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user?.id }),
       });
