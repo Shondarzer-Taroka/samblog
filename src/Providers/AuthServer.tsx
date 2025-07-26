@@ -4,7 +4,7 @@ import { getUserFromCookie } from "@/hooks/auth";
 
 const AuthServer = async () => {
   const user = await getUserFromCookie(); // ✅ Await the user
-console.log(user);
+  console.log(user, 'auth server');
 
   return (
     <div>

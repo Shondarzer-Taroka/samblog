@@ -11,7 +11,7 @@ export async function getUserFromCookie() {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    return decoded as { id: string; name: string; email: string };
+    return decoded as { id: string; name: string; email: string; role:string};
   } catch (error) {
     const err = error as Error
     console.log(err);
