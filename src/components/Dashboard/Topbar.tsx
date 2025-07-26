@@ -109,13 +109,13 @@ export default function Topbar({
           <div className="animate-pulse bg-gray-200 rounded-full w-32 h-8"></div>
         ) : (
           <>
-            {/* {user?.role === 'admin' ? (
+            {user?.role === 'admin' ? (
               <AdminNotificationBell />
             ) : (
               <NotificationBell />
-            )} */}
+            )}
 
-                  <AdminNotificationBell />
+                   {/* <AdminNotificationBell /> */}
 
             <button className={clsx(
               "flex items-center gap-2 px-4 py-2 rounded-full",

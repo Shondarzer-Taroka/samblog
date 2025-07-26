@@ -21,7 +21,7 @@ export default function NotificationBell() {
     // Fetch initial unread count
     const fetchUnreadCount = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notifications/unread-count?userId=${user.id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notifications/unread-count?userId=${user.id}`,{credentials:'include'});
         const data = await res.json();
         if (res.ok) {
           setUnreadCount(data.count);
