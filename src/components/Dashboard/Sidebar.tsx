@@ -6,7 +6,7 @@
 import { FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip, FiUser } from 'react-icons/fi';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Link from 'next/link';
-import { ClipboardPen, Newspaper, UserRoundPen } from 'lucide-react';
+import { BookOpenCheck, ClipboardPen, Newspaper, UserRoundPen } from 'lucide-react';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
@@ -23,7 +23,7 @@ const allLinks = [
     { label: 'ই-পেপার', icon: <FiPaperclip size={20} />, href: '/news/dashboard/epapers/list', roles: ['admin'] },
     { label: 'খবর', icon: <Newspaper size={20} />, href: '/news/dashboard/allNews', roles: ['admin', 'editor'] },
     { label: 'মতামত যুক্ত করুন', icon: <ClipboardPen size={20} />, href: '/news/dashboard/createOpinion', roles: ['admin', 'user'] },
-    { label: 'মতামত সমূহ', icon: <ClipboardPen size={20} />, href: '/news/dashboard/opinions', roles: ['admin'] },
+    { label: 'মতামত সমূহ', icon: <BookOpenCheck size={20} />, href: '/news/dashboard/opinions', roles: ['admin'] },
 ];
 
 export default function Sidebar() {
