@@ -22,7 +22,8 @@ const allLinks = [
     { label: 'সেটিংস', icon: <FiSettings size={20} />, href: '#', roles: ['admin'] },
     { label: 'ই-পেপার', icon: <FiPaperclip size={20} />, href: '/news/dashboard/epapers/list', roles: ['admin'] },
     { label: 'খবর', icon: <Newspaper size={20} />, href: '/news/dashboard/allNews', roles: ['admin', 'editor'] },
-    { label: 'মতামত', icon: <ClipboardPen size={20} />, href: '/news/dashboard/opinion', roles: ['admin', 'user'] },
+    { label: 'মতামত যুক্ত করুন', icon: <ClipboardPen size={20} />, href: '/news/dashboard/createOpinion', roles: ['admin', 'user'] },
+    { label: 'মতামত সমূহ', icon: <ClipboardPen size={20} />, href: '/news/dashboard/opinions', roles: ['admin'] },
 ];
 
 export default function Sidebar() {
