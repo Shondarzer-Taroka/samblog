@@ -63,7 +63,7 @@ const MetricCard = ({ title, value, change }: { title: string; value: string; ch
   );
 };
 
-const SessionsOverviewCharat = () => {
+const Dashboard = () => {
   const [data, setData] = useState<DashboardData | null>(null);
   const [historicalData, setHistoricalData] = useState<HistoricalDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
@@ -479,4 +479,4 @@ const SessionsOverviewCharat = () => {
   );
 };
 
-export default  SessionsOverviewCharat;
+export default Dashboard;

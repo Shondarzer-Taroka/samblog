@@ -8,7 +8,7 @@ import AuthMiddleware from '@/middleware/AuthMiddleware';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -16,10 +16,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-
+    const router=useRouter()
   console.log(pathname);
   
 
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -43,6 +44,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
   },[])
 
+
+//   useEffect(() => {
+//   if (!loading && user?.role !== 'admin') {
+//     router.push('/news/dashboard/myProfile');
+//   }
+// }, [loading, user]);
+
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -55,6 +64,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     );
   }
 
+
+  
+ 
   return (
     <AuthMiddleware>
       {user?.email && (

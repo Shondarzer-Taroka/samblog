@@ -1,12 +1,6 @@
-'use client'
+import React from 'react';
 
-interface MetricCardProps {
-  title: string;
-  value: string;
-  change: string;
-}
-
-export const MetricCard = ({ title, value, change }: MetricCardProps) => {
+const MetricCard = ({ title, value, change }: { title: string; value: string; change: string }) => {
   const days = ['s', 's', 'm', 't', 'w', 't', 'f'];
   
   return (
@@ -34,3 +28,5 @@ export const MetricCard = ({ title, value, change }: MetricCardProps) => {
     </div>
   );
 };
+
+export default MetricCard;
