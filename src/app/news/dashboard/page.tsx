@@ -1,12 +1,9 @@
 'use client'
 import DashboardCards from "@/components/Dashboard/DashboardCards";
 import { useAuthProvider } from "@/Providers/AuthProvider";
-
-// import { getUserFromCookie } from "@/hooks/auth";
 import { redirect, useRouter } from "next/navigation";
 
 export default function DashboardPage() {
-  // const user = await getUserFromCookie();
   const { user, loading } = useAuthProvider()
   const router = useRouter()
 
