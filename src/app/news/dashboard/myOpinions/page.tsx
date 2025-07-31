@@ -1,15 +1,30 @@
-// 'use client'
-// import { useAuthProvider } from '@/Providers/AuthProvider';
-// import React from 'react';
+'use client'
+import Loading from '@/app/loading';
+import OpinionTable from '@/components/Dashboard/OpinionTable';
+import { useAuthProvider } from '@/Providers/AuthProvider';
+import React from 'react';
 
-// const page = () => {
-//     const { user, loading } = useAuthProvider()
-//     return (
-//         <div>
+const Page = () => {
+    const { user, loading } = useAuthProvider()
 
-//         </div>
-//     );
-// };
+    if (loading) {
+        
+        return <Loading/>
+    }
+    return (
+        <div>
+            <OpinionTable userEmail={user?.email} />
+        </div>
+    );
+};
 
-// export default page;
+export default Page;
+
+
+
+
+
+
+
+
 
