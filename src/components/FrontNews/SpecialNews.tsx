@@ -22,7 +22,6 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                 <div className="relative rounded-xl overflow-hidden shadow-lg mb-8 group">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
 
-                    {/* News Image */}
                     <Image
                         src={data?.imageUrl || 'https://cdn.jugantor.com/assets/news_photos/2025/06/24/65659-685a4c7561e73.jpg'}
                         alt={data.title}
@@ -32,25 +31,25 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                         priority
                     />
 
-                    {/* News Content Overlay */}
+
                     <div className="absolute bottom-0 left-0 right-0 z-20 p-3 md:p-8 text-white">
-                        {/* Category Badge */}
+
                         <span className="inline-block bg-red-600 text-white text-sm font-semibold px-3 py-1 rounded-full mb-3">
                             বিশেষ সংবাদ
                         </span>
 
-                        {/* News Title */}
+
                         <NewsCardWrapper id={data.id} href={`/news/${data.category}/${data.id}`}>
                             <h2 className="sm:text-2xl md:text-4xl font-bold leading-tight mb-2 md:mb-4 drop-shadow-lg">
                                 {data.title}
                             </h2>
                         </NewsCardWrapper>
-                        {/* News Excerpt */}
+
                         <p className="text-[13px] md:text-xl mb-2 md:mb-6 text-gray-100 line-clamp-2">
                             {short}
                         </p>
 
-                        {/* Meta Information */}
+
                         <div className="flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center space-x-4">
                                 <span className="flex items-center text-gray-200  text-[11px] md:text-sm">
@@ -61,16 +60,16 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                                 </span>
                             </div>
 
-                            {/* Action Buttons */}
+
                             <div className="flex space-x-3">
                                 <div
                                     className=" rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                                    // aria-label="Share"
+                                // aria-label="Share"
                                 >
                                     {/* <FaShareAlt /> */}
-                                    <div className='flex justify-center items-center w-[40px] h-[40px]'> 
+                                    <div className='flex justify-center items-center w-[40px] h-[40px]'>
 
-                                    <ClientShareTrigger title={data.title} url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.category}/${data.id}`}/>
+                                        <ClientShareTrigger title={data.title} url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.category}/${data.id}`} />
                                     </div>
                                 </div>
                                 <div
@@ -78,34 +77,34 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                                     aria-label="Bookmark"
                                 >
                                     {/* <FaBookmark /> */}
-                                    <BookmarkButton article={data}/>
+                                    <BookmarkButton article={data} />
                                 </div>
                                 {isTruncated && (
-                                    <NewsCardWrapper  href={`/news/${data.category}/${data.id}`} id={data.id}>
-                                    <button className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-colors">
-                                        আরও পড়ুন <MdOutlineArrowForward className="ml-1" />
-                                    </button>
+                                    <NewsCardWrapper href={`/news/${data.category}/${data.id}`} id={data.id}>
+                                        <button className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-colors">
+                                            আরও পড়ুন <MdOutlineArrowForward className="ml-1" />
+                                        </button>
                                     </NewsCardWrapper>
                                 )}
                             </div>
                         </div>
                     </div>
                 </div>
-       
-            {/* Top Stories Section with Seamless Integration */}
-            <div className="mt-12 bg-white rounded-xl shadow-md overflow-hidden hidden">
-                <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-100">
-                        সর্বশেষ সংবাদ
-                    </h3>
-                    <TopStoriesPage />
+
+                {/* Top Stories */}
+                <div className="mt-12 bg-white rounded-xl shadow-md overflow-hidden hidden">
+                    <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-100">
+                            সর্বশেষ সংবাদ
+                        </h3>
+                        <TopStoriesPage />
+                    </div>
                 </div>
+
+
+                <FloatingSocial />
             </div>
 
-
-            <FloatingSocial />
-        </div>
-      
         </section >
     );
 };
