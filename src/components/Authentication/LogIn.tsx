@@ -6,7 +6,7 @@ import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/share/Toast';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +76,7 @@ const Login = () => {
     <section className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 py-10 px-4 flex justify-center items-center">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-6">
         <div className="text-center">
-          <div className="flex justify-center mb-4">
+          {/* <div className="flex justify-center mb-4">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -84,7 +84,7 @@ const Login = () => {
               height={80}
               className="rounded-full"
             />
-          </div>
+          </div> */}
           <h2 className="text-2xl font-bold text-gray-800">লগইন করুন</h2>
           <p className="text-gray-600 mt-2">আপনার অ্যাকাউন্টে অ্যাক্সেস পেতে লগইন করুন</p>
         </div>
