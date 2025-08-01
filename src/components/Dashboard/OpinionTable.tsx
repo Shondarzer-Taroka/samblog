@@ -41,17 +41,46 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
     if (userEmail) fetchOpinions();
   }, [userEmail, page]);
 
+  // const handleDelete = async (id: string) => {
+  //   if (confirm('Are you sure you want to delete this opinion?')) {
+  //     try {
+  //       await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
+  //         withCredentials: true
+  //       });
+  //       fetchOpinions();
+  //     } catch (error) {
+  //       console.error('Error deleting opinion:', error);
+  //     }
+  //   }
+  // };
+
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this opinion?')) {
-      try {
-        await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
-          withCredentials: true
-        });
-        fetchOpinions();
-      } catch (error) {
-        console.error('Error deleting opinion:', error);
-      }
-    }
+    showAlert('warning', {
+      title: 'নিশ্চিত করুন',
+      message: 'আপনি কি নিশ্চিতভাবে এই খবরটি মুছতে চান?',
+      confirmText: 'হ্যাঁ, মুছুন',
+      cancelText: 'না, বাতিল করুন',
+      onConfirm: async () => {
+        try {
+                await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
+                  withCredentials: true
+                });
+          // setNews(news.filter(item => item.id !== id));
+
+          fetchOpinions()
+          showAlert('success', {
+            title: 'সফল হয়েছে',
+            message: 'খবরটি সফলভাবে মুছে ফেলা হয়েছে',
+          });
+        } catch (error) {
+          console.error('Failed to delete news:', error);
+          showAlert('error', {
+            title: 'ত্রুটি হয়েছে',
+            message: 'খবরটি মুছতে সমস্যা হয়েছে',
+          });
+        }
+      },
+    });
   };
 
   const totalPages = Math.ceil(total / limit);
