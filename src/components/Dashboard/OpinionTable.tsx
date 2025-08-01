@@ -146,9 +146,9 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
       </div>
 
       {/* Pagination Controls */}
-      <div>
+      <div className=''>
 
-      <div className="flex justify-center mt-4 space-x-2 ">
+      <div className="flex justify-center flex-wrap mt-4 space-x-2 ">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
