@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/useToast';
-import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
+import { FiEdit, FiEye } from 'react-icons/fi';
 import clsx from 'clsx';
+import { useAlert } from '@/hooks/useAlert';
 
 export default function OpinionsTable({ opinions, onStatusChange }: {
   opinions: any[];
@@ -16,6 +19,7 @@ export default function OpinionsTable({ opinions, onStatusChange }: {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { showToast } = useToast();
+  const { showAlert, AlertDialog } = useAlert();
 
   const handleStatusChange = async (status: 'APPROVED' | 'REJECTED') => {
     if (status === 'REJECTED' && !rejectionReason) {
@@ -39,7 +43,7 @@ export default function OpinionsTable({ opinions, onStatusChange }: {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="min-w-full divide-y divide-gray-200 overflow-hidden">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
@@ -101,7 +105,7 @@ export default function OpinionsTable({ opinions, onStatusChange }: {
             <h3 className="text-lg font-medium mb-4">
               Update Opinion Status: {selectedOpinion?.title}
             </h3>
-            
+
             {selectedOpinion?.status !== 'APPROVED' && (
               <button
                 onClick={() => handleStatusChange('APPROVED')}

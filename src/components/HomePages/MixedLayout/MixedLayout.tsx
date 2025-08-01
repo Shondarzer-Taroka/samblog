@@ -133,14 +133,14 @@ export default function MixedLayout({ data }: { data: mixedLayoutProps }) {
               alt="featured"
               height={256}
               width={350}
-              className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-[280px] object-cover transform group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute bottom-0 left-0 z-20 p-5 w-full">
               <span className="inline-block bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded mb-2">
                 {data.featuredCategories[0].category}
               </span>
               <Link href={`/news/${data.featuredCategories[0].category}`}>
-              <h3 className="text-lg font-bold text-white mb-1">
+              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-red-600 transition-colors">
                 {data.featuredCategories[0].title}
               </h3>
               </Link>
@@ -176,7 +176,7 @@ export default function MixedLayout({ data }: { data: mixedLayoutProps }) {
                   </div>
                 </div>
                 <Link href={`/news/${item.category}`}> 
-                <h4 className="text-sm font-semibold text-gray-800 leading-snug group-hover:text-blue-600 transition-colors">
+                <h4 className="text-sm font-semibold text-gray-800 leading-snug group-hover:text-red-600 transition-colors">
                   {item.title}
                 </h4>
                 </Link>
@@ -190,7 +190,7 @@ export default function MixedLayout({ data }: { data: mixedLayoutProps }) {
             ))}
           </div>
 
-          <button className="w-full more-read-btn  mt-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-bold shadow-md hover:shadow-lg transition-all duration-300 transform  flex items-center justify-center">
+          <button className="w-full more-read-btn  mt-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-bold shadow-md hover:shadow-lg transition-all duration-300 transform  hidden items-center justify-center">
             আরও পড়ুন
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
