@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useAlert } from '@/hooks/useAlert';
 
 interface Opinion {
   id: string;
@@ -14,6 +15,7 @@ interface Opinion {
 }
 
 const OpinionTable = ({ userEmail }: { userEmail: string }) => {
+  const { showAlert, AlertDialog } = useAlert();
   const [opinions, setOpinions] = useState<Opinion[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);

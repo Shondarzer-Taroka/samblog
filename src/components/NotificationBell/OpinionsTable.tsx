@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/useToast';
 import { FiEdit, FiEye } from 'react-icons/fi';
 import clsx from 'clsx';
-import { useAlert } from '@/hooks/useAlert';
 
 export default function OpinionsTable({ opinions, onStatusChange }: {
   opinions: any[];
@@ -19,8 +18,8 @@ export default function OpinionsTable({ opinions, onStatusChange }: {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { showToast } = useToast();
-  const { showAlert, AlertDialog } = useAlert();
 
+  
   const handleStatusChange = async (status: 'APPROVED' | 'REJECTED') => {
     if (status === 'REJECTED' && !rejectionReason) {
       showToast('error', 'Please provide a rejection reason');
@@ -105,7 +104,7 @@ export default function OpinionsTable({ opinions, onStatusChange }: {
             <h3 className="text-lg font-medium mb-4">
               Update Opinion Status: {selectedOpinion?.title}
             </h3>
-
+            
             {selectedOpinion?.status !== 'APPROVED' && (
               <button
                 onClick={() => handleStatusChange('APPROVED')}
