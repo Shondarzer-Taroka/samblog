@@ -3,6 +3,7 @@ import FirstSectionRandom from './FirstSectionRandom';
 import SecondRandom from './SecondRandom';
 import { NewsItem } from '@/types/news.types';
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
+import AreaNewsFilter from '../HomePages/AreaNewsFilter/AreaNewsFilter';
 
 const RandomNews = ({ data }: { data: { nationalNews: NewsItem[], wholeCountry: NewsItem[] } }) => {
   console.log(data.nationalNews,'rand');
@@ -23,6 +24,7 @@ const RandomNews = ({ data }: { data: { nationalNews: NewsItem[], wholeCountry: 
       <aside className=' bg-gray-50 py-6 px-2 md:px-4 '>
         {/* <h2 className="text-xl font-semibold text-red-600">সারাদেশ</h2> */}
         <div className='mb-8'>
+          <AreaNewsFilter/>
           <TitleNewsOverSection headline='সারাদেশ' />
         </div>
 
