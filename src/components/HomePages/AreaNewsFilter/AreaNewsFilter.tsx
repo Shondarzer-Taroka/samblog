@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaSearchLocation, FaSearch } from 'react-icons/fa';
-import BdAddress, { bdUnions, bdPostCodes } from 'bd-address';
+import BdAddress, { bdUnions } from 'bd-address';
 
 type Division = {
   id: string;
@@ -41,14 +41,12 @@ const AreaNewsFilter = () => {
   const [district, setDistrict] = useState<string>('');
   const [upazila, setUpazila] = useState<string>('');
   const [union, setUnion] = useState<string>('');
-  const [postCode, setPostCode] = useState<string>('');
 
   // State for address data
   const [divisions, setDivisions] = useState<Division[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
   const [upazilas, setUpazilas] = useState<Upazilla[]>([]);
   const [unions, setUnions] = useState<Union[]>([]);
-  const [postCodes, setPostCodes] = useState<string[]>([]);
 
   // Load divisions on component mount
   useEffect(() => {
@@ -70,7 +68,6 @@ const AreaNewsFilter = () => {
     setDistrict('');
     setUpazila('');
     setUnion('');
-    setPostCode('');
   }, [division, divisions]);
 
   // Load upazilas when district changes
@@ -86,7 +83,6 @@ const AreaNewsFilter = () => {
     }
     setUpazila('');
     setUnion('');
-    setPostCode('');
   }, [district, districts]);
 
   // Load unions when upazila changes
@@ -103,42 +99,14 @@ const AreaNewsFilter = () => {
       setUnions([]);
     }
     setUnion('');
-    setPostCode('');
   }, [upazila, upazilas]);
-
-  // Load post codes when union changes
-  useEffect(() => {
-    if (union) {
-      const selectedUnion = unions.find(u => u.bn_name === union);
-      if (selectedUnion) {
-        const allPostCodes = bdPostCodes();
-        const matchedCodes: string[] = [];
-        
-        for (const key in allPostCodes) {
-          const entry = allPostCodes[key];
-          if (entry?.bn?.suboffice?.includes(selectedUnion.bn_name)) {
-            matchedCodes.push(entry.bn.postcode.trim());
-          }
-        }
-        
-        setPostCodes(matchedCodes);
-        if (matchedCodes.length > 0) {
-          setPostCode(matchedCodes[0]);
-        }
-      }
-    } else {
-      setPostCodes([]);
-      setPostCode('');
-    }
-  }, [union, unions]);
 
   const handleSearch = () => {
     console.log({
       division,
       district,
       upazila,
-      union,
-      postCode
+      union
     });
     // You can implement your search logic here
   };
@@ -153,7 +121,7 @@ const AreaNewsFilter = () => {
         </div>
 
         {/* Dropdowns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
           <select 
             className="px-4 py-2 rounded-lg border border-blue-300 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             value={division}
@@ -200,25 +168,13 @@ const AreaNewsFilter = () => {
               <option key={uni.id} value={uni.bn_name}>{uni.bn_name}</option>
             ))}
           </select>
-
-          <select 
-            className="px-4 py-2 rounded-lg border border-blue-300 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-            value={postCode}
-            onChange={(e) => setPostCode(e.target.value)}
-            disabled={!union}
-          >
-            <option value="">পোস্ট কোড নির্বাচন করুন</option>
-            {postCodes.map((code, index) => (
-              <option key={index} value={code}>{code}</option>
-            ))}
-          </select>
         </div>
 
         {/* Search button */}
         <button 
           className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg flex items-center justify-center gap-2 text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-300 disabled:bg-blue-400 disabled:cursor-not-allowed"
           onClick={handleSearch}
-          disabled={!postCode}
+          disabled={!union}
         >
           <FaSearch />
           খুঁজুন
