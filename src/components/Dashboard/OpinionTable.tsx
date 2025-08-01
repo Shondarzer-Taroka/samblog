@@ -62,9 +62,9 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
       cancelText: 'না, বাতিল করুন',
       onConfirm: async () => {
         try {
-                await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
-                  withCredentials: true
-                });
+          await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
+            withCredentials: true
+          });
           // setNews(news.filter(item => item.id !== id));
 
           fetchOpinions()
@@ -146,7 +146,9 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center mt-4 space-x-2">
+      <div>
+
+      <div className="flex justify-center mt-4 space-x-2 ">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
@@ -172,6 +174,10 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
           Next
         </button>
       </div>
+      </div>
+      
+      <AlertDialog />
+
     </div>
   );
 };
