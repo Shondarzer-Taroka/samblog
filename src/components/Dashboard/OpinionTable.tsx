@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface Opinion {
   id: string;
@@ -23,7 +24,7 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:7700/api/opinion/getOpinionByEmail/${userEmail}?page=${page}&limit=${limit}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/opinion/getOpinionByEmail/${userEmail}?page=${page}&limit=${limit}`
       );
       setOpinions(res.data.opinions);
       setTotal(res.data.total);
@@ -41,7 +42,7 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this opinion?')) {
       try {
-        await axios.delete(`http://localhost:7700/api/opinion/delete/${id}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/opinion/delete/${id}`, {
           withCredentials: true
         });
         fetchOpinions();
@@ -88,12 +89,14 @@ const OpinionTable = ({ userEmail }: { userEmail: string }) => {
                   </span>
                 </td>
                 <td className="p-2 border space-x-2">
-                  <button
-                    onClick={() => alert(`Implement modal for update ${opinion.id}`)}
-                    className="text-blue-600 hover:underline"
-                  >
-                    Update
-                  </button>
+                  <Link href={`/news/dashboard/myOpinions/update/${opinion.id}`}>
+                    <button
+
+                      className="text-blue-600 hover:underline"
+                    >
+                      Update
+                    </button>
+                  </Link>
                   <button
                     onClick={() => handleDelete(opinion.id)}
                     className="text-red-600 hover:underline"
