@@ -1,6 +1,7 @@
 'use client'
+import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import React from 'react';
-import { FaUser, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 interface Author {
   name: string;
@@ -21,14 +22,7 @@ interface NewsItem {
 }
 
 const AreaNewsCard = ({ news }: { news: NewsItem }) => {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('bn-BD', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
+
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
@@ -63,10 +57,10 @@ const AreaNewsCard = ({ news }: { news: NewsItem }) => {
           )}
         </div>
         
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-500 border-t pt-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-500 pt-3">
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-gray-400" />
-            <span>{formatDate(news.createdAt)}</span>
+            <span>{formatBengaliDate(news.createdAt)}</span>
           </div>
         </div>
       </div>
