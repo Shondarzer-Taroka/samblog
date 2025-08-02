@@ -166,7 +166,7 @@ const NewsNavBar: React.FC = () => {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       <div className="container mx-auto px-1 md:px-4">
-        <nav className='flex items-center justify-between py-3'>
+        <nav className='flex items-center justify-between gap-0 md:gap-8 py-3'>
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
