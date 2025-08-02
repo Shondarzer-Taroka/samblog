@@ -64,12 +64,6 @@ const AreaNewsCard = ({ news }: { news: NewsItem }) => {
         </div>
         
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-500 border-t pt-3">
-          <div className="flex items-center gap-2 mb-2 sm:mb-0">
-            <FaUser className="text-gray-400" />
-            <span>{news.author.name}</span>
-            <span className="hidden sm:inline">|</span>
-            <span className="text-blue-600">{news.author.email}</span>
-          </div>
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-gray-400" />
             <span>{formatDate(news.createdAt)}</span>
