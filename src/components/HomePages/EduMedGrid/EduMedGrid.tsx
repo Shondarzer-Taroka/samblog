@@ -95,7 +95,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
           <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70 z-10"></div>
             <img
-              src={categories[0].image}
+              src={categories[0].image || "https://images.dailyamardesh.com/original_images/indestry.jpg"}
               alt={categories[0].title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />

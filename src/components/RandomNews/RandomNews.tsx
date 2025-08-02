@@ -24,7 +24,10 @@ const RandomNews = ({ data }: { data: { nationalNews: NewsItem[], wholeCountry: 
       <aside className=' bg-gray-50 py-6 px-2 md:px-4 '>
         {/* <h2 className="text-xl font-semibold text-red-600">সারাদেশ</h2> */}
         <div className='mb-8'>
+          <div className='my-4'>
           <AreaNewsFilter isHomePage={true}/>
+
+          </div>
           <TitleNewsOverSection headline='সারাদেশ' />
         </div>
 
