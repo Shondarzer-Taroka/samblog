@@ -19,7 +19,7 @@ const NewsHorizontalCard = ({ news }: NewsCardProps) => {
       className="bg-white cursor-pointer shadow-sm rounded-md overflow-hidden hover:shadow-md transition-shadow duration-200 border border-gray-100"
     >
       <div
-        className="flex flex-col sm:flex-row gap-4"
+        className="flex flex-col-reverse md:flex-col sm:flex-row gap-4"
         onClick={() => router.push(`/news/${news.category}/${news.id}`)}
       >
         {/* Content */}
@@ -34,7 +34,7 @@ const NewsHorizontalCard = ({ news }: NewsCardProps) => {
         </div>
 
         {/* Image */}
-        <div className="w-[192px] h-[100px] sm:h-auto relative">
+        <div className="w-full md:w-[192px] md:h-[100px] sm:h-auto relative">
           {/* min-w-[120px] sm:min-w-[160px]  */}
           <Image
             src={news.imageUrl || ''}

@@ -38,6 +38,7 @@ const SearchPanel = () => {
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
   const [selectedDate, setSelectedDate] = useState(searchParams.get('date') || '');
   const [showCalendar, setShowCalendar] = useState(false);
+    console.log(news);
 
   const calendarRef = useRef<HTMLDivElement>(null);
   const itemsPerPage = 10;
@@ -51,6 +52,7 @@ const SearchPanel = () => {
     if (month === -1) return null;
     return new Date(parseInt(year), month, parseInt(day)).toISOString();
   };
+
 
   const updateUrlParams = (page = 1) => {
     const params = new URLSearchParams();
@@ -95,6 +97,7 @@ const SearchPanel = () => {
     }
   };
 
+
   const handleDateSelect = (date: string) => {
     setSelectedDate(date);
     setShowCalendar(false);
@@ -135,6 +138,7 @@ const SearchPanel = () => {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
 
+    
     return (
       <div className="flex justify-center mt-6 items-center">
         {currentPage > 1 && (
