@@ -43,6 +43,10 @@ export interface NewsFormData {
   imageUrl?: string;
   imageTitle?: string;
   imageSource?: string;
+  division?:string;
+  district?:string;
+  thana?:string;
+  union?:string
 }
 
 export interface NewsFormProps {

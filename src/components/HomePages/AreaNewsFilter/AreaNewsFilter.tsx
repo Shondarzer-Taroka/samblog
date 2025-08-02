@@ -1,5 +1,4 @@
- /* eslint-disable @typescript-eslint/no-explicit-any */
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaSearchLocation, FaSearch, FaSpinner } from 'react-icons/fa';
@@ -41,9 +40,14 @@ interface Union {
 
 interface NewsData {
   news: any[];
-  total: number;
-  page: number;
-  totalPages: number;
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  };
 }
 
 interface AreaNewsFilterProps {
@@ -139,12 +143,10 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
     if (district) params.append('district', district);
     if (upazila) params.append('thana', upazila);
     if (union) params.append('union', union);
-
+    params.append('page', '1'); 
     if (isHomePage) {
       router.push(`/news/area?${params.toString()}`);
     } else {
-      window.history.pushState({}, '', `?${params.toString()}`);
-      
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/area?${params.toString()}`);
         
@@ -153,7 +155,10 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
         }
         
         const data = await response.json();
-        if (onSearch) onSearch(data);
+        if (onSearch) onSearch(data.data);
+        
+        // Update URL without page reload
+        window.history.pushState({}, '', `?${params.toString()}`);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
         console.error('Error fetching news:', err);
