@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 import React, { useState, useEffect } from 'react';
@@ -57,25 +57,35 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // State for filters
-  const [division, setDivision] = useState<string>(searchParams.get('division') || '');
-  const [district, setDistrict] = useState<string>(searchParams.get('district') || '');
-  const [upazila, setUpazila] = useState<string>(searchParams.get('thana') || '');
-  const [union, setUnion] = useState<string>(searchParams.get('union') || '');
+  const [division, setDivision] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
+  const [upazila, setUpazila] = useState<string>('');
+  const [union, setUnion] = useState<string>('');
 
-  // State for address data
   const [divisions, setDivisions] = useState<Division[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
   const [upazilas, setUpazilas] = useState<Upazilla[]>([]);
   const [unions, setUnions] = useState<Union[]>([]);
 
-  // Load divisions on component mount
   useEffect(() => {
     const allDivisions = BdAddress.divisions();
     setDivisions(allDivisions);
   }, []);
 
-  // Load districts when division changes
+  useEffect(() => {
+    if (searchParams) {
+      const divisionParam = searchParams.get('division');
+      const districtParam = searchParams.get('district');
+      const upazilaParam = searchParams.get('thana');
+      const unionParam = searchParams.get('union');
+
+      if (divisionParam) setDivision(divisionParam);
+      if (districtParam) setDistrict(districtParam);
+      if (upazilaParam) setUpazila(upazilaParam);
+      if (unionParam) setUnion(unionParam);
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     if (division) {
       const selectedDivision = divisions.find(d => d.bn_name === division);
@@ -85,13 +95,12 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
       }
     } else {
       setDistricts([]);
+      setDistrict('');
     }
-    if (!searchParams.get('district')) setDistrict('');
     setUpazila('');
     setUnion('');
-  }, [division, divisions, searchParams]);
+  }, [division, divisions]);
 
-  // Load upazilas when district changes
   useEffect(() => {
     if (district) {
       const selectedDistrict = districts.find(d => d.bn_name === district);
@@ -101,12 +110,11 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
       }
     } else {
       setUpazilas([]);
+      setUpazila('');
     }
-    if (!searchParams.get('thana')) setUpazila('');
     setUnion('');
-  }, [district, districts, searchParams]);
+  }, [district, districts]);
 
-  // Load unions when upazila changes
   useEffect(() => {
     if (upazila) {
       const selectedUpazila = upazilas.find(u => u.bn_name === upazila);
@@ -118,17 +126,9 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
       }
     } else {
       setUnions([]);
+      setUnion('');
     }
-    if (!searchParams.get('union')) setUnion('');
-  }, [upazila, upazilas, searchParams]);
-
-  // Initialize from URL params
-  useEffect(() => {
-    if (searchParams.get('division')) setDivision(searchParams.get('division') || '');
-    if (searchParams.get('district')) setDistrict(searchParams.get('district') || '');
-    if (searchParams.get('thana')) setUpazila(searchParams.get('thana') || '');
-    if (searchParams.get('union')) setUnion(searchParams.get('union') || '');
-  }, [searchParams]);
+  }, [upazila, upazilas]);
 
   const handleSearch = async () => {
     setIsLoading(true);
@@ -141,10 +141,10 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
     if (union) params.append('union', union);
 
     if (isHomePage) {
-      // Navigate to news/area with params
       router.push(`/news/area?${params.toString()}`);
     } else {
-      // Fetch data directly
+      window.history.pushState({}, '', `?${params.toString()}`);
+      
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/area?${params.toString()}`);
         
@@ -166,13 +166,11 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg shadow-md w-full border border-blue-200">
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
-        {/* Icon and label */}
         <div className="flex items-center gap-2 text-blue-700 font-bold whitespace-nowrap min-w-[180px]">
           <FaSearchLocation className="text-2xl" />
           <span className="text-lg">আমার এলাকার খবর</span>
         </div>
 
-        {/* Dropdowns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
           <select 
             className="px-4 py-2 rounded-lg border border-blue-300 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -222,7 +220,6 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
           </select>
         </div>
 
-        {/* Search button */}
         <button 
           className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg flex items-center justify-center gap-2 text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-300 disabled:bg-blue-400 disabled:cursor-not-allowed min-w-[100px]"
           onClick={handleSearch}

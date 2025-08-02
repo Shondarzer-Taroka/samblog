@@ -1,23 +1,3 @@
-// import React from 'react';
-
-// const AreaNewsCard = () => {
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default AreaNewsCard;
-
-
-
-
-
-
-
-
-
 'use client'
 import React from 'react';
 import { FaUser, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
