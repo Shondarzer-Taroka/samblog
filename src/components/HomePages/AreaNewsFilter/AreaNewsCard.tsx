@@ -1,4 +1,5 @@
 'use client'
+import NewsCardWrapper from '@/share/NewsCardWrapper';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
@@ -18,6 +19,7 @@ interface NewsItem {
   union?: string;
   createdAt: string;
   updatedAt: string;
+  category:string;
   author: Author;
 }
 
@@ -25,9 +27,11 @@ const AreaNewsCard = ({ news }: { news: NewsItem }) => {
 
 
   return (
+    <NewsCardWrapper href={`/news/${news.category}/${news.id}`} id={news.id}> 
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+      
       <div className="p-5">
-        <h3 className="text-xl font-bold text-gray-800 mb-3">{news.title}</h3>
+        <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-red-600 transition-all duration-100">{news.title}</h3>
         <p className="text-gray-600 mb-4 line-clamp-3">{news.content}</p>
         
         <div className="flex flex-wrap gap-2 mb-4">
@@ -65,6 +69,7 @@ const AreaNewsCard = ({ news }: { news: NewsItem }) => {
         </div>
       </div>
     </div>
+    </NewsCardWrapper>
   );
 };
 
