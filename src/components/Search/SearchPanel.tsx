@@ -270,13 +270,7 @@ const SearchPanel = () => {
       ) : (
         <section className=' grid grid-cols-1 gap-4 md:grid-cols-2'>
           {news.map(item => (
-            // <div key={item.id} className="mb-6 border-b pb-4">
-            //   <h3 className="text-xl font-bold">{item.title}</h3>
-            //   <p className="text-gray-700">{item.content}</p>
-            //   <p className="text-sm text-gray-500 mt-1">
-            //     {item.author?.name} • {new Date(item.createdAt).toLocaleDateString('bn-BD')} • {toBengaliNumber(item.views)} বার দেখা
-            //   </p>
-            // </div>
+        
             
             <NewsHorizontalCard key={item.id} news={item}/>
           ))}
