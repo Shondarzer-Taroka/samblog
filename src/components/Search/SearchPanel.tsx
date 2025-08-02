@@ -38,7 +38,7 @@ const SearchPanel = () => {
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
   const [selectedDate, setSelectedDate] = useState(searchParams.get('date') || '');
   const [showCalendar, setShowCalendar] = useState(false);
-    console.log(news);
+
 
   const calendarRef = useRef<HTMLDivElement>(null);
   const itemsPerPage = 10;
