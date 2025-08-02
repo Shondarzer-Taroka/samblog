@@ -140,7 +140,7 @@ const SearchPanel = () => {
 
     
     return (
-      <div className="flex justify-center mt-6 items-center">
+      <div className="flex justify-center mt-6 items-center flex-wrap ">
         {currentPage > 1 && (
           <button
             onClick={() => {
