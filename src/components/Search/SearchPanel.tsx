@@ -191,7 +191,7 @@ const SearchPanel = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4">
       <h2 className="text-3xl font-bold mb-4">অনুসন্ধান</h2>
 
       <form onSubmit={handleSearchSubmit} className="flex border rounded-md overflow-hidden mb-4">

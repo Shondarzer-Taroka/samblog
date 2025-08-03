@@ -232,7 +232,7 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
         >
           {isLoading ? (
             
-            <FaSpinner className="animate-spin text-lg" />
+            <FaSpinner className="animate-spin text-xl" />
           ) : (
             <>
               <FaSearch />
