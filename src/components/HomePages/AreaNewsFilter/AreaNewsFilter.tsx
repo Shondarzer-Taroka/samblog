@@ -226,12 +226,13 @@ const AreaNewsFilter = ({ onSearch, isHomePage = false }: AreaNewsFilterProps) =
         </div>
 
         <button 
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg flex items-center justify-center gap-2 text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-300 disabled:bg-blue-400 disabled:cursor-not-allowed min-w-[100px]"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-[9.5px] rounded-[4px] flex items-center justify-center gap-2 text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-300 disabled:bg-blue-400 disabled:cursor-not-allowed min-w-[100px]"
           onClick={handleSearch}
           disabled={isLoading || !division}
         >
           {isLoading ? (
-            <FaSpinner className="animate-spin" />
+            
+            <FaSpinner className="animate-spin text-lg" />
           ) : (
             <>
               <FaSearch />
