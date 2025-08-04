@@ -3,10 +3,51 @@
 // DetailsPageNewsSection.tsx
 // // with demo advertisement 
 
-import { NewsItem } from '@/types/news.types';
 import axios from 'axios';
 import Link from 'next/link';
 import React from 'react';
+import LikeCommentWrapper from './LikeCommentWrapper';
+
+
+type Author = {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+};
+
+type Count = {
+  Like: number;
+  Comment: number;
+};
+
+type NewsItem = {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  subCategory: string;
+  imageSource: string;
+  imageTitle: string;
+  keywords: string[];
+  subKeywords: string[];
+  imageUrl: string | null;
+  division: string;
+  district: string | null;
+  thana: string | null;
+  union: string | null;
+  postCode: string | null;
+  createdAt: string;
+  updatedAt: string;
+  views: number;
+  authorId: string;
+  author: Author;
+  _count: Count;
+  likesCount: number;
+  commentsCount: number;
+  isLiked: boolean;
+};
+
 
 const getTitleForDescription = async (category: string): Promise<NewsItem[]> => {
     const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getTitleForDescription/${category}`)
@@ -98,16 +139,29 @@ export default async function DetailsPageNewsSection({ data, category }: { data:
                 ))}
 
                 {/* Highlighted Footer */}
-                <div className="bg-red-50 p-4 rounded-lg mt-6">
-                    <h3 className="text-md font-semibold mb-3 text-red-700">আরও শিরোনাম</h3>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {bottomHighlights.map((item, idx) => (
-                            <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
-                                <Link href={`/news/${item.category}/${item.id}`}>★ {item.title}</Link>
-                            </li>
-                        ))}
-                    </ul>
+                <div>
+                    <div className="bg-red-50 p-4 rounded-lg mt-6">
+                        <h3 className="text-md font-semibold mb-3 text-red-700">আরও শিরোনাম</h3>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {bottomHighlights.map((item, idx) => (
+                                <li key={idx} className="text-sm text-gray-800 hover:text-red-600 cursor-pointer">
+                                    <Link href={`/news/${item.category}/${item.id}`}>★ {item.title}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <LikeCommentWrapper
+
+                        entityId={data.id}
+                        entityType="news"
+                        initialLikes={data.likesCount || 0}
+                        initialComments={data.commentsCount || 0}
+                        initialIsLiked={data.isLiked || false}
+                        text={data.content}
+                        title={data.title}
+                    />
                 </div>
+
             </main>
         </div>
     );

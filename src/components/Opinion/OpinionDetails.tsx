@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { FiShare2, FiClock, FiUser } from 'react-icons/fi';
@@ -11,6 +11,7 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaTelegram } from 'react
 import { Advertisement } from '@/share/DetailsPageNewsSection';
 import LikeComment from '@/share/LikeComment';
 import { useAuthProvider } from '@/Providers/AuthProvider';
+
 // import { Advertisement } from '@/share/Advertisement';
 
 interface Opinion {
@@ -35,12 +36,12 @@ export default function OpinionDetails() {
   const [opinion, setOpinion] = useState<Opinion | null>(null);
   const [relatedOpinions, setRelatedOpinions] = useState<Opinion[]>([]);
   const [loading, setLoading] = useState(true);
-  const {user,loading:spring}=useAuthProvider()
+  const { user, loading: spring } = useAuthProvider()
   const [showShareOptions, setShowShareOptions] = useState(false);
-  
+const router=useRouter()
   console.log(opinion);
 
-   const handleShare = () => {
+  const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: opinion?.title,
@@ -51,11 +52,12 @@ export default function OpinionDetails() {
       setShowShareOptions(!showShareOptions);
     }
   };
-  
-const handleUnauthorized = () => {
-  // Show login modal or redirect
-  alert('Please login to like');
-};
+
+  // const handleUnauthorized = () => {
+  //   // Show login modal or redirect
+  //   alert('Please login to like');
+  // };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -258,12 +260,21 @@ const handleUnauthorized = () => {
 
 
             <LikeComment
-              opinionId={opinion.id}
-              initialLikes={opinion.likesCount || 0}
-              initialComments={opinion.commentsCount || 0}
-              initialIsLiked={opinion.isLiked || false}
-              onUnauthorized={handleUnauthorized}
+              // opinionId={opinion.id}
+              // initialLikes={opinion.likesCount || 0}
+              // initialComments={opinion.commentsCount || 0}
+              // initialIsLiked={opinion.isLiked || false}
+              // onUnauthorized={handleUnauthorized}
+              // currentUserId={user?.id}
+              // handleShare={handleShare}
+
+              entityId={opinion.id}
+              entityType="opinion"
+              initialLikes={opinion.likesCount}
+              initialComments={opinion.commentsCount}
+              initialIsLiked={opinion.isLiked}
               currentUserId={user?.id}
+              onUnauthorized={() => router.push('/login')}
               handleShare={handleShare}
             />
 

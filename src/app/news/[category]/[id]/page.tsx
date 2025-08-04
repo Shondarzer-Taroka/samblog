@@ -14,7 +14,9 @@ import React from 'react';
 
 async function getSingleNews(id: string): Promise<NewsItem> {
     const result = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getSingleNews/${id}`)
-    return result.data.news
+    console.log(result.data,'single news');
+    
+    return result.data
 }
 
 

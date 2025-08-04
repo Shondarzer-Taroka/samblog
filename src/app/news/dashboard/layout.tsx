@@ -9,6 +9,7 @@ import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
+import { FaSpinner } from 'react-icons/fa';
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -59,7 +60,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+        <FaSpinner className='animate-spin text-3xl text-blue-600'/>
       </div>
     );
   }
