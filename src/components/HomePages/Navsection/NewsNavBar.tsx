@@ -19,7 +19,7 @@ const mobileCategories = {
 };
 
 const menuItems = [
-  { key: 'home', label: 'মূলপাতা', href: '/' ,isMd:true},
+  { key: 'home', label: 'মূলপাতা', href: '/', isMd: true },
   {
     key: 'categories',
     label: 'বিষয়শ্রেণি',
@@ -63,7 +63,7 @@ const NewsNavBar: React.FC = () => {
   const { user, loading, logout } = useAuthProvider();
   const router = useRouter();
   const pathname = usePathname();
-   const [showBookmark, setShowBookmark] = useState(false);
+  const [showBookmark, setShowBookmark] = useState(false);
 
   // Handle scroll event
   useEffect(() => {
@@ -181,7 +181,7 @@ const NewsNavBar: React.FC = () => {
             className="text-xl md:text-2xl font-bold text-gray-800 cursor-pointer mx-auto md:mx-0"
             onClick={() => router.push('/')}
           >
-             
+
             টিএন<span className="text-blue-600">নিউজ</span>
           </div>
 
@@ -205,13 +205,58 @@ const NewsNavBar: React.FC = () => {
           </ul>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-1 md:gap-4">
+          <div className="flex items-center gap-1 md:gap-2">
             <button
-            onClick={() => setShowBookmark(true)}
-            className="text-blue-600 hover:underline flex items-center gap-1"
-          >
-            <FaBookmark />
+              onClick={() => setShowBookmark(true)}
+              className="text-blue-600 hover:underline flex items-center gap-1"
+            >
+              <FaBookmark />
             </button>
+
+            <div className=" text-gray-600 relative flex gap-1 md:gap-2 items-center">
+              <div className="relative" ref={searchRef}>
+                <button
+                  onClick={navigateSearch}
+                  className="py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                  aria-label="Search"
+                >
+                  <FiSearch size={14.8} />
+                </button>
+
+
+              </div >
+              <div className='conterinerOFsvgAndeppertext flex gap-1 md:gap-2 items-center' onClick={() => router.push('/epapers/viewer')}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  enableBackground="new 0 0 24 24"
+                  xmlSpace="preserve"
+                  className={`svgclass w-5 h-5 text-gray-600}`}
+                  fill="currentColor"
+                >
+                  <path
+                    fillOpacity={0.8}
+                    d="M4.058,20.75c-0.497,0-0.923-0.177-1.277-0.531s-0.531-0.78-0.531-1.277V4.49
+        c0-0.247,0.06-0.396,0.181-0.447c0.121-0.051,0.268,0.011,0.442,0.185l0.802,0.802l1.017-1.027C4.786,3.91,4.885,3.842,4.99,3.798
+        c0.105-0.044,0.217-0.065,0.337-0.065c0.12,0,0.233,0.019,0.341,0.058c0.108,0.039,0.208,0.105,0.3,0.198L7,5.031l1.033-1.042
+        C8.124,3.895,8.223,3.83,8.33,3.791c0.107-0.039,0.221-0.058,0.343-0.058c0.122,0,0.235,0.022,0.339,0.065
+        C9.115,3.842,9.214,3.91,9.308,4.004l1.017,1.027l1.042-1.042c0.094-0.094,0.193-0.16,0.297-0.198
+        c0.105-0.038,0.217-0.058,0.337-0.058c0.12,0,0.231,0.019,0.335,0.058c0.104,0.038,0.203,0.104,0.296,0.198l1.042,1.042l1.017-1.027
+        c0.094-0.094,0.193-0.162,0.297-0.206c0.105-0.044,0.217-0.065,0.337-0.065c0.12,0,0.233,0.019,0.341,0.058
+        c0.108,0.039,0.208,0.105,0.3,0.198L17,5.031l1.033-1.042c0.091-0.093,0.191-0.159,0.297-0.198c0.107-0.039,0.221-0.058,0.343-0.058
+        c0.122,0,0.235,0.022,0.339,0.065c0.104,0.044,0.203,0.112,0.296,0.206l1.017,1.027l0.802-0.802
+        c0.174-0.174,0.322-0.236,0.442-0.185c0.12,0.051,0.181,0.2,0.181,0.447v14.452c0,0.497-0.177,0.923-0.531,1.277
+        s-0.78,0.531-1.277,0.531H4.058z M4.058,19.25h7.192v-6.5h-7.5v6.192c0,0.09,0.029,0.163,0.087,0.221
+        C3.894,19.221,3.968,19.25,4.058,19.25z M12.75,19.25h7.192c0.09,0,0.163-0.029,0.221-0.087c0.058-0.058,0.087-0.131,0.087-0.221
+        V16.75h-7.5V19.25z M12.75,15.25h7.5v-2.5h-7.5V15.25z M3.75,11.25h16.5V7.654H3.75V11.25z"
+                  />
+                </svg>
+                {/* <span className='h-[20px]'>ই-পেপার</span> */}
+                <span className='h-[20px] text-gray-600 epaperNav'>ই-পেপার</span>
+              </div>
+
+
+            </div>
             {/* Search Button */}
             <div className="relative hidden" ref={searchRef}>
               <button
@@ -259,7 +304,8 @@ const NewsNavBar: React.FC = () => {
               </div>
             ) : user?.email ? (
               <>
-                <div className="p-2 text-gray-600 relative flex gap-2 items-center">
+                {/* e paper and search icon hidden because user is required viewing it */}
+                <div className="p-2 text-gray-600 relative hidden gap-2 items-center">
                   <div className="relative" ref={searchRef}>
                     <button
                       onClick={navigateSearch}
@@ -367,7 +413,7 @@ const NewsNavBar: React.FC = () => {
             ) : (
               <button
                 onClick={() => router.push('/login')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors flex items-center"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-4 py-[6px] md:py-2 rounded-md font-medium transition-colors flex items-center"
               >
                 <FiUser className="mr-2" />
                 লগ ইন
@@ -442,7 +488,7 @@ const NewsNavBar: React.FC = () => {
                                 <button
                                   key={item}
                                   onClick={() => {
-                                    router.push(`/category/${item}`);
+                                    router.push(`/news/${item}`);
                                     setMobileMenuOpen(false);
                                   }}
                                   className="text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-2 py-1 rounded text-left"

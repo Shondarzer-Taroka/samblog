@@ -20,11 +20,13 @@ export default function UpdateNewsPage() {
     const fetchNews = async () => {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/news/getSingleNews/${id}`);
+       
+        
         if (!res.ok) {
           throw new Error('Failed to fetch news');
         }
         const data = await res.json();
-        setInitialData(data.news);
+        setInitialData(data);
       } catch (error) {
         console.error('Error fetching news:', error);
         showToast('error', 'Failed to load news data');
