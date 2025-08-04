@@ -101,7 +101,7 @@ const NewsTabs = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const res = await axios.get('http://localhost:7700/api/news/news-tabs');
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/news/news-tabs`);
         setNews(res.data);
       } catch (error) {
         console.error('Failed to load news', error);

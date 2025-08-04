@@ -134,6 +134,8 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                 <DetailsPageNewsSection category={category} data={news} />
         
             </div>
+
+            
         </section>
     );
 }

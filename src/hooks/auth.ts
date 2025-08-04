@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // // lib/auth.ts
 // import jwt from 'jsonwebtoken';
 // import { cookies } from 'next/headers';
@@ -36,7 +37,7 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
 export async function getUserFromCookie() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get('refreshToken')?.value;
 
   if (!token) return null;

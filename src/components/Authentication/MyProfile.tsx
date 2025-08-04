@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import axios from 'axios';

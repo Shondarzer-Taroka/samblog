@@ -7,6 +7,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import React from 'react';
 import LikeCommentWrapper from './LikeCommentWrapper';
+import TopStoriesPage from './TopStories';
 
 
 type Author = {
@@ -116,6 +117,8 @@ export default async function DetailsPageNewsSection({ data, category }: { data:
                 {/* Sidebar Advertisement */}
                 <div className="mt-8">
                     <Advertisement position="Sidebar" />
+
+                      <TopStoriesPage />
                 </div>
             </aside>
 
@@ -161,6 +164,8 @@ export default async function DetailsPageNewsSection({ data, category }: { data:
                         title={data.title}
                     />
                 </div>
+
+                
 
             </main>
         </div>

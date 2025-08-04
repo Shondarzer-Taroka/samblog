@@ -16,7 +16,7 @@ const Category = ({ category }: { category: string }) => {
     const [loading, setLoading] = useState(true)
     const [hasMore, setHasMore] = useState(true)
     const [page, setPage] = useState(1)
-    const router=useRouter()
+    const router = useRouter()
 
     const fetchNews = async (pageNum: number) => {
         try {
@@ -40,7 +40,7 @@ const Category = ({ category }: { category: string }) => {
         setNews([])
         setPage(1)
         fetchNews(1)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const loadMore = () => {
@@ -52,12 +52,12 @@ const Category = ({ category }: { category: string }) => {
     }
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
-   
-    if (news.length==0) {
-        return <div className='flex justify-center items-center h-screen'><h1 >No news available</h1> </div> 
+
+    if (news.length == 0) {
+        return <div className='flex justify-center items-center h-screen'><h1 >No news available</h1> </div>
     }
     // console.log(news);
 
@@ -69,23 +69,23 @@ const Category = ({ category }: { category: string }) => {
             <h2 className="text-2xl font-bold text-red-600 mb-3">{decodeURIComponent(category)}</h2>
 
             {/* --- Main layout: content + right‑side ad --- */}
-           { loading ? <><div className="mt-8 text-center">
-                     <button
-                      
-                   
-                        className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
-                    >
-                        {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
-                    </button>
-                </div> </> : <div className="lg:flex lg:gap-6">
+            {loading ? <><div className="mt-8 text-center">
+                <button
+
+
+                    className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400"
+                >
+                    {loading ? 'লোড হচ্ছে...' : ` আরও দেখুন`}
+                </button>
+            </div> </> : <div className="lg:flex lg:gap-6">
                 {/* ---------- NEWS GRID ---------- */}
                 <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 " >
 
-                    
+
                     {/* Left Large Card */}
-                    <div   
-                    onClick={()=> router.push(`/news/${news[0].category}/${news[0].id}`)}
-                    className="lg:col-span-2 relative">
+                    <div
+                        onClick={() => router.push(`/news/${news[0].category}/${news[0].id}`)}
+                        className="lg:col-span-2 relative">
                         <div className='w-full h-full bg-[#00000072] absolute top-0'></div>
                         <div className="h-full bg-white shadow-md">
                             <Image
@@ -108,8 +108,8 @@ const Category = ({ category }: { category: string }) => {
 
                     {/* Top‑right two small cards */}
                     <div className="flex flex-col gap-6">
-                        {news.slice(3, 5).map(({ title, imageUrl, createdAt,category,id }, i) => (
-                            <div key={i} className="bg-white shadow-md cursor-pointer" onClick={()=> router.push(`/news/${category}/${id}`)}>
+                        {news.slice(3, 5).map(({ title, imageUrl, createdAt, category, id }, i) => (
+                            <div key={i} className="bg-white shadow-md cursor-pointer" onClick={() => router.push(`/news/${category}/${id}`)}>
                                 <Image
                                     src={imageUrl && imageUrl || "https://cdn.jugantor.com/assets/news_photos/2025/06/28/congo-rwanda-685f640151cd2.jpg"}
                                     alt={title}
@@ -129,8 +129,8 @@ const Category = ({ category }: { category: string }) => {
 
                     {/* Bottom row – 3 cards */}
                     <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 cursor-pointer">
-                        {news.slice(4, 7).map(({ id, imageUrl, title ,category}, i) => (
-                            <div key={id} className="bg-white shadow-md" onClick={()=> router.push(`/news/${category}/${id}`)}>
+                        {news.slice(4, 7).map(({ id, imageUrl, title, category }, i) => (
+                            <div key={id} className="bg-white shadow-md" onClick={() => router.push(`/news/${category}/${id}`)}>
                                 {/* Swap in real thumbnails ↓ */}
                                 <Image
                                     src={imageUrl && imageUrl || `https://picsum.photos/id/${i + 10}/400/200`}
@@ -186,14 +186,14 @@ const Category = ({ category }: { category: string }) => {
 
             <div>
 
-             { news.length> 6 &&  <h2 className="text-2xl font-bold mb-6 text-gray-800 mt-10">আরও দেখুন  <span className='underline'>{decodeURIComponent(category)}</span> সংবাদ</h2>}
+                {news.length > 6 && <h2 className="text-2xl font-bold mb-6 text-gray-800 mt-10">আরও দেখুন  <span className='underline'>{decodeURIComponent(category)}</span> সংবাদ</h2>}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {news.length > 0 && news.slice(5, news.length + 1).map((news) => (
                         <article
-                            key={news.id+Math.random()}
+                            key={news.id + Math.random()}
                             className="bg-white cursor-pointer shadow-sm rounded-md overflow-hidden hover:shadow-md transition-shadow duration-200 border border-gray-100"
                         >
-                            <div className="flex flex-col sm:flex-row gap-4" onClick={()=> router.push(`/news/${news.category}/${news.id}`)}>
+                            <div className="flex flex-col sm:flex-row gap-4" onClick={() => router.push(`/news/${news.category}/${news.id}`)}>
                                 {/* Content */}
                                 <div className="p-4 flex-1">
                                     <h3 className="text-md sm:text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer leading-snug">

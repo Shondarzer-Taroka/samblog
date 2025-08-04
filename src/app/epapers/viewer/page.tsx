@@ -17,6 +17,7 @@ import {
   FaEnvelope,
   FaPrint,
   FaBookmark,
+  FaSpinner,
   
 } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
@@ -82,18 +83,15 @@ const handleDownload = () => {
 
 
   const handleEmail = () => {
-    // Implement email functionality
     console.log('Emailing article...');
   };
 
   const handlePrint = () => {
-    // Implement print functionality
     window.print();
   };
 
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
-    // Implement bookmark functionality
     console.log(isBookmarked ? 'Removing bookmark...' : 'Adding bookmark...');
   };
 
@@ -467,7 +465,9 @@ export default function EpaperViewerPage() {
 /* ---------- Helper UI Components ---------- */
 const Loader = () => (
   <div className="flex justify-center items-center h-screen">
-    <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-red-600"></div>
+    
+    <FaSpinner className='text-xl animate-spin text-blue-600'/>
+
   </div>
 );
 
@@ -482,4 +482,28 @@ const Empty = () => (
     <p className="text-xl">No epapers found</p>
   </div>
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
