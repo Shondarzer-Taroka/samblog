@@ -89,7 +89,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                     <div className='flex gap-2.5 items-center mt-4'>
                         <Image
                             src={news.author?.image || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
-                            // src={'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'}
+                            
                             alt={news.title}
                             width={50}
                             height={50}
@@ -99,7 +99,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                         <div className='text-xl'>
                             <p>আন্তর্জাতিক ডেস্ক</p>
                             <p className='text-[#00000067]'> প্রকাশ: {formatBengaliDate(news.createdAt)}</p>
-                            {/* <p className='text-[#00000067]'>প্রকাশ: ২১ জুন ২০২৫, ১০:৪৯ এএম</p> */}
+                           
                         </div>
                     </div>
 
@@ -132,7 +132,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
 
             <div>
                 <DetailsPageNewsSection category={category} data={news} />
-                {/* <DetailsPageNewsSection category={category} data={news} /> */}
+        
             </div>
         </section>
     );
