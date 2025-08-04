@@ -95,7 +95,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
           <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70 z-10"></div>
             <img
-              src={categories[0].image || "https://images.dailyamardesh.com/original_images/indestry.jpg"}
+              src={categories[0]?.image || "https://images.dailyamardesh.com/original_images/indestry.jpg"}
               alt={categories[0].title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -119,7 +119,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
                   <Image
                     width={250}
                     height={160}
-                    src={cat.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}
+                    src={cat?.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}
                     alt={cat.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
