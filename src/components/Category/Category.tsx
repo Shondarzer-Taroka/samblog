@@ -207,7 +207,7 @@ const Category = ({ category }: { category: string }) => {
                                 {/* Image */}
                                 <div className="min-w-[120px] sm:min-w-[160px] h-[100px] sm:h-auto relative">
                                     <Image
-                                        src={news.imageUrl || ''}
+                                        src={news?.imageUrl || ''}
                                         alt={news?.title}
                                         width={160}
                                         height={120}
