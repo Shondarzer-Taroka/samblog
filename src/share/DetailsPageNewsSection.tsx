@@ -36,7 +36,7 @@ type NewsItem = {
   district: string | null;
   thana: string | null;
   union: string | null;
-  postCode: string | null;
+ 
   createdAt: string;
   updatedAt: string;
   views: number;

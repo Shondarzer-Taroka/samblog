@@ -3,11 +3,51 @@
 
 import DetailsPageNewsSection from '@/share/DetailsPageNewsSection';
 import ShareBar from '@/share/Sharebar';
-import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import axios from 'axios';
 import Image from 'next/image';
 import React from 'react';
+
+
+type Author = {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+};
+
+type Count = {
+  Like: number;
+  Comment: number;
+};
+
+type NewsItem = {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  subCategory: string;
+  imageSource: string;
+  imageTitle: string;
+  keywords: string[];
+  subKeywords: string[];
+  imageUrl: string | null;
+  division: string;
+  district: string | null;
+  thana: string | null;
+  union: string | null;
+ 
+  createdAt: string;
+  updatedAt: string;
+  views: number;
+  authorId: string;
+  author: Author;
+  _count: Count;
+  likesCount: number;
+  commentsCount: number;
+  isLiked: boolean;
+};
+
 
 
 
@@ -77,7 +117,7 @@ export default async function NewsDetailsPage({ params }:{params:Promise<{id:str
                     width={1000}
                     height={400}
                     alt={news.title}
-                    src={news.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'} />
+                    src={news?.imageUrl || 'https://cdn.jugantor.com/uploads/settings/icon_2.jpg'} />
 
                 <p className="mt-2 text-center text-base font-medium text-gray-700 w-full">
                     <i>  {news.imageTitle && news.imageTitle}</i>
