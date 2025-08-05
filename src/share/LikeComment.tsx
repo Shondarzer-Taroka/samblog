@@ -472,6 +472,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { useAlert } from '@/hooks/useAlert';
+import { useRouter } from 'next/navigation';
 
 type EntityType = 'opinion' | 'news';
 
@@ -518,7 +519,7 @@ export default function LikeComment({
   const [editCommentContent, setEditCommentContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { showAlert, AlertDialog } = useAlert();
-  
+  const router=useRouter()
   // Fetch like status
   const { data: likeData, mutate: mutateLike } = useSWR(
     `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/${entityType}/${entityId}/like-status`,
