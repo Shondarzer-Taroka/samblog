@@ -102,7 +102,7 @@ export default async function DetailsPageNewsSection({ data, category }: { data:
     const contentParts = splitContentWithAds(data.content);
 
     return (
-        <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Sidebar */}
             <aside className="md:col-span-1">
                 <h2 className="text-lg font-bold mb-4">আরও পড়ুন</h2>

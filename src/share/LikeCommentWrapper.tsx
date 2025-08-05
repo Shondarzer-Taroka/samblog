@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import LikeComment from './LikeComment';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { useRouter } from 'next/navigation';
+import { useAlert } from '@/hooks/useAlert';
 
 interface LikeCommentWrapperProps {
     entityId: string;
@@ -29,7 +30,7 @@ export default function LikeCommentWrapper({
     const currentUserId = user?.id;
     const router = useRouter()
     const [showShareOptions, setShowShareOptions] = useState(false);
-
+  const { showAlert, AlertDialog } = useAlert();
     const handleShare = () => {
         if (navigator.share) {
             navigator.share({

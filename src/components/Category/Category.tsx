@@ -10,6 +10,7 @@ import { formatBengaliDate } from '@/utils/formatBengaliDate';
 import { stripHtmlAndLimit } from '@/utils/stripAndLimitHtml';
 import { useRouter } from 'next/navigation';
 import Loading from '@/app/loading';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const Category = ({ category }: { category: string }) => {
     const [news, setNews] = useState<NewsItem[]>([])
@@ -57,7 +58,13 @@ const Category = ({ category }: { category: string }) => {
 
 
     if (news.length == 0) {
-        return <div className='flex justify-center items-center h-screen'><h1 >No news available</h1> </div>
+        return <div className='flex justify-center items-center h-screen'>
+            <div className="text-center py-12 bg-gray-50 rounded-lg w-full h-full">
+            <FaExclamationCircle className="mx-auto text-4xl text-gray-400 mb-4" />
+            <p className="text-gray-600 text-lg">কোন খবর পাওয়া যায়নি</p>
+            <p className="text-gray-500">অনুগ্রহ করে অন্য ক্যাটাগরি নির্বাচন করুন</p>
+        </div>
+        </div>
     }
     // console.log(news);
 
