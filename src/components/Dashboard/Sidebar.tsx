@@ -167,7 +167,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { FaSquarePollVertical } from 'react-icons/fa6';
-import { FaDoorClosed } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome size={20} />, href: '/', roles: ['admin', 'editor', 'user'] },
@@ -191,6 +191,10 @@ type SidebarProps = {
 export default function Sidebar({isMobile,toggleSidebarLayout}:SidebarProps) {
     const { loading, user } = useAuthProvider();
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCloseIcon,setIsCloseIcon]=useState(false)
+
+    console.log(isCloseIcon,'is close');
+    
 
     if (loading) {
         return (
@@ -219,7 +223,7 @@ export default function Sidebar({isMobile,toggleSidebarLayout}:SidebarProps) {
             'bg-indigo-900 text-white h-screen fixed md:sticky md:top-0 z-50',
             'transition-all duration-300 ease-in-out',
             'flex flex-col',
-            isCollapsed ? 'w-[45px] md:w-20' : 'w-64'
+            isCollapsed ? 'w-[75px] md:w-20' : 'w-64'
         )}>
             {/* Sidebar Header */}
             <div className={clsx(
@@ -230,22 +234,25 @@ export default function Sidebar({isMobile,toggleSidebarLayout}:SidebarProps) {
                 {!isCollapsed && (
                     <h2 className="text-xl font-bold whitespace-nowrap">ড্যাশবোর্ড</h2>
                 )}
+
+
+                <button
+                    onClick={toggleSidebarLayout}
+                    className={` p-2 rounded-full hover:bg-indigo-800 transition-colors`}
+                    // aria-label='Toggle sidebar'
+                >
+                    {/* {isCollapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />} */}
+                    {isMobile &&  isCollapsed && isCloseIcon&& <MdClose/>}
+                </button>
+
                 <button
                     onClick={toggleSidebar}
                     className="p-2 rounded-full hover:bg-indigo-800 transition-colors"
                     aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                 >
-                    {isCollapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
+                    {isCollapsed ? <FiChevronRight size={20} onClick={()=> setIsCloseIcon(false)} /> : <FiChevronLeft size={20} onClick={()=>setIsCloseIcon(true)}/>}
                 </button>
 
-                <button
-                    onClick={toggleSidebarLayout}
-                    className="p-2 rounded-full hover:bg-indigo-800 transition-colors"
-                    aria-label='Toggle sidebar'
-                >
-                    {/* {isCollapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />} */}
-                    {isMobile && <FaDoorClosed/>}
-                </button>
             </div>
 
             {/* Sidebar Links */}
