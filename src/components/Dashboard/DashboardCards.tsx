@@ -5,7 +5,7 @@ export default function DashboardCards() {
     <section>
 
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      <div className="hidden grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
           <h3 className="text-lg font-semibold">মোট লেখা</h3>
           <p className="text-3xl font-bold mt-2 text-blue-600">২৫০</p>
