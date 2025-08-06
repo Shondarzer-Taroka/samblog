@@ -167,6 +167,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { FaSquarePollVertical } from 'react-icons/fa6';
+import { FaDoorClosed } from 'react-icons/fa';
 
 const allLinks = [
     { label: 'মূলপাতা', icon: <FiHome size={20} />, href: '/', roles: ['admin', 'editor', 'user'] },
@@ -182,7 +183,12 @@ const allLinks = [
     { label: 'আমার মতামত সমূহ', icon: <BookOpenText size={20} />, href: '/news/dashboard/myOpinions', roles: ['admin','user'] },
 ];
 
-export default function Sidebar() {
+type SidebarProps = {
+  isMobile: boolean;
+  toggleSidebarLayout:()=> void;
+};
+
+export default function Sidebar({isMobile,toggleSidebarLayout}:SidebarProps) {
     const { loading, user } = useAuthProvider();
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -230,6 +236,15 @@ export default function Sidebar() {
                     aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                 >
                     {isCollapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
+                </button>
+
+                <button
+                    onClick={toggleSidebarLayout}
+                    className="p-2 rounded-full hover:bg-indigo-800 transition-colors"
+                    aria-label='Toggle sidebar'
+                >
+                    {/* {isCollapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />} */}
+                    {isMobile && <FaDoorClosed/>}
                 </button>
             </div>
 

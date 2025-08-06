@@ -59,7 +59,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             isSidebarOpen ? 'block' : 'hidden',
             'md:block'
           )}>
-            <Sidebar />
+            <Sidebar isMobile={isMobile} toggleSidebarLayout={toggleSidebar}/>
           </div>
           
           <div className={clsx(
