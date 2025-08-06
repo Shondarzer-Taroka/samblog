@@ -6,7 +6,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { useAuthProvider } from '@/Providers/AuthProvider';
 import { 
-  FiHome, FiEdit, FiUsers, FiSettings, FiPaperclip, FiUser,
+  FiHome, FiEdit, FiUsers, FiPaperclip, FiUser,
   FiChevronLeft, FiChevronRight 
 } from 'react-icons/fi';
 import { 
@@ -33,7 +33,6 @@ const allLinks: SidebarLink[] = [
   { label: 'লেখা যুক্ত করুন', icon: <FiEdit size={20} />, href: '/news/dashboard/createNews', roles: ['admin', 'editor'] },
   { label: 'ইউজার', icon: <FiUsers size={20} />, href: '/news/dashboard/allUsers', roles: ['admin'] },
   { label: 'অনলাইন ভোট যুক্ত করুন', icon: <FaSquarePollVertical size={20} />, href: '/news/dashboard/createPoll', roles: ['admin'] },
-  { label: 'সেটিংস', icon: <FiSettings size={20} />, href: '#', roles: ['admin'] },
   { label: 'ই-পেপার', icon: <FiPaperclip size={20} />, href: '/news/dashboard/epapers/list', roles: ['admin'] },
   { label: 'খবর', icon: <Newspaper size={20} />, href: '/news/dashboard/allNews', roles: ['admin', 'editor'] },
   { label: 'মতামত যুক্ত করুন', icon: <ClipboardPen size={20} />, href: '/news/dashboard/createOpinion', roles: ['admin', 'user'] },
