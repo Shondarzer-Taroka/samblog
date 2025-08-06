@@ -171,7 +171,7 @@ if (!data || data.length === 0 || !Array.isArray(data)) {
               <div key={idx} className="flex-shrink-0 w-64 mr-4 bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="h-32 relative">
                   <img
-                    src={cat.imageUrl}
+                    src={cat?.imageUrl || 'https://images.dailyamardesh.com/original_images/indestry.jpg'}
                     alt={cat.title}
                     className="w-full h-full object-cover"
                   />
