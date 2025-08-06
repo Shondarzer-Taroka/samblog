@@ -1,6 +1,118 @@
+// /* eslint-disable react-hooks/exhaustive-deps */
+// /* eslint-disable @typescript-eslint/no-unused-vars */
+// // // app/news/dashboard/layout.tsx
+// 'use client';
+
+// import Sidebar from '@/components/Dashboard/Sidebar';
+// import Topbar from '@/components/Dashboard/Topbar';
+// import AuthMiddleware from '@/middleware/AuthMiddleware';
+// import { useAuthProvider } from '@/Providers/AuthProvider';
+// import { useState, useEffect } from 'react';
+// import clsx from 'clsx';
+// import { usePathname, useRouter } from 'next/navigation';
+// import { FaSpinner } from 'react-icons/fa';
+
+
+// export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+//   const { user, loading } = useAuthProvider();
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const [isMobile, setIsMobile] = useState(false);
+//   const pathname = usePathname();
+//     const router=useRouter()
+//   console.log(pathname);
+  
+
+  
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth < 768);
+//       if (window.innerWidth >= 768) {
+//         setIsSidebarOpen(true);
+//       } else {
+//         setIsSidebarOpen(false);
+//       }
+//     };
+
+//     handleResize();
+//     window.addEventListener('resize', handleResize);
+//     return () => window.removeEventListener('resize', handleResize);
+//   }, []);
+
+
+//   useEffect(()=>{
+//     if (pathname.startsWith('/news/dashboard')) {
+      
+//       document.getElementById('mainSection')?.classList.remove('mt-[60px]')
+//     }
+//   },[])
+
+
+
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="flex justify-center items-center min-h-screen">
+//         <FaSpinner className='animate-spin text-3xl text-blue-600'/>
+//       </div>
+//     );
+//   }
+
+
+  
+ 
+//   return (
+//     <AuthMiddleware>
+//       {user?.email && (
+//         <div className="flex min-h-screen bg-gray-50 ">
+//           <Sidebar />
+          
+//           <div className={clsx(
+//             "flex-1 flex flex-col",
+//             "transition-all duration-300 ease-in-out",
+//             "mr-1 lg:ml-0 overflow-x-hidden" // Match sidebar widths
+//           )}>
+//             <Topbar toggleSidebar={toggleSidebar} />
+            
+//             <main className="flex-1 p-4 md:p-6 bg-gray-50 w-[90%] ml-auto md:w-full">
+//               {children}
+//             </main>
+//           </div>
+//         </div>
+//       )}
+//     </AuthMiddleware>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// // app/news/dashboard/layout.tsx
+// app/news/dashboard/layout.tsx
 'use client';
 
 import Sidebar from '@/components/Dashboard/Sidebar';
@@ -12,25 +124,20 @@ import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaSpinner } from 'react-icons/fa';
 
-
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuthProvider();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-    const router=useRouter()
-  console.log(pathname);
-  
+  const router = useRouter();
 
-  
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setIsSidebarOpen(true);
-      } else {
-        setIsSidebarOpen(false);
-      }
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // On desktop, sidebar is always open
+      // On mobile, sidebar is closed by default
+      setIsSidebarOpen(!mobile);
     };
 
     handleResize();
@@ -38,15 +145,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (pathname.startsWith('/news/dashboard')) {
-      
-      document.getElementById('mainSection')?.classList.remove('mt-[60px]')
+      document.getElementById('mainSection')?.classList.remove('mt-[60px]');
     }
-  },[])
-
-
+  }, [pathname]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -60,19 +163,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     );
   }
 
-
-  
- 
   return (
     <AuthMiddleware>
       {user?.email && (
-        <div className="flex min-h-screen bg-gray-50 ">
-          <Sidebar />
+        <div className="flex min-h-screen bg-gray-50">
+          {/* Sidebar - hidden on mobile by default */}
+          <div className={clsx(
+            isSidebarOpen ? 'block' : 'hidden',
+            'md:block'
+          )}>
+            <Sidebar />
+          </div>
           
           <div className={clsx(
             "flex-1 flex flex-col",
             "transition-all duration-300 ease-in-out",
-            "mr-1 lg:ml-0 overflow-x-hidden" // Match sidebar widths
+            "mr-1 lg:ml-0 overflow-x-hidden"
           )}>
             <Topbar toggleSidebar={toggleSidebar} />
             
@@ -85,4 +191,3 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     </AuthMiddleware>
   );
 }
-
