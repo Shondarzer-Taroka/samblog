@@ -47,12 +47,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   },[])
 
 
-//   useEffect(() => {
-//   if (!loading && user?.role !== 'admin') {
-//     router.push('/news/dashboard/myProfile');
-//   }
-// }, [loading, user]);
-
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
