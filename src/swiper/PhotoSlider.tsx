@@ -58,7 +58,7 @@ const PhotoSlider = ({ data }: { data: NewsItem[] }) => {
   }, [isPaused, current]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-2 py-8">
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Photo Slider - Left Side */}
         <div className="lg:w-2/3 h-full">
