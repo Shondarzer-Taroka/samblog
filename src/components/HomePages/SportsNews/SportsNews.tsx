@@ -94,12 +94,12 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                       প্রধান খবর
                     </span>
                   </div>
-                  <div className="p-5 h-[244px]" >
+                  <div className="p-5 md:h-[244px]" >
                     <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-red-600 transition-colors">
                       {centerMain.title}
                     </h2>
                     <p className="text-gray-600 mb-4 text-[15.2px]">
-                      {stripHtmlAndLimitWithSpace(centerMain.content,304).short}
+                      {stripHtmlAndLimitWithSpace(centerMain.content,244).short}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center text-sm text-gray-500">

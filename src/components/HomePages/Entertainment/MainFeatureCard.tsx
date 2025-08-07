@@ -41,7 +41,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
         )}
         
       
-        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute hidden top-3 right-3  gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button className="p-2 bg-white/90 rounded-full shadow-sm hover:bg-white transition-colors">
             <FiBookmark className="text-gray-700" />
           </button>
@@ -51,12 +51,13 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
         </div>
       </div>
 
-      <div className="p-4 md:p-5  ">
+      <div className="p-4 md:p-5  md:h-[158px]">
         <h2 className="text-lg  md:text font-bold text-gray-800 group-hover:text-red-600 transition-colors line-clamp-2 mb-2">
           {title}
         </h2>
         
-        <p className="text-sm md:text-base text-gray-600 mb-3">
+
+        <p className="text-sm md:text-base text-gray-600 mb-3 hidden md:block">
           {description}
         </p>
         

@@ -109,7 +109,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
             </div>
 
             {showActions && (
-              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="hidden items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button className="p-1 text-gray-500 hover:text-primary transition-colors">
                   <FiBookmark className="h-3.5 w-3.5" />
                 </button>

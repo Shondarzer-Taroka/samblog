@@ -15,7 +15,7 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
   return (
     <section className="grid grid-cols-1 xl:grid-cols-2">
       {/* First Aside */}
-      <aside className="md:mr-4">
+      <aside className="md:mr-4 mb-4 md:mb-0">
         <NewsCardWrapper
           id={data[0].id}
           href={`/news/${data[0].category}/${data[0].id}`}
