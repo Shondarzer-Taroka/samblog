@@ -67,7 +67,7 @@ const MainFeatureCard: React.FC<MainFeatureCardProps> = ({
             <span>{time}</span>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2">
             <button className="p-1 text-gray-500 hover:text-red-500 transition-colors">
               <FiHeart size={16} />
             </button>

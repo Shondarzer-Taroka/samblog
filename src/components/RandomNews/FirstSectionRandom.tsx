@@ -52,12 +52,12 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
       {/* 4 News cards */}
       <aside className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {randomNews.slice(1,randomNews.length+1).map((item, index) => (
-          <div key={index + 987}>
+          <div key={index + 987} className='h-full'>
             <NewsCardWrapper
               id={item.id}
               href={`/news/${item.category}/${item.id}`}
             >
-              <div className="block group bg-white p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="block group bg-white h-full p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="text-gray-800 text-[17.7px] leading-relaxed w-full h-full overflow-hidden">
                   <div className="leading-5 mb-1.5">
                     <h2 className="text-[15px] font-bold">{stripHtmlAndLimit(item.title,7).short}</h2>

@@ -1,34 +1,8 @@
-
-
-
 import NewsCardWrapper from '@/share/NewsCardWrapper';
 import { NewsItem } from '@/types/news.types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
-// const newsCards = [
-//   {
-//     category: 'শিক্ষা',
-//     title: 'এসএসসি পরীক্ষা-২০২৫, প্রশ্নপত্র ফাঁসে জড়ালে আইন ব্যবস্থা',
-//     image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-08%2Fibnphfan%2Fbrain-implant-to-the-voice.png?rect=0%2C32%2C640%2C233&w=320&auto=format%2Ccompress&fmt=avif',
-//   },
-//   {
-//     category: 'প্রযুক্তি',
-//     title: 'পক্ষাঘাতগ্রস্তদের কথা বলার সুযোগ করে দিয়েছে নতুন ব্রেন-টু-ভয়েস প্রযুক্তি',
-//     image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-08%2Fibnphfan%2Fbrain-implant-to-the-voice.png?rect=0%2C32%2C640%2C233&w=320&auto=format%2Ccompress&fmt=avif',
-//   },
-//   {
-//     category: 'ধর্ম',
-//     title: 'জিতের জড়তা কাটাতে মুসা (আ.) যে প্রার্থনা করেছিলেন',
-//     image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-08%2Fibnphfan%2Fbrain-implant-to-the-voice.png?rect=0%2C32%2C640%2C233&w=320&auto=format%2Ccompress&fmt=avif',
-//   },
-//   {
-//     category: 'একটু থামুন',
-//     title: '৭টি ভিন ভিন দশকে অস্কারের জন্য মনোনয়ন পেয়েছিলেন তিনি',
-//     image: 'https://media.prothomalo.com/prothomalo-bangla%2F2025-04-08%2Fhgfll6ku%2FJohnwilliams2006.jpg?rect=0%2C68%2C690%2C252&w=320&auto=format%2Ccompress&fmt=avif',
-//   },
-// ];
 
 const BottomNewsCard = ({ data }: { data: NewsItem[] }) => {
 

@@ -1,6 +1,7 @@
 'use client'
 import NewsCardWrapper from '@/share/NewsCardWrapper';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
+import { stripHtmlAndLimitForArray } from '@/utils/stripAndLimitHtml';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -32,7 +33,7 @@ const AreaNewsCard = ({ news }: { news: NewsItem }) => {
       
       <div className="p-5">
         <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-red-600 transition-all duration-100">{news.title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">{news.content}</p>
+        <p className="text-gray-600 mb-4 line-clamp-3">{stripHtmlAndLimitForArray(news.content,12).short}</p>
         
         <div className="flex flex-wrap gap-2 mb-4">
           {news.division && (
