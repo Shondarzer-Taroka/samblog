@@ -59,7 +59,7 @@ const Login = () => {
       if (res.ok) {
         showToast('success', 'সফলভাবে লগইন হয়েছে');
         setTimeout(() => {
-          router.push('/news/dashboard');
+          router.push('/news/dashboard/myProfile');
         }, 300);
       } else {
         showToast('error', data?.message || 'লগইন ব্যর্থ হয়েছে');

@@ -82,7 +82,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }: SidebarProps)
         isCollapsed ? 'flex-col gap-4' : 'flex-row'
       )}>
         {!isCollapsed && (
-          <h2 className="text-xl font-bold whitespace-nowrap">ড্যাশবোর্ড</h2>
+          <h2 className="text-xl font-bold whitespace-nowrap"> <Link href={'/news/dashboard'}> ড্যাশবোর্ড </Link></h2>
         )}
 
         <div className={clsx(

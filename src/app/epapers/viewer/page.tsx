@@ -433,7 +433,7 @@ export default function EpaperViewerPage() {
       </div>
 
       {/* ===== Thumbnail slider ===== */}
-      <div className="bg-gray-100 py-6 px-2 ">
+      <div className="bg-gray-100 py-6 px-2 max-w-7xl mx-auto">
         <Slider {...settings}>
           {epapers.map((epaper, idx) => (
             <div key={epaper.id} className="px-2">
@@ -448,7 +448,7 @@ export default function EpaperViewerPage() {
                   alt={`Epaper ${epaper.date}`}
                   width={150}
                   height={200}
-                  className="object-cover w-full h-[130]"
+                  className="object-cover w-full h-auto"
                 />
               </div>
               <p className="mt-2 text-center text-sm bg-gray-800 text-white py-1 rounded">

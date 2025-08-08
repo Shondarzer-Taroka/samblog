@@ -9,6 +9,7 @@ import FloatingSocial from '@/share/FloatingSocial';
 import BookmarkButton from '../Bookmark/BookmarkButton';
 import ClientShareTrigger from '../SocialShare/ClientShareTrigger';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
+import { englishToBengali } from '@/utils/englishToBengali';
 
 const SpecialNews = ({ data }: { data: NewsItem }) => {
     const { short, isTruncated } = stripHtmlAndLimit(data.content, 40);
@@ -56,7 +57,7 @@ const SpecialNews = ({ data }: { data: NewsItem }) => {
                                     <FaClock className="mr-1" /> {formatBengaliDate(data.createdAt)}
                                 </span>
                                 <span className="flex items-center  text-[11px] md:text-sm text-gray-200">
-                                    <FaEye className="mr-1" /> {data.views} বার দেখা
+                                    <FaEye className="mr-1" /> {englishToBengali(data.views)} বার দেখা
                                 </span>
                             </div>
 

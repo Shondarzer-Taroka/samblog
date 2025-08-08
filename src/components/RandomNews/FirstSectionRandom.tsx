@@ -15,12 +15,13 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
   return (
     <section className="grid grid-cols-1 xl:grid-cols-2">
       {/* First Aside */}
-      <aside className="md:mr-4 mb-4 md:mb-0">
-        <NewsCardWrapper
+      <aside className="md:mr-4 mb-4 md:mb-0 h-full">
+        <div className='h-full'> 
+             <NewsCardWrapper
           id={data[0].id}
           href={`/news/${data[0].category}/${data[0].id}`}
         >
-          <div className="block group bg-white p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div className="block group h-full bg-white p-2 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="text-gray-800 text-[17px] leading-relaxed w-full h-full overflow-hidden">
               <h2 className="text-2xl font-bold mb-1">{data[0].title}</h2>
 
@@ -46,6 +47,8 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
             </div>
           </div>
         </NewsCardWrapper>
+        </div>
+     
         <div className="clear-both"></div>
       </aside>
 
