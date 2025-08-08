@@ -11,7 +11,7 @@ const BottomNewsCard = ({ data }: { data: NewsItem[] }) => {
   }
 
   return (
-    <div className=" px-2 md:px-4">
+    <div className=" px-2 md:px-4 ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {data.map((card, index) => (
           <div
