@@ -40,4 +40,19 @@ TNNews is a cutting-edge news platform built with Next.js that delivers real-tim
 🔐 Role-based permissions  
 📊 Real-time engagement metrics  
 
-## 📂 Project Structure
+### Interactive Elements
+1. Opinion Polls: User engagement through voting
+2. Comments Section: Discussion threads for articles
+3. Reactions: Like/dislike system
+4. E-Paper: Digital newspaper edition
+
+### Performance Optimization
+1. Static Site Generation (SSG): For content pages with infrequent updates
+2. Incremental Static Regeneration (ISR): For frequently updated news pages
+3. Image Optimization: Next.js Image component with automatic resizing
+4. Code Splitting: Automatic component-level code splitting
+5. Edge Caching: Vercel edge network caching
+
+
+
+
