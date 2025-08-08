@@ -297,7 +297,9 @@ export default function EpaperForm({ epaperId }: EpaperFormProps) {
     try {
       if (epaperId) {
         const data = await updateEpaper(epaperId, epaperData);
-        if (data.message === 'OK') {
+        // console.log(data,'up e data');
+        
+        if (data.res.status === 200) {
           showToast('success', 'ই-পেপার আপডেট হয়েছে');
         } else {
           showToast('failed', 'ই-পেপার আপডেট ব্যর্থ হয়েছে');

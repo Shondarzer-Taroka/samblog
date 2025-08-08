@@ -33,7 +33,7 @@ export const createEpaper = async (data: EpaperData ) => {
 
 export const updateEpaper = async (id: number, data: EpaperData) => {
   const response = await axios.put(`${API_BASE_URL}/epaper/${id}`, data,{withCredentials:true});
-  return {data:response.data,message:response.statusText};
+  return {data:response.data,message:response.statusText,res:response};
 };
 
 export const deleteEpaper = async (id: number) => {

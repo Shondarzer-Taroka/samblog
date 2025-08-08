@@ -112,7 +112,7 @@ export default function ArticleEditor({
   
   }, [editorContent])
 
-  console.log(editorContent,'articleEditor');
+  // console.log(editorContent,'articleEditor');
 
   function hisd() {
     console.log('hisd');
@@ -123,7 +123,7 @@ export default function ArticleEditor({
     <div className="p-6 border border-gray-200 rounded-lg bg-gray-50">
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-lg font-medium text-gray-800">
-          Article #{index + 1}
+          Article #{article?.id || index + 1}
         </h3>
         <button
           type="button"
