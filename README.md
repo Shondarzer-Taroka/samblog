@@ -1,6 +1,6 @@
 # TNNews - Modern News Platform
 
-![TNNews Banner](https://i.ibb.co.com/Ng57qCmV/dailytnnewsbd-vercel-app.png) <!-- Add your banner image if available -->
+![TNNews Banner](https://i.ibb.co.com/CpQ0yRWJ/bl-2-1.png) <!-- Add your banner image if available -->
 
 ## 🚀 Overview
 
