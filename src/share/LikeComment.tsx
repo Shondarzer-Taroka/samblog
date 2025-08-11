@@ -33,7 +33,7 @@ interface LikeCommentProps {
   currentUserId?: string;
   onUnauthorized?: () => void;
   handleShare?: () => void;
-  title?:string
+  title?: string;
 }
 
 interface Comment {
@@ -59,7 +59,7 @@ export default function LikeComment({
   currentUserId,
   onUnauthorized,
   handleShare,
-  title
+  title,
 }: LikeCommentProps) {
   const [localLiked, setLocalLiked] = useState(initialIsLiked);
   const [localLikes, setLocalLikes] = useState(initialLikes);
@@ -331,21 +331,20 @@ export default function LikeComment({
         </button>
 
         {/* Share Button */}
-        {handleShare && (
+       
           <button
             className="flex items-center space-x-1 px-4 py-2 rounded-full text-gray-500 hover:text-green-500 transition-colors"
             aria-label="Share"
-            onClick={handleShare}
           >
             {/* <FaShare /> */}
             <ClientShareTrigger
-              title={title || 'News'}
+              title={title || "News"}
               url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${title}`}
             />
 
             <span className="text-sm font-medium">Share</span>
           </button>
-        )}
+      
 
         {/* Options Button */}
         <button
