@@ -58,7 +58,7 @@ export default function LikeComment({
   initialIsLiked = false,
   currentUserId,
   onUnauthorized,
-  handleShare,
+  // handleShare,
   title,
 }: LikeCommentProps) {
   const [localLiked, setLocalLiked] = useState(initialIsLiked);
@@ -342,7 +342,7 @@ export default function LikeComment({
               url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${title}`}
             />
 
-            <span className="text-sm font-medium">Share</span>
+            {/* <span className="text-sm font-medium">Share</span> */}
           </button>
       
 
