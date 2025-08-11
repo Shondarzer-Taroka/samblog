@@ -53,6 +53,7 @@ export default function LikeCommentWrapper({
                 // router.push('/login')
             }}
             handleShare={handleShare}
+            title={}
         />
     );
 }

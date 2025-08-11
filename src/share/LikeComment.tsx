@@ -1,8 +1,7 @@
-
 /* eslint-disable @next/next/no-img-element */
 
-'use client'
-import { useState, useEffect } from 'react';
+"use client";
+import { useState, useEffect } from "react";
 import {
   FaHeart,
   FaRegHeart,
@@ -14,16 +13,17 @@ import {
   FaEdit,
   FaTrash,
   FaTimes,
-  FaCheck
-} from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
-import useSWR from 'swr';
-import axios from 'axios';
-import { formatBengaliDate } from '@/utils/formatBengaliDate';
-import { useAlert } from '@/hooks/useAlert';
-import { useRouter } from 'next/navigation';
+  FaCheck,
+} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import useSWR from "swr";
+import axios from "axios";
+import { formatBengaliDate } from "@/utils/formatBengaliDate";
+import { useAlert } from "@/hooks/useAlert";
+import { useRouter } from "next/navigation";
+import ClientShareTrigger from "@/components/SocialShare/ClientShareTrigger";
 
-type EntityType = 'opinion' | 'news';
+type EntityType = "opinion" | "news";
 
 interface LikeCommentProps {
   entityId: string;
@@ -34,6 +34,7 @@ interface LikeCommentProps {
   currentUserId?: string;
   onUnauthorized?: () => void;
   handleShare?: () => void;
+  title?:string
 }
 
 interface Comment {
@@ -47,7 +48,8 @@ interface Comment {
   };
 }
 
-const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
+const fetcher = (url: string) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 export default function LikeComment({
   entityId,
@@ -57,18 +59,19 @@ export default function LikeComment({
   initialIsLiked = false,
   currentUserId,
   onUnauthorized,
-  handleShare
+  handleShare,
+  title
 }: LikeCommentProps) {
   const [localLiked, setLocalLiked] = useState(initialIsLiked);
   const [localLikes, setLocalLikes] = useState(initialLikes);
   const [localComments, setLocalComments] = useState(initialComments);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  const [commentContent, setCommentContent] = useState('');
+  const [commentContent, setCommentContent] = useState("");
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
-  const [editCommentContent, setEditCommentContent] = useState('');
+  const [editCommentContent, setEditCommentContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { showAlert, AlertDialog } = useAlert();
-  const router = useRouter()
+  const router = useRouter();
   // Fetch like status
   const { data: likeData, mutate: mutateLike } = useSWR(
     `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/${entityType}/${entityId}/like-status`,
@@ -78,14 +81,16 @@ export default function LikeComment({
       fallbackData: {
         liked: initialIsLiked,
         likeCount: initialLikes,
-        success: true
-      }
+        success: true,
+      },
     }
   );
 
   // Fetch comments
   const { data: commentsData, mutate: mutateComments } = useSWR(
-    showCommentBox ? `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/${entityType}/${entityId}/comments?page=1&limit=10` : null,
+    showCommentBox
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/${entityType}/${entityId}/comments?page=1&limit=10`
+      : null,
     fetcher
   );
 
@@ -100,12 +105,12 @@ export default function LikeComment({
     if (isLoading) return;
 
     if (!currentUserId) {
-      showAlert('warning', {
-        title: 'সতর্কতা',
-        message: 'আপনাকে লগইন করতে হবে',
-        confirmText: 'লগইন করুন',
+      showAlert("warning", {
+        title: "সতর্কতা",
+        message: "আপনাকে লগইন করতে হবে",
+        confirmText: "লগইন করুন",
         onConfirm() {
-          router.push('/login')
+          router.push("/login");
         },
       });
       onUnauthorized?.();
@@ -136,7 +141,7 @@ export default function LikeComment({
         setLocalLikes(newLikedState ? newLikeCount - 1 : newLikeCount + 1);
       }
     } catch (error) {
-      console.error('Like action failed:', error);
+      console.error("Like action failed:", error);
       setLocalLiked(!localLiked);
       setLocalLikes(localLiked ? localLikes - 1 : localLikes + 1);
 
@@ -160,11 +165,11 @@ export default function LikeComment({
         { withCredentials: true }
       );
 
-      setCommentContent('');
+      setCommentContent("");
       setLocalComments(data.commentCount);
       mutateComments();
     } catch (error) {
-      console.error('Comment failed:', error);
+      console.error("Comment failed:", error);
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         onUnauthorized?.();
       }
@@ -185,11 +190,11 @@ export default function LikeComment({
       );
 
       setEditingCommentId(null);
-      setEditCommentContent('');
+      setEditCommentContent("");
       setLocalComments(data.commentCount);
       mutateComments();
     } catch (error) {
-      console.error('Update comment failed:', error);
+      console.error("Update comment failed:", error);
     } finally {
       setIsLoading(false);
     }
@@ -205,29 +210,28 @@ export default function LikeComment({
       //   { withCredentials: true }
       // );
 
-      showAlert('warning', {
-        title: 'নিশ্চিত করুন',
-        message: 'আপনি কি নিশ্চিতভাবে এই খবরটি মুছতে চান?',
-        confirmText: 'হ্যাঁ, মুছুন',
-        cancelText: 'না, বাতিল করুন',
+      showAlert("warning", {
+        title: "নিশ্চিত করুন",
+        message: "আপনি কি নিশ্চিতভাবে এই খবরটি মুছতে চান?",
+        confirmText: "হ্যাঁ, মুছুন",
+        cancelText: "না, বাতিল করুন",
         onConfirm: async () => {
           try {
             const { data } = await axios.delete(
               `${process.env.NEXT_PUBLIC_BASE_URL}/likeComment/comments/${commentId}`,
               { withCredentials: true }
             );
-            showAlert('success', {
-              title: 'সফল হয়েছে',
-              message: 'খবরটি সফলভাবে মুছে ফেলা হয়েছে',
+            showAlert("success", {
+              title: "সফল হয়েছে",
+              message: "খবরটি সফলভাবে মুছে ফেলা হয়েছে",
             });
             setLocalComments(data.commentCount);
             mutateComments();
-
           } catch (error) {
-            console.error('Failed to delete news:', error);
-            showAlert('error', {
-              title: 'ত্রুটি হয়েছে',
-              message: 'খবরটি মুছতে সমস্যা হয়েছে',
+            console.error("Failed to delete news:", error);
+            showAlert("error", {
+              title: "ত্রুটি হয়েছে",
+              message: "খবরটি মুছতে সমস্যা হয়েছে",
             });
           }
         },
@@ -236,7 +240,7 @@ export default function LikeComment({
       // setLocalComments(data.commentCount);
       // mutateComments();
     } catch (error) {
-      console.error('Delete comment failed:', error);
+      console.error("Delete comment failed:", error);
     } finally {
       setIsLoading(false);
     }
@@ -249,27 +253,26 @@ export default function LikeComment({
 
   const cancelEditing = () => {
     setEditingCommentId(null);
-    setEditCommentContent('');
+    setEditCommentContent("");
   };
-
 
   function handleCommment() {
     if (isLoading) return;
 
     if (!currentUserId) {
-      showAlert('warning', {
-        title: 'সতর্কতা',
-        message: 'আপনাকে লগইন করতে হবে',
-        confirmText: 'লগইন করুন',
+      showAlert("warning", {
+        title: "সতর্কতা",
+        message: "আপনাকে লগইন করতে হবে",
+        confirmText: "লগইন করুন",
         onConfirm() {
-          router.push('/login')
+          router.push("/login");
         },
       });
       onUnauthorized?.();
       return;
     }
 
-    setShowCommentBox(!showCommentBox)
+    setShowCommentBox(!showCommentBox);
   }
 
   return (
@@ -281,17 +284,22 @@ export default function LikeComment({
           whileTap={{ scale: currentUserId ? 1.1 : 1 }}
           onClick={handleLike}
           disabled={isLoading}
-          className={`flex items-center space-x-1 px-4 py-2 rounded-full transition-colors ${localLiked ? 'text-red-500' : 'text-gray-500 hover:text-gray-700'
-            } ${isLoading ? 'opacity-70 cursor-not-allowed' :
-              currentUserId ? 'cursor-pointer' : 'cursor-default'
-            }`}
-          aria-label={localLiked ? 'Unlike' : 'Like'}
+          className={`flex items-center space-x-1 px-4 py-2 rounded-full transition-colors ${
+            localLiked ? "text-red-500" : "text-gray-500 hover:text-gray-700"
+          } ${
+            isLoading
+              ? "opacity-70 cursor-not-allowed"
+              : currentUserId
+              ? "cursor-pointer"
+              : "cursor-default"
+          }`}
+          aria-label={localLiked ? "Unlike" : "Like"}
         >
           {localLiked ? (
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 500 }}
+              transition={{ type: "spring", stiffness: 500 }}
             >
               <FaHeart className="text-red-500" />
             </motion.div>
@@ -306,11 +314,20 @@ export default function LikeComment({
           onClick={handleCommment}
           // onClick={() => setShowCommentBox(!showCommentBox)}
           disabled={isLoading}
-          className={`flex items-center space-x-1 px-4 py-2 rounded-full ${showCommentBox ? 'text-blue-500' : 'text-gray-500 hover:text-blue-500'
-            } transition-colors ${isLoading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
-          aria-label={showCommentBox ? 'Hide comments' : 'Show comments'}
+          className={`flex items-center space-x-1 px-4 py-2 rounded-full ${
+            showCommentBox
+              ? "text-blue-500"
+              : "text-gray-500 hover:text-blue-500"
+          } transition-colors ${
+            isLoading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+          }`}
+          aria-label={showCommentBox ? "Hide comments" : "Show comments"}
         >
-          {showCommentBox ? <FaComment className="text-blue-500" /> : <FaRegComment />}
+          {showCommentBox ? (
+            <FaComment className="text-blue-500" />
+          ) : (
+            <FaRegComment />
+          )}
           <span className="text-sm font-medium">{localComments}</span>
         </button>
 
@@ -321,7 +338,12 @@ export default function LikeComment({
             aria-label="Share"
             onClick={handleShare}
           >
-            <FaShare />
+            {/* <FaShare /> */}
+            <ClientShareTrigger
+              title={title || 'News'}
+              url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${title}`}
+            />
+
             <span className="text-sm font-medium">Share</span>
           </button>
         )}
@@ -340,7 +362,7 @@ export default function LikeComment({
         {showCommentBox && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="px-4 overflow-hidden"
@@ -377,12 +399,13 @@ export default function LikeComment({
                   <button
                     type="submit"
                     disabled={!commentContent.trim() || isLoading}
-                    className={`px-4 py-2 text-sm rounded-lg transition-colors ${commentContent.trim()
-                      ? 'bg-blue-500 text-white hover:bg-blue-600'
-                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                      } ${isLoading ? 'opacity-70' : ''}`}
+                    className={`px-4 py-2 text-sm rounded-lg transition-colors ${
+                      commentContent.trim()
+                        ? "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    } ${isLoading ? "opacity-70" : ""}`}
                   >
-                    {isLoading ? 'Posting...' : 'Post'}
+                    {isLoading ? "Posting..." : "Post"}
                   </button>
                 </div>
               </form>
@@ -410,7 +433,9 @@ export default function LikeComment({
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <textarea
                           value={editCommentContent}
-                          onChange={(e) => setEditCommentContent(e.target.value)}
+                          onChange={(e) =>
+                            setEditCommentContent(e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none"
                           rows={3}
                           disabled={isLoading}
@@ -426,24 +451,30 @@ export default function LikeComment({
                           <button
                             onClick={() => handleUpdateComment(comment.id)}
                             disabled={!editCommentContent.trim() || isLoading}
-                            className={`px-3 py-1 text-sm rounded-lg flex items-center ${editCommentContent.trim()
-                              ? 'bg-blue-500 text-white hover:bg-blue-600'
-                              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                              } ${isLoading ? 'opacity-70' : ''}`}
+                            className={`px-3 py-1 text-sm rounded-lg flex items-center ${
+                              editCommentContent.trim()
+                                ? "bg-blue-500 text-white hover:bg-blue-600"
+                                : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                            } ${isLoading ? "opacity-70" : ""}`}
                           >
-                            <FaCheck className="mr-1" /> {isLoading ? 'Saving...' : 'Save'}
+                            <FaCheck className="mr-1" />{" "}
+                            {isLoading ? "Saving..." : "Save"}
                           </button>
                         </div>
                       </div>
                     ) : (
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <div className="flex items-center space-x-2">
-                          <span className="font-medium text-sm">{comment.user.name}</span>
+                          <span className="font-medium text-sm">
+                            {comment.user.name}
+                          </span>
                           <span className="text-xs text-gray-400">
                             {formatBengaliDate(comment.createdAt)}
                           </span>
                         </div>
-                        <p className="mt-1 text-sm text-gray-700">{comment.content}</p>
+                        <p className="mt-1 text-sm text-gray-700">
+                          {comment.content}
+                        </p>
 
                         {currentUserId === comment.user.id && (
                           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2">
