@@ -6,6 +6,7 @@ import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from 'react-icons/fa';
 import { splitTextByLength } from '@/utils/splitTextByLength';
 import NewsCardWrapper from '@/share/NewsCardWrapper';
 import Link from 'next/link';
+import BookmarkButton from '@/components/Bookmark/BookmarkButton';
 
 const SportsNews = ({ data }: { data: NewsItem[] }) => {
   const leftColumn = data?.slice(0, 2) || [];
@@ -37,7 +38,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
           <div className="space-y-6">
             {leftColumn.map((item) => (
               <div key={item.id} >
-                <NewsCardWrapper href={`/news/${item.category}/${item.id}`} id={item.id}>
+              
                   <div className='block group'>
                     <div
 
@@ -53,16 +54,19 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                       </div>
                       <div className="p-4 h-[110px]">
+                          <NewsCardWrapper href={`/news/${item.category}/${item.id}`} id={item.id}>
                         <h3 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
                           {splitTextByLength(item.title, 12)}
                         </h3>
+                        </NewsCardWrapper>
                         <div className="flex items-center justify-between mt-3">
                           <span className="flex items-center text-sm text-gray-500">
                             <FaClock className="mr-1" /> {new Date(item.createdAt).toLocaleDateString('bn-BD')}
                           </span>
                           <div className="flex space-x-2">
                             <button className="text-gray-400 hover:text-red-600 transition-colors">
-                              <FaBookmark size={14} />
+                              {/* <FaBookmark size={14} /> */}
+                                 <BookmarkButton article={item}/>
                             </button>
                             <button className="text-gray-400 hover:text-red-600 transition-colors">
                               <FaShareAlt size={14} />
@@ -72,7 +76,7 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                       </div>
                     </div>
                   </div>
-                </NewsCardWrapper>
+                
               </div>
             ))}
           </div>
