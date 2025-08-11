@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { NewsItem } from "@/types/news.types";
 import { stripHtmlAndLimitWithSpace } from "@/utils/stripAndLimitHtml";
-import { FaClock, FaShareAlt, FaBookmark, FaArrowRight } from "react-icons/fa";
+import { FaClock, FaArrowRight } from "react-icons/fa";
 import { splitTextByLength } from "@/utils/splitTextByLength";
 import NewsCardWrapper from "@/share/NewsCardWrapper";
 import Link from "next/link";
@@ -176,10 +176,13 @@ const SportsNews = ({ data }: { data: NewsItem[] }) => {
                           </span>
                           <div className="flex space-x-2">
                             <button className="text-gray-400 hover:text-red-600 transition-colors">
-                              <FaBookmark size={14} />
+                              <BookmarkButton article={item} />
                             </button>
                             <button className="text-gray-400 hover:text-red-600 transition-colors">
-                              <FaShareAlt size={14} />
+                              <ClientShareTrigger
+                                title={item.title}
+                                url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${item.title}`}
+                              />
                             </button>
                           </div>
                         </div>
