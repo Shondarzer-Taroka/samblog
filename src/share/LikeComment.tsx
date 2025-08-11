@@ -7,7 +7,6 @@ import {
   FaRegHeart,
   FaComment,
   FaRegComment,
-  FaShare,
   FaEllipsisH,
   FaUserAlt,
   FaEdit,
