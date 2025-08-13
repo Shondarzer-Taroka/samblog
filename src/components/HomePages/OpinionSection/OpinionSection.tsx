@@ -42,17 +42,13 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
                     বিশেষ মতামত
                   </span>
                   <span className="bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
-                    {/* এসএসসির ফলাফল */}
                     {opinions[0].keywords[0]}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
                   {opinions[0].title}
-                  {/* এসএসসির ফলাফল যেন আত্মহত্যার কারণ না হয় */}
                 </h3>
                 <p className="text-gray-600 mb-4 flex-grow">
-                  {/* আত্মহত্যার পেছনে নানা কারণ রয়েছে—মানসিক অবসাদ, সামাজিক বিচ্ছিন্নতা, বুলিং, বৈষম্য ও
-              বিশেষভাবে উল্লেখযোগ্য একটি কারণ হলো পাবলিক পরীক্ষায় কাঙ্ক্ষিত ফল না পাওয়া। */}
                   {stripHtmlAndLimit(opinions[0].content, 20).short}
                 </p>
                 <div className="flex items-center mt-auto">
@@ -61,14 +57,12 @@ export default function OpinionSection({ data }: { data: OpinionItems[] }) {
                       width={40}
                       height={40}
                       src={opinions[0].author?.image || "https://randomuser.me/api/portraits/men/32.jpg"}
-                      // src="https://randomuser.me/api/portraits/men/32.jpg"
                       alt="author"
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-700">
-                      {/* ড. রফিকুল ইসলাম */}
                       {opinions[0]?.author?.name}
                     </p>
                     <p className="text-xs text-gray-500">মনোবিজ্ঞানী ও শিক্ষাবিদ</p>
