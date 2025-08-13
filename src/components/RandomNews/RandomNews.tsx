@@ -16,7 +16,6 @@ const RandomNews = ({ data }: { data: { nationalNews: NewsItem[], wholeCountry: 
         <div className='mb-8'>
           <TitleNewsOverSection headline='জাতীয়' />
         </div>
-
         <FirstSectionRandom data={data.nationalNews} />
       </aside>
 

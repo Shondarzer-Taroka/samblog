@@ -1,10 +1,4 @@
-
-
-
-
-
 'use client';
-
 import TitleNewsOverSection from '@/share/TitleNewsOverSection';
 import { NewsItem } from '@/types/news.types';
 import { formatBengaliDate } from '@/utils/formatBengaliDate';
@@ -26,7 +20,7 @@ const PoliticsSection = ({ data }: { data: NewsItem[] }) => {
             </div>
 
             <aside className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
-                {/* ---------- Featured News ---------- */}
+                {/* Featured News */}
                 <Link href={`/news/${politicalNews[0].category}/${politicalNews[0].id}`} className="group">
                     <div className="w-full bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden p-2">
                         <div className="relative w-full h-[460px] rounded-lg overflow-hidden ">
