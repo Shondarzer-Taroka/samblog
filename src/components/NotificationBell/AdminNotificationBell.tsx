@@ -249,7 +249,7 @@ export default function AdminNotificationBell() {
   }, [socket, user, notifications, unreadCount]);
 
   const handleViewOpinion = (opinionId: string) => {
-    router.push(`/admin/opinions/${opinionId}`);
+    router.push(`/news/dashboard/opinions/${opinionId}`);
     setVisible(false);
   };
 
