@@ -13,9 +13,9 @@ const FirstSectionRandom = ({ data }: { data: NewsItem[] }) => {
  }
 
   return (
-    <section className="grid grid-cols-1 xl:grid-cols-2">
+    <section className="grid grid-cols-1 xl:grid-cols-2 gap-4">
       {/* First Aside */}
-      <aside className="md:mr-4 mb-4 md:mb-0 h-full">
+      <aside className="h-full">
         <div className='h-full'> 
              <NewsCardWrapper
           id={data[0].id}
