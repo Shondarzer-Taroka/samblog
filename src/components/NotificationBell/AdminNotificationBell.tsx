@@ -305,7 +305,7 @@ export default function AdminNotificationBell() {
       </button>
 
       {visible && (
-        <div className="absolute right-0 mt-2 w-96 bg-white rounded-md shadow-xl z-50 border border-gray-200">
+        <div className="absolute max-[529px]:-right-[100px] right-0 mt-2 max-[529px]:w-[320px] w-96 bg-white rounded-md shadow-xl z-50 border border-gray-200">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
             <h3 className="text-lg font-medium text-gray-800">
               Admin Notifications
