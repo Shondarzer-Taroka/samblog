@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import SessionsOverviewChart from "./SessionsOverviewChart";
 
 export default function DashboardCards() {
